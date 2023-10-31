@@ -98,10 +98,8 @@
       grid-auto-flow: column;
       gap: 24px;
       &__leave {
-        display: grid;
-        justify-content: center;
-        left: 0;
-        top: 84px;
+        position: absolute;
+        transform: translate(356px, -100%);
       }
       &__text {
         position: relative;
