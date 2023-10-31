@@ -171,6 +171,8 @@
 
 .middleBanner {
   background-image: url('../../assets/images/vegetable.png');
+  background-size: cover;
+  background-position: center left;
   &__cont {
     position: relative;
     padding-block: 80px;
