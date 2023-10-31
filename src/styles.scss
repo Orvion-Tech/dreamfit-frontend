@@ -1,0 +1,167 @@
+/* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: 'Zolina-Bold';
+  src:
+    url('./assets/fonts/Zolina-Bold.woff') format('woff'),
+    url('./assets/fonts/Zolina-Bold.woff2') format('woff2'),
+    url('./assets/fonts/Zolina-Bold.eot'),
+    url('./assets/fonts/Zolina-Bold.eot?#iefix') format('embedded-opentype'),
+    url('./assets/fonts/Zolina-Bold.otf') format('truetype');
+
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+:root {
+  --font-family-primary: 'Zolina-Bold';
+  --font-family-secondary: 'Noto Sans SC', sans-serif;
+}
+:host {
+  font-family: var(--font-family-secondary);
+  font-size: 16px;
+  color: #000;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+* {
+  font-family: var(--font-family-secondary);
+  font-weight: 400;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body,
+html {
+  margin: 0;
+  box-sizing: border-box;
+}
+body.noscroll {
+  overflow: hidden;
+}
+img {
+  max-width: 100%;
+}
+a,
+b,
+blockquote,
+body,
+button,
+canvas,
+caption,
+code,
+div,
+em,
+embed,
+fieldset,
+figure,
+footer,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+header,
+html,
+i,
+iframe,
+img,
+input,
+label,
+li,
+main,
+nav,
+object,
+ol,
+p,
+pre,
+section,
+select,
+small,
+span,
+strike,
+strong,
+sub,
+sup,
+table,
+tbody,
+td,
+textarea,
+tfoot,
+th,
+thead,
+tr,
+tt,
+u,
+ul,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+  -webkit-text-size-adjust: none;
+  -moz-text-size-adjust: none;
+  text-size-adjust: none;
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+a,
+a:visited,
+a:hover {
+  color: #1976d2;
+  text-decoration: none;
+}
+a {
+  cursor: pointer;
+}
+a:hover {
+  color: #125699;
+}
+input {
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+
+input[type='number'] {
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-inline: 16px;
+  width: 100%;
+  @media screen and (max-width: 1024px) {
+    max-width: 700px;
+  }
+}
+video {
+  max-width: 100%;
+}
+.font-primary {
+  font-family: var(--font-family-primary);
+}
+.font-secondary {
+  font-family: var(--font-family-secondary);
+}

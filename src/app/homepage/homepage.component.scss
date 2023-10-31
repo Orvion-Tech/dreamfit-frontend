@@ -1,0 +1,82 @@
+.header {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: 12px;
+  &__menu {
+    display: grid;
+    grid-auto-flow: column;
+    gap: 32px;
+    &__menu a {
+      color: #0abab5;
+      font-size: 18px;
+    }
+  }
+  &__btn {
+    width: 110px;
+    height: 34px;
+    border-radius: 4px;
+    background: #0abab5;
+    color: #fff;
+    font-size: 12px;
+    display: grid;
+    place-content: center;
+    place-items: center;
+  }
+}
+.topBanner {
+  background: linear-gradient(244deg, #fffaca 20.44%, rgba(255, 250, 202, 0) 92.19%);
+  &__cont {
+    position: relative;
+    padding-block: 80px;
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: space-between;
+    &__run {
+      position: absolute;
+      bottom: 40px;
+      left: 0;
+      transform: translateX(-20%);
+    }
+
+    &__straberry {
+      position: absolute;
+      left: 0;
+      transform: translateX(-20%);
+      top: 50%;
+    }
+    &__left {
+      position: relative;
+      &__veggie {
+        position: absolute;
+        right: -20px;
+        top: 50%;
+        transform: translate(100%, -100%);
+      }
+      h2 {
+        color: #000;
+        font-size: 48px;
+      }
+
+      p {
+        color: #000;
+        font-size: 32px;
+        font-style: italic;
+      }
+
+      a {
+        margin-top: 64px;
+        display: grid;
+        width: 104px;
+        height: 34px;
+        place-items: center;
+        place-content: center;
+        background: #000;
+        border-radius: 4px;
+        color: #fffaca;
+        font-size: 12px;
+      }
+    }
+  }
+}
