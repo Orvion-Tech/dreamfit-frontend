@@ -204,3 +204,43 @@
     }
   }
 }
+
+.submiddleBanner {
+  background: linear-gradient(244deg, #fffaca 20.44%, rgba(255, 250, 202, 0) 92.19%);
+  &__cont {
+    position: relative;
+    padding-block: 80px;
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: flex-start;
+    gap: 64px;
+    &__left {
+      display: grid;
+      grid-auto-flow: row;
+      gap: 64px;
+      &__text {
+        color: black;
+        font-size: 32px;
+        font-weight: 400;
+      }
+      h4 {
+        color: black;
+        font-size: 38px;
+        font-weight: 700;
+        p {
+          color: black;
+          font-size: 22px;
+          font-weight: 700;
+        }
+      }
+      p {
+        color: black;
+        font-size: 22px;
+        font-weight: 400;
+      }
+    }
+    &__right {
+      color: #d9d9d9;
+    }
+  }
+}
