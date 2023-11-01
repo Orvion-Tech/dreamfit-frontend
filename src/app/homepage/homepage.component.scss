@@ -274,3 +274,14 @@
     }
   }
 }
+
+.bottomSUbBanner {
+  background: linear-gradient(244deg, #fffaca 20.44%, rgba(255, 250, 202, 0) 92.19%);
+  &__cont {
+    osition: relative;
+    padding-block: 80px;
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: flex-end;
+  }
+}

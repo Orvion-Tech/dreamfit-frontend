@@ -1,0 +1,42 @@
+<div class="login">
+  <div class="login__cont appcontainer">
+    <div class="login__cont__top">
+      <img src="../../../../assets/images/logo1.png" width="140" height="102" />
+      <p>Login</p>
+    </div>
+    <div class="login__cont__mid">
+      <div class="login__cont__mid__top">
+        <div>
+          <select placeholder="Select Country Code" formControlName="gender">
+            <option value="0">Select Country Code</option>
+            <option value="1">+91</option>
+            <option value="2">+22</option>
+          </select>
+        </div>
+        <div>
+          <input
+            type="number"
+            placeholder="Enter Phone Number"
+            id="phone_number"
+            formControlName="phone_number"
+          />
+          <p>Type after +91</p>
+        </div>
+        <div>
+          <input
+            type="password"
+            placeholder="Enter Password"
+            id="password"
+            formControlName="password"
+          />
+          <p>Atleast 8 digit</p>
+        </div>
+      </div>
+      <div class="login__cont__mid__bottom">
+        <a>Forgot your Password?</a>
+        <div class="login__cont__mid__bottom__btn">Login</div>
+      </div>
+    </div>
+    <div class="login__cont__btn">Register</div>
+  </div>
+</div>
