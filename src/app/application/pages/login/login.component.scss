@@ -32,6 +32,18 @@
         gap: 24px;
         display: grid;
         align-content: flex-start;
+        select {
+          padding-inline: 20px;
+          color: #626262;
+          height: 60px;
+          border-radius: 10px;
+        }
+        input {
+          padding-inline: 20px;
+          color: #f1f4ff;
+          height: 60px;
+          border-radius: 10px;
+        }
         p {
           color: black;
           font-size: 14px;
