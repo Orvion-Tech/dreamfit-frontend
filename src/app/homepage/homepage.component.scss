@@ -244,3 +244,33 @@
     }
   }
 }
+
+.bottomBanner {
+  background-image: url('../../assets/images/sky.png');
+  background-size: cover;
+  background-position: center left;
+  &__cont {
+    position: relative;
+    padding-block: 80px;
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: center;
+    &__center {
+      display: grid;
+      gap: 12px;
+      h4 {
+        color: #1c97a2;
+        font-size: 38px;
+        font-style: italic;
+        font-weight: 400;
+        text-align: center;
+      }
+      p {
+        color: black;
+        font-size: 18px;
+        font-weight: 400;
+        text-align: center;
+      }
+    }
+  }
+}
