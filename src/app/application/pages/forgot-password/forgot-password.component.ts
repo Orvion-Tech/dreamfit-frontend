@@ -5,4 +5,6 @@ import { Component } from '@angular/core';
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.scss'],
 })
-export class ForgotPasswordComponent {}
+export class ForgotPasswordComponent {
+  currentStep = 1;
+}

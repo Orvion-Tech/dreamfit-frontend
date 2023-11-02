@@ -37,6 +37,9 @@
         display: grid;
         place-content: center;
         place-items: center;
+        position: absolute;
+        right: 12px;
+        top: 12px;
       }
       &__forgot {
         display: grid;
