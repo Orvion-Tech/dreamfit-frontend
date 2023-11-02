@@ -2,18 +2,21 @@
   background-image: url('../../../../assets/images/application.png');
   background-size: cover;
   background-attachment: fixed;
+  background-position: center;
   height: 100vh;
   &__cont {
     display: grid;
     height: 100%;
     overflow-y: auto;
+    align-content: flex-start;
     gap: 24px;
-    justify-content: center;
+    padding: 24px 32px;
+    padding-top: 80px;
     &__top {
-      justify-content: center;
       display: grid;
-      padding-block: 80px;
-      gap: 10px;
+      justify-content: center;
+      justify-items: center;
+      gap: 24px;
       p {
         color: rgba(10, 186, 181, 0.8);
         font-size: 22px;
@@ -21,69 +24,97 @@
         text-align: center;
       }
     }
-    &__mid {
+    &__form {
       display: grid;
-      justify-content: center;
-      grid-auto-flow: row;
       gap: 24px;
-      width: 357px;
-      // height: 271px;
-      &__top {
-        gap: 24px;
+      &__forgot {
         display: grid;
-        align-content: flex-start;
-        select {
-          padding-inline: 20px;
-          color: #626262;
-          width: 357px;
-          height: 60px;
-          border-radius: 10px;
-        }
-        input {
-          padding-inline: 20px;
-          color: #f1f4ff;
-          width: 357px;
-          height: 60px;
-          border-radius: 10px;
-        }
-        p {
-          color: black;
-          font-size: 14px;
-          font-weight: 400;
-        }
-      }
-      &__bottom {
-        gap: 24px;
-        display: grid;
+        gap: 16px;
+        justify-items: flex-end;
         a {
-          color: black;
+          color: var(--color-black);
           font-size: 14px;
-          font-weight: 400;
-          text-decoration: underline;
-          text-align: right;
-        }
-        &__btn {
-          //   width: 110px;
-          height: 34px;
-          border-radius: 4px;
-          background: #fffaca;
-          color: #616161;
-          font-size: 20px;
-          display: grid;
-          place-content: center;
-          place-items: center;
+          text-decoration-line: underline;
         }
       }
     }
-    &__btn {
-      height: 34px;
-      border-radius: 4px;
-      background: #b4b4b4;
-      color: #616161;
-      font-size: 20px;
-      display: grid;
-      place-content: center;
-      place-items: center;
-    }
+    // gap: 24px;
+    // justify-content: center;
+    // &__top {
+    //   justify-content: center;
+    //   display: grid;
+    //   padding-block: 80px;
+    //   gap: 10px;
+    //   p {
+    //     color: rgba(10, 186, 181, 0.8);
+    //     font-size: 22px;
+    //     font-weight: 400;
+    //     text-align: center;
+    //   }
+    // }
+    // &__mid {
+    //   display: grid;
+    //   justify-content: center;
+    //   grid-auto-flow: row;
+    //   gap: 24px;
+    //   width: 357px;
+    //   // height: 271px;
+    //   &__top {
+    //     gap: 24px;
+    //     display: grid;
+    //     align-content: flex-start;
+    //     select {
+    //       padding-inline: 20px;
+    //       color: #626262;
+    //       width: 357px;
+    //       height: 60px;
+    //       border-radius: 10px;
+    //     }
+    //     input {
+    //       padding-inline: 20px;
+    //       color: #f1f4ff;
+    //       width: 357px;
+    //       height: 60px;
+    //       border-radius: 10px;
+    //     }
+    //     p {
+    //       color: black;
+    //       font-size: 14px;
+    //       font-weight: 400;
+    //     }
+    //   }
+    //   &__bottom {
+    //     gap: 24px;
+    //     display: grid;
+    //     a {
+    //       color: black;
+    //       font-size: 14px;
+    //       font-weight: 400;
+    //       text-decoration: underline;
+    //       text-align: right;
+    //     }
+    //     &__btn {
+    //       //   width: 110px;
+    //       height: 34px;
+    //       border-radius: 4px;
+    //       background: #fffaca;
+    //       color: #616161;
+    //       font-size: 20px;
+    //       display: grid;
+    //       place-content: center;
+    //       place-items: center;
+    //     }
+    //   }
+    // }
+    // &__btn {
+    //   height: 34px;
+    //   border-radius: 4px;
+    //   background: #b4b4b4;
+    //   color: #616161;
+    //   font-size: 20px;
+    //   display: grid;
+    //   place-content: center;
+    //   place-items: center;
+    // }
   }
 }
