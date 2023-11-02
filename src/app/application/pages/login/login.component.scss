@@ -27,7 +27,7 @@
       grid-auto-flow: row;
       gap: 24px;
       width: 357px;
-      height: 271px;
+      // height: 271px;
       &__top {
         gap: 24px;
         display: grid;
@@ -35,12 +35,14 @@
         select {
           padding-inline: 20px;
           color: #626262;
+          width: 357px;
           height: 60px;
           border-radius: 10px;
         }
         input {
           padding-inline: 20px;
           color: #f1f4ff;
+          width: 357px;
           height: 60px;
           border-radius: 10px;
         }
