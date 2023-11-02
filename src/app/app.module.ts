@@ -7,11 +7,17 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { LoginComponent } from './application/pages/login/login.component';
 import { SplashComponent } from './application/pages/splash/splash.component';
 import { ForgotPasswordComponent } from './application/pages/forgot-password/forgot-password.component';
-import { VerificationComponent } from './application/pages/verification/verification.component';
-import { NewPasswordComponent } from './application/pages/new-password/new-password.component';
+import { RegistrationComponent } from './application/pages/registration/registration.component';
 
 @NgModule({
-  declarations: [AppComponent, HomepageComponent, LoginComponent, SplashComponent, ForgotPasswordComponent, VerificationComponent, NewPasswordComponent],
+  declarations: [
+    AppComponent,
+    HomepageComponent,
+    LoginComponent,
+    SplashComponent,
+    ForgotPasswordComponent,
+    RegistrationComponent,
+  ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent],
