@@ -21,17 +21,18 @@
       <div
         [ngClass]="{
           input: true,
-          input___error: true
+          input___error: false
         }"
       >
         <input
           type="text"
-          placeholder="85558555"
+          placeholder="Phone Number"
           id="phone_number"
           formControlName="phone_number"
         />
-        <p class="input__info">Type after +91</p>
+        <!-- <p class="input__info">Type after +91</p> -->
         <p class="input__errorMsg">Mobile number is required.</p>
+        <input type="button" value="Send OTP" class="registration__cont__form__btn" />
       </div>
       <div
         [ngClass]="{

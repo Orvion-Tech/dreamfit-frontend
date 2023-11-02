@@ -27,6 +27,17 @@
     &__form {
       display: grid;
       gap: 24px;
+      &__btn {
+        width: 78px;
+        height: 34px;
+        border-radius: 4px;
+        background: #0abab5;
+        color: #fff;
+        font-size: 12px;
+        display: grid;
+        place-content: center;
+        place-items: center;
+      }
       &__forgot {
         display: grid;
         gap: 16px;
