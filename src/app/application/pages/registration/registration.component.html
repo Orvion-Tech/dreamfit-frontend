@@ -1,0 +1,101 @@
+<div class="registration">
+  <div class="registration__cont appcontainer">
+    <div class="registration__cont__top">
+      <img src="../../../../assets/images/logo1.png" width="140" height="102" />
+      <p>Register</p>
+    </div>
+    <form class="registration__cont__form">
+      <div
+        [ngClass]="{
+          input: true,
+          input___error: false
+        }"
+      >
+        <select placeholder="Select Country Code" formControlName="Country Code">
+          <option value="0">Select Country Code</option>
+          <option value="1">China</option>
+          <option value="2">India</option>
+        </select>
+        <p class="input__errorMsg">Country Code is required.</p>
+      </div>
+      <div
+        [ngClass]="{
+          input: true,
+          input___error: true
+        }"
+      >
+        <input
+          type="text"
+          placeholder="85558555"
+          id="phone_number"
+          formControlName="phone_number"
+        />
+        <p class="input__info">Type after +91</p>
+        <p class="input__errorMsg">Mobile number is required.</p>
+      </div>
+      <div
+        [ngClass]="{
+          input: true,
+          input___error: false
+        }"
+      >
+        <input
+          type="text"
+          placeholder="Enter One Time Password"
+          formControlName="one time password"
+        />
+        <p class="input__info">At least 8 digits</p>
+        <p class="input__errorMsg">Password is required.</p>
+      </div>
+      <div
+        [ngClass]="{
+          input: true,
+          input___error: false
+        }"
+      >
+        <input type="text" placeholder="Enter Invitation Code" formControlName="invitation code" />
+        <!-- <p class="input__info">At least 8 digits</p> -->
+        <p class="input__errorMsg">invitation is required.</p>
+      </div>
+      <div class="registration__cont__form__forgot">
+        <!-- <a href="">Forgot your password?</a> -->
+        <input type="button" value="Verify OTP & Invitation Code" class="primaryBtn" />
+      </div>
+      <a class="secondaryBtn">Already have an account?</a>
+    </form>
+    <!-- <div class="login__cont__mid">
+        <div class="login__cont__mid__top">
+          <div>
+            <select placeholder="Select Country Code" formControlName="country code">
+              <option value="0">Select Country Code</option>
+              <option value="1">+91</option>
+              <option value="2">+22</option>
+            </select>
+          </div>
+          <div>
+            <input
+              type="number"
+              placeholder="Enter Phone Number"
+              id="phone_number"
+              formControlName="phone_number"
+            />
+            <p>Type after +91</p>
+          </div>
+          <div>
+            <input
+              type="password"
+              placeholder="Enter Password"
+              id="password"
+              formControlName="password"
+            />
+            <p>Atleast 8 digit</p>
+          </div>
+        </div>
+        <div class="login__cont__mid__bottom">
+          <a>Forgot your Password?</a>
+          <div class="login__cont__mid__bottom__btn">Login</div>
+        </div>
+      </div>
+      <div class="login__cont__btn">Register</div> -->
+  </div>
+</div>
