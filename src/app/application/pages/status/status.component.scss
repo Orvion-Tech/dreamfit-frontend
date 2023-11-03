@@ -1,0 +1,183 @@
+.status {
+  background-color: #ffffff;
+
+  &__cont {
+    width: 430px;
+    height: 926px;
+    display: grid;
+    grid-auto-flow: row;
+    padding-block: 30px;
+    gap: 20px;
+    &__icon {
+      display: grid;
+      grid-auto-flow: column;
+      gap: 57px;
+      background-color: #79e0e8;
+      width: 430px;
+      height: 86px;
+      align-items: flex-end;
+      justify-content: center;
+      position: fixed;
+      bottom: 0;
+      padding-block: 20px;
+      //   border-radius: 0 0 50px 50px;
+      &__home {
+        p {
+          color: #fffaca;
+          font-size: 12px;
+          font-weight: 700;
+        }
+      }
+      &__calendar {
+        p {
+          color: #9b9b9b;
+          font-size: 12px;
+          font-weight: 700;
+        }
+      }
+    }
+    &__content {
+      display: grid;
+      padding-inline: 31px;
+      gap: 12px;
+      &__logo {
+        display: grid;
+        // gap: 164px;
+        grid-auto-flow: row;
+        &__mobIcon {
+          display: grid;
+          color: #79e0e8;
+          //   @media screen and (max-width: 1024px) {
+          //     display: grid;
+          //   }
+        }
+      }
+      &__mission {
+        display: grid;
+        gap: 64px;
+        grid-auto-flow: column;
+        &__cal {
+          display: grid;
+          gap: 12px;
+          p {
+            color: #616161;
+            font-size: 18px;
+            font-weight: 400;
+          }
+          &__time {
+            display: grid;
+            grid-auto-flow: column;
+            gap: 12px;
+            justify-content: flex-start;
+            p {
+              color: #616161;
+              font-size: 12px;
+              font-weight: 400;
+            }
+          }
+        }
+        &__btn {
+          display: grid;
+          &__send {
+            width: 78px;
+            height: 34px;
+            border-radius: 4px;
+            background: #0abab5;
+            color: #fff;
+            font-size: 12px;
+            display: grid;
+            place-content: center;
+            place-items: center;
+            //position: absolute;
+            right: 12px;
+            top: 12px;
+          }
+        }
+      }
+      &__name {
+        display: grid;
+        gap: 12px;
+        padding-block: 16px;
+        // width: 360px;
+        // height: 368px;
+        h5 {
+          color: #616161;
+          font-size: 18px;
+          font-weight: 500;
+          text-align: center;
+        }
+        &__goal {
+          display: grid;
+          grid-auto-flow: column;
+          padding-block: 12px;
+          width: 328px;
+          height: 116px;
+          gap: 4px;
+        }
+      }
+      &__supp {
+        display: grid;
+        gap: 12px;
+        padding-block: 16px;
+        // width: 360px;
+        // height: 368px;
+        h5 {
+          color: #616161;
+          font-size: 16px;
+          font-weight: 500;
+          text-align: center;
+          span {
+            color: #616161;
+            font-size: 12px;
+            font-weight: 400;
+          }
+        }
+        &__goal {
+          display: grid;
+          grid-auto-flow: column;
+          padding-block: 12px;
+          width: 328px;
+          height: 116px;
+          gap: 4px;
+
+          //   color: #616161;
+          //   font-size: 10px;
+          //   font-weight: 400;
+        }
+      }
+      &__msg {
+        display: grid;
+        grid-auto-flow: row;
+        gap: 12px;
+        &__tick {
+          display: grid;
+          grid-auto-flow: column;
+          gap: 12px;
+          p {
+            color: black;
+            font-size: 12px;
+            font-weight: 500;
+          }
+        }
+        p {
+          color: black;
+          font-size: 10px;
+          font-weight: 400;
+          span {
+            color: #606060;
+            font-size: 10px;
+            font-weight: 400;
+          }
+        }
+      }
+    }
+    &__profile {
+      display: grid;
+      gap: 12px;
+    }
+    &__meal {
+      display: grid;
+      gap: 12px;
+    }
+  }
+}

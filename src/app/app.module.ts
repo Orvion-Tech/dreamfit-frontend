@@ -8,6 +8,7 @@ import { LoginComponent } from './application/pages/login/login.component';
 import { SplashComponent } from './application/pages/splash/splash.component';
 import { ForgotPasswordComponent } from './application/pages/forgot-password/forgot-password.component';
 import { RegistrationComponent } from './application/pages/registration/registration.component';
+import { StatusComponent } from './application/pages/status/status.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { RegistrationComponent } from './application/pages/registration/registra
     SplashComponent,
     ForgotPasswordComponent,
     RegistrationComponent,
+    StatusComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],

@@ -1,0 +1,150 @@
+<div class="status">
+  <div class="status__cont appcontainer">
+    <div class="status__cont__icon">
+      <div class="status__cont__icon__home">
+        <img src="../../../../assets/images/home.svg" alt="home" />
+        <p>Home</p>
+      </div>
+      <div class="status__cont__icon__calendar">
+        <img src="../../../../assets/images/calendar.svg" alt="calendar" />
+        <p>Calendar</p>
+      </div>
+      <div class="status__cont__icon__calendar">
+        <img src="../../../../assets/images/trend.svg" alt="trend" />
+        <p>Trend</p>
+      </div>
+      <div class="status__cont__icon__calendar">
+        <img src="../../../../assets/images/profile.svg" alt="profile" />
+        <p>Profile</p>
+      </div>
+    </div>
+    <div class="status__cont__content">
+      <div class="status__cont__content__logo">
+        <img src="../../../../assets/images/dreamfit.png" alt="logo" />
+        <a class="status__cont__content__logo__mobIcon">
+          <img
+            *ngIf="!showMenu"
+            src="../../../assets/images/menu-icon-open.svg"
+            width="24px"
+            height="24px"
+            alt="menu open"
+          />
+          <img
+            *ngIf="showMenu"
+            src="../../../assets/images/menu-icon-close.svg"
+            width="24px"
+            height="24px"
+            alt="menu open"
+          />
+        </a>
+      </div>
+      <div class="status__cont__content__mission">
+        <div class="status__cont__content__mission__cal">
+          <p>Today's Mission</p>
+          <div class="status__cont__content__mission__cal__time">
+            <img src="../../../../assets/images/time.svg" alt="time" width="20" height="20" />
+            <p>2023-09-28 (GMT+8)</p>
+          </div>
+        </div>
+        <div class="status__cont__content__mission__btn">
+          <input type="button" value="Send OTP" class="status__cont__content__mission__btn__send" />
+        </div>
+      </div>
+      <div class="status__cont__content__name">
+        <h5>John Doe</h5>
+        <div class="status__cont__content__name__goal">
+          <div><br />Goal: <br />Current:  <br />Remaining:</div>
+          <div>
+            Main 🍚  <br />5   <br />6 <br />
+            2
+          </div>
+          <div>
+            Meat 🥩  <br />2   <br />1 <br />
+            3
+          </div>
+          <div>
+            Veggie 🥦  <br />2   <br />1 <br />
+            3
+          </div>
+          <div>
+            Fruit🍓  <br />2   <br />1 <br />
+            3
+          </div>
+          <div>
+            Water 💧  <br />2400  <br />2400  <br />
+            2400
+          </div>
+        </div>
+      </div>
+      <div class="status__cont__content__supp">
+        <h5>
+          Supplement  <br />
+          <span>Consumed: 2 Br, 3 Wh</span>
+        </h5>
+        <div class="status__cont__content__supp__goal">
+          <div>Goal:<br />Current: <br />Remaining:</div>
+          <div>
+            Main 🍚 <br />5 <br />6 <br />
+            2
+          </div>
+          <div>
+            Meat 🥩  <br />2   <br />1 <br />
+            3
+          </div>
+          <div>
+            Veggie 🥦  <br />2   <br />1 <br />
+            3
+          </div>
+          <div>
+            Fruit🍓  <br />2   <br />1 <br />
+            3
+          </div>
+          <div>
+            Water 💧  <br />2400  <br />2400  <br />
+            2400
+          </div>
+        </div>
+      </div>
+      <div class="status__cont__content__msg">
+        <div class="status__cont__content__msg__tick">
+          <p>Massage form the Tutor:</p>
+          <img src="../../../../assets/images/tick.svg" alt="tick" />
+        </div>
+        <p>
+          Keep exercise at least 2 hour a day. Keep exercise at least 2 hour <br />
+          a day. Keep exercise at least 2 hour a day. <span>See more...</span>
+        </p>
+      </div>
+    </div>
+    <div class="status__cont__profile">
+      <div
+        [ngClass]="{
+          input: true,
+          input___error: false
+        }"
+      >
+        <select placeholder="Personal Froflie" formControlName="personal profile">
+          <option value="0">Personal Profile</option>
+          <option value="1">男性</option>
+          <option value="2">女性</option>
+        </select>
+        <!-- <p class="input__errorMsg">Country Code is required.</p> -->
+      </div>
+    </div>
+    <div class="status__cont__meal">
+      <div
+        [ngClass]="{
+          input: true,
+          input___error: false
+        }"
+      >
+        <select placeholder="Meal Management" formControlName="Meal Management">
+          <option value="0">Meal Management</option>
+          <option value="1">男性</option>
+          <option value="2">女性</option>
+        </select>
+        <!-- <p class="input__errorMsg">Country Code is required.</p> -->
+      </div>
+    </div>
+  </div>
+</div>
