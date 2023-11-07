@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class StatusComponent {
   showMenu = false;
+  isChecked: boolean = false;
+
+  toggleChanged() {
+    this.isChecked = !this.isChecked;
+  }
 }

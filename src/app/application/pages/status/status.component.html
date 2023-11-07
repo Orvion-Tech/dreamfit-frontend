@@ -31,30 +31,36 @@
           </div>
         </div>
         <div class="status__cont__content__mission__btn">
-          <input type="button" value="Send OTP" class="status__cont__content__mission__btn__send" />
+          <input
+            type="button"
+            value="Goto previous Date"
+            class="status__cont__content__mission__btn__send"
+          />
         </div>
       </div>
       <div class="status__cont__content__name">
         <h5>John Doe</h5>
         <div class="status__cont__content__name__goal">
-          <div><br />Goal: <br />Current:  <br />Remaining:</div>
-          <div>
+          <div style="border-right: 1px solid; font-size: 10px; font-weight: 400">
+            <br /><br />Goal: <br />Current:  <br />Remaining:
+          </div>
+          <div style="border-right: 1px solid; font-size: 12px; font-weight: 400">
             Main 🍚  <br />5   <br />6 <br />
             2
           </div>
-          <div>
+          <div style="border-right: 1px solid; font-size: 12px; font-weight: 400">
             Meat 🥩  <br />2   <br />1 <br />
             3
           </div>
-          <div>
+          <div style="border-right: 1px solid; font-size: 12px; font-weight: 400">
             Veggie 🥦  <br />2   <br />1 <br />
             3
           </div>
-          <div>
+          <div style="border-right: 1px solid; font-size: 12px; font-weight: 400">
             Fruit🍓  <br />2   <br />1 <br />
             3
           </div>
-          <div>
+          <div style="font-size: 12px; font-weight: 400">
             Water 💧  <br />2400  <br />2400  <br />
             2400
           </div>
@@ -66,24 +72,26 @@
           <span>Consumed: 2 Br, 3 Wh</span>
         </h5>
         <div class="status__cont__content__supp__goal">
-          <div>Goal:<br />Current: <br />Remaining:</div>
-          <div>
+          <div style="border-right: 1px solid; font-size: 10px; font-weight: 400">
+            <br />Goal: <br />Current:  <br />Remaining:
+          </div>
+          <div style="border-right: 1px solid; font-size: 12px; font-weight: 400">
             Main 🍚 <br />5 <br />6 <br />
             2
           </div>
-          <div>
+          <div style="border-right: 1px solid; font-size: 12px; font-weight: 400">
             Meat 🥩  <br />2   <br />1 <br />
             3
           </div>
-          <div>
+          <div style="border-right: 1px solid; font-size: 12px; font-weight: 400">
             Veggie 🥦  <br />2   <br />1 <br />
             3
           </div>
-          <div>
+          <div style="border-right: 1px solid; font-size: 12px; font-weight: 400">
             Fruit🍓  <br />2   <br />1 <br />
             3
           </div>
-          <div>
+          <div style="font-size: 12px; font-weight: 400">
             Water 💧  <br />2400  <br />2400  <br />
             2400
           </div>
@@ -91,7 +99,7 @@
       </div>
       <div class="status__cont__content__msg">
         <div class="status__cont__content__msg__tick">
-          <p>Massage form the Tutor:</p>
+          <h5>Massage form the Tutor:</h5>
           <img src="../../../../assets/images/tick.svg" alt="tick" />
         </div>
         <p>
@@ -101,18 +109,53 @@
       </div>
     </div>
     <div class="status__cont__profile">
-      <div
-        [ngClass]="{
-          input: true,
-          input___error: false
-        }"
-      >
-        <select placeholder="Personal Froflie" formControlName="personal profile">
-          <option value="0">Personal Profile</option>
-          <option value="1">男性</option>
-          <option value="2">女性</option>
-        </select>
-        <!-- <p class="input__errorMsg">Country Code is required.</p> -->
+      <div class="status__cont__profile__link">
+        <a>Personal profile</a>
+      </div>
+      <div class="status__cont__profile__period">
+        <label>Period</label>
+        <label class="toggle-switch">
+          <input type="checkbox" [(ngModel)]="isChecked" (change)="toggleChanged()" />
+          <span class="slider round"></span>
+        </label>
+      </div>
+      <div class="status__cont__profile__weight">
+        <div
+          [ngClass]="{
+            input: true
+          }"
+        >
+          <label>Weight (kg)</label>
+          <input type="text" placeholder="" formControlName="" />
+
+          <p class="input__errorMsg">weight is required.</p>
+        </div>
+      </div>
+      <div class="status__cont__profile__fat">
+        <div
+          [ngClass]="{
+            input: true
+          }"
+        >
+          <label>Body Fat (%)</label>
+          <input type="text" placeholder="" formControlName="" />
+
+          <p class="input__errorMsg">body fat is required.</p>
+        </div>
+
+        <div
+          [ngClass]="{
+            input: true
+          }"
+        >
+          <label>Body Mass (kg)</label>
+          <input type="text" placeholder="80" formControlName="80" />
+
+          <p class="input__errorMsg">body fat is required.</p>
+        </div>
+      </div>
+      <div class="status__cont__profile__btn">
+        <input type="button" value="Submit Daily Profile" class="primaryBtn" />
       </div>
     </div>
     <div class="status__cont__meal">

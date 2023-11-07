@@ -9,6 +9,7 @@ import { SplashComponent } from './application/pages/splash/splash.component';
 import { ForgotPasswordComponent } from './application/pages/forgot-password/forgot-password.component';
 import { RegistrationComponent } from './application/pages/registration/registration.component';
 import { StatusComponent } from './application/pages/status/status.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import { StatusComponent } from './application/pages/status/status.component';
     RegistrationComponent,
     StatusComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule],
+  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })
