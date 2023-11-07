@@ -9,6 +9,7 @@
     padding-block: 30px;
     padding-bottom: 100px;
     gap: 20px;
+
     &__icon {
       display: grid;
       grid-auto-flow: column;
@@ -24,6 +25,7 @@
       position: fixed;
       bottom: 0;
       padding: 20px 40px;
+      z-index: 1;
       //   border-radius: 0 0 50px 50px;
       &__home {
         p {
@@ -42,7 +44,7 @@
     }
     &__content {
       display: grid;
-      padding-inline: 31px;
+      //padding-inline: 31px;
       gap: 12px;
       &__logo {
         display: grid;
@@ -76,12 +78,13 @@
         &__btn {
           display: grid;
           &__send {
-            // width: 78px;
-            // height: 34px;
+            width: 107px;
+            height: 28px;
             border-radius: 4px;
+            padding: 8px 4px;
             background: #79e0e8;
             color: #fff;
-            font-size: 12px;
+            font-size: 10px;
             display: grid;
             place-content: center;
             place-items: center;
@@ -152,6 +155,7 @@
         gap: 12px;
         background: rgba(255, 226, 122, 0.2);
         padding: 12px 13px;
+        border-radius: 8px;
         &__tick {
           display: grid;
           grid-auto-flow: column;
@@ -178,10 +182,13 @@
     &__profile {
       display: grid;
       gap: 12px;
+      border: 1px #79e0e8 solid;
+      padding: 20px;
+      border-radius: 8px;
       &__link {
         display: grid;
         a {
-          text-align: center;
+          text-align: start;
           color: #626262;
           font-size: 18px;
         }
@@ -195,8 +202,8 @@
           position: relative;
           display: grid;
           grid-auto-flow: column;
-          width: 60px;
-          height: 34px;
+          width: 46px;
+          height: 24px;
         }
 
         .toggle-switch input {
@@ -220,8 +227,8 @@
         .slider:before {
           position: absolute;
           content: '';
-          height: 26px;
-          width: 26px;
+          height: 20px;
+          width: 20px;
           left: 4px;
           bottom: 4px;
           background-color: white;
@@ -260,14 +267,37 @@
       }
       &__btn {
         display: grid;
-        color: #616161;
-        font-size: 14px;
-        font-weight: 400;
+        &__daily {
+          width: 100%;
+          height: 38px;
+          border-radius: 10px;
+          background: var(--color-yellow);
+          display: grid;
+          place-content: center;
+          place-items: center;
+          color: #616161;
+          font-size: 14px;
+        }
       }
     }
     &__meal {
       display: grid;
       gap: 12px;
+      border: 1px #79e0e8 solid;
+      padding: 20px;
+      border-radius: 8px;
+      &__link {
+        display: grid;
+        a {
+          text-align: start;
+          color: #626262;
+          font-size: 18px;
+          font-weight: 400;
+        }
+        input {
+          text-align: center;
+        }
+      }
     }
   }
 }
