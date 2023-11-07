@@ -255,6 +255,9 @@
         grid-auto-flow: column;
         gap: 18px;
       }
+      &__upload {
+        display: grid;
+      }
       &__btn {
         display: grid;
         color: #616161;
