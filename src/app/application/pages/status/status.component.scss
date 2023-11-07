@@ -109,7 +109,7 @@
         &__goal {
           display: grid;
           grid-auto-flow: column;
-          padding-block: 12px;
+          padding: 12px 16px;
           font-size: 12px;
           //   width: 328px;
           //   height: 116px;
@@ -138,7 +138,7 @@
         &__goal {
           display: grid;
           grid-auto-flow: column;
-          padding-block: 12px;
+          padding: 12px 16px;
           // width: 328px;
           // height: 116px;
           gap: 4px;
@@ -227,9 +227,9 @@
         .slider:before {
           position: absolute;
           content: '';
-          height: 20px;
-          width: 20px;
-          left: 4px;
+          height: 17px;
+          width: 18px;
+          left: 2px;
           bottom: 4px;
           background-color: white;
           -webkit-transition: 0.4s;
