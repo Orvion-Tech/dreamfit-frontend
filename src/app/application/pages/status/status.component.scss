@@ -268,10 +268,12 @@
         border: 1px solid;
         border-radius: 10px;
         padding-block: 22px;
+        position: relative;
         &__btn {
           display: grid;
           position: absolute;
-          right: 78px;
+          right: 30px;
+          top: 10px;
           gap: 24px;
           &__send {
             width: 40px;
