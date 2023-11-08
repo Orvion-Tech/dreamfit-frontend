@@ -166,14 +166,21 @@
           </div>
         </div>
         <div class="status__cont__profile__upload">
-          <div
-            [ngClass]="{
-              input: true
-            }"
-          >
-            <input type="text" placeholder="" formControlName="" />
+          <div class="status__cont__profile__upload__btn">
+            <input type="button" value="Delete" class="status__cont__profile__upload__btn__send" />
+          </div>
+          <div class="status__cont__profile__upload__file">
+            <div
+              [ngClass]="{
+                input: true
+              }"
+            >
+              <!-- <input type="file" id="upload" hidden /> -->
+              <label for="upload">Upload Back Profile Photo</label>
+              <input type="file" id="upload" hidden />
 
-            <p class="input__errorMsg">weight is required.</p>
+              <p class="input__errorMsg">weight is required.</p>
+            </div>
           </div>
         </div>
         <div class="status__cont__profile__btn">
