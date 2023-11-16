@@ -28,8 +28,7 @@
   }
 }
 .topBanner {
-  background-image: url('../../assets/images/background-img.png');
-  // background: linear-gradient(244deg, #fffaca 20.44%, rgba(255, 250, 202, 0) 92.19%);
+  background: linear-gradient(244deg, #fffaca 20.44%, rgba(255, 250, 202, 0) 92.19%);
   &__cont {
     position: relative;
     padding-block: 80px;
@@ -37,83 +36,105 @@
     grid-auto-flow: column;
     // justify-content: space-between;
     &__logo {
-      background: white;
+      //background: white;
     }
   }
 }
 
 .middleBanner {
-  background-image: url('../../assets/images/vegetable.png');
+  background-image: url('../../assets/images/background-img.png');
   background-size: cover;
-  background-position: center left;
+  background-position: center;
   &__cont {
     position: relative;
     padding-block: 80px;
     display: grid;
     grid-auto-flow: row;
-    justify-content: flex-end;
-    gap: 12px;
-    h4 {
-      color: #1c97a2;
-      font-size: 38px;
-      font-style: italic;
-      font-weight: 400;
-    }
-    p {
-      color: #1c97a2;
-      font-size: 18px;
-      font-weight: 400;
-    }
-    &__btn {
-      width: 110px;
-      height: 34px;
-      border-radius: 4px;
-      background: #0abab5;
-      color: #fff;
-      font-size: 12px;
+    justify-content: center;
+    gap: 48px;
+    img {
       display: grid;
-      place-content: center;
+      justify-content: center;
       place-items: center;
+      place-self: center;
+    }
+    &__text {
+      display: grid;
+      gap: 32px;
+      h5 {
+        color: #78797b;
+        font-size: 32px;
+        font-family: Zolina;
+        font-weight: 700;
+        text-align: center;
+      }
+      p {
+        color: #78797b;
+        font-size: 32px;
+        font-family: Helvetica;
+        font-weight: 400;
+        text-align: center;
+      }
+    }
+    &__para {
+      display: grid;
+      gap: 32px;
+      p {
+        color: #78797b;
+        font-size: 32px;
+        font-family: Helvetica;
+        font-weight: 400;
+        text-align: center;
+      }
+      h5 {
+        color: #00c3bb;
+        font-size: 32px;
+        font-family: Helvetica;
+        font-weight: 400;
+        text-align: center;
+      }
     }
   }
 }
 
 .submiddleBanner {
-  background: linear-gradient(244deg, #fffaca 20.44%, rgba(255, 250, 202, 0) 92.19%);
+  background-image: url('../../assets/images/sky-1.png');
+  background-size: cover;
+  background-position: center;
   &__cont {
     position: relative;
     padding-block: 80px;
     display: grid;
-    grid-auto-flow: column;
+    grid-auto-flow: row;
     justify-content: flex-start;
+    align-items: center;
     gap: 64px;
     &__left {
       display: grid;
       grid-auto-flow: row;
-      gap: 64px;
-      &__text {
-        color: black;
-        font-size: 32px;
-        font-weight: 400;
-      }
-      h4 {
-        color: black;
-        font-size: 38px;
-        font-weight: 700;
-        p {
-          color: black;
-          font-size: 22px;
-          font-weight: 700;
-        }
-      }
+      gap: 12px;
       p {
-        color: black;
-        font-size: 22px;
-        font-weight: 400;
+        color: #78797b;
+        font-size: 24px;
+        font-family: Zolina;
+        font-weight: 700;
+        text-align: center;
       }
     }
     &__right {
-      color: #d9d9d9;
+      display: grid;
+      grid-auto-flow: column;
+      gap: 64px;
+      &__content {
+        display: grid;
+        gap: 24px;
+        p {
+          color: #78797b;
+          font-size: 24px;
+          font-family: Zolina;
+          font-weight: 700;
+        }
+      }
     }
   }
 }
@@ -126,11 +147,14 @@
     position: relative;
     padding-block: 80px;
     display: grid;
-    grid-auto-flow: column;
+    grid-auto-flow: row;
     justify-content: center;
+    &__img {
+      display: grid;
+    }
     &__center {
       display: grid;
-      gap: 12px;
+      gap: 32px;
       h4 {
         color: #1c97a2;
         font-size: 38px;
