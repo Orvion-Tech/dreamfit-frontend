@@ -8,9 +8,11 @@
     display: grid;
     grid-auto-flow: column;
     gap: 32px;
-    &__menu a {
+    a {
       color: #0abab5;
       font-size: 18px;
+      font-family: Times New Roman;
+      font-weight: 400;
     }
   }
   &__btn {
@@ -26,145 +28,16 @@
   }
 }
 .topBanner {
-  background: linear-gradient(244deg, #fffaca 20.44%, rgba(255, 250, 202, 0) 92.19%);
+  background-image: url('../../assets/images/background-img.png');
+  // background: linear-gradient(244deg, #fffaca 20.44%, rgba(255, 250, 202, 0) 92.19%);
   &__cont {
     position: relative;
     padding-block: 80px;
     display: grid;
     grid-auto-flow: column;
-    justify-content: space-between;
-    &__run {
-      position: absolute;
-      bottom: 40px;
-      left: 0;
-      transform: translateX(-20%);
-    }
-
-    &__straberry {
-      position: absolute;
-      left: 0;
-      transform: translateX(-20%);
-      top: 50%;
-    }
-
-    &__lemon {
-      position: absolute;
-      left: 94%;
-      transform: translateX(-20%);
-      top: 16px;
-    }
-
-    &__weight {
-      position: absolute;
-      left: 93%;
-      transform: translateX(-20%);
-      top: 78%;
-    }
-    &__left {
-      position: relative;
-      &__veggie {
-        position: absolute;
-        right: 0px;
-        top: 25%;
-        transform: translate(100%, -100%);
-      }
-      h2 {
-        color: #000;
-        font-size: 48px;
-      }
-
-      p {
-        color: #000;
-        font-size: 32px;
-        font-style: italic;
-      }
-
-      a {
-        margin-top: 64px;
-        display: grid;
-        width: 104px;
-        height: 34px;
-        place-items: center;
-        place-content: center;
-        background: #000;
-        border-radius: 4px;
-        color: #fffaca;
-        font-size: 12px;
-      }
-    }
-    &__right {
-      position: relative;
-      display: grid;
-      grid-auto-flow: column;
-      gap: 24px;
-      &__leave {
-        position: absolute;
-        transform: translate(356px, -100%);
-      }
-      &__text {
-        position: relative;
-        display: grid;
-        gap: 16px;
-        margin-top: 80px;
-        &__egg {
-          display: grid;
-          justify-self: flex-end;
-        }
-        &__top {
-          display: grid;
-          justify-content: center;
-          gap: 32px;
-          justify-items: center;
-          p {
-            color: black;
-            font-size: 12px;
-            font-weight: 400;
-            word-wrap: break-word;
-            text-align: center;
-          }
-        }
-        &__img {
-          display: grid;
-          &__group {
-            display: grid;
-            grid-auto-flow: column;
-            background-color: #79e0e8;
-            padding: 16px 20px;
-            border-radius: 54px;
-            img {
-              border: 1px solid #fff;
-              border-radius: 100%;
-              &:nth-child(2) {
-                transform: translateX(-12px);
-              }
-              &:nth-child(3) {
-                transform: translateX(-24px);
-              }
-              &:nth-child(4) {
-                transform: translateX(-36px);
-              }
-            }
-            p {
-              color: black;
-              font-size: 12px;
-              font-weight: 400;
-              text-align: left;
-              margin-left: -24px;
-            }
-          }
-        }
-        &__quote {
-          display: grid;
-          justify-content: center;
-          justify-items: center;
-
-          p {
-            font-size: 32px;
-            color: black;
-            text-align: center;
-          }
-        }
-      }
+    // justify-content: space-between;
+    &__logo {
+      background: white;
     }
   }
 }
