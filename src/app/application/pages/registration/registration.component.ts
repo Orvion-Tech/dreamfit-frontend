@@ -52,16 +52,13 @@ export class RegistrationComponent {
           this.registrationForm.get('phone_number')!.value,
       };
       try {
-        const response = await fetch(
-          'https://dogli0pt226g2.cloudfront.net/en/api/user-registration/',
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(credentials),
+        const response = await fetch('http://192.168.1.24/api/user-registration/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
           },
-        );
+          body: JSON.stringify(credentials),
+        });
         if (response.ok) {
           const data = await response.json();
           const user_id = data.user_id;
@@ -97,7 +94,7 @@ export class RegistrationComponent {
       this.registrationForm.get('invitation_code')!.valid
     ) {
       try {
-        const response = await fetch('https://dogli0pt226g2.cloudfront.net/en/api/verify-otp/', {
+        const response = await fetch('http://192.168.1.24/api/verify-otp/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -141,7 +138,7 @@ export class RegistrationComponent {
       this.registrationForm.get('phone_number')!.valid
     ) {
       try {
-        const response = await fetch('https://dogli0pt226g2.cloudfront.net/en/api/send-otp/', {
+        const response = await fetch('http://192.168.1.24/api/send-otp/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

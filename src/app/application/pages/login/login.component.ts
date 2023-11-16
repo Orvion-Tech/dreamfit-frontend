@@ -36,7 +36,7 @@ export class LoginComponent {
         password: this.loginForm.value.password,
       };
       try {
-        const response = await fetch('http://192.168.1.28/api/login/', {
+        const response = await fetch('http://192.168.1.24/api/login/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
