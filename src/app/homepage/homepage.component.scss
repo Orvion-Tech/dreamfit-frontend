@@ -152,9 +152,11 @@
     &__img {
       display: grid;
       position: relative;
-      padding: 0 64px;
       background: #fff;
-      z-index: 1;
+      img {
+        z-index: 1;
+        padding: 0 64px;
+      }
       &::before {
         position: absolute;
         content: '';
@@ -193,6 +195,15 @@
     padding: 80px 64px;
     display: grid;
     grid-auto-flow: column;
+    &__top {
+      display: grid;
+      grid-auto-flow: column;
+      justify-content: center;
+      position: absolute;
+      place-content: center;
+      place-items: center;
+      padding: 25px 155px;
+    }
     &__bottom {
       display: grid;
       grid-auto-flow: column;
