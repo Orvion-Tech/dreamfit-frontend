@@ -237,6 +237,7 @@
   background-size: cover;
   background-position: center left;
   position: relative;
+  overflow-x: hidden;
   &__cont {
     //position: relative;
     padding-block: 80px;
