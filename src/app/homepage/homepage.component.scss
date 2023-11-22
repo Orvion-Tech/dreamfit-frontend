@@ -360,6 +360,10 @@
     grid-auto-flow: column;
     justify-content: space-between;
     gap: 140px;
+    grid-template-columns: repeat(3, 1fr);
+    @media screen and (max-width: 767px) {
+      order: 3;
+    }
     &__left {
       display: grid;
       gap: 78px;
@@ -384,7 +388,6 @@
       &__banner {
         display: grid;
         gap: 29px;
-        grid-template-rows: repeat(3, 1fr);
         &__primaryBtn {
           width: 100%;
           height: 60px;
