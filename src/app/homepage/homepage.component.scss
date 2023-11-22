@@ -244,6 +244,7 @@
     display: grid;
     grid-auto-flow: row;
     justify-content: center;
+    gap: 48px;
     &__img {
       display: grid;
       //position: relative;
@@ -299,21 +300,22 @@
     position: relative;
     padding: 80px 64px;
     display: grid;
-    grid-auto-flow: column;
+    grid-auto-flow: row;
+    gap: 48px;
     &__top {
       display: grid;
       grid-auto-flow: column;
       justify-content: center;
-      position: absolute;
-      place-content: center;
+      //position: absolute;
+      //place-content: center;
       place-items: center;
-      padding: 25px 155px;
+      // padding: 25px 155px;
       @media screen and (max-width: 767px) {
         grid-auto-flow: row;
         gap: 24px;
       }
     }
-    &__bottom {
+    &__middle {
       display: grid;
       grid-auto-flow: column;
       gap: 48px;
@@ -330,6 +332,19 @@
           font-weight: 400;
           text-align: center;
         }
+      }
+    }
+    &__bottom {
+      display: grid;
+      grid-auto-flow: column;
+      justify-content: center;
+      //position: absolute;
+      //place-content: center;
+      place-items: center;
+      padding: 25px 155px;
+      @media screen and (max-width: 767px) {
+        grid-auto-flow: row;
+        gap: 24px;
       }
     }
   }
