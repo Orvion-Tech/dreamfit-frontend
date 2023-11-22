@@ -325,6 +325,7 @@
       &__month {
         display: grid;
         gap: 32px;
+        place-items: center;
         p {
           color: #78797b;
           font-size: 24px;
@@ -374,10 +375,10 @@
             position: absolute;
             content: '';
             width: 40vw;
-            height: 10px;
+            height: 3px;
             background: #ffffff;
             top: 173px;
-            left: 0;
+            left: 68px;
           }
         }
         p {
