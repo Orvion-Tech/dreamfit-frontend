@@ -360,10 +360,8 @@
     grid-auto-flow: column;
     justify-content: space-between;
     gap: 140px;
-    grid-template-columns: repeat(3, 1fr);
-    @media screen and (max-width: 767px) {
-      order: 3;
-    }
+    grid-template-columns: repeat(2, 1fr);
+
     &__left {
       display: grid;
       gap: 78px;
