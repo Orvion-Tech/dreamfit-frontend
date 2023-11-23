@@ -1,4 +1,4 @@
-<!-- <div
+<div
   class="header container"
   [ngClass]="{ header: true, container: true, header___openMenu: showMenu === true }"
 >
@@ -12,14 +12,14 @@
     <a href="/">Promises</a>
     <a href="/">Successful Cases</a>
     <a href="/">Q&A</a>
-    <div class="header__menu__btn" *ngIf="showMenu">
-      <a href="/" class="header__menu__btn__login">Login</a>
-    </div>
   </div>
-  <div class="header__right">
+  <div class="header__btn">
+    <a href="/" class="header__btn__login">Login</a>
+  </div>
+  <!-- <div class="header__right">
     <a href="/" class="header__right__login">Login</a>
-  </div>
-  <a class="header__mobIcon">
+  </div> -->
+  <a class="header__mobIcon" (click)="showMenuFn()">
     <img
       *ngIf="!showMenu"
       src="../../../assets/images/menu-icon-open.svg"
@@ -35,13 +35,20 @@
       alt="menu open"
     />
   </a>
-</div> -->
+</div>
 
 <div class="topBanner">
   <div class="topBanner__cont container">
-    <div class="topBanner__cont__logo">
-      <img src="../../assets/images/logo.svg" alt="logo" />
-    </div>
+    <img src="../../assets/images/background_banner.png" alt="banner" />
+    <a class="topBanner__cont__logo">
+      <img
+        src="../../assets/images/logos_whatsapp-icon.svg"
+        alt="whatsapp"
+        width="80"
+        height="80"
+      />
+      <p>立即查詢</p>
+    </a>
   </div>
 </div>
 
