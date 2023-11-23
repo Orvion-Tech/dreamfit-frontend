@@ -1,0 +1,133 @@
+.home-screen {
+  display: grid;
+  gap: 12px;
+}
+.today-mission {
+  padding-inline: 16px;
+  display: grid;
+  gap: 4px;
+  h3 {
+    color: #616161;
+    font-size: 18px;
+  }
+  &__row {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: space-between;
+    &__date {
+      display: grid;
+      grid-auto-flow: column;
+      align-items: center;
+      gap: 8px;
+      p {
+        font-size: 12px;
+        color: #616161;
+      }
+    }
+    &__btn {
+      border-radius: 4px;
+      background: var(--Secondary, #79e0e8);
+      font-size: 12px;
+      color: #fff;
+      padding: 8px 16px;
+    }
+  }
+}
+.meal-summary {
+  padding: 16px;
+  display: grid;
+  gap: 12px;
+  h2 {
+    text-align: center;
+  }
+
+  &__table {
+    border: 1px solid #7d7d7d;
+    display: grid;
+    grid-auto-flow: column;
+    padding: 12px 4px;
+    border-radius: 16px;
+    p {
+      color: #616161;
+      font-size: 10px;
+      text-align: center;
+      padding-block: 2px;
+    }
+    &__col {
+      border-right: 1px solid #7d7d7d;
+      padding: 0 4px;
+      &:first-child {
+        p {
+          text-align: left;
+        }
+      }
+      &:last-child {
+        border-right: none;
+      }
+    }
+  }
+}
+.supplement {
+  padding-inline: 16px;
+  display: grid;
+  gap: 24px;
+  h2 {
+    color: #616161;
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  &__cont {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    justify-content: center;
+    justify-items: center;
+    &__box {
+      display: grid;
+      gap: 4px;
+      input {
+        width: 100%;
+        border-radius: 4px;
+        background: #d9d9d9;
+        font-size: 10px;
+        height: 18px;
+        padding: 4px;
+        color: #616161;
+      }
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+      &.supplement__cont__box___disabled {
+        filter: grayscale(1);
+        pointer-events: none;
+      }
+    }
+  }
+}
+.tutor-message {
+  margin-inline: 16px;
+  border-radius: 8px;
+  background: rgba(255, 226, 122, 0.2);
+  padding: 12px;
+  display: grid;
+  gap: 4px;
+  p {
+    color: #000;
+    font-size: 12px;
+    line-height: 150%;
+  }
+  &__row {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: space-between;
+    align-items: center;
+    h3 {
+      color: #000;
+      font-size: 16px;
+      font-weight: 500;
+    }
+  }
+}
