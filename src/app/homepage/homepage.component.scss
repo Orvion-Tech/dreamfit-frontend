@@ -118,13 +118,15 @@
       display: grid;
       position: fixed;
       bottom: 0;
-      right: 0;
+      right: 40px;
       gap: 24px;
       grid-auto-flow: column;
       background: #ffffff;
       border-radius: 50px;
-      overflow: hidden;
-      padding: 24px 12px;
+      // overflow: hidden;
+      // padding: 24px 12px;
+      justify-content: center;
+      align-items: center;
       p {
         color: #78797b;
         font-size: 32px;
