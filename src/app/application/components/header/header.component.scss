@@ -1,0 +1,116 @@
+.header {
+  position: relative;
+  left: 0;
+  top: 0;
+  right: 0;
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: 14px;
+  z-index: 1;
+  @media screen and (max-width: 1024px) {
+    padding: 16px;
+  }
+  // @media screen and (max-width: 1024px) {
+  //   grid-auto-flow: row;
+  // }
+  &__menu {
+    display: grid;
+    grid-auto-flow: column;
+    gap: 32px;
+    @media screen and (max-width: 1024px) {
+      display: none;
+    }
+    a {
+      color: #0abab5;
+      font-size: 18px;
+      font-family: Times New Roman;
+      font-weight: 400;
+
+      &.header__menu__login {
+        width: 110px;
+        height: 34px;
+        border-radius: 4px;
+        background: #0abab5;
+        color: #fff;
+        font-size: 12px;
+        display: grid;
+        place-content: center;
+        place-items: center;
+      }
+    }
+  }
+  &__right {
+    display: grid;
+    grid-auto-flow: column;
+    gap: 8px;
+    @media screen and (max-width: 1024px) {
+      display: none;
+    }
+    &__login {
+      width: 110px;
+      height: 34px;
+      border-radius: 4px;
+      background: #0abab5;
+      color: #fff;
+      font-size: 12px;
+      display: grid;
+      place-content: center;
+      place-items: center;
+    }
+  }
+  &__logo {
+    display: grid;
+    img {
+      @media screen and (max-width: 1024px) {
+        height: 48px;
+        width: auto;
+      }
+      @media screen and (max-width: 767px) {
+        height: 32px;
+        width: auto;
+      }
+    }
+  }
+  &__mobIcon {
+    display: none;
+    @media screen and (max-width: 1024px) {
+      display: grid;
+    }
+  }
+
+  &___openMenu {
+    @media screen and (max-width: 1024px) {
+      //background: rgba(0, 0, 0, 0.6);
+      background: aliceblue;
+      backdrop-filter: blur(12px);
+    }
+    .header__menu {
+      @media screen and (max-width: 1024px) {
+        display: grid;
+        grid-auto-flow: row;
+        position: fixed;
+        top: 64px;
+        left: 0;
+        right: 0;
+        //background: rgba(0, 0, 0, 0.6);
+        background: aliceblue;
+        backdrop-filter: blur(12px);
+        padding-inline: 16px;
+        gap: 0;
+      }
+      a {
+        @media screen and (max-width: 1024px) {
+          padding: 12px 16px;
+          //border-bottom: 1px solid #3d3d3d;
+        }
+        &:nth-last-child(2) {
+          @media screen and (max-width: 1024px) {
+            border-bottom: none;
+          }
+        }
+      }
+    }
+  }
+}

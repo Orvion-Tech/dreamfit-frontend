@@ -10,6 +10,7 @@ import { ForgotPasswordComponent } from './application/pages/forgot-password/for
 import { RegistrationComponent } from './application/pages/registration/registration.component';
 import { StatusComponent } from './application/pages/status/status.component';
 import { FormsModule } from '@angular/forms';
+import { HeaderComponent } from './application/components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { FormsModule } from '@angular/forms';
     ForgotPasswordComponent,
     RegistrationComponent,
     StatusComponent,
+    HeaderComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, FormsModule],
   providers: [],

@@ -1,0 +1,37 @@
+<div
+  class="header container"
+  [ngClass]="{ header: true, container: true, header___openMenu: showMenu === true }"
+>
+  <a href="/" class="header__logo"
+    ><img src="../../../assets/images/logo.svg" alt="logo" width="188" height="52"
+  /></a>
+  <div class="header__menu">
+    <a href="/">Home</a>
+    <a href="/">About Us</a>
+    <a href="/">Our Team</a>
+    <a href="/">Promises</a>
+    <a href="/">Successful Cases</a>
+    <a href="/">Q&A</a>
+
+    <a href="/" class="header__menu__login" *ngIf="showMenu">Login</a>
+  </div>
+  <div class="header__right">
+    <a href="/" class="header__right__login">Login</a>
+  </div>
+  <a class="header__mobIcon" (click)="showMenuFn()">
+    <img
+      *ngIf="!showMenu"
+      src="../../../assets/images/menu-icon-open.svg"
+      width="24px"
+      height="24px"
+      alt="menu open"
+    />
+    <img
+      *ngIf="showMenu"
+      src="../../../assets/images/menu-icon-close.svg"
+      width="24px"
+      height="24px"
+      alt="menu open"
+    />
+  </a>
+</div>
