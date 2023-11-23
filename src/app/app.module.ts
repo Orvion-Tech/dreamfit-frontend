@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './application/pages/home/home.component';
 import { AppHeaderComponent } from './application/components/app-header/app-header.component';
 import { AppFooterComponent } from './application/components/app-footer/app-footer.component';
+import { HeaderComponent } from './application/components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { AppFooterComponent } from './application/components/app-footer/app-foot
     HomeComponent,
     AppHeaderComponent,
     AppFooterComponent,
+    HeaderComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, FormsModule],
   providers: [],
