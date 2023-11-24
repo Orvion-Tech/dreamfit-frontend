@@ -3,12 +3,8 @@
   &__cont {
     position: relative;
     display: grid;
-    img {
-      @media screen and (max-width: 767px) {
-        width: 375px;
-        height: 320px;
-      }
-    }
+    z-index: 1;
+
     &__logo {
       height: 105px;
       width: 300px;
@@ -29,9 +25,8 @@
         width: 144px;
         display: grid;
         position: fixed;
-        //bottom: 22px;
+        bottom: 22px;
         right: 80px;
-        top: 296px;
         gap: 4px;
         // justify-content: center;
         // align-items: center;
@@ -45,7 +40,7 @@
       p {
         color: #78797b;
         font-size: 32px;
-        font-family: Times New Roman;
+        font-family: Helvetica;
         font-weight: 400;
         text-align: center;
         @media screen and (max-width: 767px) {
