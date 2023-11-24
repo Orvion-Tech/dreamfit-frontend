@@ -1,0 +1,35 @@
+.footer {
+  display: grid;
+  grid-auto-flow: column;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #79e0e8;
+  padding: 16px 48px;
+  justify-content: space-between;
+  align-items: center;
+  &__menu {
+    display: grid;
+    gap: 4px;
+    place-content: center;
+    place-items: center;
+    p {
+      color: #9b9b9b;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 400;
+    }
+    &.footer__menu___active {
+      svg {
+        path {
+          fill: #fffaca;
+        }
+      }
+      p {
+        color: #fffaca;
+        font-weight: 700;
+      }
+    }
+  }
+}
