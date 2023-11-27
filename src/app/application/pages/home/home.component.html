@@ -257,9 +257,9 @@
       least 2 hour a day.
     </p>
   </div>
-  <div class="personal-profile">
-    <div class="personal-profile__header">Personal Profile</div>
-    <div class="personal-profile__body">
+  <div [ngClass]="{ 'personal-profile': true, 'personal-profile___show': showPersonal }">
+    <div class="personal-profile__header" (click)="personalClick()">Personal Profile</div>
+    <div class="personal-profile__body" *ngIf="showPersonal">
       <form action="">
         <div class="personal-profile__body__period">
           <p>Period</p>
@@ -274,27 +274,99 @@
           }"
         >
           <label>Weight (kg)</label>
-          <input
-            type="text"
-            formControlName="weight"
-            placeholder="如果係循環貸款打0"
-            pattern="[0-9]*"
-          />
+          <input type="text" formControlName="weight" />
           <!-- <p class="input__errorMsg" >請輸入資料</p> -->
         </div>
         <div class="grid grid___same gap___df">
           <div class="input">
             <label>Body Fat (%) </label>
-            <input type="text" formControlName="bodyFat" placeholder="如果係循環貸款打0" />
+            <input type="text" formControlName="bodyFat" />
             <!-- <p class="input__errorMsg" >請輸入資料</p> -->
           </div>
           <div class="input">
             <label>Body Mass (kg)</label>
-            <input type="text" formControlName="bodyMass" placeholder="如果係循環貸款打0" />
+            <input type="text" formControlName="bodyMass" />
             <!-- <p class="input__errorMsg" >請輸入資料</p> -->
           </div>
         </div>
+        <div class="fileUpload">
+          <div class="upload-btn-wrapper">
+            <button class="btn">
+              <svg
+                width="30"
+                height="30"
+                viewBox="0 0 30 30"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M13.75 20V9.8125L10.5 13.0625L8.75 11.25L15 5L21.25 11.25L19.5 13.0625L16.25 9.8125V20H13.75ZM7.5 25C6.8125 25 6.22375 24.755 5.73375 24.265C5.24375 23.775 4.99917 23.1867 5 22.5V18.75H7.5V22.5H22.5V18.75H25V22.5C25 23.1875 24.755 23.7763 24.265 24.2663C23.775 24.7563 23.1867 25.0008 22.5 25H7.5Z"
+                  fill="#79E0E8"
+                />
+              </svg>
+              <p>Upload Front Profile Photo</p>
+            </button>
+            <input type="file" name="myfile" />
+          </div>
+          <a class="fileUpload__delete">Delete</a>
+        </div>
+        <div class="fileUpload">
+          <div class="upload-btn-wrapper">
+            <button class="btn">
+              <svg
+                width="30"
+                height="30"
+                viewBox="0 0 30 30"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M13.75 20V9.8125L10.5 13.0625L8.75 11.25L15 5L21.25 11.25L19.5 13.0625L16.25 9.8125V20H13.75ZM7.5 25C6.8125 25 6.22375 24.755 5.73375 24.265C5.24375 23.775 4.99917 23.1867 5 22.5V18.75H7.5V22.5H22.5V18.75H25V22.5C25 23.1875 24.755 23.7763 24.265 24.2663C23.775 24.7563 23.1867 25.0008 22.5 25H7.5Z"
+                  fill="#79E0E8"
+                />
+              </svg>
+              <p>Upload Back Profile Photo</p>
+            </button>
+            <input type="file" name="myfile" />
+          </div>
+          <a class="fileUpload__delete">Delete</a>
+        </div>
+        <div class="fileUpload">
+          <div class="upload-btn-wrapper">
+            <button class="btn">
+              <svg
+                width="30"
+                height="30"
+                viewBox="0 0 30 30"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M13.75 20V9.8125L10.5 13.0625L8.75 11.25L15 5L21.25 11.25L19.5 13.0625L16.25 9.8125V20H13.75ZM7.5 25C6.8125 25 6.22375 24.755 5.73375 24.265C5.24375 23.775 4.99917 23.1867 5 22.5V18.75H7.5V22.5H22.5V18.75H25V22.5C25 23.1875 24.755 23.7763 24.265 24.2663C23.775 24.7563 23.1867 25.0008 22.5 25H7.5Z"
+                  fill="#79E0E8"
+                />
+              </svg>
+              <p>Upload Side Profile Photo</p>
+            </button>
+            <input type="file" name="myfile" />
+          </div>
+          <a class="fileUpload__delete">Delete</a>
+        </div>
+        <input
+          type="button"
+          value="Submit Daily Profile"
+          class="primaryBtn primaryBtn__smallHeight"
+        />
       </form>
+    </div>
+  </div>
+  <div [ngClass]="{ 'meal-management': true, 'meal-management___show': showMeal }">
+    <div class="meal-management__header" (click)="mealClick()">Meal Management</div>
+    <div class="meal-management__body" *ngIf="showMeal">
+      <div class="meal-management__body__btn">+ Add Breakfast</div>
+      <div class="meal-management__body__btn">+ Add Lunch</div>
+      <div class="meal-management__body__btn">+ Add Dinner</div>
+      <div class="meal-management__body__btn">+ Add Snacks</div>
     </div>
   </div>
   <app-app-footer />

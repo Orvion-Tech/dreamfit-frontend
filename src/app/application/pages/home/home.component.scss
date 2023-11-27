@@ -131,3 +131,115 @@
     }
   }
 }
+.personal-profile {
+  margin-inline: 16px;
+  border-radius: 10px;
+  border: 1px solid #79e0e8;
+  background: #fff;
+  &__header {
+    width: 100%;
+    height: 64px;
+    border-radius: 10px;
+    background: #f1f4ff;
+    display: grid;
+    align-items: center;
+    padding-inline: 16px;
+    color: #626262;
+    font-size: 18px;
+    position: relative;
+    &::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-top: 10px solid #6b6f80;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      border-radius: 8px;
+    }
+  }
+  &__body {
+    padding-inline: 16px;
+    padding-bottom: 20px;
+    &__period {
+      display: grid;
+      grid-auto-flow: column;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 12px;
+    }
+    form {
+      display: grid;
+      gap: 12px;
+    }
+  }
+  &___show {
+    .personal-profile__header {
+      background-color: transparent;
+      &:after {
+        transform: rotate(180deg);
+        margin-top: -4px;
+      }
+    }
+  }
+}
+.meal-management {
+  margin-inline: 16px;
+  border-radius: 10px;
+  border: 1px solid #79e0e8;
+  background: #fff;
+  &__header {
+    width: 100%;
+    height: 64px;
+    border-radius: 10px;
+    background: #f1f4ff;
+    display: grid;
+    align-items: center;
+    padding-inline: 16px;
+    color: #626262;
+    font-size: 18px;
+    position: relative;
+    &::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-top: 10px solid #6b6f80;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      border-radius: 8px;
+    }
+  }
+  &__body {
+    padding-inline: 16px;
+    padding-bottom: 20px;
+    display: grid;
+    gap: 12px;
+    &__btn {
+      border-radius: 10px;
+      border: 1px solid #79e0e8;
+      background: #f1f4ff;
+      height: 50px;
+      display: grid;
+      place-content: center;
+      place-items: center;
+      color: #484848;
+      font-size: 18px;
+    }
+  }
+  &___show {
+    .meal-management__header {
+      background-color: transparent;
+      &:after {
+        transform: rotate(180deg);
+        margin-top: -4px;
+      }
+    }
+  }
+}

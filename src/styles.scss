@@ -292,6 +292,11 @@ video {
   place-items: center;
   color: var(--color-gray);
   font-size: 20px;
+  &__smallHeight {
+    height: 38px;
+    border-radius: 4px;
+    font-size: 14px;
+  }
 }
 .secondaryBtn {
   width: 100%;
@@ -321,5 +326,115 @@ video {
   &___same {
     grid-auto-columns: 1fr;
     align-items: start;
+  }
+}
+/*
+  ===============================
+  Toggle Btn Start
+  ===============================
+*/
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+  }
+  .slider:before {
+    position: absolute;
+    content: '';
+    height: 20px;
+    width: 20px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+  }
+
+  input:checked + .slider {
+    background-color: #79e0e8;
+  }
+
+  input:focus + .slider {
+    box-shadow: 0 0 1px #79e0e8;
+  }
+
+  input:checked + .slider:before {
+    -webkit-transform: translateX(20px);
+    -ms-transform: translateX(20px);
+    transform: translateX(20px);
+  }
+
+  .slider.round {
+    border-radius: 34px;
+  }
+
+  .slider.round:before {
+    border-radius: 50%;
+  }
+}
+
+/*
+  ===============================
+  Custom File Uploader 
+  ===============================
+*/
+.fileUpload {
+  position: relative;
+  .upload-btn-wrapper {
+    position: relative;
+    overflow: hidden;
+    .btn {
+      border-radius: 8px;
+      border: 1px solid #000;
+      background: #fff;
+      padding: 8px 20px;
+      border-radius: 8px;
+      font-size: 20px;
+      font-weight: bold;
+      height: 180px;
+      width: 100%;
+    }
+
+    input[type='file'] {
+      font-size: 100px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+    }
+  }
+  &__delete {
+    width: 48px;
+    height: 24px;
+    border-radius: 4px;
+    background: #ff4e4e;
+    box-shadow: 0px 1px 2px 0px rgba(27, 59, 78, 0.05);
+    display: grid;
+    place-content: center;
+    place-items: center;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 140%;
+    position: absolute;
+    top: 8px;
+    right: 8px;
   }
 }
