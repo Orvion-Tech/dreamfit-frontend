@@ -1,0 +1,172 @@
+<div class="app-container profile-screen">
+  <app-app-header />
+  <div class="profile-screen__body">
+    <h1 class="profile-screen__body__title">User Profile</h1>
+    <form class="profile-screen__body__form">
+      <div class="profile-screen__body__form__img">
+        <img src="../../../../assets/images/user.jpg" alt="User Image" width="180" height="180" />
+        <div class="profile-screen__body__form__img__upload">
+          <input type="file" id="upload" hidden />
+          <label for="upload">Upload Photo</label>
+        </div>
+      </div>
+      <div class="profile-screen__body__form__body">
+        <div class="profile-screen__body__form__body__row">
+          <div class="profile-screen__body__form__body__input">
+            <label for="first_name">First Name:</label>
+            <input type="text" id="first_name" value="Ravi" />
+          </div>
+          <div class="profile-screen__body__form__body__input">
+            <label for="last_name">Last Name:</label>
+            <input type="text" id="last_name" value="Patel" />
+          </div>
+        </div>
+        <div class="profile-screen__body__form__body__row">
+          <div class="profile-screen__body__form__body__input">
+            <label for="dob">Birthday:</label>
+            <input type="date" id="dob" value="16-11-1992" />
+          </div>
+          <div class="profile-screen__body__form__body__input">
+            <label for="gender">Gender:</label>
+            <select>
+              <option>Male</option>
+              <option>Female</option>
+            </select>
+          </div>
+        </div>
+        <div class="profile-screen__body__form__body__row">
+          <div class="profile-screen__body__form__body__input">
+            <label for="body_fat">Body Fat(%):</label>
+            <input type="text" id="body_fat" value="15" />
+          </div>
+          <div class="profile-screen__body__form__body__input">
+            <label for="fat_mass">Fat Mass(kg):</label>
+            <input type="text" id="fat_mass" value="11.25" />
+          </div>
+        </div>
+        <div class="profile-screen__body__form__body__input">
+          <label for="waist">waist (cm):</label>
+          <input type="text" id="waist" value="30" />
+          <small class="profile-screen__body__form__body__input__info"
+            >Decimal data should not allowed</small
+          >
+        </div>
+        <div class="profile-screen__body__form__body__input">
+          <label for="hips">Hips (cm):</label>
+          <input type="text" id="hips" value="Patel" />
+          <small class="profile-screen__body__form__body__input__info"
+            >Decimal data should not allowed</small
+          >
+        </div>
+        <div class="profile-screen__body__form__body__input">
+          <label for="Activity_level">Activity Level:</label>
+          <select>
+            <option>Sedentary - Little or no exercise</option>
+            <option>Light Active - Exercise 1-2 Days/Week</option>
+            <option>Moderately Active Exercise 3-5 Days/Week</option>
+            <option>Active - Exercise 6-7 Days/Week</option>
+            <option>Very Active - Hard Exercise 6-7 Days/Week</option>
+          </select>
+        </div>
+        <div class="profile-screen__body__form__body__bmi">
+          <p><span>Your BMI</span>: 23.1</p>
+          <p>Your base calorie requriement: 1715 calories</p>
+          <p>Your daily calorie requirement: 2658 calories</p>
+        </div>
+        <div class="profile-screen__body__form__body__input">
+          <label for="timezone">Select timezone:</label>
+          <select>
+            <option>GMT +8</option>
+            <option>GMT +4</option>
+            <option>GMT +2</option>
+            <option>GMT -2</option>
+            <option>GMT -4</option>
+          </select>
+        </div>
+        <div class="profile-screen__body__form__body__row">
+          <div class="profile-screen__body__form__body__input">
+            <label for="sleeping">Usual Sleeping time:</label>
+            <input type="time" id="sleeping" />
+          </div>
+          <div class="profile-screen__body__form__body__input">
+            <label for="wakeup">Usual wakeup time:</label>
+            <input type="time" id="wakeup" />
+          </div>
+        </div>
+        <div class="profile-screen__body__form__body__input">
+          <label for="sleep_quality">Sleep Quality:</label>
+          <select>
+            <option>Easy to wakeup from light sleep</option>
+            <option>Good sleep quality</option>
+            <option>Sleep quality is good but difficult to fall sleep</option>
+            <option>Light sleep</option>
+          </select>
+        </div>
+        <div class="profile-screen__body__form__body__input">
+          <label for="sleep_quality"
+            >Do you have your discoumfort before and after menstrual.Or the condition of the skin
+            has deteriorated significantly?</label
+          >
+          <select>
+            <option>Yes</option>
+            <option>No</option>
+          </select>
+        </div>
+        <div class="profile-screen__body__form__body__input">
+          <label for="illnesses">List all long-term illnesses Here:</label>
+          <textarea rows="3" id="ïllnesses">Sugar</textarea>
+        </div>
+        <div class="profile-screen__body__form__body__input">
+          <label for="medicines">Taking regular medicines? If yes, list here :</label>
+          <textarea rows="3" id="medicines">Paracetamol</textarea>
+        </div>
+        <div class="profile-screen__body__form__body__input">
+          <label for="allergies">List food allergies, if any:</label>
+          <textarea rows="3" id="allergies">Lorem ipsum</textarea>
+        </div>
+        <div class="profile-screen__body__form__body__input">
+          <label for="food_preference">Food Preference:</label>
+          <select>
+            <option>NA</option>
+            <option>Sweets</option>
+            <option>Spicy Food</option>
+            <option>Strong Food</option>
+            <option>Dairy Products</option>
+            <option>Snacks</option>
+          </select>
+        </div>
+        <div class="profile-screen__body__form__body__input">
+          <label for="bowel_movement">How often you have bowel movement?:</label>
+          <select>
+            <option>Several times a day</option>
+            <option>Once a day</option>
+            <option>Every other day</option>
+            <option>Less than 3 times a week</option>
+          </select>
+        </div>
+        <div class="profile-screen__body__form__body__input">
+          <label for="bowel_movement">Usual stool pattern:</label>
+          <select>
+            <option>Normal banana shape</option>
+            <option>Hard and fine-grained</option>
+            <option>Pulpy watery</option>
+          </select>
+        </div>
+        <div class="profile-screen__body__form__body__input">
+          <label for="bowel_movement">Work stress index:</label>
+          <select>
+            <option>1 - Low</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5 - High</option>
+          </select>
+        </div>
+        <div class="profile-screen__body__form__body__btn">
+          <input type="button" value="Save" class="profile-screen__body__form__body__btn__submit" />
+        </div>
+      </div>
+    </form>
+  </div>
+  <app-app-footer />
+</div>

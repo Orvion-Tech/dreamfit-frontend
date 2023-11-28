@@ -14,6 +14,9 @@ import { HomeComponent } from './application/pages/home/home.component';
 import { AppHeaderComponent } from './application/components/app-header/app-header.component';
 import { AppFooterComponent } from './application/components/app-footer/app-footer.component';
 import { HeaderComponent } from './application/components/header/header.component';
+import { ProfileComponent } from './application/pages/profile/profile.component';
+import { TrendComponent } from './application/pages/trend/trend.component';
+import { CalenderComponent } from './application/pages/calender/calender.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +31,9 @@ import { HeaderComponent } from './application/components/header/header.componen
     AppHeaderComponent,
     AppFooterComponent,
     HeaderComponent,
+    ProfileComponent,
+    TrendComponent,
+    CalenderComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, FormsModule],
   providers: [],

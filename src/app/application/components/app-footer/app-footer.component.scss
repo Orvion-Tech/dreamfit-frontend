@@ -23,6 +23,17 @@
     &.footer__menu___active {
       svg {
         path {
+          stroke: #fffaca;
+        }
+      }
+      p {
+        color: #fffaca;
+        font-weight: 700;
+      }
+    }
+    &.footer__menu___activeFill {
+      svg {
+        path {
           fill: #fffaca;
         }
       }

@@ -1,0 +1,14 @@
+.calender-screen {
+  margin-bottom: 32px;
+  &__body {
+    display: grid;
+    padding-inline: 16px;
+    gap: 32px;
+    &__title {
+      color: #616161;
+      text-align: center;
+      font-size: 22px;
+      font-weight: 700;
+    }
+  }
+}

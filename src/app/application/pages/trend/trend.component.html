@@ -1,0 +1,20 @@
+<div class="app-container trend-screen">
+  <app-app-header />
+  <div class="trend-screen__body">
+    <h1 class="trend-screen__body__title">Trend Table</h1>
+    <div class="trend-screen__body__chart">
+      <p class="trend-screen__body__chart__title">Last 30 days</p>
+      <div class="chart-container">
+        <canvas id="MyChart">{{ chart }}</canvas>
+      </div>
+    </div>
+    <div class="trend-screen__body__chart">
+      <p class="trend-screen__body__chart__title">Last 90 days</p>
+
+      <div class="chart-container">
+        <canvas id="MyChart2">{{ chart2 }}</canvas>
+      </div>
+    </div>
+  </div>
+  <app-app-footer />
+</div>

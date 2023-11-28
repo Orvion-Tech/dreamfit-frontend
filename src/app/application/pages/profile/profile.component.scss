@@ -1,0 +1,127 @@
+.profile-screen {
+  margin-bottom: 32px;
+  &__body {
+    display: grid;
+    gap: 24px;
+    &__title {
+      color: #616161;
+      text-align: center;
+      font-size: 22px;
+      font-weight: 700;
+    }
+    &__form {
+      display: grid;
+      padding-inline: 16px;
+      gap: 24px;
+      &__img {
+        display: grid;
+        place-content: center;
+        place-items: center;
+        border-radius: 14px;
+        background: #616161;
+        max-width: max-content;
+        padding: 8px;
+        margin: 0 auto;
+        gap: 8px;
+        img {
+          border-radius: 12px;
+          object-fit: cover;
+          object-position: center;
+          aspect-ratio: 1;
+        }
+        &__upload {
+          display: grid;
+          place-content: center;
+          place-items: center;
+          color: white;
+          width: 100%;
+          cursor: pointer;
+          border-radius: 10px;
+          background: #64d1dc;
+          text-align: center;
+          font-size: 14px;
+          font-weight: 600;
+          height: 40px;
+        }
+      }
+      &__body {
+        border-radius: 16px;
+        border: 1px solid #797979;
+        &__row {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+        }
+        &__input {
+          border-bottom: 1px solid #797979;
+          padding: 8px 12px;
+          display: grid;
+          //   place-content: flex-start;
+          place-items: flex-start;
+          position: relative;
+          gap: 2px;
+          input,
+          select,
+          textarea {
+            width: 100%;
+            color: #000;
+            font-size: 12px;
+            line-height: 12px;
+            outline: none;
+          }
+          textarea {
+            resize: none;
+          }
+          label {
+            color: #000;
+            font-size: 12px;
+            line-height: 12px;
+          }
+          &__info {
+            color: #606060;
+            font-size: 8px;
+            line-height: 12px;
+            position: absolute;
+            top: 8px;
+            right: 12px;
+          }
+        }
+        &__bmi {
+          border-radius: 4px;
+          background: #fff6d8;
+          margin: 12px 16px;
+          display: grid;
+          place-content: center;
+          place-items: center;
+          padding: 16px;
+          p {
+            color: #000;
+            text-align: center;
+            font-size: 12px;
+            line-height: 16px;
+            span {
+              font-weight: 600;
+              color: #000;
+              text-align: center;
+              font-size: 12px;
+              line-height: 16px;
+            }
+          }
+        }
+        &__btn {
+          padding: 12px;
+          //   padding-bottom: 24px;
+          display: grid;
+          place-content: center;
+          &__submit {
+            border-radius: 4px;
+            background: var(--Secondary, #79e0e8);
+            padding: 10px 20px;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+  }
+}
