@@ -363,11 +363,323 @@
   <div [ngClass]="{ 'meal-management': true, 'meal-management___show': showMeal }">
     <div class="meal-management__header" (click)="mealClick()">Meal Management</div>
     <div class="meal-management__body" *ngIf="showMeal">
-      <div class="meal-management__body__btn">+ Add Breakfast</div>
-      <div class="meal-management__body__btn">+ Add Lunch</div>
-      <div class="meal-management__body__btn">+ Add Dinner</div>
-      <div class="meal-management__body__btn">+ Add Snacks</div>
+      <div class="meal-management__body__btn" (click)="showMealFormClick('Breakfast')">
+        + Add Breakfast
+      </div>
+      <div class="meal-management__body__btn" (click)="showMealFormClick('Lunch')">+ Add Lunch</div>
+      <div class="meal-management__body__btn" (click)="showMealFormClick('Dinner')">
+        + Add Dinner
+      </div>
+      <div class="meal-management__body__btn" (click)="showMealFormClick('Snacks')">
+        + Add Snacks
+      </div>
     </div>
   </div>
   <app-app-footer />
+  <div class="app-container meal-popup" *ngIf="showMealForm">
+    <div class="meal-popup__header">
+      <a class="meal-popup__header__back" (click)="hideMeal()"
+        ><svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M11 6L5 12M5 12L11 18M5 12L19 12"
+            stroke="white"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+        </svg>
+      </a>
+      <p class="meal-popup__header__title">+ Add {{ mealType }}</p>
+    </div>
+    <form class="meal-popup__form">
+      <div class="meal-popup__form__time grid grid___space-between">
+        <p>Select Time:</p>
+        <a class="meal-popup__form__time__btn"> 05:18 (GMT+8)</a>
+      </div>
+      <div class="meal-popup__form__row">
+        <div class="meal-popup__form__row__left">
+          <div class="fileUpload">
+            <div class="upload-btn-wrapper">
+              <button class="btn">
+                <svg
+                  width="30"
+                  height="30"
+                  viewBox="0 0 30 30"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M13.75 20V9.8125L10.5 13.0625L8.75 11.25L15 5L21.25 11.25L19.5 13.0625L16.25 9.8125V20H13.75ZM7.5 25C6.8125 25 6.22375 24.755 5.73375 24.265C5.24375 23.775 4.99917 23.1867 5 22.5V18.75H7.5V22.5H22.5V18.75H25V22.5C25 23.1875 24.755 23.7763 24.265 24.2663C23.775 24.7563 23.1867 25.0008 22.5 25H7.5Z"
+                    fill="#79E0E8"
+                  />
+                </svg>
+                <p>Upload Front Profile Photo</p>
+              </button>
+              <input type="file" name="myfile" />
+            </div>
+            <a class="fileUpload__delete">Delete</a>
+          </div>
+          <div class="fileUpload">
+            <div class="upload-btn-wrapper">
+              <button class="btn">
+                <svg
+                  width="30"
+                  height="30"
+                  viewBox="0 0 30 30"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M13.75 20V9.8125L10.5 13.0625L8.75 11.25L15 5L21.25 11.25L19.5 13.0625L16.25 9.8125V20H13.75ZM7.5 25C6.8125 25 6.22375 24.755 5.73375 24.265C5.24375 23.775 4.99917 23.1867 5 22.5V18.75H7.5V22.5H22.5V18.75H25V22.5C25 23.1875 24.755 23.7763 24.265 24.2663C23.775 24.7563 23.1867 25.0008 22.5 25H7.5Z"
+                    fill="#79E0E8"
+                  />
+                </svg>
+                <p>Upload Front Profile Photo</p>
+              </button>
+              <input type="file" name="myfile" />
+            </div>
+            <a class="fileUpload__delete">Delete</a>
+          </div>
+          <div class="fileUpload">
+            <div class="upload-btn-wrapper">
+              <button class="btn">
+                <svg
+                  width="30"
+                  height="30"
+                  viewBox="0 0 30 30"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M13.75 20V9.8125L10.5 13.0625L8.75 11.25L15 5L21.25 11.25L19.5 13.0625L16.25 9.8125V20H13.75ZM7.5 25C6.8125 25 6.22375 24.755 5.73375 24.265C5.24375 23.775 4.99917 23.1867 5 22.5V18.75H7.5V22.5H22.5V18.75H25V22.5C25 23.1875 24.755 23.7763 24.265 24.2663C23.775 24.7563 23.1867 25.0008 22.5 25H7.5Z"
+                    fill="#79E0E8"
+                  />
+                </svg>
+                <p>Upload Front Profile Photo</p>
+              </button>
+              <input type="file" name="myfile" />
+            </div>
+            <a class="fileUpload__delete">Delete</a>
+          </div>
+        </div>
+        <div class="meal-popup__form__row__right">
+          <div class="meal-popup__form__row__right__input">
+            <label>主</label>
+            <input type="number" />
+          </div>
+          <div class="meal-popup__form__row__right__input">
+            <label>肉</label>
+            <input type="number" />
+          </div>
+          <div class="meal-popup__form__row__right__input">
+            <label>菜</label>
+            <input type="number" />
+          </div>
+          <div class="meal-popup__form__row__right__input">
+            <label>果</label>
+            <input type="number" />
+          </div>
+          <div class="meal-popup__form__row__right__input">
+            <label>水</label>
+            <input type="number" />
+          </div>
+        </div>
+      </div>
+      <div class="supplement">
+        <h2>Supplements</h2>
+        <div class="supplement__cont">
+          <div class="supplement__cont__box supplement__cont__box___disabled">
+            <img
+              src="../../../../assets/images/suppliment.svg"
+              width="54"
+              height="17"
+              alt="supplement"
+            />
+            <input type="text" />
+          </div>
+          <div class="supplement__cont__box">
+            <img
+              src="../../../../assets/images/suppliment.svg"
+              width="54"
+              height="17"
+              alt="supplement"
+            />
+            <input type="text" />
+          </div>
+          <div class="supplement__cont__box">
+            <img
+              src="../../../../assets/images/suppliment.svg"
+              width="54"
+              height="17"
+              alt="supplement"
+            />
+            <input type="text" />
+          </div>
+          <div class="supplement__cont__box">
+            <img
+              src="../../../../assets/images/suppliment.svg"
+              width="54"
+              height="17"
+              alt="supplement"
+            />
+            <input type="text" />
+          </div>
+          <div class="supplement__cont__box">
+            <img
+              src="../../../../assets/images/suppliment.svg"
+              width="54"
+              height="17"
+              alt="supplement"
+            />
+            <input type="text" />
+          </div>
+          <div class="supplement__cont__box">
+            <img
+              src="../../../../assets/images/suppliment.svg"
+              width="54"
+              height="17"
+              alt="supplement"
+            />
+            <input type="text" />
+          </div>
+          <div class="supplement__cont__box">
+            <img
+              src="../../../../assets/images/suppliment.svg"
+              width="54"
+              height="17"
+              alt="supplement"
+            />
+            <input type="text" />
+          </div>
+          <div class="supplement__cont__box supplement__cont__box___disabled">
+            <img
+              src="../../../../assets/images/suppliment.svg"
+              width="54"
+              height="17"
+              alt="supplement"
+            />
+            <input type="text" />
+          </div>
+          <div class="supplement__cont__box supplement__cont__box___disabled">
+            <img
+              src="../../../../assets/images/suppliment.svg"
+              width="54"
+              height="17"
+              alt="supplement"
+            />
+            <input type="text" />
+          </div>
+          <div class="supplement__cont__box">
+            <img
+              src="../../../../assets/images/suppliment.svg"
+              width="54"
+              height="17"
+              alt="supplement"
+            />
+            <input type="text" />
+          </div>
+          <div class="supplement__cont__box supplement__cont__box___disabled">
+            <img
+              src="../../../../assets/images/suppliment.svg"
+              width="54"
+              height="17"
+              alt="supplement"
+            />
+            <input type="text" />
+          </div>
+          <div class="supplement__cont__box">
+            <img
+              src="../../../../assets/images/suppliment.svg"
+              width="54"
+              height="17"
+              alt="supplement"
+            />
+            <input type="text" />
+          </div>
+          <div class="supplement__cont__box">
+            <img
+              src="../../../../assets/images/suppliment.svg"
+              width="54"
+              height="17"
+              alt="supplement"
+            />
+            <input type="text" />
+          </div>
+          <div class="supplement__cont__box">
+            <img
+              src="../../../../assets/images/suppliment.svg"
+              width="54"
+              height="17"
+              alt="supplement"
+            />
+            <input type="text" />
+          </div>
+          <div class="supplement__cont__box">
+            <img
+              src="../../../../assets/images/suppliment.svg"
+              width="54"
+              height="17"
+              alt="supplement"
+            />
+            <input type="text" />
+          </div>
+          <div class="supplement__cont__box">
+            <img
+              src="../../../../assets/images/suppliment.svg"
+              width="54"
+              height="17"
+              alt="supplement"
+            />
+            <input type="text" />
+          </div>
+          <div class="supplement__cont__box">
+            <img
+              src="../../../../assets/images/suppliment.svg"
+              width="54"
+              height="17"
+              alt="supplement"
+            />
+            <input type="text" />
+          </div>
+          <div class="supplement__cont__box supplement__cont__box___disabled">
+            <img
+              src="../../../../assets/images/suppliment.svg"
+              width="54"
+              height="17"
+              alt="supplement"
+            />
+            <input type="text" />
+          </div>
+          <div class="supplement__cont__box supplement__cont__box___disabled">
+            <img
+              src="../../../../assets/images/suppliment.svg"
+              width="54"
+              height="17"
+              alt="supplement"
+            />
+            <input type="text" />
+          </div>
+          <div class="supplement__cont__box">
+            <img
+              src="../../../../assets/images/suppliment.svg"
+              width="54"
+              height="17"
+              alt="supplement"
+            />
+            <input type="text" />
+          </div>
+        </div>
+      </div>
+      <input
+        type="button"
+        value="Submit Daily Profile"
+        class="primaryBtn primaryBtn__smallHeight"
+      />
+    </form>
+  </div>
 </div>

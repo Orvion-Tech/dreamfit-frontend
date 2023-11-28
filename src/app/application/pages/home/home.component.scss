@@ -243,3 +243,99 @@
     }
   }
 }
+.meal-popup {
+  position: fixed;
+  inset: 0 0 0 0;
+  background-color: #fff;
+  display: grid;
+  gap: 16px;
+  align-content: flex-start;
+  overflow-y: auto;
+  padding-bottom: 24px;
+  &__header {
+    background-color: #79e0e8;
+    position: sticky;
+    top: 0;
+    padding-inline: 16px;
+    height: 48px;
+    display: grid;
+    place-content: center;
+    place-items: center;
+    z-index: 1;
+    &__back {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: grid;
+    }
+    &__title {
+      text-align: center;
+      font-size: 18px;
+      font-weight: 600;
+      color: #fff;
+    }
+  }
+  &__form {
+    display: grid;
+    gap: 12px;
+    grid-auto-flow: row;
+    padding-inline: 16px;
+    & > div {
+      padding-inline: 0;
+    }
+    &__time {
+      &__btn {
+        padding: 4px 12px;
+        border-radius: 4px;
+        background: #64d1dc;
+        color: #fff;
+        font-size: 12px;
+        line-height: 24px; /* 200% */
+        letter-spacing: -0.25px;
+      }
+    }
+    &__row {
+      display: grid;
+      gap: 8px;
+      align-content: flex-start;
+      align-items: flex-start;
+      // grid-auto-flow: column;
+      grid-template-columns: 1fr auto;
+      // padding-inline: 16px;
+      &__left {
+        display: grid;
+        gap: 12px;
+      }
+      &__right {
+        display: grid;
+        gap: 4px;
+        &__input {
+          display: grid;
+          gap: 4px;
+          grid-auto-flow: column;
+          label {
+            color: #141519;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 150%;
+            letter-spacing: -0.25px;
+          }
+          input {
+            width: 48px;
+            height: 24px;
+            text-align: center;
+            padding: 2px;
+            color: #6b6f80;
+            text-align: center;
+            font-size: 16px;
+            line-height: 150%;
+            letter-spacing: -0.25px;
+            border-radius: 4px;
+            background: #efefef;
+          }
+        }
+      }
+    }
+  }
+}

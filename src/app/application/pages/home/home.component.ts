@@ -8,10 +8,19 @@ import { Component } from '@angular/core';
 export class HomeComponent {
   showPersonal = false;
   showMeal = false;
+  showMealForm = false;
+  mealType = '';
   personalClick() {
     this.showPersonal = !this.showPersonal;
   }
   mealClick() {
     this.showMeal = !this.showMeal;
+  }
+  showMealFormClick(data: string) {
+    this.mealType = data;
+    this.showMealForm = true;
+  }
+  hideMeal() {
+    this.showMealForm = false;
   }
 }
