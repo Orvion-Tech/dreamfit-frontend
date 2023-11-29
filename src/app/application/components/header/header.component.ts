@@ -15,7 +15,7 @@ export class HeaderComponent {
   ) {}
   redirect = false;
 
-  ngOnInit() {
+  OnInit() {
     const idToken = localStorage.getItem('id_token');
     const userId = localStorage.getItem('user_id');
     if (idToken && userId) {

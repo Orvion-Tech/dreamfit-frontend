@@ -1,4 +1,4 @@
-.calender-screen {
+.trend-screen {
   margin-bottom: 32px;
   &__body {
     display: grid;
@@ -9,6 +9,17 @@
       text-align: center;
       font-size: 22px;
       font-weight: 700;
+    }
+    &__chart {
+      border-radius: 8px;
+      background: #fff;
+      padding: 16px;
+      box-shadow: 0px 2px 6px 0px rgba(13, 10, 44, 0.08);
+      &__title {
+        color: #39393c;
+        font-size: 12px;
+        font-weight: 600;
+      }
     }
   }
 }
