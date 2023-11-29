@@ -17,6 +17,7 @@ import { HeaderComponent } from './application/components/header/header.componen
 import { ProfileComponent } from './application/pages/profile/profile.component';
 import { TrendComponent } from './application/pages/trend/trend.component';
 import { CalenderComponent } from './application/pages/calender/calender.component';
+import { MealSummaryComponent } from './application/pages/meal-summary/meal-summary.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { CalenderComponent } from './application/pages/calender/calender.compone
     ProfileComponent,
     TrendComponent,
     CalenderComponent,
+    MealSummaryComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, FormsModule],
   providers: [],

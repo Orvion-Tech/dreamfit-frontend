@@ -8,6 +8,7 @@ import { HomeComponent } from './application/pages/home/home.component';
 import { ProfileComponent } from './application/pages/profile/profile.component';
 import { TrendComponent } from './application/pages/trend/trend.component';
 import { CalenderComponent } from './application/pages/calender/calender.component';
+import { MealSummaryComponent } from './application/pages/meal-summary/meal-summary.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: '/', pathMatch: 'full' }, // Default route redirects to '/home'
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'trend', component: TrendComponent },
   { path: 'calender', component: CalenderComponent },
+  { path: 'meal-summary', component: MealSummaryComponent },
 ];
 
 @NgModule({
