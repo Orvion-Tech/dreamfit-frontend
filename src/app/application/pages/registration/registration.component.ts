@@ -52,7 +52,7 @@ export class RegistrationComponent {
           this.registrationForm.get('phone_number')!.value,
       };
       try {
-        const response = await fetch('http://192.168.1.24/api/user-registration/', {
+        const response = await fetch('http://192.168.1.103/api/user-registration/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -66,6 +66,8 @@ export class RegistrationComponent {
           // localStorage.setItem('token_timestamp', now);
           localStorage.setItem('id_token', data.token.access);
           localStorage.setItem('user_id', user_id);
+          window.location.replace('/home');
+
           // window.location.replace('/account');
         } else {
           const data = await response.json();
@@ -94,7 +96,7 @@ export class RegistrationComponent {
       this.registrationForm.get('invitation_code')!.valid
     ) {
       try {
-        const response = await fetch('http://192.168.1.24/api/verify-otp/', {
+        const response = await fetch('http://192.168.1.103/api/verify-otp/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -138,7 +140,7 @@ export class RegistrationComponent {
       this.registrationForm.get('phone_number')!.valid
     ) {
       try {
-        const response = await fetch('http://192.168.1.24/api/send-otp/', {
+        const response = await fetch('http://192.168.1.103/api/send-otp/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

@@ -36,7 +36,7 @@ export class LoginComponent {
         password: this.loginForm.value.password,
       };
       try {
-        const response = await fetch('http://192.168.1.24/api/login/', {
+        const response = await fetch('http://192.168.1.103/api/login/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -49,6 +49,7 @@ export class LoginComponent {
           const user_id = data.user_id;
           localStorage.setItem('id_token', data.token.access);
           localStorage.setItem('user_id', user_id);
+          window.location.replace('/home');
           // const now: any = new Date().getTime();
           // localStorage.setItem('token_timestamp', now);
           // window.location.replace('/account');

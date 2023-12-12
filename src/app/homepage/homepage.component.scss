@@ -1,5 +1,6 @@
 .topBanner {
   background: #ffffff;
+  position: relative;
   &__cont {
     position: relative;
     display: grid;
@@ -300,11 +301,18 @@
     justify-content: space-between;
     gap: 140px;
     grid-template-columns: repeat(2, 1fr);
-
+    @media screen and (max-width: 767px) {
+      grid-template-columns: initial;
+      grid-auto-flow: row;
+      padding: 16px;
+      gap: 64px;
+    }
     &__left {
       display: grid;
       gap: 78px;
-
+      @media screen and (max-width: 767px) {
+        order: 2;
+      }
       &__text {
         display: grid;
         gap: 24px;
@@ -347,6 +355,16 @@
           place-items: center;
           color: var(--color-gray);
           font-size: 20px;
+        }
+      }
+    }
+    &__right {
+      @media screen and (max-width: 767px) {
+        order: 1;
+      }
+      img {
+        @media screen and (max-width: 767px) {
+          height: initial;
         }
       }
     }
