@@ -1,8 +1,27 @@
-<div>
-  <input type="file" #fileInput (change)="fileChangeEvent($event)" />
+<div class="fileUpload">
+  <div *ngIf="!showCroppedImage" class="upload-btn-wrapper">
+    <button class="btn">
+      <svg
+        width="30"
+        height="30"
+        viewBox="0 0 30 30"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M13.75 20V9.8125L10.5 13.0625L8.75 11.25L15 5L21.25 11.25L19.5 13.0625L16.25 9.8125V20H13.75ZM7.5 25C6.8125 25 6.22375 24.755 5.73375 24.265C5.24375 23.775 4.99917 23.1867 5 22.5V18.75H7.5V22.5H22.5V18.75H25V22.5C25 23.1875 24.755 23.7763 24.265 24.2663C23.775 24.7563 23.1867 25.0008 22.5 25H7.5Z"
+          fill="#79E0E8"
+        />
+      </svg>
+      <p>Upload Front Profile Photo</p>
+    </button>
+    <input type="file" name="myfile" #fileInput (change)="fileChangeEvent($event)" />
+  </div>
+  <div class="fileUpload__preview" *ngIf="showCroppedImage">
+    <img [src]="croppedImageLink.toString()" alt="Cropped Image" />
+    <a class="fileUpload__delete" (click)="deleteFile()">Delete</a>
+  </div>
 </div>
-
-<img *ngIf="setCroppedImage" [src]="setCroppedImage" alt="Cropped Image" />
 <div class="crop_popup" *ngIf="showCropPopup">
   <image-cropper
     [imageChangedEvent]="imageChangedEvent"
@@ -14,6 +33,8 @@
     (cropperReady)="cropperReady()"
     (loadImageFailed)="loadImageFailed()"
   ></image-cropper>
-  <a (click)="setCropImage()">Set Image</a>
-  <a (click)="hideCropPopup()">Close</a>
+  <div class="crop_popup__row">
+    <a (click)="setCropImage()" class="primaryBlueBtn primaryBlueBtn__smallHeight">Set Image</a>
+    <a (click)="hideCropPopup()" class="secondaryBtn">Close</a>
+  </div>
 </div>

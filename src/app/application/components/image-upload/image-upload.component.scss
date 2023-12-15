@@ -1,0 +1,21 @@
+.crop_popup {
+  position: fixed;
+  inset: 0 0 0 0;
+  background-color: #fff;
+  z-index: 1;
+  display: grid;
+  place-content: center;
+  place-items: center;
+  &__row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    a {
+      border-radius: 0;
+    }
+  }
+}

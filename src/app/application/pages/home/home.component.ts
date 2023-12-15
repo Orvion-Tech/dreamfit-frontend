@@ -10,6 +10,12 @@ export class HomeComponent {
   showMeal = false;
   showMealForm = false;
   mealType = '';
+  selectedFile: File | undefined;
+  uploadedFiles: File[] = [];
+  fileChangeEvent(uploadedFile: File) {
+    this.uploadedFiles.push(uploadedFile);
+    console.log(this.uploadedFiles);
+  }
   personalClick() {
     this.showPersonal = !this.showPersonal;
   }
@@ -22,5 +28,9 @@ export class HomeComponent {
   }
   hideMeal() {
     this.showMealForm = false;
+  }
+  deleteLastFile(index: number) {
+    // Implementation to delete the file at the specified index from the array
+    this.uploadedFiles.splice(index, 1);
   }
 }
