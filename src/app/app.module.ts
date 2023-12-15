@@ -23,7 +23,8 @@ import { ProfileComponent } from './application/pages/profile/profile.component'
 import { TrendComponent } from './application/pages/trend/trend.component';
 import { CalenderComponent } from './application/pages/calender/calender.component';
 import { MealSummaryComponent } from './application/pages/meal-summary/meal-summary.component';
-
+import { ImageUploadComponent } from './application/components/image-upload/image-upload.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +42,7 @@ import { MealSummaryComponent } from './application/pages/meal-summary/meal-summ
     TrendComponent,
     CalenderComponent,
     MealSummaryComponent,
+    ImageUploadComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,6 +54,7 @@ import { MealSummaryComponent } from './application/pages/meal-summary/meal-summ
     MatFormFieldModule,
     MatNativeDateModule,
     BrowserAnimationsModule,
+    ImageCropperModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

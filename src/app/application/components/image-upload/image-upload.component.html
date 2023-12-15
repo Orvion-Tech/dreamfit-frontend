@@ -1,0 +1,19 @@
+<div>
+  <input type="file" #fileInput (change)="fileChangeEvent($event)" />
+</div>
+
+<img *ngIf="setCroppedImage" [src]="setCroppedImage" alt="Cropped Image" />
+<div class="crop_popup" *ngIf="showCropPopup">
+  <image-cropper
+    [imageChangedEvent]="imageChangedEvent"
+    [maintainAspectRatio]="true"
+    [aspectRatio]="4 / 4"
+    format="png"
+    (imageCropped)="imageCropped($event)"
+    (imageLoaded)="imageLoaded($event)"
+    (cropperReady)="cropperReady()"
+    (loadImageFailed)="loadImageFailed()"
+  ></image-cropper>
+  <a (click)="setCropImage()">Set Image</a>
+  <a (click)="hideCropPopup()">Close</a>
+</div>
