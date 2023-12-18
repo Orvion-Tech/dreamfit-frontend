@@ -325,7 +325,7 @@
       <a>Side</a>
       <a>Back</a>
     </div>
-    <div>
+    <div id="contentToExport">
       <div class="comparison-screen__photo">
         <img src="../../../../assets/images/comp.jpeg" alt="img 1" />
         <img src="../../../../assets/images/comp.jpeg" alt="img 1" />
@@ -338,8 +338,8 @@
       </div>
     </div>
     <div class="comparison-screen__export">
-      <a href="/">Export as PDF</a>
-      <a href="/">Export as JPG</a>
+      <a (click)="exportToPdf()">Export as PDF</a>
+      <a (click)="exportToJpg()">Export as JPG</a>
     </div>
   </div>
   <app-app-footer />

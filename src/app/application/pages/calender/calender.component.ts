@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
-
+import { ExportService } from '../../../export.service';
 @Component({
   selector: 'app-calender',
   templateUrl: './calender.component.html',
   styleUrls: ['./calender.component.scss'],
 })
 export class CalenderComponent {
-  showComparison = true;
+  constructor(private exportService: ExportService) {}
+
+  showComparison = false;
   selectedDate: string = new Date().toISOString().slice(0, 7); // Initialize as YYYY-MM
   months: string[] = [
     'January',
@@ -97,5 +99,23 @@ export class CalenderComponent {
     }
 
     return calendar;
+  }
+
+  exportToPdf() {
+    const element = document.getElementById('contentToExport');
+    if (element) {
+      this.exportService.exportToPdf(element, 'exportedFile');
+    } else {
+      console.error('Element with ID "contentToExport" not found.');
+    }
+  }
+
+  exportToJpg() {
+    const element = document.getElementById('contentToExport');
+    if (element) {
+      this.exportService.exportToJpg(element, 'exportedFile');
+    } else {
+      console.error('Element with ID "contentToExport" not found.');
+    }
   }
 }
