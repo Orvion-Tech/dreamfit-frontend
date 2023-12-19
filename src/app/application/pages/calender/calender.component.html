@@ -321,9 +321,27 @@
       <div class="comparison-screen__title">Comparison</div>
     </div>
     <div class="comparison-screen__selection">
-      <a class="comparison-screen__selection__active">Front</a>
-      <a>Side</a>
-      <a>Back</a>
+      <a
+        (click)="selectComparision('front')"
+        [ngClass]="{
+          'comparison-screen__selection__active': comparisonType === 'front'
+        }"
+        >Front</a
+      >
+      <a
+        (click)="selectComparision('side')"
+        [ngClass]="{
+          'comparison-screen__selection__active': comparisonType === 'side'
+        }"
+        >Side</a
+      >
+      <a
+        (click)="selectComparision('back')"
+        [ngClass]="{
+          'comparison-screen__selection__active': comparisonType === 'back'
+        }"
+        >Back</a
+      >
     </div>
     <div id="contentToExport">
       <div class="comparison-screen__photo">

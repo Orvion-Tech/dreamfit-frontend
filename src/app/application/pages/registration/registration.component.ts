@@ -52,7 +52,7 @@ export class RegistrationComponent {
           this.registrationForm.get('phone_number')!.value,
       };
       try {
-        const response = await fetch('http://18.163.194.77/api/user-registration/', {
+        const response = await fetch('http://192.168.1.103/api/user-registration/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -96,7 +96,7 @@ export class RegistrationComponent {
       this.registrationForm.get('invitation_code')!.valid
     ) {
       try {
-        const response = await fetch('http://18.163.194.77/api/verify-otp/', {
+        const response = await fetch('http://192.168.1.103/api/verify-otp/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -140,7 +140,7 @@ export class RegistrationComponent {
       this.registrationForm.get('phone_number')!.valid
     ) {
       try {
-        const response = await fetch('http://18.163.194.77/api/send-otp/', {
+        const response = await fetch('http://192.168.1.103/api/send-otp/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

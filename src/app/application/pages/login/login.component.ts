@@ -17,14 +17,14 @@ export class LoginComponent {
       password: ['', Validators.required],
     });
   }
-  // ngOnInit(): void {
-  //   const idToken = localStorage.getItem('id_token');
-  //   const userId = localStorage.getItem('user_id');
+  onInit(): void {
+    const idToken: string | null = localStorage.getItem('id_token');
+    const userId: string | null = localStorage.getItem('user_id');
 
-  //   if (idToken && userId) {
-  //     window.location.href = '/account'; // Allow access to the route
-  //   }
-  // }
+    if (idToken && userId) {
+      window.location.href = '/home';
+    }
+  }
   async onSubmit() {
     this.countryCode = true;
     this.password = true;
@@ -36,7 +36,7 @@ export class LoginComponent {
         password: this.loginForm.value.password,
       };
       try {
-        const response = await fetch('http://18.163.194.77/api/login/', {
+        const response = await fetch('http://192.168.1.103/api/login/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -49,9 +49,9 @@ export class LoginComponent {
           const user_id = data.user_id;
           localStorage.setItem('id_token', data.token.access);
           localStorage.setItem('user_id', user_id);
+          const now: number = new Date().getTime();
+          localStorage.setItem('token_timestamp', now.toString());
           window.location.replace('/home');
-          // const now: any = new Date().getTime();
-          // localStorage.setItem('token_timestamp', now);
           // window.location.replace('/account');
         } else {
           const data = await response.json();

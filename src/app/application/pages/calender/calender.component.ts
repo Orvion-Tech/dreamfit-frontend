@@ -9,6 +9,7 @@ export class CalenderComponent {
   constructor(private exportService: ExportService) {}
 
   showComparison = false;
+  comparisonType = 'front';
   selectedDate: string = new Date().toISOString().slice(0, 7); // Initialize as YYYY-MM
   months: string[] = [
     'January',
@@ -28,6 +29,9 @@ export class CalenderComponent {
   currentYear = new Date(this.selectedDate).getFullYear();
   get selectedDateObject(): Date {
     return new Date(this.selectedDate);
+  }
+  selectComparision(val: string) {
+    this.comparisonType = val;
   }
   showComparisonFn() {
     this.showComparison = true;

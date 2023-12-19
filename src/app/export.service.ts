@@ -39,6 +39,12 @@ export class ExportService {
 
       // Draw the original canvas onto the new canvas with the specified margin
       marginContext.drawImage(canvas, margin, margin);
+      marginContext.font = '32px Arial';
+      marginContext.fillStyle = 'black'; // Set the text color, change as needed
+      marginContext.fillText('WaterMark', 40, 20);
+      marginContext.fillText('WaterMark', 120, 100);
+      marginContext.fillText('WaterMark', 40, 180);
+      marginContext.fillText('WaterMark', 120, 260);
 
       // Set the href attribute to the data URL of the new canvas
       link.href = marginCanvas.toDataURL('image/jpeg');
