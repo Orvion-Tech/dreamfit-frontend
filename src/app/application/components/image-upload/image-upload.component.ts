@@ -1,4 +1,13 @@
-import { Component, ViewChild, ElementRef, Output, Input, EventEmitter } from '@angular/core';
+import {
+  Component,
+  ViewChild,
+  ElementRef,
+  Output,
+  Input,
+  OnChanges,
+  EventEmitter,
+  SimpleChanges,
+} from '@angular/core';
 import { ImageCroppedEvent, LoadedImage } from 'ngx-image-cropper';
 import { DomSanitizer } from '@angular/platform-browser';
 @Component({
@@ -6,11 +15,16 @@ import { DomSanitizer } from '@angular/platform-browser';
   templateUrl: './image-upload.component.html',
   styleUrls: ['./image-upload.component.scss'],
 })
-export class ImageUploadComponent {
+export class ImageUploadComponent implements OnChanges {
   @ViewChild('fileInput') fileInput: ElementRef | undefined;
-  @Output() fileSelected: EventEmitter<File> = new EventEmitter<File>();
-  @Output() deleteLastFile = new EventEmitter<number>();
-  @Input() uploadedFiles: File[] = [];
+  // @Output() fileSelected: EventEmitter<File> = new EventEmitter<File>();
+  @Output() fileSelected: EventEmitter<{ file: File; side: string }> = new EventEmitter<{
+    file: File;
+    side: string;
+  }>();
+  @Output() deleteLastFile = new EventEmitter<string>();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  @Input() uploadedFiles: any;
   @Input() index: number = 0;
   imageChangedEvent: Event | null = null;
   croppedImage: Blob | null = null;
@@ -20,6 +34,45 @@ export class ImageUploadComponent {
   // setCroppedImage: unknown;
   showCropPopup = false;
   constructor(private sanitizer: DomSanitizer) {}
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['uploadedFiles']) {
+      setTimeout(() => {
+        this.updateDisplayedImage();
+      }, 100);
+    }
+  }
+
+  updateDisplayedImage() {
+    let side = '';
+    if (this.index === 0) {
+      side = 'front';
+    }
+    if (this.index === 1) {
+      side = 'side';
+    }
+    if (this.index === 2) {
+      side = 'back';
+    }
+    console.log(side, 'sidedata');
+    console.log(
+      this.uploadedFiles.filter((data: { side: string }) => data.side == side),
+      'side data',
+    );
+    if (
+      this.uploadedFiles &&
+      this.uploadedFiles.length > 0 &&
+      this.uploadedFiles.filter((data: { side: string }) => data.side == side).length > 0
+    ) {
+      this.croppedImageLink = this.uploadedFiles.filter(
+        (data: { side: string }) => data.side == side,
+      )[0].selectedFile;
+      this.showCroppedImage = true;
+    } else {
+      // Handle case where there is no image for the current index
+      this.showCroppedImage = false;
+      this.croppedImageLink = '';
+    }
+  }
   hideCropPopup() {
     this.showCropPopup = false;
     this.resetFileInput();
@@ -32,7 +85,17 @@ export class ImageUploadComponent {
     this.croppedImageLink = '';
     if (this.uploadedFiles.length > 0) {
       // Notify the parent component to delete the last file
-      this.deleteLastFile.emit(this.index);
+      let side = '';
+      if (this.index === 0) {
+        side = 'front';
+      }
+      if (this.index === 1) {
+        side = 'side';
+      }
+      if (this.index === 2) {
+        side = 'back';
+      }
+      this.deleteLastFile.emit(side);
     }
   }
   resetFileInput() {
@@ -68,9 +131,18 @@ export class ImageUploadComponent {
         type: this.croppedImage.type,
         lastModified: Date.now(),
       });
-
+      let side = '';
+      if (this.index === 0) {
+        side = 'front';
+      }
+      if (this.index === 1) {
+        side = 'side';
+      }
+      if (this.index === 2) {
+        side = 'back';
+      }
       // Emit the File
-      this.fileSelected.emit(file);
+      this.fileSelected.emit({ file, side });
       this.hideCropPopup();
     }
   }

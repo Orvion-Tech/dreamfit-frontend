@@ -99,33 +99,77 @@
   <div [ngClass]="{ 'personal-profile': true, 'personal-profile___show': showPersonal }">
     <div class="personal-profile__header" (click)="personalClick()">Personal Profile</div>
     <div class="personal-profile__body" *ngIf="showPersonal">
-      <form action="">
+      <form action="" [formGroup]="personalProfileForm">
         <div class="personal-profile__body__period">
           <p>Period</p>
           <label class="switch">
-            <input type="checkbox" />
+            <input type="checkbox" formControlName="meanstation_cycle" />
             <span class="slider round"></span>
           </label>
         </div>
-        <div
-          [ngClass]="{
-            input: true
-          }"
-        >
-          <label>Weight (kg)</label>
-          <input type="text" />
-          <!-- <p class="input__errorMsg" >請輸入資料</p> -->
-        </div>
         <div class="grid grid___same gap___df">
-          <div class="input">
-            <label>Body Fat (%) </label>
-            <input type="text" />
-            <!-- <p class="input__errorMsg" >請輸入資料</p> -->
+          <div
+            [ngClass]="{
+              input: true,
+              input___error: weight && personalProfileForm.get('weight')?.hasError('required')
+            }"
+          >
+            <label>Weight (kg)</label>
+            <input type="number" formControlName="weight" (input)="resetError()" />
+            <p
+              class="input__errorMsg"
+              *ngIf="personalProfileForm.get('weight')?.hasError('required')"
+            >
+              Weight is required.
+            </p>
           </div>
-          <div class="input">
+          <div
+            [ngClass]="{
+              input: true,
+              input___error: poopoo && personalProfileForm.get('poopoo')?.hasError('required')
+            }"
+          >
+            <label>Poopoo</label>
+            <input type="number" formControlName="poopoo" (input)="resetError()" />
+            <p
+              class="input__errorMsg"
+              *ngIf="personalProfileForm.get('poopoo')?.hasError('required')"
+            >
+              Poopoo is required.
+            </p>
+          </div>
+        </div>
+
+        <div class="grid grid___same gap___df">
+          <div
+            [ngClass]="{
+              input: true,
+              input___error: body_fat && personalProfileForm.get('body_fat')?.hasError('required')
+            }"
+          >
+            <label>Body Fat (%) </label>
+            <input type="number" formControlName="body_fat" (input)="resetError()" />
+            <p
+              class="input__errorMsg"
+              *ngIf="personalProfileForm.get('body_fat')?.hasError('required')"
+            >
+              Body Fat is required.
+            </p>
+          </div>
+          <div
+            [ngClass]="{
+              input: true,
+              input___error: body_mass && personalProfileForm.get('body_mass')?.hasError('required')
+            }"
+          >
             <label>Body Mass (kg)</label>
-            <input type="text" />
-            <!-- <p class="input__errorMsg" >請輸入資料</p> -->
+            <input type="number" formControlName="body_mass" (input)="resetError()" />
+            <p
+              class="input__errorMsg"
+              *ngIf="personalProfileForm.get('body_mass')?.hasError('required')"
+            >
+              Body Mass is required.
+            </p>
           </div>
         </div>
         <app-image-upload
@@ -146,52 +190,12 @@
           (fileSelected)="fileChangeEvent($event)"
           [index]="2"
         />
-        <!-- <div class="fileUpload">
-          <div class="upload-btn-wrapper">
-            <button class="btn">
-              <svg
-                width="30"
-                height="30"
-                viewBox="0 0 30 30"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M13.75 20V9.8125L10.5 13.0625L8.75 11.25L15 5L21.25 11.25L19.5 13.0625L16.25 9.8125V20H13.75ZM7.5 25C6.8125 25 6.22375 24.755 5.73375 24.265C5.24375 23.775 4.99917 23.1867 5 22.5V18.75H7.5V22.5H22.5V18.75H25V22.5C25 23.1875 24.755 23.7763 24.265 24.2663C23.775 24.7563 23.1867 25.0008 22.5 25H7.5Z"
-                  fill="#79E0E8"
-                />
-              </svg>
-              <p>Upload Back Profile Photo</p>
-            </button>
-            <input type="file" name="myfile" />
-          </div>
-          <a class="fileUpload__delete">Delete</a>
-        </div>
-        <div class="fileUpload">
-          <div class="upload-btn-wrapper">
-            <button class="btn">
-              <svg
-                width="30"
-                height="30"
-                viewBox="0 0 30 30"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M13.75 20V9.8125L10.5 13.0625L8.75 11.25L15 5L21.25 11.25L19.5 13.0625L16.25 9.8125V20H13.75ZM7.5 25C6.8125 25 6.22375 24.755 5.73375 24.265C5.24375 23.775 4.99917 23.1867 5 22.5V18.75H7.5V22.5H22.5V18.75H25V22.5C25 23.1875 24.755 23.7763 24.265 24.2663C23.775 24.7563 23.1867 25.0008 22.5 25H7.5Z"
-                  fill="#79E0E8"
-                />
-              </svg>
-              <p>Upload Side Profile Photo</p>
-            </button>
-            <input type="file" name="myfile" />
-          </div>
-          <a class="fileUpload__delete">Delete</a>
-        </div> -->
         <input
           type="button"
           value="Submit Daily Profile"
           class="primaryBtn primaryBtn__smallHeight"
+          *ngIf="notToday"
+          (click)="onProfileSubmit()"
         />
       </form>
     </div>
