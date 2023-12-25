@@ -53,25 +53,26 @@ export class ImageUploadComponent implements OnChanges {
     if (this.index === 2) {
       side = 'back';
     }
-    console.log(side, 'sidedata');
-    console.log(
-      this.uploadedFiles.filter((data: { side: string }) => data.side == side),
-      'side data',
-    );
     if (
       this.uploadedFiles &&
       this.uploadedFiles.length > 0 &&
       this.uploadedFiles.filter((data: { side: string }) => data.side == side).length > 0
     ) {
-      this.croppedImageLink = this.uploadedFiles.filter(
-        (data: { side: string }) => data.side == side,
-      )[0].selectedFile;
-      this.showCroppedImage = true;
+      if (
+        typeof this.uploadedFiles.filter((data: { side: string }) => data.side == side)[0]
+          .selectedFile === 'string'
+      ) {
+        this.croppedImageLink = this.uploadedFiles.filter(
+          (data: { side: string }) => data.side == side,
+        )[0].selectedFile;
+        this.showCroppedImage = true;
+      }
     } else {
       // Handle case where there is no image for the current index
       this.showCroppedImage = false;
       this.croppedImageLink = '';
     }
+    console.log(this.croppedImageLink);
   }
   hideCropPopup() {
     this.showCropPopup = false;
