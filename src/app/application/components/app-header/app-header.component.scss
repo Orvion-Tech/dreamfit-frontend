@@ -1,3 +1,28 @@
 .header {
   padding: 16px;
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  &__menu {
+    position: absolute;
+    background: #fff;
+    top: 68px;
+    width: 100%;
+    left: 0;
+    right: 0;
+    display: grid;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.16);
+    padding-inline: 16px;
+    a {
+      border-bottom: 1px solid #bebebe;
+      padding: 8px;
+      color: #000;
+      font-size: 16px;
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
 }
