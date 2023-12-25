@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, OnInit } from '@angular/core';
+import { DateService } from '../../../date.service';
 import Chart from 'chart.js/auto';
 @Component({
   selector: 'app-trend',
@@ -6,35 +8,80 @@ import Chart from 'chart.js/auto';
   styleUrls: ['./trend.component.scss'],
 })
 export class TrendComponent implements OnInit {
-  constructor() {}
+  constructor(private dateService: DateService) {}
 
   ngOnInit(): void {
-    this.createChart();
+    this.getTrendData();
+  }
+  async getTrendData() {
+    try {
+      const response = await fetch('http://192.168.1.103/api/trend/', {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('id_token')}`,
+          'Content-Type': 'application/json',
+        },
+        // body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        const homeData = await response.json();
+        this.createChart(homeData);
+        console.log(homeData);
+      } else {
+        const data = await response.json();
+        alert(data.message);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
   }
   public chart: unknown;
   public chart2: unknown;
 
-  createChart() {
+  createChart(daily_data: any) {
+    const daily_labels_30: any[] = [];
+    const fat_percents_30: any[] = [];
+    const weights_30: any[] = [];
+    const poopoo_times_30: any[] = [];
+    const daily_labels_90: any[] = [];
+    const fat_percents_90: any[] = [];
+    const weights_90: any[] = [];
+    const poopoo_times_90: any[] = [];
+    for (const data of daily_data.trend_30_day) {
+      const date = this.dateService.formatDate(new Date(data.date_time), 'yyyy-MM-dd');
+      daily_labels_30.push(date);
+      fat_percents_30.push(data.body_fat);
+      weights_30.push(data.weight);
+      poopoo_times_30.push(data.poopoo_time);
+    }
+    for (const data of daily_data.trend_90_day) {
+      const date = this.dateService.formatDate(new Date(data.date_time), 'yyyy-MM-dd');
+      daily_labels_90.push(date);
+      fat_percents_90.push(data.body_fat);
+      weights_90.push(data.weight);
+      poopoo_times_90.push(data.poopoo_time);
+    }
     this.chart = new Chart('MyChart', {
       type: 'line', //this denotes tha type of chart
 
       data: {
         // values on X-Axis
-        labels: ['day 1', 'day 5', 'day 10', 'day 15', 'day 20', 'day 25', 'day 30'],
+        labels: daily_labels_30,
         datasets: [
           {
             label: 'Fat %',
-            data: ['25', '50', '75', '200', '125', '150', '100'],
+            data: fat_percents_30,
             backgroundColor: '#224DEB',
             borderColor: '#224DEB',
             yAxisID: 'y',
           },
           {
             label: 'Weight (kg)',
-            data: ['50', '52', '54', '50', '58', '56', '52'],
+            data: weights_30,
             backgroundColor: '#ED7D31',
             borderColor: '#ED7D31',
-            yAxisID: 'y1',
+            // yAxisID: 'y1',
           },
         ],
       },
@@ -51,16 +98,16 @@ export class TrendComponent implements OnInit {
             // display: true,
             position: 'left',
           },
-          y1: {
-            type: 'linear',
-            display: true,
-            position: 'right',
+          // y1: {
+          //   type: 'linear',
+          //   display: true,
+          //   position: 'right',
 
-            // grid line settings
-            grid: {
-              drawOnChartArea: false, // only want the grid lines for one axis to show up
-            },
-          },
+          //   // grid line settings
+          //   grid: {
+          //     drawOnChartArea: false, // only want the grid lines for one axis to show up
+          //   },
+          // },
         },
       },
     });
@@ -69,21 +116,20 @@ export class TrendComponent implements OnInit {
 
       data: {
         // values on X-Axis
-        labels: ['day 1', 'day 5', 'day 10', 'day 15', 'day 20', 'day 25', 'day 30'],
+        labels: daily_labels_90,
         datasets: [
           {
             label: 'Fat %',
-            data: ['25', '50', '75', '200', '125', '150', '100'],
+            data: fat_percents_90,
             backgroundColor: '#224DEB',
             borderColor: '#224DEB',
             yAxisID: 'y',
           },
           {
             label: 'Weight (kg)',
-            data: ['50', '52', '54', '50', '58', '56', '52'],
+            data: weights_90,
             backgroundColor: '#ED7D31',
             borderColor: '#ED7D31',
-            yAxisID: 'y1',
           },
         ],
       },
@@ -99,16 +145,6 @@ export class TrendComponent implements OnInit {
             type: 'linear',
             // display: true,
             position: 'left',
-          },
-          y1: {
-            type: 'linear',
-            display: true,
-            position: 'right',
-
-            // grid line settings
-            grid: {
-              drawOnChartArea: false, // only want the grid lines for one axis to show up
-            },
           },
         },
       },
