@@ -3,356 +3,156 @@
   <div class="summary-screen__body">
     <h1 class="summary-screen__body__title">Meal Summary</h1>
     <div class="summary-screen__body__calender">
-      <a class="summary-screen__body__calender__date">Dec 30, 2019 (GMT+8)</a>
+      <!-- <a class="summary-screen__body__calender__date">Dec 30, 2019 (GMT+8)</a> -->
+      <input
+        type="date"
+        [value]="formattedDate"
+        (change)="dateChange($event)"
+        class="summary-screen__body__calender__date"
+      />
       <a class="summary-screen__body__calender__export" (click)="showExport()">Export</a>
     </div>
-    <div class="meal-summary">
-      <h2>Ravi Patel</h2>
-      <div class="meal-summary__table">
-        <div class="meal-summary__table__col">
-          <p>&nbsp;</p>
-          <p>Goal:</p>
-          <p>Current:</p>
-          <p>Remaining:</p>
-        </div>
-        <div class="meal-summary__table__col">
-          <p>Main 🍚</p>
-          <p>6</p>
-          <p>2</p>
-          <p>4</p>
-        </div>
-        <div class="meal-summary__table__col">
-          <p>Meat 🥩</p>
-          <p>6</p>
-          <p>2</p>
-          <p>4</p>
-        </div>
-        <div class="meal-summary__table__col">
-          <p>Veggie 🥦</p>
-          <p>6</p>
-          <p>2</p>
-          <p>4</p>
-        </div>
-        <div class="meal-summary__table__col">
-          <p>Fruit🍓</p>
-          <p>6</p>
-          <p>2</p>
-          <p>4</p>
-        </div>
-        <div class="meal-summary__table__col">
-          <p>Water 💧</p>
-          <p>6000</p>
-          <p>2000</p>
-          <p>4000</p>
-        </div>
-      </div>
-    </div>
-    <div class="supplement">
-      <h2>Supplements</h2>
-      <div class="supplement__cont">
-        <div class="supplement__cont__box supplement__cont__box___disabled">
-          <img
-            src="../../../../assets/images/suppliment.svg"
-            width="54"
-            height="17"
-            alt="supplement"
-          />
-          <input type="text" />
-        </div>
-        <div class="supplement__cont__box">
-          <img
-            src="../../../../assets/images/suppliment.svg"
-            width="54"
-            height="17"
-            alt="supplement"
-          />
-          <input type="text" />
-        </div>
-        <div class="supplement__cont__box">
-          <img
-            src="../../../../assets/images/suppliment.svg"
-            width="54"
-            height="17"
-            alt="supplement"
-          />
-          <input type="text" />
-        </div>
-        <div class="supplement__cont__box">
-          <img
-            src="../../../../assets/images/suppliment.svg"
-            width="54"
-            height="17"
-            alt="supplement"
-          />
-          <input type="text" />
-        </div>
-        <div class="supplement__cont__box">
-          <img
-            src="../../../../assets/images/suppliment.svg"
-            width="54"
-            height="17"
-            alt="supplement"
-          />
-          <input type="text" />
-        </div>
-        <div class="supplement__cont__box">
-          <img
-            src="../../../../assets/images/suppliment.svg"
-            width="54"
-            height="17"
-            alt="supplement"
-          />
-          <input type="text" />
-        </div>
-        <div class="supplement__cont__box">
-          <img
-            src="../../../../assets/images/suppliment.svg"
-            width="54"
-            height="17"
-            alt="supplement"
-          />
-          <input type="text" />
-        </div>
-        <div class="supplement__cont__box supplement__cont__box___disabled">
-          <img
-            src="../../../../assets/images/suppliment.svg"
-            width="54"
-            height="17"
-            alt="supplement"
-          />
-          <input type="text" />
-        </div>
-        <div class="supplement__cont__box supplement__cont__box___disabled">
-          <img
-            src="../../../../assets/images/suppliment.svg"
-            width="54"
-            height="17"
-            alt="supplement"
-          />
-          <input type="text" />
-        </div>
-        <div class="supplement__cont__box">
-          <img
-            src="../../../../assets/images/suppliment.svg"
-            width="54"
-            height="17"
-            alt="supplement"
-          />
-          <input type="text" />
-        </div>
-        <div class="supplement__cont__box supplement__cont__box___disabled">
-          <img
-            src="../../../../assets/images/suppliment.svg"
-            width="54"
-            height="17"
-            alt="supplement"
-          />
-          <input type="text" />
-        </div>
-        <div class="supplement__cont__box">
-          <img
-            src="../../../../assets/images/suppliment.svg"
-            width="54"
-            height="17"
-            alt="supplement"
-          />
-          <input type="text" />
-        </div>
-        <div class="supplement__cont__box">
-          <img
-            src="../../../../assets/images/suppliment.svg"
-            width="54"
-            height="17"
-            alt="supplement"
-          />
-          <input type="text" />
-        </div>
-        <div class="supplement__cont__box">
-          <img
-            src="../../../../assets/images/suppliment.svg"
-            width="54"
-            height="17"
-            alt="supplement"
-          />
-          <input type="text" />
-        </div>
-        <div class="supplement__cont__box">
-          <img
-            src="../../../../assets/images/suppliment.svg"
-            width="54"
-            height="17"
-            alt="supplement"
-          />
-          <input type="text" />
-        </div>
-        <div class="supplement__cont__box">
-          <img
-            src="../../../../assets/images/suppliment.svg"
-            width="54"
-            height="17"
-            alt="supplement"
-          />
-          <input type="text" />
-        </div>
-        <div class="supplement__cont__box">
-          <img
-            src="../../../../assets/images/suppliment.svg"
-            width="54"
-            height="17"
-            alt="supplement"
-          />
-          <input type="text" />
-        </div>
-        <div class="supplement__cont__box supplement__cont__box___disabled">
-          <img
-            src="../../../../assets/images/suppliment.svg"
-            width="54"
-            height="17"
-            alt="supplement"
-          />
-          <input type="text" />
-        </div>
-        <div class="supplement__cont__box supplement__cont__box___disabled">
-          <img
-            src="../../../../assets/images/suppliment.svg"
-            width="54"
-            height="17"
-            alt="supplement"
-          />
-          <input type="text" />
-        </div>
-        <div class="supplement__cont__box">
-          <img
-            src="../../../../assets/images/suppliment.svg"
-            width="54"
-            height="17"
-            alt="supplement"
-          />
-          <input type="text" />
+    <div class="export" id="contentToExport">
+      <div class="meal-summary">
+        <h2>Ravi Patel</h2>
+        <div class="meal-summary__table" *ngIf="homeData !== undefined">
+          <div class="meal-summary__table__col">
+            <p>&nbsp;</p>
+            <p>Goal:</p>
+            <p>Current:</p>
+            <p>Remaining:</p>
+          </div>
+          <div class="meal-summary__table__col">
+            <p>Main 🍚</p>
+            <p>{{ homeData.goal.rice_noodels }}</p>
+            <p>{{ homeData.current_code.rice_noodels }}</p>
+            <p>{{ homeData.remaning_code.rice_noodels }}</p>
+          </div>
+          <div class="meal-summary__table__col">
+            <p>Meat 🥩</p>
+            <p>{{ homeData.goal.meat }}</p>
+            <p>{{ homeData.current_code.meat }}</p>
+            <p>{{ homeData.remaning_code.meat }}</p>
+          </div>
+          <div class="meal-summary__table__col">
+            <p>Veggie 🥦</p>
+            <p>{{ homeData.goal.vegitables }}</p>
+            <p>{{ homeData.current_code.vegitables }}</p>
+            <p>{{ homeData.remaning_code.vegitables }}</p>
+          </div>
+          <div class="meal-summary__table__col">
+            <p>Fruit🍓</p>
+            <p>{{ homeData.goal.fruits }}</p>
+            <p>{{ homeData.current_code.fruits }}</p>
+            <p>{{ homeData.remaning_code.fruits }}</p>
+          </div>
+          <div class="meal-summary__table__col">
+            <p>Water 💧</p>
+            <p>{{ homeData.goal.water }}</p>
+            <p>{{ homeData.current_code.water }}</p>
+            <p>{{ homeData.remaning_code.water }}</p>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="summary-screen__body__box">
-      <p class="summary-screen__body__box__title"><span>Breakfast:</span> 08:45 (GMT+8)</p>
-      <div class="summary-screen__body__box__mealDetail">
-        <div class="summary-screen__body__box__mealDetail__imgs">
-          <img
-            src="../../../../assets/images/meal-pic.jpg"
-            alt="meal photo"
-            width="250"
-            height="140"
-          />
-          <img
-            src="../../../../assets/images/meal-pic.jpg"
-            alt="meal photo"
-            width="250"
-            height="140"
-          />
-          <img
-            src="../../../../assets/images/meal-pic.jpg"
-            alt="meal photo"
-            width="250"
-            height="140"
-          />
-        </div>
-        <div class="summary-screen__body__box__mealDetail__detail">
-          <p><span>主</span>4</p>
-          <p><span>肉</span>5</p>
-          <p><span>菜</span>4</p>
-          <p><span>果</span>1</p>
-          <p><span>水</span>500</p>
-          <div class="summary-screen__body__box__mealDetail__detail__divider"></div>
-          <p><span>Br</span>2</p>
-          <p><span>Wh</span>2</p>
-          <p><span>Wh</span>2</p>
-          <p><span>Wh</span>2</p>
+      <div
+        class="supplement"
+        *ngIf="
+          homeData !== undefined &&
+          homeData.assigned_suppliment !== undefined &&
+          homeData.assigned_suppliment.length > 0
+        "
+      >
+        <h2>Supplements</h2>
+        <div class="supplement__cont">
+          <div class="supplement__cont__box" *ngFor="let data of homeData.assigned_suppliment">
+            <img
+              src="{{ data.suppliment.image }}"
+              width="54"
+              height="17"
+              alt="{{ data.suppliment.name }}"
+            />
+            <input
+              type="text"
+              class="supplement__cont__box__input"
+              disabled
+              value="{{ data.quantity }} / {{ data.quantity }}"
+            />
+          </div>
         </div>
       </div>
-      <div class="summary-screen__body__box__remarks">
-        <p class="summary-screen__body__box__remarks__title">Remarks:</p>
-        <p>Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum</p>
-      </div>
-    </div>
-    <div class="summary-screen__body__box">
-      <p class="summary-screen__body__box__title"><span>Dinner:</span> 08:45 (GMT+8)</p>
-      <div class="summary-screen__body__box__mealDetail">
-        <div class="summary-screen__body__box__mealDetail__imgs">
-          <img
-            src="../../../../assets/images/meal-pic.jpg"
-            alt="meal photo"
-            width="250"
-            height="140"
-          />
-          <img
-            src="../../../../assets/images/meal-pic.jpg"
-            alt="meal photo"
-            width="250"
-            height="140"
-          />
-          <img
-            src="../../../../assets/images/meal-pic.jpg"
-            alt="meal photo"
-            width="250"
-            height="140"
-          />
+      <div
+        class="summary-screen__body__boxCont"
+        *ngIf="homeData !== undefined && homeData.meal_information.length > 0"
+      >
+        <div
+          class="summary-screen__body__box"
+          *ngFor="let meal of homeData.meal_information; let i = index"
+        >
+          <p class="summary-screen__body__box__title">
+            <span>{{
+              meal.meal_type === '1'
+                ? 'Breakfast'
+                : meal.meal_type === '2'
+                ? 'Lunch'
+                : meal.meal_type === '3'
+                ? 'Dinner'
+                : meal.meal_type === '4'
+                ? 'Snacks'
+                : ''
+            }}</span>
+
+            {{ meal.meal_time.split('T')[1].split(':').slice(0, 2).join(':') }} (GMT+8)
+          </p>
+          <div class="summary-screen__body__box__mealDetail">
+            <div class="summary-screen__body__box__mealDetail__imgs">
+              <img
+                src="{{ meal.meal_photo_1 }}"
+                alt="meal photo"
+                width="250"
+                height="140"
+                *ngIf="meal.meal_photo_1 !== null"
+              />
+              <img
+                *ngIf="meal.meal_photo_2 !== null"
+                src="{{ meal.meal_photo_2 }}"
+                alt="meal photo"
+                width="250"
+                height="140"
+              />
+              <img
+                src="{{ meal.meal_photo_3 }}"
+                alt="meal photo"
+                width="250"
+                height="140"
+                *ngIf="meal.meal_photo_3 !== null"
+              />
+            </div>
+            <div class="summary-screen__body__box__mealDetail__detail">
+              <p>
+                <span>主</span
+                >{{ meal.amount_of_rice_or_noodels !== null ? meal.amount_of_rice_or_noodels : 0 }}
+              </p>
+              <p><span>肉</span>{{ meal.amount_of_meat !== null ? meal.amount_of_meat : 0 }}</p>
+              <p>
+                <span>菜</span
+                >{{ meal.amount_of_vegitables !== null ? meal.amount_of_vegitables : 0 }}
+              </p>
+              <p><span>果</span>{{ meal.amount_of_fruits !== null ? meal.amount_of_fruits : 0 }}</p>
+              <p><span>水</span>{{ meal.amount_of_water !== null ? meal.amount_of_water : 0 }}</p>
+              <div class="summary-screen__body__box__mealDetail__detail__divider"></div>
+              <div *ngIf="meal.suppliment !== null && meal.suppliment.length > 0">
+                <p *ngFor="let single_suppliment of meal.suppliment">
+                  <span>{{ single_suppliment.suppliment.name }}</span
+                  >{{ single_suppliment.quantity }}
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="summary-screen__body__box__remarks" *ngIf="meal.remarks !== null">
+            <p class="summary-screen__body__box__remarks__title">Remarks:</p>
+            <p>{{ meal.remarks }}</p>
+          </div>
         </div>
-        <div class="summary-screen__body__box__mealDetail__detail">
-          <p><span>主</span>4</p>
-          <p><span>肉</span>5</p>
-          <p><span>菜</span>4</p>
-          <p><span>果</span>1</p>
-          <p><span>水</span>500</p>
-          <div class="summary-screen__body__box__mealDetail__detail__divider"></div>
-          <p><span>Br</span>2</p>
-          <p><span>Wh</span>2</p>
-          <p><span>Wh</span>2</p>
-          <p><span>Wh</span>2</p>
-        </div>
-      </div>
-      <div class="summary-screen__body__box__remarks">
-        <p class="summary-screen__body__box__remarks__title">Remarks:</p>
-        <p>Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum</p>
-      </div>
-    </div>
-    <div class="summary-screen__body__box">
-      <p class="summary-screen__body__box__title"><span>Snack:</span> 08:45 (GMT+8)</p>
-      <div class="summary-screen__body__box__mealDetail">
-        <div class="summary-screen__body__box__mealDetail__imgs">
-          <img
-            src="../../../../assets/images/meal-pic.jpg"
-            alt="meal photo"
-            width="250"
-            height="140"
-          />
-          <img
-            src="../../../../assets/images/meal-pic.jpg"
-            alt="meal photo"
-            width="250"
-            height="140"
-          />
-          <img
-            src="../../../../assets/images/meal-pic.jpg"
-            alt="meal photo"
-            width="250"
-            height="140"
-          />
-        </div>
-        <div class="summary-screen__body__box__mealDetail__detail">
-          <p><span>主</span>4</p>
-          <p><span>肉</span>5</p>
-          <p><span>菜</span>4</p>
-          <p><span>果</span>1</p>
-          <p><span>水</span>500</p>
-          <div class="summary-screen__body__box__mealDetail__detail__divider"></div>
-          <p><span>Br</span>2</p>
-          <p><span>Wh</span>2</p>
-          <p><span>Wh</span>2</p>
-          <p><span>Wh</span>2</p>
-        </div>
-      </div>
-      <div class="summary-screen__body__box__remarks">
-        <p class="summary-screen__body__box__remarks__title">Remarks:</p>
-        <p>Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum</p>
       </div>
     </div>
   </div>
@@ -376,8 +176,8 @@
       </a>
       <p class="export-popup__cont__title">Export Today's Summary</p>
       <div class="export-popup__cont__row">
-        <a>Export as PDF</a>
-        <a>Export as JPG</a>
+        <a (click)="exportToPdf()">Export as PDF</a>
+        <a (click)="exportToJpg()">Export as JPG</a>
       </div>
     </div>
   </div>

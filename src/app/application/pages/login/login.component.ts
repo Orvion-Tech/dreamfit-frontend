@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   countryCode = false;
   phoneNumber = false;
@@ -17,10 +17,11 @@ export class LoginComponent {
       password: ['', Validators.required],
     });
   }
-  onInit(): void {
+  ngOnInit(): void {
+    console.log('test');
     const idToken: string | null = localStorage.getItem('id_token');
     const userId: string | null = localStorage.getItem('user_id');
-
+    console.log(idToken, userId);
     if (idToken && userId) {
       window.location.href = '/home';
     }

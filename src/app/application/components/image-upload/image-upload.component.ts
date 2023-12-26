@@ -26,6 +26,7 @@ export class ImageUploadComponent implements OnChanges {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @Input() uploadedFiles: any;
   @Input() index: number = 0;
+  @Input() childLabel: string = '';
   imageChangedEvent: Event | null = null;
   croppedImage: Blob | null = null;
   selectedFile: File | null = null;
