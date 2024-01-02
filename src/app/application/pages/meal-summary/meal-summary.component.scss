@@ -182,7 +182,7 @@
     &__box {
       display: grid;
       gap: 4px;
-      input {
+      &__input {
         width: 100%;
         border-radius: 4px;
         background: #d9d9d9;
@@ -190,6 +190,9 @@
         height: 18px;
         padding: 4px;
         color: #616161;
+        display: grid;
+        place-content: center;
+        place-items: center;
       }
 
       img {

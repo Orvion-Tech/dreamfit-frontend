@@ -43,6 +43,12 @@
           font-weight: 600;
           height: 40px;
         }
+        &__placeholder {
+          width: 180px;
+          height: 180px;
+          background: #ccc;
+          border-radius: 8px;
+        }
       }
       &__body {
         border-radius: 16px;

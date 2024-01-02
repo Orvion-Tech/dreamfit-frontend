@@ -23,32 +23,32 @@
       <div class="meal-summary__table__col">
         <p>Main 🍚</p>
         <p>{{ homeData.goal.rice_noodels }}</p>
-        <p>{{ homeData.remaning_code.rice_noodels }}</p>
         <p>{{ homeData.current_code.rice_noodels }}</p>
+        <p>{{ homeData.remaning_code.rice_noodels }}</p>
       </div>
       <div class="meal-summary__table__col">
         <p>Meat 🥩</p>
         <p>{{ homeData.goal.meat }}</p>
-        <p>{{ homeData.remaning_code.meat }}</p>
         <p>{{ homeData.current_code.meat }}</p>
+        <p>{{ homeData.remaning_code.meat }}</p>
       </div>
       <div class="meal-summary__table__col">
         <p>Veggie 🥦</p>
         <p>{{ homeData.goal.vegitables }}</p>
-        <p>{{ homeData.remaning_code.vegitables }}</p>
         <p>{{ homeData.current_code.vegitables }}</p>
+        <p>{{ homeData.remaning_code.vegitables }}</p>
       </div>
       <div class="meal-summary__table__col">
         <p>Fruit🍓</p>
         <p>{{ homeData.goal.fruits }}</p>
-        <p>{{ homeData.remaning_code.fruits }}</p>
         <p>{{ homeData.current_code.fruits }}</p>
+        <p>{{ homeData.remaning_code.fruits }}</p>
       </div>
       <div class="meal-summary__table__col">
         <p>Water 💧</p>
         <p>{{ homeData.goal.water }}</p>
-        <p>{{ homeData.remaning_code.water }}</p>
         <p>{{ homeData.current_code.water }}</p>
+        <p>{{ homeData.remaning_code.water }}</p>
       </div>
     </div>
   </div>
@@ -75,7 +75,11 @@
   </div>
   <div
     class="tutor-message"
-    *ngIf="homeData !== undefined && homeData.message_from_tutor !== undefined"
+    *ngIf="
+      homeData !== undefined &&
+      homeData.message_from_tutor !== undefined &&
+      homeData.message_from_tutor !== null
+    "
   >
     <div class="tutor-message__row">
       <h3>Message form the Tutor:</h3>
@@ -177,17 +181,20 @@
           (deleteLastFile)="deleteLastFile($event)"
           (fileSelected)="fileChangeEvent($event)"
           [index]="0"
+          [childLabel]="'Upload Front Profile Photo'"
         />
         <app-image-upload
           [uploadedFiles]="uploadedFiles"
           (deleteLastFile)="deleteLastFile($event)"
           (fileSelected)="fileChangeEvent($event)"
           [index]="1"
+          [childLabel]="'Upload Side Profile Photo'"
         />
         <app-image-upload
           [uploadedFiles]="uploadedFiles"
           (deleteLastFile)="deleteLastFile($event)"
           (fileSelected)="fileChangeEvent($event)"
+          [childLabel]="'Upload Back Profile Photo'"
           [index]="2"
         />
         <input
@@ -254,18 +261,21 @@
             (deleteLastFile)="deleteMealLastFile($event)"
             (fileSelected)="mealFileChangeEvent($event)"
             [index]="0"
+            [childLabel]="'Upload Meal Photo 1'"
           />
           <app-image-upload
             [uploadedFiles]="mealUploadedFiles"
             (deleteLastFile)="deleteMealLastFile($event)"
             (fileSelected)="mealFileChangeEvent($event)"
             [index]="1"
+            [childLabel]="'Upload Meal Photo 2'"
           />
           <app-image-upload
             [uploadedFiles]="mealUploadedFiles"
             (deleteLastFile)="deleteMealLastFile($event)"
             (fileSelected)="mealFileChangeEvent($event)"
             [index]="2"
+            [childLabel]="'Upload Meal Photo 3'"
           />
         </div>
         <div class="meal-popup__form__row__right">
@@ -308,11 +318,7 @@
               height="17"
               alt="{{ data.suppliment.name }}"
             />
-            <input
-              type="text"
-              id="{{ data.suppliment.id }}"
-              formControlName="{{ data.suppliment.id }}"
-            />
+            <input type="text" class="supplement__cont__box__input" id="{{ data.suppliment.id }}" />
           </div>
         </div>
       </div>

@@ -44,6 +44,7 @@
         [(ngModel)]="selectedDate"
         class="calender-screen__body__input"
         [value]="selectedDate"
+        (ngModelChange)="onChange()"
       />
       <a class="calender-screen__body__row__today" (click)="goToToday()">Today</a>
     </div>
@@ -58,10 +59,37 @@
             {{ day }}
           </div>
         </div>
-        <div *ngFor="let week of generateCalendar()" class="week">
-          <div *ngFor="let day of week" class="day" [class.empty]="day === null">
-            <p class="day__number">{{ day }}</p>
-            <div *ngIf="day !== null && day < 3" class="day__period">
+        <div *ngFor="let week of calendar" class="week">
+          <div
+            *ngFor="let day of week"
+            [ngClass]="{
+              day: true,
+              day__selected:
+                day !== null &&
+                day.data !== undefined &&
+                day.data !== null &&
+                day.data.daily_selfie_front !== null &&
+                day.data.daily_selfie_back !== null &&
+                day.data.daily_selfie_side !== null
+                  ? comparisonDate.includes(day.data.date_time.slice(0, 10))
+                  : null
+            }"
+            (click)="
+              day !== null &&
+              day.data !== undefined &&
+              day.data !== null &&
+              day.data.daily_selfie_front !== null &&
+              day.data.daily_selfie_back !== null &&
+              day.data.daily_selfie_side !== null
+                ? selectCompDate(day.data.date_time)
+                : null
+            "
+          >
+            <p class="day__number">{{ day.day }}</p>
+            <div
+              *ngIf="day !== null && day.data !== null && day.data.meanstation_cycle === true"
+              class="day__period"
+            >
               <svg
                 width="16"
                 height="17"
@@ -72,11 +100,49 @@
                 <path d="M0 0L15.9706 17L16 0H0Z" fill="#FF0000" />
               </svg>
             </div>
-            <div class="day__weight" *ngIf="day !== null && day % 2 === 0">71 kg</div>
-            <div class="day__bodyFat" *ngIf="day !== null && day % 2 !== 0">25.1%</div>
-            <div class="day__fatWeight" *ngIf="day !== null">12 kg</div>
+            <div
+              class="day__weight"
+              *ngIf="
+                day !== null &&
+                day.data !== undefined &&
+                day.data !== null &&
+                day.data.weight !== null
+              "
+            >
+              {{ day.data.weight }} kg
+            </div>
+            <div
+              class="day__bodyFat"
+              *ngIf="
+                day !== null &&
+                day.data !== undefined &&
+                day.data !== null &&
+                day.data.body_fat !== null
+              "
+            >
+              {{ day.data.body_fat }}%
+            </div>
+            <div
+              class="day__fatWeight"
+              *ngIf="
+                day !== null &&
+                day.data !== undefined &&
+                day.data !== null &&
+                day.data.body_mass !== null
+              "
+            >
+              {{ day.data.body_mass }} kg
+            </div>
             <div class="day__footer" *ngIf="day !== null">
               <svg
+                *ngIf="
+                  day !== null &&
+                  day.data !== undefined &&
+                  day.data !== null &&
+                  (day.data.daily_selfie_front !== null ||
+                    day.data.daily_selfie_back !== null ||
+                    day.data.daily_selfie_side !== null)
+                "
                 width="12"
                 height="9"
                 viewBox="0 0 12 9"
@@ -114,6 +180,12 @@
                 />
               </svg>
               <svg
+                *ngIf="
+                  day !== null &&
+                  day.data !== undefined &&
+                  day.data !== null &&
+                  day.data.poopoo_time !== null
+                "
                 width="11"
                 height="10"
                 viewBox="0 0 11 10"
@@ -297,7 +369,9 @@
         </div>
       </div>
     </div>
-    <a class="primaryBlueBtn" (click)="showComparisonFn()">View Comparison</a>
+    <a class="primaryBlueBtn" *ngIf="comparisonDate.length >= 2" (click)="showComparisonFn()"
+      >View Comparison</a
+    >
   </div>
   <div class="comparison-screen" *ngIf="showComparison">
     <div class="comparison-screen__header">
@@ -345,14 +419,24 @@
     </div>
     <div id="contentToExport">
       <div class="comparison-screen__photo">
-        <img src="../../../../assets/images/comp.jpeg" alt="img 1" />
-        <img src="../../../../assets/images/comp.jpeg" alt="img 1" />
-        <img src="../../../../assets/images/comp.jpeg" alt="img 1" />
+        <img
+          src="{{
+            comparisonType === 'front'
+              ? data.daily_selfie_front
+              : comparisonType === 'back'
+              ? data.daily_selfie_back
+              : comparisonType === 'side'
+              ? data.daily_selfie_side
+              : ''
+          }}"
+          alt="img 1"
+          *ngFor="let data of this.compareData.photos"
+        />
       </div>
       <div class="comparison-screen__date">
-        <p>10-Sep-2023</p>
-        <p>17-Sep-2023</p>
-        <p>22-Sep-2023</p>
+        <p *ngFor="let data of this.compareData.photos">
+          {{ data.date_time.slice(0, 10) }}
+        </p>
       </div>
     </div>
     <div class="comparison-screen__export">
