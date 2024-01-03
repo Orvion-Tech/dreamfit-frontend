@@ -157,6 +157,10 @@ export class CalenderComponent implements OnInit {
   }
   onChange() {
     this.generateCalendar();
+    this.updateSelectedDate(
+      this.selectedDateObject.getFullYear(),
+      this.selectedDateObject.getMonth(),
+    );
   }
   private updateSelectedDate(year: number, monthIndex: number) {
     this.currentMonth = this.months[monthIndex];

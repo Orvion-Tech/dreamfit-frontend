@@ -3,6 +3,7 @@
   &__body {
     display: grid;
     gap: 24px;
+    margin-bottom: 32px;
     &__title {
       color: #616161;
       text-align: center;
@@ -89,6 +90,12 @@
             position: absolute;
             top: 8px;
             right: 12px;
+          }
+          &__checkbox {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 16px;
           }
         }
         &__bmi {

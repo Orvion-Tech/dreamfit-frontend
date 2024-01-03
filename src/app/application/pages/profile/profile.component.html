@@ -139,32 +139,18 @@
         </div>
         <div class="profile-screen__body__form__body__input">
           <label for="food_preference">Food Preference:</label>
-          <div *ngFor="let option of options">
-            <label class="customCheckbox"
-              >{{ option.label }}
-              <!-- <input
-                type="checkbox"
-                [value]="option.value"
-                [(ngModel)]="option.selected"
-                (change)="toggleOption(option)"
-                formControlName="{{ option.value }}"
-              /> -->
+          <div class="profile-screen__body__form__body__input__checkbox">
+            <label class="customCheckbox" *ngFor="let option of options">
               <input
                 type="checkbox"
+                [value]="option.value"
                 [checked]="isSelected(option.value)"
                 (change)="toggleOption(option.value)"
               />
               <span class="checkmark"></span>
+              {{ option.label }}
             </label>
           </div>
-          <!-- <select formControlName="food_test_preference">
-            <option value="1">NA</option>
-            <option value="2">Sweets</option>
-            <option value="3">Spicy Food</option>
-            <option value="4">Strong Food</option>
-            <option value="5">Dairy Products</option>
-            <option value="6">Snacks</option>
-          </select> -->
         </div>
         <div class="profile-screen__body__form__body__input">
           <label for="bowel_movement">How often you have bowel movement?:</label>
