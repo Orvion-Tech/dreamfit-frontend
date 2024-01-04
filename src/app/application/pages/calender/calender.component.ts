@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { TokenService } from '../../../token.service';
 import { DateService } from '../../../date.service';
+import { AbortControllerService } from '../../../abort-controller.service';
 import { ExportService } from '../../../export.service';
 interface CalendarDataItem {
   body_fat: any;
@@ -36,6 +37,7 @@ export class CalenderComponent implements OnInit {
     private router: Router,
     private tokenService: TokenService,
     private dateService: DateService,
+    private abortControllerService: AbortControllerService,
   ) {}
   ngOnInit(): void {
     const currentDate = new Date(); // You can pass any date you want to format
@@ -52,7 +54,8 @@ export class CalenderComponent implements OnInit {
   }
   async getCalenderData(getDate: string) {
     const data = { month: getDate };
-
+    this.abortControllerService.abortExistingRequest();
+    const abortController = this.abortControllerService.createAbortController();
     try {
       const response = await fetch('http://192.168.1.103/api/callender/', {
         method: 'POST',
@@ -60,15 +63,20 @@ export class CalenderComponent implements OnInit {
           Authorization: `Bearer ${localStorage.getItem('id_token')}`,
           'Content-Type': 'application/json',
         },
+        signal: abortController.signal,
         body: JSON.stringify(data),
       });
 
       if (response.ok) {
         this.calenderData = await response.json();
+        this.abortControllerService.resetAbortController();
+
         this.generateCalendar();
         // console.log(this.calenderData);
       } else {
         const data = await response.json();
+        this.abortControllerService.resetAbortController();
+
         alert(data.message);
       }
     } catch (error) {
@@ -103,7 +111,8 @@ export class CalenderComponent implements OnInit {
   async showComparisonFn() {
     if (this.comparisonDate.length > 0 && this.comparisonDate.length <= 3) {
       const data = { date: this.comparisonDate };
-
+      this.abortControllerService.abortExistingRequest();
+      const abortController = this.abortControllerService.createAbortController();
       try {
         const response = await fetch('http://192.168.1.103/api/comparison/', {
           method: 'POST',
@@ -112,15 +121,20 @@ export class CalenderComponent implements OnInit {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(data),
+          signal: abortController.signal,
         });
 
         if (response.ok) {
           this.compareData = await response.json();
           // this.generateCalendar();
           this.showComparison = true;
+          this.abortControllerService.resetAbortController();
+
           console.log(this.compareData);
         } else {
           const data = await response.json();
+          this.abortControllerService.resetAbortController();
+
           alert(data.message);
         }
       } catch (error) {
@@ -264,7 +278,7 @@ export class CalenderComponent implements OnInit {
     }
   }
   selectCompDate(date: any) {
-    // console.log(date, 'selected');
+    console.log(date, 'selected');
     // this.comparisonDate.push(compDate);
     // if (this.comparisonDate.length === 3) {
     //   console.log('done');

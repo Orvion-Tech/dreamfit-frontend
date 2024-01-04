@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-
+import { AbortControllerService } from '../../../abort-controller.service';
+import { Router } from '@angular/router';
+import { TokenService } from '../../../token.service';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -27,9 +29,22 @@ export class ProfileComponent implements OnInit {
   bseCalorie = 0;
   dailyCalorie = 0;
   ngOnInit(): void {
-    this.getProfileData('GET', null);
+    if (this.tokenService.isTokenExpired()) {
+      // Token has expired
+      localStorage.removeItem('user_id');
+      localStorage.removeItem('id_token');
+      localStorage.removeItem('token_timestamp');
+      this.router.navigate(['/login']);
+    } else {
+      this.getProfileData('GET', null);
+    }
   }
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private abortControllerService: AbortControllerService,
+    private router: Router,
+    private tokenService: TokenService,
+  ) {
     this.ProfileForm = this.fb.group({
       user_image: [null],
       first_name: [''],
@@ -102,12 +117,15 @@ export class ProfileComponent implements OnInit {
     if (method === 'PATCH') {
       url = `http://192.168.1.103/api/profile/${this.profileId}/`;
     }
+    this.abortControllerService.abortExistingRequest();
+    const abortController = this.abortControllerService.createAbortController();
     try {
       const response = await fetch(url, {
         method: method,
         headers: {
           Authorization: `Bearer ${localStorage.getItem('id_token')}`,
         },
+        signal: abortController.signal,
         body: data !== null ? data : undefined,
       });
 
@@ -164,8 +182,10 @@ export class ProfileComponent implements OnInit {
             });
           }
         }
+        this.abortControllerService.resetAbortController();
       } else {
         const data = await response.json();
+        this.abortControllerService.resetAbortController();
         alert(data.message);
       }
     } catch (error) {
@@ -181,6 +201,8 @@ export class ProfileComponent implements OnInit {
     if (method === 'PATCH') {
       url = `http://192.168.1.103/api/profile/${this.profileId}/`;
     }
+    this.abortControllerService.abortExistingRequest();
+    const abortController = this.abortControllerService.createAbortController();
     try {
       const response = await fetch(url, {
         method: method,
@@ -189,6 +211,7 @@ export class ProfileComponent implements OnInit {
           'Content-Type': 'application/json',
         },
         body: data !== null ? JSON.stringify(data) : undefined,
+        signal: abortController.signal,
       });
 
       if (response.ok) {
@@ -244,8 +267,10 @@ export class ProfileComponent implements OnInit {
             });
           }
         }
+        this.abortControllerService.resetAbortController();
       } else {
         const data = await response.json();
+        this.abortControllerService.resetAbortController();
         alert(data.message);
       }
     } catch (error) {

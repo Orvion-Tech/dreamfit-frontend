@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbortControllerService } from '../../../abort-controller.service';
 
 @Component({
   selector: 'app-registration',
@@ -17,7 +18,10 @@ export class RegistrationComponent {
   otpVerified = false;
   countryCode = false;
   passwordMismatch = false;
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private abortControllerService: AbortControllerService,
+  ) {
     this.registrationForm = this.fb.group({
       phone_number: ['', [Validators.required, Validators.pattern(/^\d{8}$/)]],
       otp: ['', [Validators.required, Validators.pattern(/^\d{4}$/)]],
@@ -51,6 +55,8 @@ export class RegistrationComponent {
           this.registrationForm.get('country_code')!.value +
           this.registrationForm.get('phone_number')!.value,
       };
+      this.abortControllerService.abortExistingRequest();
+      const abortController = this.abortControllerService.createAbortController();
       try {
         const response = await fetch('http://192.168.1.103/api/user-registration/', {
           method: 'POST',
@@ -58,6 +64,7 @@ export class RegistrationComponent {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(credentials),
+          signal: abortController.signal,
         });
         if (response.ok) {
           const data = await response.json();
@@ -67,10 +74,12 @@ export class RegistrationComponent {
           localStorage.setItem('id_token', data.token.access);
           localStorage.setItem('user_id', user_id);
           window.location.replace('/home');
+          this.abortControllerService.resetAbortController();
 
           // window.location.replace('/account');
         } else {
           const data = await response.json();
+          this.abortControllerService.resetAbortController();
           alert(data.message);
         }
       } catch (error) {
@@ -90,6 +99,8 @@ export class RegistrationComponent {
   async verifyOTP() {
     this.invitationCode = true;
     this.otp = true;
+    this.abortControllerService.abortExistingRequest();
+    const abortController = this.abortControllerService.createAbortController();
     if (
       this.registrationForm.get('phone_number')!.valid &&
       this.registrationForm.get('otp')!.valid &&
@@ -108,14 +119,17 @@ export class RegistrationComponent {
             otp: this.registrationForm.get('otp')!.value,
             invitation_code: this.registrationForm.get('invitation_code')!.value,
           }),
+          signal: abortController.signal,
         });
 
         if (response.ok) {
           // const data = await response.json();
           this.otpVerified = true;
+          this.abortControllerService.resetAbortController();
           console.log('Authentication successful');
         } else {
           const data = await response.json();
+          this.abortControllerService.resetAbortController();
           alert(data.message);
         }
       } catch (error) {
@@ -135,6 +149,8 @@ export class RegistrationComponent {
   async sendOTP() {
     this.countryCode = true;
     this.phoneNumber = true;
+    this.abortControllerService.abortExistingRequest();
+    const abortController = this.abortControllerService.createAbortController();
     if (
       this.registrationForm.get('country_code')!.valid &&
       this.registrationForm.get('phone_number')!.valid
@@ -150,14 +166,17 @@ export class RegistrationComponent {
               this.registrationForm.get('country_code')!.value +
               this.registrationForm.get('phone_number')!.value,
           }),
+          signal: abortController.signal,
         });
 
         if (response.ok) {
           // const data = await response.json();
           this.otpSent = true;
+          this.abortControllerService.resetAbortController();
           console.log('Authentication successful');
         } else {
           const data = await response.json();
+          this.abortControllerService.resetAbortController();
           alert(data.message);
         }
       } catch (error) {

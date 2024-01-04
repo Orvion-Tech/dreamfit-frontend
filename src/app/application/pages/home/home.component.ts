@@ -4,6 +4,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { TokenService } from '../../../token.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DateService } from '../../../date.service';
+import { AbortControllerService } from '../../../abort-controller.service';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -11,8 +13,6 @@ import { DateService } from '../../../date.service';
   encapsulation: ViewEncapsulation.None,
 })
 export class HomeComponent implements OnInit {
-  private abortController: AbortController | null = null;
-
   personalProfileForm: FormGroup;
   showPersonal = false;
   showMeal = false;
@@ -49,6 +49,7 @@ export class HomeComponent implements OnInit {
     private tokenService: TokenService,
     private dateService: DateService,
     private fb: FormBuilder,
+    private abortControllerService: AbortControllerService,
   ) {
     this.personalProfileForm = this.fb.group({
       weight: ['', Validators.required],
@@ -101,6 +102,8 @@ export class HomeComponent implements OnInit {
   }
   async homeDataApi(getDate: string) {
     const data = { date: getDate };
+    this.abortControllerService.abortExistingRequest();
+    const abortController = this.abortControllerService.createAbortController();
     try {
       const response = await fetch('http://192.168.1.103/api/home-summary/', {
         method: 'POST',
@@ -109,13 +112,18 @@ export class HomeComponent implements OnInit {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
+        signal: abortController.signal,
       });
 
       if (response.ok) {
         this.homeData = await response.json();
+        this.abortControllerService.resetAbortController();
+
         console.log(this.homeData);
       } else {
         const data = await response.json();
+        this.abortControllerService.resetAbortController();
+
         alert(data.message);
       }
     } catch (error) {
@@ -163,9 +171,8 @@ export class HomeComponent implements OnInit {
     if (method === 'PATCH') {
       url = `http://192.168.1.103/api/daily-profile/${localStorage.getItem('dailyProfileId')}/`;
     }
-    this.abortExistingRequest();
-    this.abortController = new AbortController();
-
+    this.abortControllerService.abortExistingRequest();
+    const abortController = this.abortControllerService.createAbortController();
     try {
       const response = await fetch(url, {
         method: method,
@@ -174,7 +181,7 @@ export class HomeComponent implements OnInit {
           // 'Content-Type': 'application/json',
         },
         body: data !== null ? data : undefined,
-        signal: this.abortController.signal,
+        signal: abortController.signal,
       });
 
       if (response.ok) {
@@ -206,11 +213,11 @@ export class HomeComponent implements OnInit {
             this.uploadedFiles.push({ selectedFile: fillData.daily_selfie_side, side: 'side' });
           }
         }
-        this.resetAbortController();
+        this.abortControllerService.resetAbortController();
       } else {
         const data = await response.json();
+        this.abortControllerService.resetAbortController();
         alert(data.message);
-        this.resetAbortController();
       }
     } catch (error) {
       console.error('Error:', error);
@@ -465,6 +472,8 @@ export class HomeComponent implements OnInit {
     if (method === 'PATCH') {
       url = `http://192.168.1.103/api/meal-info/${localStorage.getItem('dailyMealId')}/`;
     }
+    this.abortControllerService.abortExistingRequest();
+    const abortController = this.abortControllerService.createAbortController();
     try {
       const response = await fetch(url, {
         method: method,
@@ -473,6 +482,7 @@ export class HomeComponent implements OnInit {
           // 'Content-Type': 'application/json',
         },
         body: data !== null ? data : undefined,
+        signal: abortController.signal,
       });
 
       if (response.ok) {
@@ -526,8 +536,10 @@ export class HomeComponent implements OnInit {
           this.mealForm!.get('water')!.setValue('');
           this.mealUploadedFiles = [];
         }
+        this.abortControllerService.resetAbortController();
       } else {
         const data = await response.json();
+        this.abortControllerService.resetAbortController();
         alert(data.message);
       }
     } catch (error) {
@@ -549,14 +561,5 @@ export class HomeComponent implements OnInit {
       mealTypeNo = '4';
     }
     return mealTypeNo;
-  }
-  private abortExistingRequest(): void {
-    if (this.abortController) {
-      this.abortController.abort();
-    }
-  }
-
-  private resetAbortController(): void {
-    this.abortController = null;
   }
 }

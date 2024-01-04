@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AbortControllerService } from '../../../abort-controller.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-login',
@@ -10,7 +11,11 @@ export class LoginComponent implements OnInit {
   countryCode = false;
   phoneNumber = false;
   password = false;
-  constructor(private fb: FormBuilder) {
+
+  constructor(
+    private fb: FormBuilder,
+    private abortControllerService: AbortControllerService,
+  ) {
     this.loginForm = this.fb.group({
       country_code: ['', Validators.required],
       phone_number: ['', [Validators.required]],
@@ -30,7 +35,8 @@ export class LoginComponent implements OnInit {
     this.countryCode = true;
     this.password = true;
     this.phoneNumber = true;
-
+    this.abortControllerService.abortExistingRequest();
+    const abortController = this.abortControllerService.createAbortController();
     if (this.loginForm.valid) {
       const credentials = {
         phone_number: this.loginForm.value.country_code + this.loginForm.value.phone_number,
@@ -43,6 +49,7 @@ export class LoginComponent implements OnInit {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(credentials),
+          signal: abortController.signal,
         });
 
         if (response.ok) {
@@ -53,9 +60,12 @@ export class LoginComponent implements OnInit {
           const now: number = new Date().getTime();
           localStorage.setItem('token_timestamp', now.toString());
           window.location.replace('/home');
+          this.abortControllerService.resetAbortController();
+
           // window.location.replace('/account');
         } else {
           const data = await response.json();
+          this.abortControllerService.resetAbortController();
           alert(data.message);
         }
       } catch (error) {

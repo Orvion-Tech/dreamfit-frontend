@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { Router } from '@angular/router';
+import { TokenService } from '../../../token.service';
 import { Component, OnInit } from '@angular/core';
 import { DateService } from '../../../date.service';
 import Chart from 'chart.js/auto';
@@ -8,10 +10,22 @@ import Chart from 'chart.js/auto';
   styleUrls: ['./trend.component.scss'],
 })
 export class TrendComponent implements OnInit {
-  constructor(private dateService: DateService) {}
+  constructor(
+    private dateService: DateService,
+    private router: Router,
+    private tokenService: TokenService,
+  ) {}
 
   ngOnInit(): void {
-    this.getTrendData();
+    if (this.tokenService.isTokenExpired()) {
+      // Token has expired
+      localStorage.removeItem('user_id');
+      localStorage.removeItem('id_token');
+      localStorage.removeItem('token_timestamp');
+      this.router.navigate(['/login']);
+    } else {
+      this.getTrendData();
+    }
   }
   async getTrendData() {
     try {

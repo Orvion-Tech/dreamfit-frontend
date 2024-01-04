@@ -5,6 +5,7 @@ import { TokenService } from '../../../token.service';
 import { DateService } from '../../../date.service';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import { AbortControllerService } from '../../../abort-controller.service';
 @Component({
   selector: 'app-meal-summary',
   templateUrl: './meal-summary.component.html',
@@ -21,6 +22,7 @@ export class MealSummaryComponent implements OnInit {
     private router: Router,
     private tokenService: TokenService,
     private dateService: DateService,
+    private abortControllerService: AbortControllerService,
   ) {}
   ngOnInit() {
     const currentDate = new Date(); // You can pass any date you want to format
@@ -44,6 +46,8 @@ export class MealSummaryComponent implements OnInit {
   }
   async homeDataApi(getDate: string) {
     const data = { date: getDate };
+    this.abortControllerService.abortExistingRequest();
+    const abortController = this.abortControllerService.createAbortController();
     try {
       const response = await fetch('http://192.168.1.103/api/summary/', {
         method: 'POST',
@@ -52,13 +56,16 @@ export class MealSummaryComponent implements OnInit {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
+        signal: abortController.signal,
       });
 
       if (response.ok) {
         this.homeData = await response.json();
+        this.abortControllerService.resetAbortController();
         console.log(this.homeData);
       } else {
         const data = await response.json();
+        this.abortControllerService.resetAbortController();
         alert(data.message);
       }
     } catch (error) {

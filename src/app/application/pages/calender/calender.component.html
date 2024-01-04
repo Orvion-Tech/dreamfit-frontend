@@ -65,22 +65,12 @@
             [ngClass]="{
               day: true,
               day__selected:
-                day !== null &&
-                day.data !== undefined &&
-                day.data !== null &&
-                day.data.daily_selfie_front !== null &&
-                day.data.daily_selfie_back !== null &&
-                day.data.daily_selfie_side !== null
+                day !== null && day.data !== undefined && day.data !== null
                   ? comparisonDate.includes(day.data.date_time.slice(0, 10))
                   : null
             }"
             (click)="
-              day !== null &&
-              day.data !== undefined &&
-              day.data !== null &&
-              day.data.daily_selfie_front !== null &&
-              day.data.daily_selfie_back !== null &&
-              day.data.daily_selfie_side !== null
+              day !== null && day.data !== undefined && day.data !== null
                 ? selectCompDate(day.data.date_time)
                 : null
             "
@@ -419,7 +409,7 @@
     </div>
     <div id="contentToExport">
       <div class="comparison-screen__photo">
-        <img
+        <!-- <img
           src="{{
             comparisonType === 'front'
               ? data.daily_selfie_front
@@ -431,7 +421,26 @@
           }}"
           alt="img 1"
           *ngFor="let data of this.compareData.photos"
-        />
+        /> -->
+        <ng-container *ngFor="let data of this.compareData.photos">
+          <img
+            *ngIf="
+              (comparisonType === 'front' && data.daily_selfie_front) ||
+              (comparisonType === 'back' && data.daily_selfie_back) ||
+              (comparisonType === 'side' && data.daily_selfie_side)
+            "
+            [src]="
+              comparisonType === 'front'
+                ? data.daily_selfie_front
+                : comparisonType === 'back'
+                ? data.daily_selfie_back
+                : comparisonType === 'side'
+                ? data.daily_selfie_side
+                : ''
+            "
+            alt="img 1"
+          />
+        </ng-container>
       </div>
       <div class="comparison-screen__date">
         <p *ngFor="let data of this.compareData.photos">
