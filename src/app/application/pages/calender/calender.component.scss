@@ -220,6 +220,8 @@
   border: 1px solid #ccc;
   height: 120px;
   position: relative;
+  cursor: pointer;
+  user-select: none;
   &__selected {
     background-color: green;
   }
