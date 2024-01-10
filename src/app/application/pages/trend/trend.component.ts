@@ -29,7 +29,7 @@ export class TrendComponent implements OnInit {
   }
   async getTrendData() {
     try {
-      const response = await fetch('http://192.168.1.103/en/api/trend/', {
+      const response = await fetch('http://18.163.194.77/en/api/trend/', {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${localStorage.getItem('id_token')}`,
