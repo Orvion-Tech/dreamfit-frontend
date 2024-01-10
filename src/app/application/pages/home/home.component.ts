@@ -31,7 +31,8 @@ export class HomeComponent implements OnInit {
   body_fat = false;
   body_mass = false;
   poopoo = false;
-
+  showFullMsg = false;
+  calculatedBodyMass!: number;
   /**
    *
    * Meal Form Start
@@ -40,6 +41,7 @@ export class HomeComponent implements OnInit {
   mealUploadedFiles: any;
   mealData: any;
   mealDataUpdate = false;
+  consumed_suppliment: any;
   /**
    *
    * Meal Form End
@@ -55,7 +57,7 @@ export class HomeComponent implements OnInit {
       weight: ['', Validators.required],
       poopoo: ['', Validators.required],
       body_fat: ['', Validators.required],
-      body_mass: ['', Validators.required],
+      body_mass: [''],
       meanstation_cycle: [false],
       daily_selfie_front: [''],
       daily_selfie_side: [''],
@@ -85,6 +87,23 @@ export class HomeComponent implements OnInit {
       this.personalDataApi(this.formattedDate, 'GET', null);
     }
   }
+  calculateBodyMass() {
+    const weight = this.personalProfileForm.get('weight')!.value;
+    const bodyFat = this.personalProfileForm.get('body_fat')!.value;
+
+    // Calculate body mass using the formula: body mass = weight * body fat
+    this.calculatedBodyMass = weight * bodyFat;
+  }
+  getConsumedQuantity(supplement: any): number {
+    const consumedItem = this.consumed_suppliment.find(
+      (item: any) => item.suppliment.id === supplement.id,
+    );
+    return consumedItem ? consumedItem.quantity : 0;
+  }
+
+  showMsg() {
+    this.showFullMsg = !this.showFullMsg;
+  }
   prevDate() {
     this.notToday = false;
     // Parse the current formatted date into a Date object
@@ -102,27 +121,27 @@ export class HomeComponent implements OnInit {
   }
   async homeDataApi(getDate: string) {
     const data = { date: getDate };
-    this.abortControllerService.abortExistingRequest();
-    const abortController = this.abortControllerService.createAbortController();
+    // this.abortControllerService.abortExistingRequest();
+    // const abortController = this.abortControllerService.createAbortController();
     try {
-      const response = await fetch('http://18.163.194.77/en/api/home-summary/', {
+      const response = await fetch('http://192.168.1.103/en/api/home-summary/', {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${localStorage.getItem('id_token')}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
-        signal: abortController.signal,
+        // signal: abortController.signal,
       });
 
       if (response.ok) {
         this.homeData = await response.json();
-        this.abortControllerService.resetAbortController();
-
+        // this.abortControllerService.resetAbortController();
+        this.consumed_suppliment = this.homeData.consumed_suppliment;
         console.log(this.homeData);
       } else {
         const data = await response.json();
-        this.abortControllerService.resetAbortController();
+        // this.abortControllerService.resetAbortController();
 
         alert(data.message);
       }
@@ -146,11 +165,19 @@ export class HomeComponent implements OnInit {
   }
   showMealFormClick(data: string) {
     this.mealType = data;
-    this.showMealForm = true;
     this.mealDataApi(this.formattedDate, 'GET', null);
+    this.showMealForm = true;
   }
   hideMeal() {
+    this.mealForm!.get('time')!.setValue(this.dateService.formatTime(new Date()));
+    this.mealForm!.get('rice')!.setValue('');
+    this.mealForm!.get('meat')!.setValue('');
+    this.mealForm!.get('veg')!.setValue('');
+    this.mealForm!.get('fruit')!.setValue('');
+    this.mealForm!.get('water')!.setValue('');
+    this.mealUploadedFiles = [];
     this.showMealForm = false;
+    window.location.reload();
   }
   deleteLastFile(index: string) {
     // Implementation to delete the file at the specified index from the array
@@ -162,14 +189,14 @@ export class HomeComponent implements OnInit {
     method: string,
     postData: BodyInit | null | undefined,
   ) {
-    let url = `http://18.163.194.77/en/api/daily-profile/`;
+    let url = `http://192.168.1.103/en/api/daily-profile/`;
     let data = postData;
     if (method === 'GET') {
-      url = `http://18.163.194.77/en/api/daily-profile/?date=${getDate}`;
+      url = `http://192.168.1.103/en/api/daily-profile/?date=${getDate}`;
       data = null;
     }
     if (method === 'PATCH') {
-      url = `http://18.163.194.77/en/api/daily-profile/${localStorage.getItem('dailyProfileId')}/`;
+      url = `http://192.168.1.103/en/api/daily-profile/${localStorage.getItem('dailyProfileId')}/`;
     }
     this.abortControllerService.abortExistingRequest();
     const abortController = this.abortControllerService.createAbortController();
@@ -246,7 +273,7 @@ export class HomeComponent implements OnInit {
       formData.append('weight', this.personalProfileForm.value.weight);
       formData.append('poopoo_time', this.personalProfileForm.value.poopoo);
       formData.append('body_fat', this.personalProfileForm.value.body_fat);
-      formData.append('body_mass', this.personalProfileForm.value.body_mass);
+      formData.append('body_mass', this.calculatedBodyMass.toString());
       if (this.personalProfileForm.value.meanstation_cycle == true) {
         formData.append('meanstation_cycle', this.personalProfileForm.value.meanstation_cycle);
       }
@@ -296,29 +323,9 @@ export class HomeComponent implements OnInit {
     if (this.mealForm.valid) {
       this.formattedDate = this.dateService.formatDate(new Date(), 'yyyy-MM-dd');
       this.formattedTime = this.mealForm.value.time;
-      const formData = new FormData();
-      formData.append('meal_type', mealTypeNo);
-      formData.append('user', localStorage.getItem('user_id') || '');
-      formData.append('meal_time', `${this.formattedDate} ${this.formattedTime}`);
-
-      if (this.mealForm.value.rice !== '') {
-        formData.append('amount_of_rice_or_noodels', this.mealForm.value.rice);
-      }
-      if (this.mealForm.value.meat !== '') {
-        formData.append('amount_of_meat', this.mealForm.value.meat);
-      }
-      if (this.mealForm.value.veg !== '') {
-        formData.append('amount_of_vegitables', this.mealForm.value.veg);
-      }
-      if (this.mealForm.value.fruit !== '') {
-        formData.append('amount_of_fruits', this.mealForm.value.fruit);
-      }
-      if (this.mealForm.value.water !== '') {
-        formData.append('amount_of_water', this.mealForm.value.water);
-      }
       const supplementArray: {
         quantity: number;
-        suppliment: number;
+        suppliment: { id: number };
         date: string;
       }[] = [];
       const inputElements = document.querySelectorAll(
@@ -329,39 +336,141 @@ export class HomeComponent implements OnInit {
         if (inputElement.value > '0') {
           const data = {
             quantity: parseInt(inputElement.value),
-            suppliment: parseInt(inputElement.id),
+            suppliment: { id: parseInt(inputElement.id) },
             date: `${this.formattedDate} ${this.formattedTime}`,
           };
           supplementArray.push(data);
         }
       });
-      if (supplementArray.length > 0) {
-        formData.append('suppliment', JSON.stringify(supplementArray));
-      }
+      const data = {
+        meal_type: mealTypeNo,
+        user: localStorage.getItem('user_id') || '',
+        meal_time: `${this.formattedDate} ${this.formattedTime}`,
+        amount_of_rice_or_noodels: this.mealForm.value.rice,
+        amount_of_meat: this.mealForm.value.meat,
+        amount_of_vegitables: this.mealForm.value.veg,
+        amount_of_water: this.mealForm.value.water,
+        amount_of_fruits: this.mealForm.value.fruit,
+        suppliment: supplementArray,
+      };
+
       if (this.mealUploadedFiles !== undefined && this.mealUploadedFiles.length > 0) {
-        const frontSide = this.mealUploadedFiles.find(
-          (side: { side: string }) => side.side === 'front',
-        );
-        const sideSide = this.mealUploadedFiles.find(
-          (side: { side: string }) => side.side === 'side',
-        );
-        const backSide = this.mealUploadedFiles.find(
-          (side: { side: string }) => side.side === 'back',
-        );
-        if (frontSide && typeof frontSide.selectedFile !== 'string') {
-          formData.append('meal_photo_1', frontSide.selectedFile);
-        }
-        if (sideSide && typeof sideSide.selectedFile !== 'string') {
-          formData.append('meal_photo_2', sideSide.selectedFile);
-        }
-        if (backSide && typeof backSide.selectedFile !== 'string') {
-          formData.append('meal_photo_3', backSide.selectedFile);
-        }
+        this.mealPhotoApi(null, method);
       }
-      this.mealDataApi(null, method, formData);
+
+      this.mealDataApi(null, method, data);
     }
   }
+  async mealPhotoApi(getDate: string | null = null, method: string) {
+    const formData = new FormData();
+    if (this.mealUploadedFiles !== undefined && this.mealUploadedFiles.length > 0) {
+      const frontSide = this.mealUploadedFiles.find(
+        (side: { side: string }) => side.side === 'front',
+      );
+      const sideSide = this.mealUploadedFiles.find(
+        (side: { side: string }) => side.side === 'side',
+      );
+      const backSide = this.mealUploadedFiles.find(
+        (side: { side: string }) => side.side === 'back',
+      );
+      if (frontSide && typeof frontSide.selectedFile !== 'string') {
+        formData.append('meal_photo_1', frontSide.selectedFile);
+      }
+      if (sideSide && typeof sideSide.selectedFile !== 'string') {
+        formData.append('meal_photo_3', sideSide.selectedFile);
+      }
+      if (backSide && typeof backSide.selectedFile !== 'string') {
+        formData.append('meal_photo_2', backSide.selectedFile);
+      }
+    }
+    let url = `http://192.168.1.103/en/api/meal-info/`;
+    let data: FormData | null = formData;
+    if (method === 'GET') {
+      url = `http://192.168.1.103/en/api/meal-info/?date=${getDate}`;
+      data = null;
+    }
+    if (method === 'PATCH') {
+      url = `http://192.168.1.103/en/api/meal-info/${localStorage.getItem('dailyMealId')}/`;
+    }
+    // this.abortControllerService.abortExistingRequest();
+    // const abortController = this.abortControllerService.createAbortController();
+    try {
+      const response = await fetch(url, {
+        method: method,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('id_token')}`,
+          // 'Content-Type': 'application/json',
+        },
+        body: data !== null ? data : undefined,
+        // signal: abortController.signal,
+      });
 
+      if (response.ok) {
+        this.mealUploadedFiles = [];
+
+        this.mealData = await response.json();
+        let fillData;
+        console.log(this.getMealNumber(), this.mealData, 'fetch call');
+        if (this.mealData.length > 0) {
+          fillData = this.mealData.filter(
+            (mealType: { meal_type: string }) => mealType.meal_type === this.getMealNumber(),
+          )[0];
+          console.log(fillData, 'filter meal data');
+        } else {
+          fillData = this.mealData;
+        }
+        if (fillData !== undefined && fillData.meal_type === this.getMealNumber()) {
+          this.mealDataUpdate = true;
+        }
+        if (
+          fillData !== undefined &&
+          Object.keys(fillData).length > 0 &&
+          fillData.meal_type === this.getMealNumber()
+        ) {
+          localStorage.setItem('dailyMealId', fillData.id);
+          // const date = new Date(fillData.meal_time).toLocaleTimeString([], {
+          //   hour: '2-digit',
+          //   minute: '2-digit',
+          //   hour12: false,
+          // });
+          // this.mealForm!.get('time')!.setValue(date);
+          // this.mealForm!.get('rice')!.setValue(fillData.amount_of_rice_or_noodels);
+          // this.mealForm!.get('meat')!.setValue(fillData.amount_of_meat);
+          // this.mealForm!.get('veg')!.setValue(fillData.amount_of_vegitables);
+          // this.mealForm!.get('fruit')!.setValue(fillData.amount_of_fruits);
+          // this.mealForm!.get('water')!.setValue(fillData.amount_of_water);
+          if (fillData.meal_photo_1 !== null) {
+            this.mealUploadedFiles.push({
+              selectedFile: fillData.meal_photo_1,
+              side: 'front',
+            });
+          }
+          if (fillData.meal_photo_2 !== null) {
+            this.mealUploadedFiles.push({ selectedFile: fillData.meal_photo_2, side: 'back' });
+          }
+          if (fillData.meal_photo_3 !== null) {
+            this.mealUploadedFiles.push({ selectedFile: fillData.meal_photo_3, side: 'side' });
+          }
+          console.log(this.mealUploadedFiles);
+        } else {
+          this.mealForm!.get('time')!.setValue(this.dateService.formatTime(new Date()));
+          this.mealForm!.get('rice')!.setValue('');
+          this.mealForm!.get('meat')!.setValue('');
+          this.mealForm!.get('veg')!.setValue('');
+          this.mealForm!.get('fruit')!.setValue('');
+          this.mealForm!.get('water')!.setValue('');
+          this.mealUploadedFiles = [];
+        }
+        // this.abortControllerService.resetAbortController();
+      } else {
+        const data = await response.json();
+        // this.abortControllerService.resetAbortController();
+        alert(data.message);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
   // onMealSubmit() {
   //   let method = 'POST';
   //   if (this.mealDataUpdate) {
@@ -463,31 +572,30 @@ export class HomeComponent implements OnInit {
   //   return new File([blob], fileName, { lastModified: new Date().getTime() });
   // }
   async mealDataApi(getDate: string | null = null, method: string, postData: any) {
-    let url = `http://18.163.194.77/en/api/meal-info/`;
+    let url = `http://192.168.1.103/en/api/meal-info/`;
     let data = postData;
     if (method === 'GET') {
-      url = `http://18.163.194.77/en/api/meal-info/?date=${getDate}`;
+      url = `http://192.168.1.103/en/api/meal-info/?date=${getDate}`;
       data = null;
     }
     if (method === 'PATCH') {
-      url = `http://18.163.194.77/en/api/meal-info/${localStorage.getItem('dailyMealId')}/`;
+      url = `http://192.168.1.103/en/api/meal-info/${localStorage.getItem('dailyMealId')}/`;
     }
-    this.abortControllerService.abortExistingRequest();
-    const abortController = this.abortControllerService.createAbortController();
+    // this.abortControllerService.abortExistingRequest();
+    // const abortController = this.abortControllerService.createAbortController();
     try {
       const response = await fetch(url, {
         method: method,
         headers: {
           Authorization: `Bearer ${localStorage.getItem('id_token')}`,
-          // 'Content-Type': 'application/json',
+          'Content-Type': 'application/json',
         },
-        body: data !== null ? data : undefined,
-        signal: abortController.signal,
+        body: data !== null ? JSON.stringify(data) : undefined,
+        // signal: abortController.signal,
       });
 
       if (response.ok) {
         this.mealUploadedFiles = [];
-
         this.mealData = await response.json();
         let fillData;
         console.log(this.getMealNumber(), this.mealData, 'fetch call');
@@ -499,10 +607,16 @@ export class HomeComponent implements OnInit {
         } else {
           fillData = this.mealData;
         }
-        if (fillData.meal_type === this.getMealNumber()) {
+        if (fillData !== undefined && fillData.meal_type === this.getMealNumber()) {
           this.mealDataUpdate = true;
+        } else {
+          this.mealDataUpdate = false;
         }
-        if (Object.keys(fillData).length > 0 && fillData.meal_type === this.getMealNumber()) {
+        if (
+          fillData !== undefined &&
+          Object.keys(fillData).length > 0 &&
+          fillData.meal_type === this.getMealNumber()
+        ) {
           localStorage.setItem('dailyMealId', fillData.id);
           const date = new Date(fillData.meal_time).toLocaleTimeString([], {
             hour: '2-digit',
@@ -527,6 +641,7 @@ export class HomeComponent implements OnInit {
           if (fillData.meal_photo_3 !== null) {
             this.mealUploadedFiles.push({ selectedFile: fillData.meal_photo_3, side: 'side' });
           }
+          console.log(this.mealUploadedFiles);
         } else {
           this.mealForm!.get('time')!.setValue(this.dateService.formatTime(new Date()));
           this.mealForm!.get('rice')!.setValue('');
@@ -536,10 +651,13 @@ export class HomeComponent implements OnInit {
           this.mealForm!.get('water')!.setValue('');
           this.mealUploadedFiles = [];
         }
-        this.abortControllerService.resetAbortController();
+        if (method !== 'GET') {
+          window.location.reload();
+        }
+        // this.abortControllerService.resetAbortController();
       } else {
         const data = await response.json();
-        this.abortControllerService.resetAbortController();
+        // this.abortControllerService.resetAbortController();
         alert(data.message);
       }
     } catch (error) {

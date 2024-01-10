@@ -21,6 +21,9 @@
     <img [src]="croppedImageLink.toString()" alt="Cropped Image" />
     <a class="fileUpload__delete" (click)="deleteFile()">Delete</a>
   </div>
+  <div *ngIf="fileSizeError" class="error">
+    {{ fileSizeError }}
+  </div>
 </div>
 <div class="crop_popup" *ngIf="showCropPopup">
   <image-cropper

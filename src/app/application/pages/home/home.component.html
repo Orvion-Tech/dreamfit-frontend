@@ -69,19 +69,23 @@
           height="17"
           alt="{{ data.suppliment.name }}"
         />
-        <input type="text" disabled value="{{ data.quantity }} / {{ data.quantity }}" />
+        <input
+          type="text"
+          disabled
+          value="{{ getConsumedQuantity(data.suppliment) }} / {{ data.quantity }}"
+        />
       </div>
     </div>
   </div>
   <div
-    class="tutor-message"
+    [ngClass]="{ 'tutor-message': true, 'tutor-message___full': showFullMsg }"
     *ngIf="
       homeData !== undefined &&
       homeData.message_from_tutor !== undefined &&
       homeData.message_from_tutor !== null
     "
   >
-    <div class="tutor-message__row">
+    <div [ngClass]="{ 'tutor-message__row': true }">
       <h3>Message form the Tutor:</h3>
       <svg
         width="16"
@@ -99,6 +103,9 @@
     <p>
       {{ homeData.message_from_tutor.message }}
     </p>
+    <a class="tutor-message__row" (click)="showMsg()">{{
+      !showFullMsg ? 'show more' : 'show less'
+    }}</a>
   </div>
   <div [ngClass]="{ 'personal-profile': true, 'personal-profile___show': showPersonal }">
     <div class="personal-profile__header" (click)="personalClick()">Personal Profile</div>
@@ -119,7 +126,11 @@
             }"
           >
             <label>Weight (kg)</label>
-            <input type="number" formControlName="weight" (input)="resetError()" />
+            <input
+              type="number"
+              formControlName="weight"
+              (input)="resetError(); calculateBodyMass()"
+            />
             <p
               class="input__errorMsg"
               *ngIf="personalProfileForm.get('weight')?.hasError('required')"
@@ -152,7 +163,11 @@
             }"
           >
             <label>Body Fat (%) </label>
-            <input type="number" formControlName="body_fat" (input)="resetError()" />
+            <input
+              type="number"
+              formControlName="body_fat"
+              (input)="resetError(); calculateBodyMass()"
+            />
             <p
               class="input__errorMsg"
               *ngIf="personalProfileForm.get('body_fat')?.hasError('required')"
@@ -167,7 +182,13 @@
             }"
           >
             <label>Body Mass (kg)</label>
-            <input type="number" formControlName="body_mass" (input)="resetError()" />
+            <input
+              type="number"
+              formControlName="body_mass"
+              (input)="resetError()"
+              readonly
+              value="{{ calculatedBodyMass }}"
+            />
             <p
               class="input__errorMsg"
               *ngIf="personalProfileForm.get('body_mass')?.hasError('required')"
@@ -318,7 +339,12 @@
               height="17"
               alt="{{ data.suppliment.name }}"
             />
-            <input type="text" class="supplement__cont__box__input" id="{{ data.suppliment.id }}" />
+            <input
+              type="text"
+              class="supplement__cont__box__input"
+              id="{{ data.suppliment.id }}"
+              value="{{ getConsumedQuantity(data.suppliment) }}"
+            />
           </div>
         </div>
       </div>

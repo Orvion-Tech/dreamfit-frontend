@@ -34,6 +34,7 @@ export class ImageUploadComponent implements OnChanges {
   showCroppedImage = false;
   // setCroppedImage: unknown;
   showCropPopup = false;
+  fileSizeError!: string;
   constructor(private sanitizer: DomSanitizer) {}
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['uploadedFiles']) {
@@ -107,11 +108,31 @@ export class ImageUploadComponent implements OnChanges {
     }
   }
   fileChangeEvent(event: Event): void {
-    this.imageChangedEvent = event;
-    this.showCropPopup = true;
     const inputElement = event.target as HTMLInputElement;
+
+    // Check if files are selected
     if (inputElement.files && inputElement.files.length > 0) {
-      this.selectedFile = inputElement.files[0];
+      const selectedFile = inputElement.files[0];
+
+      // Check file size (1MB = 1024 * 1024 bytes)
+      const maxSizeInBytes = 1024 * 1024; // 1MB
+      if (selectedFile.size > maxSizeInBytes) {
+        // Set the error message
+        this.fileSizeError = '上傳的文件不能超過1MB，請重新上傳';
+
+        // Clear other properties to prevent further actions
+        this.imageChangedEvent = null;
+        this.showCropPopup = false;
+        this.selectedFile = null;
+
+        return;
+      }
+
+      // Continue with the cropping process
+      this.fileSizeError = ''; // Clear the error message
+      this.imageChangedEvent = event;
+      this.showCropPopup = true;
+      this.selectedFile = selectedFile;
     }
   }
   imageCropped(event: ImageCroppedEvent): void {
