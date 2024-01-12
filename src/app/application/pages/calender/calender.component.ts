@@ -26,6 +26,7 @@ interface CalendarDataItem {
   styleUrls: ['./calender.component.scss'],
 })
 export class CalenderComponent implements OnInit {
+  [x: string]: any;
   formattedDate!: string;
   calenderData: any;
   calendar: any;

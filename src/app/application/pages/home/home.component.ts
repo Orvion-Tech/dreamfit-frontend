@@ -93,7 +93,7 @@ export class HomeComponent implements OnInit {
     const bodyFat = this.personalProfileForm.get('body_fat')!.value;
 
     // Calculate body mass using the formula: body mass = weight * body fat
-    this.calculatedBodyMass = weight * bodyFat;
+    this.calculatedBodyMass = (weight * bodyFat) / 100;
   }
   getConsumedQuantity(supplement: any): number {
     const consumedItem = this.consumed_suppliment.find(
@@ -241,6 +241,9 @@ export class HomeComponent implements OnInit {
           if (fillData.daily_selfie_side !== null) {
             this.uploadedFiles.push({ selectedFile: fillData.daily_selfie_side, side: 'side' });
           }
+        }
+        if (method !== 'GET') {
+          alert('Your information has been submitted successfully.');
         }
         this.abortControllerService.resetAbortController();
       } else {
@@ -460,6 +463,9 @@ export class HomeComponent implements OnInit {
           this.mealForm!.get('water')!.setValue('');
           this.mealUploadedFiles = [];
         }
+        if (method !== 'GET') {
+          alert('Your information has been submitted successfully.');
+        }
         // this.abortControllerService.resetAbortController();
       } else {
         const data = await response.json();
@@ -653,6 +659,9 @@ export class HomeComponent implements OnInit {
           this.mealForm!.get('fruit')!.setValue('');
           this.mealForm!.get('water')!.setValue('');
           this.mealUploadedFiles = [];
+        }
+        if (method !== 'GET') {
+          alert('Your information has been submitted successfully.');
         }
 
         // if (method !== 'GET') {
