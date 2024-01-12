@@ -73,6 +73,7 @@ export class HomeComponent implements OnInit {
     });
   }
   ngOnInit() {
+    console.log(this.notToday, 'today');
     const currentDate = new Date(); // You can pass any date you want to format
     this.formattedDate = this.dateService.formatDate(currentDate, 'yyyy-MM-dd');
     this.formattedTime = this.dateService.formatTime(currentDate);
@@ -124,7 +125,7 @@ export class HomeComponent implements OnInit {
     // this.abortControllerService.abortExistingRequest();
     // const abortController = this.abortControllerService.createAbortController();
     try {
-      const response = await fetch('http://18.163.194.77/en/api/home-summary/', {
+      const response = await fetch('http://192.168.1.103/en/api/home-summary/', {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${localStorage.getItem('id_token')}`,
@@ -189,14 +190,14 @@ export class HomeComponent implements OnInit {
     method: string,
     postData: BodyInit | null | undefined,
   ) {
-    let url = `http://18.163.194.77/en/api/daily-profile/`;
+    let url = `http://192.168.1.103/en/api/daily-profile/`;
     let data = postData;
     if (method === 'GET') {
-      url = `http://18.163.194.77/en/api/daily-profile/?date=${getDate}`;
+      url = `http://192.168.1.103/en/api/daily-profile/?date=${getDate}`;
       data = null;
     }
     if (method === 'PATCH') {
-      url = `http://18.163.194.77/en/api/daily-profile/${localStorage.getItem('dailyProfileId')}/`;
+      url = `http://192.168.1.103/en/api/daily-profile/${localStorage.getItem('dailyProfileId')}/`;
     }
     this.abortControllerService.abortExistingRequest();
     const abortController = this.abortControllerService.createAbortController();
@@ -229,6 +230,7 @@ export class HomeComponent implements OnInit {
           this.personalProfileForm!.get('poopoo')!.setValue(fillData.poopoo_time);
           this.personalProfileForm!.get('weight')!.setValue(fillData.weight);
           this.personalProfileForm!.get('body_fat')!.setValue(fillData.body_fat);
+          this.calculatedBodyMass = fillData.body_mass;
           this.personalProfileForm!.get('body_mass')!.setValue(fillData.body_mass);
           if (fillData.daily_selfie_front !== null) {
             this.uploadedFiles.push({ selectedFile: fillData.daily_selfie_front, side: 'front' });
@@ -268,7 +270,7 @@ export class HomeComponent implements OnInit {
     this.poopoo = true;
     if (this.personalProfileForm.valid) {
       this.formattedDate = this.dateService.formatDate(new Date(), 'yyyy-MM-dd');
-
+      console.log(this.calculatedBodyMass, 'mass');
       const formData = new FormData();
       formData.append('weight', this.personalProfileForm.value.weight);
       formData.append('poopoo_time', this.personalProfileForm.value.poopoo);
@@ -354,10 +356,6 @@ export class HomeComponent implements OnInit {
         suppliment: supplementArray,
       };
 
-      if (this.mealUploadedFiles !== undefined && this.mealUploadedFiles.length > 0) {
-        this.mealPhotoApi(null, method);
-      }
-
       this.mealDataApi(null, method, data);
     }
   }
@@ -383,14 +381,15 @@ export class HomeComponent implements OnInit {
         formData.append('meal_photo_2', backSide.selectedFile);
       }
     }
-    let url = `http://18.163.194.77/en/api/meal-info/`;
+    formData.append('user', localStorage.getItem('user_id') || '');
+    let url = `http://192.168.1.103/en/api/meal-info/`;
     let data: FormData | null = formData;
     if (method === 'GET') {
-      url = `http://18.163.194.77/en/api/meal-info/?date=${getDate}`;
+      url = `http://192.168.1.103/en/api/meal-info/?date=${getDate}`;
       data = null;
     }
     if (method === 'PATCH') {
-      url = `http://18.163.194.77/en/api/meal-info/${localStorage.getItem('dailyMealId')}/`;
+      url = `http://192.168.1.103/en/api/meal-info/${localStorage.getItem('dailyMealId')}/`;
     }
     // this.abortControllerService.abortExistingRequest();
     // const abortController = this.abortControllerService.createAbortController();
@@ -572,14 +571,14 @@ export class HomeComponent implements OnInit {
   //   return new File([blob], fileName, { lastModified: new Date().getTime() });
   // }
   async mealDataApi(getDate: string | null = null, method: string, postData: any) {
-    let url = `http://18.163.194.77/en/api/meal-info/`;
+    let url = `http://192.168.1.103/en/api/meal-info/`;
     let data = postData;
     if (method === 'GET') {
-      url = `http://18.163.194.77/en/api/meal-info/?date=${getDate}`;
+      url = `http://192.168.1.103/en/api/meal-info/?date=${getDate}`;
       data = null;
     }
     if (method === 'PATCH') {
-      url = `http://18.163.194.77/en/api/meal-info/${localStorage.getItem('dailyMealId')}/`;
+      url = `http://192.168.1.103/en/api/meal-info/${localStorage.getItem('dailyMealId')}/`;
     }
     // this.abortControllerService.abortExistingRequest();
     // const abortController = this.abortControllerService.createAbortController();
@@ -595,7 +594,6 @@ export class HomeComponent implements OnInit {
       });
 
       if (response.ok) {
-        this.mealUploadedFiles = [];
         this.mealData = await response.json();
         let fillData;
         console.log(this.getMealNumber(), this.mealData, 'fetch call');
@@ -618,6 +616,9 @@ export class HomeComponent implements OnInit {
           fillData.meal_type === this.getMealNumber()
         ) {
           localStorage.setItem('dailyMealId', fillData.id);
+          if (this.mealUploadedFiles !== undefined && this.mealUploadedFiles.length > 0) {
+            this.mealPhotoApi(null, 'PATCH');
+          }
           const date = new Date(fillData.meal_time).toLocaleTimeString([], {
             hour: '2-digit',
             minute: '2-digit',
@@ -629,6 +630,8 @@ export class HomeComponent implements OnInit {
           this.mealForm!.get('veg')!.setValue(fillData.amount_of_vegitables);
           this.mealForm!.get('fruit')!.setValue(fillData.amount_of_fruits);
           this.mealForm!.get('water')!.setValue(fillData.amount_of_water);
+          this.mealUploadedFiles = [];
+
           if (fillData.meal_photo_1 !== null) {
             this.mealUploadedFiles.push({
               selectedFile: fillData.meal_photo_1,
@@ -651,9 +654,10 @@ export class HomeComponent implements OnInit {
           this.mealForm!.get('water')!.setValue('');
           this.mealUploadedFiles = [];
         }
-        if (method !== 'GET') {
-          window.location.reload();
-        }
+
+        // if (method !== 'GET') {
+        //   window.location.reload();
+        // }
         // this.abortControllerService.resetAbortController();
       } else {
         const data = await response.json();

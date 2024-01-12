@@ -112,10 +112,10 @@ export class ProfileComponent implements OnInit {
     }
   }
   async uploadFile(method: string, postData: any | null | undefined) {
-    let url = `http://18.163.194.77/en/api/profile/`;
+    let url = `http://192.168.1.103/en/api/profile/`;
     const data = postData;
     if (method === 'PATCH') {
-      url = `http://18.163.194.77/en/api/profile/${this.profileId}/`;
+      url = `http://192.168.1.103/en/api/profile/${this.profileId}/`;
     }
     this.abortControllerService.abortExistingRequest();
     const abortController = this.abortControllerService.createAbortController();
@@ -132,47 +132,51 @@ export class ProfileComponent implements OnInit {
       if (response.ok) {
         const profileData = await response.json();
         console.log(profileData);
-        if (profileData[0].id !== undefined && profileData[0].id !== null) {
-          if (profileData[0].user.user_image) {
-            this.profileImage = profileData[0].user.user_image;
+        let data: any;
+        if (profileData.length > 0) {
+          data = profileData[0];
+        } else {
+          data = profileData;
+        }
+        if (data.id !== undefined && data.id !== null) {
+          if (data.user.user_image) {
+            this.profileImage = data.user.user_image;
           }
-          if (profileData[0].bmi !== null) {
-            this.BMI = profileData[0].bmi;
+          if (data.bmi !== null) {
+            this.BMI = data.bmi;
           }
-          if (profileData[0].bcr !== null) {
-            this.bseCalorie = profileData[0].bcr;
+          if (data.bcr !== null) {
+            this.bseCalorie = data.bcr;
           }
-          if (profileData[0].acr !== null) {
-            this.dailyCalorie = profileData[0].acr;
+          if (data.acr !== null) {
+            this.dailyCalorie = data.acr;
           }
           this.profilePatch = true;
-          this.profileId = profileData[0].id;
-          this.ProfileForm!.get('first_name')!.setValue(profileData[0].user.first_name);
-          this.ProfileForm!.get('last_name')!.setValue(profileData[0].user.last_name);
-          this.ProfileForm!.get('birth_date')!.setValue(profileData[0].user.birth_date);
-          this.ProfileForm!.get('gender')!.setValue(profileData[0].user.gender);
-          this.ProfileForm!.get('user_image')!.setValue(profileData[0].user.user_image);
-          this.ProfileForm!.get('body_fat')!.setValue(profileData[0].body_fat);
-          this.ProfileForm!.get('body_mass')!.setValue(profileData[0].body_mass);
-          this.ProfileForm!.get('waist')!.setValue(profileData[0].waist);
-          this.ProfileForm!.get('hips')!.setValue(profileData[0].hips);
-          this.ProfileForm!.get('activity_level')!.setValue(profileData[0].activity_level);
-          this.ProfileForm!.get('sleep_time')!.setValue(profileData[0].sleep_time);
-          this.ProfileForm!.get('wakeup_time')!.setValue(profileData[0].wakeup_time);
-          this.ProfileForm!.get('sleep_quality')!.setValue(profileData[0].sleep_quality);
-          this.ProfileForm!.get('family_history')!.setValue(profileData[0].family_history);
-          this.ProfileForm!.get('regular_medicine')!.setValue(profileData[0].regular_medicine);
-          this.ProfileForm!.get('food_allergy')!.setValue(profileData[0].food_allergy);
-          this.ProfileForm!.get('bowl_movememnt_trend')!.setValue(
-            profileData[0].bowl_movememnt_trend,
-          );
-          this.ProfileForm!.get('normal_stool_form')!.setValue(profileData[0].normal_stool_form);
-          this.ProfileForm!.get('work_stress_index')!.setValue(profileData[0].work_stress_index);
-          this.ProfileForm!.get('meanstation_cycle')!.setValue(profileData[0].meanstation_cycle);
-          if (profileData[0].food_test_preference.length > 0) {
-            this.selectedOptions = profileData[0].food_test_preference;
+          this.profileId = data.id;
+          this.ProfileForm!.get('first_name')!.setValue(data.user.first_name);
+          this.ProfileForm!.get('last_name')!.setValue(data.user.last_name);
+          this.ProfileForm!.get('birth_date')!.setValue(data.user.birth_date);
+          this.ProfileForm!.get('gender')!.setValue(data.user.gender);
+          this.ProfileForm!.get('user_image')!.setValue(data.user.user_image);
+          this.ProfileForm!.get('body_fat')!.setValue(data.body_fat);
+          this.ProfileForm!.get('body_mass')!.setValue(data.body_mass);
+          this.ProfileForm!.get('waist')!.setValue(data.waist);
+          this.ProfileForm!.get('hips')!.setValue(data.hips);
+          this.ProfileForm!.get('activity_level')!.setValue(data.activity_level);
+          this.ProfileForm!.get('sleep_time')!.setValue(data.sleep_time);
+          this.ProfileForm!.get('wakeup_time')!.setValue(data.wakeup_time);
+          this.ProfileForm!.get('sleep_quality')!.setValue(data.sleep_quality);
+          this.ProfileForm!.get('family_history')!.setValue(data.family_history);
+          this.ProfileForm!.get('regular_medicine')!.setValue(data.regular_medicine);
+          this.ProfileForm!.get('food_allergy')!.setValue(data.food_allergy);
+          this.ProfileForm!.get('bowl_movememnt_trend')!.setValue(data.bowl_movememnt_trend);
+          this.ProfileForm!.get('normal_stool_form')!.setValue(data.normal_stool_form);
+          this.ProfileForm!.get('work_stress_index')!.setValue(data.work_stress_index);
+          this.ProfileForm!.get('meanstation_cycle')!.setValue(data.meanstation_cycle);
+          if (data.food_test_preference.length > 0) {
+            this.selectedOptions = data.food_test_preference;
             this.options.forEach((option) => {
-              option.selected = profileData[0].food_test_preference.includes(option.value);
+              option.selected = data.food_test_preference.includes(option.value);
               const checkbox = document.querySelector(
                 `input[value="${option.value}"]`,
               ) as HTMLInputElement;
@@ -182,6 +186,7 @@ export class ProfileComponent implements OnInit {
             });
           }
         }
+        window.location.reload();
         this.abortControllerService.resetAbortController();
       } else {
         const data = await response.json();
@@ -193,13 +198,13 @@ export class ProfileComponent implements OnInit {
     }
   }
   async getProfileData(method: string, postData: any | null | undefined) {
-    let url = `http://18.163.194.77/en/api/profile/`;
+    let url = `http://192.168.1.103/en/api/profile/`;
     let data = postData;
     if (method === 'GET') {
       data = null;
     }
     if (method === 'PATCH') {
-      url = `http://18.163.194.77/en/api/profile/${this.profileId}/`;
+      url = `http://192.168.1.103/en/api/profile/${this.profileId}/`;
     }
     this.abortControllerService.abortExistingRequest();
     const abortController = this.abortControllerService.createAbortController();
@@ -217,47 +222,51 @@ export class ProfileComponent implements OnInit {
       if (response.ok) {
         const profileData = await response.json();
         console.log(profileData);
-        if (profileData[0].id !== undefined && profileData[0].id !== null) {
-          if (profileData[0].user.user_image) {
-            this.profileImage = profileData[0].user.user_image;
+        let data: any;
+        if (profileData.length > 0) {
+          data = profileData[0];
+        } else {
+          data = profileData;
+        }
+        if (data.id !== undefined && data.id !== null) {
+          if (data.user.user_image) {
+            this.profileImage = data.user.user_image;
           }
-          if (profileData[0].bmi !== null) {
-            this.BMI = profileData[0].bmi;
+          if (data.bmi !== null) {
+            this.BMI = data.bmi;
           }
-          if (profileData[0].bcr !== null) {
-            this.bseCalorie = profileData[0].bcr;
+          if (data.bcr !== null) {
+            this.bseCalorie = data.bcr;
           }
-          if (profileData[0].acr !== null) {
-            this.dailyCalorie = profileData[0].acr;
+          if (data.acr !== null) {
+            this.dailyCalorie = data.acr;
           }
           this.profilePatch = true;
-          this.profileId = profileData[0].id;
-          this.ProfileForm!.get('first_name')!.setValue(profileData[0].user.first_name);
-          this.ProfileForm!.get('last_name')!.setValue(profileData[0].user.last_name);
-          this.ProfileForm!.get('birth_date')!.setValue(profileData[0].user.birth_date);
-          this.ProfileForm!.get('gender')!.setValue(profileData[0].user.gender);
-          this.ProfileForm!.get('user_image')!.setValue(profileData[0].user.user_image);
-          this.ProfileForm!.get('body_fat')!.setValue(profileData[0].body_fat);
-          this.ProfileForm!.get('body_mass')!.setValue(profileData[0].body_mass);
-          this.ProfileForm!.get('waist')!.setValue(profileData[0].waist);
-          this.ProfileForm!.get('hips')!.setValue(profileData[0].hips);
-          this.ProfileForm!.get('activity_level')!.setValue(profileData[0].activity_level);
-          this.ProfileForm!.get('sleep_time')!.setValue(profileData[0].sleep_time);
-          this.ProfileForm!.get('wakeup_time')!.setValue(profileData[0].wakeup_time);
-          this.ProfileForm!.get('sleep_quality')!.setValue(profileData[0].sleep_quality);
-          this.ProfileForm!.get('family_history')!.setValue(profileData[0].family_history);
-          this.ProfileForm!.get('regular_medicine')!.setValue(profileData[0].regular_medicine);
-          this.ProfileForm!.get('food_allergy')!.setValue(profileData[0].food_allergy);
-          this.ProfileForm!.get('bowl_movememnt_trend')!.setValue(
-            profileData[0].bowl_movememnt_trend,
-          );
-          this.ProfileForm!.get('normal_stool_form')!.setValue(profileData[0].normal_stool_form);
-          this.ProfileForm!.get('work_stress_index')!.setValue(profileData[0].work_stress_index);
-          this.ProfileForm!.get('meanstation_cycle')!.setValue(profileData[0].meanstation_cycle);
-          if (profileData[0].food_test_preference.length > 0) {
-            this.selectedOptions = profileData[0].food_test_preference;
+          this.profileId = data.id;
+          this.ProfileForm!.get('first_name')!.setValue(data.user.first_name);
+          this.ProfileForm!.get('last_name')!.setValue(data.user.last_name);
+          this.ProfileForm!.get('birth_date')!.setValue(data.user.birth_date);
+          this.ProfileForm!.get('gender')!.setValue(data.user.gender);
+          this.ProfileForm!.get('user_image')!.setValue(data.user.user_image);
+          this.ProfileForm!.get('body_fat')!.setValue(data.body_fat);
+          this.ProfileForm!.get('body_mass')!.setValue(data.body_mass);
+          this.ProfileForm!.get('waist')!.setValue(data.waist);
+          this.ProfileForm!.get('hips')!.setValue(data.hips);
+          this.ProfileForm!.get('activity_level')!.setValue(data.activity_level);
+          this.ProfileForm!.get('sleep_time')!.setValue(data.sleep_time);
+          this.ProfileForm!.get('wakeup_time')!.setValue(data.wakeup_time);
+          this.ProfileForm!.get('sleep_quality')!.setValue(data.sleep_quality);
+          this.ProfileForm!.get('family_history')!.setValue(data.family_history);
+          this.ProfileForm!.get('regular_medicine')!.setValue(data.regular_medicine);
+          this.ProfileForm!.get('food_allergy')!.setValue(data.food_allergy);
+          this.ProfileForm!.get('bowl_movememnt_trend')!.setValue(data.bowl_movememnt_trend);
+          this.ProfileForm!.get('normal_stool_form')!.setValue(data.normal_stool_form);
+          this.ProfileForm!.get('work_stress_index')!.setValue(data.work_stress_index);
+          this.ProfileForm!.get('meanstation_cycle')!.setValue(data.meanstation_cycle);
+          if (data.food_test_preference.length > 0) {
+            this.selectedOptions = data.food_test_preference;
             this.options.forEach((option) => {
-              option.selected = profileData[0].food_test_preference.includes(option.value);
+              option.selected = data.food_test_preference.includes(option.value);
               const checkbox = document.querySelector(
                 `input[value="${option.value}"]`,
               ) as HTMLInputElement;

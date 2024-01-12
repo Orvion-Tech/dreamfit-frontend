@@ -58,7 +58,7 @@ export class RegistrationComponent {
       this.abortControllerService.abortExistingRequest();
       const abortController = this.abortControllerService.createAbortController();
       try {
-        const response = await fetch('http://18.163.194.77/en/api/user-registration/', {
+        const response = await fetch('http://192.168.1.103/en/api/user-registration/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -107,7 +107,7 @@ export class RegistrationComponent {
       this.registrationForm.get('invitation_code')!.valid
     ) {
       try {
-        const response = await fetch('http://18.163.194.77/en/api/verify-otp/', {
+        const response = await fetch('http://192.168.1.103/en/api/verify-otp/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -156,7 +156,7 @@ export class RegistrationComponent {
       this.registrationForm.get('phone_number')!.valid
     ) {
       try {
-        const response = await fetch('http://18.163.194.77/en/api/send-otp/', {
+        const response = await fetch('http://192.168.1.103/en/api/send-otp/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
