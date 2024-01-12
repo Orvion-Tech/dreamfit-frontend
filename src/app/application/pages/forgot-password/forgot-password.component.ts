@@ -56,7 +56,7 @@ export class ForgotPasswordComponent {
       this.abortControllerService.abortExistingRequest();
       const abortController = this.abortControllerService.createAbortController();
       try {
-        const response = await fetch('http://192.168.1.103/en/api/user-registration/', {
+        const response = await fetch('http://18.163.194.77/en/api/user-registration/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -104,7 +104,7 @@ export class ForgotPasswordComponent {
       this.forgotpasswordForm.get('otp')!.valid
     ) {
       try {
-        const response = await fetch('http://192.168.1.103/en/api/verify-forgotpass-otp/', {
+        const response = await fetch('http://18.163.194.77/en/api/verify-forgotpass-otp/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -150,7 +150,7 @@ export class ForgotPasswordComponent {
       this.forgotpasswordForm.get('phone_number')!.valid
     ) {
       try {
-        const response = await fetch('http://192.168.1.103/en/api/send-forgotpass-otp/', {
+        const response = await fetch('http://18.163.194.77/en/api/send-forgotpass-otp/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
