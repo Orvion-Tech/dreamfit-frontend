@@ -58,7 +58,7 @@
           </div>
         </div>
         <div class="profile-screen__body__form__body__input">
-          <label for="waist">waist (cm):</label>
+          <label for="waist">Waist (cm):</label>
           <input type="text" formControlName="waist" value="30" />
           <small class="profile-screen__body__form__body__input__info"
             >Decimal data should not allowed</small
@@ -81,7 +81,7 @@
             <option value="5">Very Active - Hard Exercise 6-7 Days/Week</option>
           </select>
         </div>
-        <div class="profile-screen__body__form__body__bmi">
+        <div class="profile-screen__body__form__body__bmi" *ngIf="BMI > 0">
           <p><span>Your BMI</span>: {{ BMI }}</p>
           <p>Your base calorie requriement: {{ dailyCalorie }} calories</p>
           <p>Your daily calorie requirement: {{ bseCalorie }} calories</p>
@@ -102,7 +102,7 @@
             <input type="time" formControlName="sleep_time" />
           </div>
           <div class="profile-screen__body__form__body__input">
-            <label for="wakeup">Usual wakeup time:</label>
+            <label for="wakeup">Usual Wakeup time:</label>
             <input type="time" formControlName="wakeup_time" />
           </div>
         </div>
@@ -115,7 +115,10 @@
             <option value="4">Light sleep</option>
           </select>
         </div>
-        <div class="profile-screen__body__form__body__input">
+        <div
+          class="profile-screen__body__form__body__input"
+          *ngIf="ProfileForm.value.gender === '2'"
+        >
           <label for="sleep_quality"
             >Do you have your discoumfort before and after menstrual.Or the condition of the skin
             has deteriorated significantly?</label

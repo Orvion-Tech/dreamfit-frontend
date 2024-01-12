@@ -12,7 +12,13 @@
     </div>
   </div>
   <div class="meal-summary">
-    <h2>Ravi Patel</h2>
+    <h2
+      *ngIf="
+        homeData.user_name !== undefined && homeData.user_name !== null && homeData.user_name !== ''
+      "
+    >
+      {{ homeData.user_name }}
+    </h2>
     <div class="meal-summary__table" *ngIf="homeData !== undefined">
       <div class="meal-summary__table__col">
         <p>&nbsp;</p>
