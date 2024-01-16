@@ -6,6 +6,7 @@
   display: grid;
   place-content: center;
   place-items: center;
+  padding-bottom: 42px;
   &__row {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
