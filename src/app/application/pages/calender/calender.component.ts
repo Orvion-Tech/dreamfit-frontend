@@ -5,6 +5,8 @@ import { TokenService } from '../../../token.service';
 import { DateService } from '../../../date.service';
 import { AbortControllerService } from '../../../abort-controller.service';
 import { ExportService } from '../../../export.service';
+import moment from 'moment-timezone';
+
 interface CalendarDataItem {
   body_fat: any;
   body_mass: any;
@@ -219,14 +221,10 @@ export class CalenderComponent implements OnInit {
   //   return calendar;
   // }
   generateCalendar() {
-    console.log('called');
-    // ... (existing code)
     const selectedMonth = this.selectedDateObject.getMonth();
     const selectedYear = this.selectedDateObject.getFullYear();
     const daysInMonth = this.getDaysInMonth(selectedMonth, selectedYear);
     const firstDay = this.getFirstDayOfMonth(selectedMonth, selectedYear);
-    console.log(firstDay);
-
     let day = 1;
     this.calendar = [];
     for (let week = 0; day <= daysInMonth; week++) {
@@ -241,15 +239,15 @@ export class CalenderComponent implements OnInit {
           if (this.calenderData !== undefined && this.calenderData.callender_data !== undefined) {
             const dayData: CalendarDataItem | undefined = this.calenderData.callender_data.find(
               (data: CalendarDataItem) => {
-                const dataDate = new Date(data.date_time);
-                const dataYear = dataDate.getFullYear();
-                const dataMonth = dataDate.getMonth();
-                const dataDay = dataDate.getDate();
-
+                const dataDate = moment(data.date_time).tz('Asia/Shanghai');
+                const dataYear = dataDate.year();
+                const dataMonth = dataDate.month();
+                const dataDay = dataDate.date();
+                console.log(data.date_time);
                 return dataYear === selectedYear && dataMonth === selectedMonth && dataDay === day;
               },
             );
-            console.log(dayData);
+            // console.log(dayData);
             this.calendar[week][i] = { day, data: dayData || null };
           } else {
             this.calendar[week][i] = { day, data: null };
