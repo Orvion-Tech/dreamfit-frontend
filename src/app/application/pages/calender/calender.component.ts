@@ -239,11 +239,10 @@ export class CalenderComponent implements OnInit {
           if (this.calenderData !== undefined && this.calenderData.callender_data !== undefined) {
             const dayData: CalendarDataItem | undefined = this.calenderData.callender_data.find(
               (data: CalendarDataItem) => {
-                const dataDate = moment(data.date_time).tz('Asia/Shanghai');
+                const dataDate = moment(data.date_time).tz('Asia/Hong_Kong');
                 const dataYear = dataDate.year();
                 const dataMonth = dataDate.month();
                 const dataDay = dataDate.date();
-                console.log(data.date_time);
                 return dataYear === selectedYear && dataMonth === selectedMonth && dataDay === day;
               },
             );
@@ -257,7 +256,6 @@ export class CalenderComponent implements OnInit {
         }
       }
     }
-    console.log(this.calendar);
     // return calendar;
   }
   exportToPdf() {
