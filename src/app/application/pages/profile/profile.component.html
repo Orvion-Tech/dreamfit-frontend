@@ -49,6 +49,16 @@
         </div>
         <div class="profile-screen__body__form__body__row">
           <div class="profile-screen__body__form__body__input">
+            <label for="fat_mass">Weight (kg):</label>
+            <input type="number" formControlName="weight" />
+          </div>
+          <div class="profile-screen__body__form__body__input">
+            <label for="fat_mass">height (cm):</label>
+            <input type="number" formControlName="height" />
+          </div>
+        </div>
+        <div class="profile-screen__body__form__body__row">
+          <div class="profile-screen__body__form__body__input">
             <label for="body_fat">Body Fat(%):</label>
             <input type="number" formControlName="body_fat" value="15" />
           </div>
@@ -83,8 +93,8 @@
         </div>
         <div class="profile-screen__body__form__body__bmi" *ngIf="BMI > 0">
           <p><span>Your BMI</span>: {{ BMI }}</p>
-          <p>Your base calorie requriement: {{ dailyCalorie }} calories</p>
-          <p>Your daily calorie requirement: {{ bseCalorie }} calories</p>
+          <p>Your base calorie requriement: {{ bseCalorie }} calories</p>
+          <p>Your daily calorie requirement: {{ dailyCalorie }} calories</p>
         </div>
         <!-- <div class="profile-screen__body__form__body__input">
           <label for="timezone">Select timezone:</label>

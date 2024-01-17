@@ -275,7 +275,7 @@ export class CalenderComponent implements OnInit {
     }
   }
   selectCompDate(date: any) {
-    console.log(date, 'selected');
+    console.log(moment(date).tz('Asia/Hong_Kong').format('yyyy-MM-DD'), 'selected');
     // this.comparisonDate.push(compDate);
     // if (this.comparisonDate.length === 3) {
     //   console.log('done');
@@ -284,7 +284,8 @@ export class CalenderComponent implements OnInit {
     if (this.comparisonDate.length > 3) {
       return;
     }
-    this.newDate = this.dateService.formatDate(new Date(date), 'yyyy-MM-dd');
+    const formattedDate = moment(date).tz('Asia/Hong_Kong').format('yyyy-MM-DD');
+    this.newDate = formattedDate;
     if (this.comparisonDate.includes(this.newDate)) {
       this.comparisonDate = this.comparisonDate.filter((date: string) => date !== this.newDate);
     } else {

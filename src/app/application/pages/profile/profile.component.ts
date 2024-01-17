@@ -51,6 +51,8 @@ export class ProfileComponent implements OnInit {
       last_name: [''],
       birth_date: [null],
       gender: [''],
+      height: [null],
+      weight: [null],
       body_fat: [null],
       body_mass: [null],
       waist: [null],
@@ -142,15 +144,38 @@ export class ProfileComponent implements OnInit {
           if (data.user.user_image) {
             this.profileImage = data.user.user_image;
           }
-          if (data.bmi !== null) {
-            this.BMI = data.bmi;
+          const birthdate: Date = new Date(data.user.birth_date);
+          const bdate_time = birthdate.getTime();
+          const current_time = Date.now();
+          const diff = current_time - bdate_time;
+          const age_dt = new Date(diff);
+          const year = age_dt.getUTCFullYear();
+          const age = Math.abs(year - 1970);
+          let bmr = 0;
+          let amr = 0;
+          if (data.height > 0 && data.weight > 0) {
+            const height_in_m = data.height / 100;
+            const tmpBmi = data.weight / (height_in_m * height_in_m);
+            this.BMI = parseFloat(tmpBmi.toFixed(1));
           }
-          if (data.bcr !== null) {
-            this.bseCalorie = data.bcr;
+          if (data.user.gender === '1') {
+            bmr = 66.47 + 13.75 * data.weight + 5.003 * data.height - 6.755 * age;
+          } else {
+            bmr = 655.1 + 9.563 * data.weight + 1.85 * data.height - 4.676 * age;
           }
-          if (data.acr !== null) {
-            this.dailyCalorie = data.acr;
+          this.bseCalorie = Math.round(bmr);
+          if (data.activity_level == '1') {
+            amr = 1.2 * bmr;
+          } else if (data.activity_level == '2') {
+            amr = 1.375 * bmr;
+          } else if (data.activity_level == '3') {
+            amr = 1.55 * bmr;
+          } else if (data.activity_level == '4') {
+            amr = 1.725 * bmr;
+          } else if (data.activity_level == '5') {
+            amr = 1.9 * bmr;
           }
+          this.dailyCalorie = Math.round(amr);
           this.profilePatch = true;
           this.profileId = data.id;
           this.ProfileForm!.get('first_name')!.setValue(data.user.first_name);
@@ -158,6 +183,8 @@ export class ProfileComponent implements OnInit {
           this.ProfileForm!.get('birth_date')!.setValue(data.user.birth_date);
           this.ProfileForm!.get('gender')!.setValue(data.user.gender);
           this.ProfileForm!.get('user_image')!.setValue(data.user.user_image);
+          this.ProfileForm!.get('weight')!.setValue(data.weight);
+          this.ProfileForm!.get('height')!.setValue(data.height);
           this.ProfileForm!.get('body_fat')!.setValue(data.body_fat);
           this.ProfileForm!.get('body_mass')!.setValue(data.body_mass);
           this.ProfileForm!.get('waist')!.setValue(data.waist);
@@ -232,12 +259,45 @@ export class ProfileComponent implements OnInit {
           if (data.user.user_image) {
             this.profileImage = data.user.user_image;
           }
-          if (data.bmi !== null) {
-            this.BMI = data.bmi;
+          const birthdate: Date = new Date(data.user.birth_date);
+          const bdate_time = birthdate.getTime();
+          const current_time = Date.now();
+          const diff = current_time - bdate_time;
+          const age_dt = new Date(diff);
+          const year = age_dt.getUTCFullYear();
+          const age = Math.abs(year - 1970);
+          let bmr = 0;
+          let amr = 0;
+          if (data.height > 0 && data.weight > 0) {
+            const height_in_m = data.height / 100;
+            const tmpBmi = data.weight / (height_in_m * height_in_m);
+            this.BMI = parseFloat(tmpBmi.toFixed(1));
           }
-          if (data.bcr !== null) {
-            this.bseCalorie = data.bcr;
+          if (data.user.gender === '1') {
+            bmr = 66.47 + 13.75 * data.weight + 5.003 * data.height - 6.755 * age;
+          } else {
+            bmr = 655.1 + 9.563 * data.weight + 1.85 * data.height - 4.676 * age;
           }
+          this.bseCalorie = Math.round(bmr);
+          if (data.activity_level == '1') {
+            amr = 1.2 * bmr;
+          } else if (data.activity_level == '2') {
+            amr = 1.375 * bmr;
+          } else if (data.activity_level == '3') {
+            amr = 1.55 * bmr;
+          } else if (data.activity_level == '4') {
+            amr = 1.725 * bmr;
+          } else if (data.activity_level == '5') {
+            amr = 1.9 * bmr;
+          }
+          this.dailyCalorie = Math.round(amr);
+
+          // this.BMI = data.bmi;
+          // if (data.bmi !== null) {
+          // }
+          // if (data.bcr !== null) {
+          //   this.bseCalorie = data.bcr;
+          // }
           if (data.acr !== null) {
             this.dailyCalorie = data.acr;
           }
@@ -248,6 +308,8 @@ export class ProfileComponent implements OnInit {
           this.ProfileForm!.get('birth_date')!.setValue(data.user.birth_date);
           this.ProfileForm!.get('gender')!.setValue(data.user.gender);
           this.ProfileForm!.get('user_image')!.setValue(data.user.user_image);
+          this.ProfileForm!.get('height')!.setValue(data.height);
+          this.ProfileForm!.get('weight')!.setValue(data.weight);
           this.ProfileForm!.get('body_fat')!.setValue(data.body_fat);
           this.ProfileForm!.get('body_mass')!.setValue(data.body_mass);
           this.ProfileForm!.get('waist')!.setValue(data.waist);
@@ -323,6 +385,8 @@ export class ProfileComponent implements OnInit {
       birth_date: this.ProfileForm.value.birth_date,
       gender: this.ProfileForm.value.gender,
       id: localStorage.getItem('user_id') || '',
+      weight: this.ProfileForm.value.weight,
+      height: this.ProfileForm.value.height,
       body_fat: this.ProfileForm.value.body_fat,
       body_mass: this.ProfileForm.value.body_mass,
       waist: this.ProfileForm.value.waist,
