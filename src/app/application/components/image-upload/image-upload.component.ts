@@ -118,7 +118,7 @@ export class ImageUploadComponent implements OnChanges {
       const maxSizeInBytes = 5 * 1024 * 1024; // 1MB
       if (selectedFile.size > maxSizeInBytes) {
         // Set the error message
-        this.fileSizeError = '上傳的文件不能超過1MB，請重新上傳';
+        this.fileSizeError = '上傳的文件不能超過5MB, 請重新上傳';
 
         // Clear other properties to prevent further actions
         this.imageChangedEvent = null;
