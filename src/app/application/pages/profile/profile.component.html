@@ -50,7 +50,7 @@
         <div class="profile-screen__body__form__body__row">
           <div class="profile-screen__body__form__body__input">
             <label for="fat_mass">Weight (kg):</label>
-            <input type="number" formControlName="weight" />
+            <input type="number" formControlName="weight" (input)="calculateBodyMass()" />
           </div>
           <div class="profile-screen__body__form__body__input">
             <label for="fat_mass">height (cm):</label>
@@ -60,11 +60,16 @@
         <div class="profile-screen__body__form__body__row">
           <div class="profile-screen__body__form__body__input">
             <label for="body_fat">Body Fat(%):</label>
-            <input type="number" formControlName="body_fat" value="15" />
+            <input type="number" formControlName="body_fat" (input)="calculateBodyMass()" />
           </div>
           <div class="profile-screen__body__form__body__input">
             <label for="fat_mass">Fat Mass(kg):</label>
-            <input type="number" formControlName="body_mass" value="11.25" />
+            <input
+              type="number"
+              formControlName="body_mass"
+              readonly
+              value="{{ calculatedBodyMass }}"
+            />
           </div>
         </div>
         <div class="profile-screen__body__form__body__input">

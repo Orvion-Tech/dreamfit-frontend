@@ -28,6 +28,8 @@ export class ProfileComponent implements OnInit {
   BMI = 0;
   bseCalorie = 0;
   dailyCalorie = 0;
+  calculatedBodyMass!: number;
+
   ngOnInit(): void {
     if (this.tokenService.isTokenExpired()) {
       // Token has expired
@@ -38,6 +40,14 @@ export class ProfileComponent implements OnInit {
     } else {
       this.getProfileData('GET', null);
     }
+  }
+  calculateBodyMass() {
+    const weight = this.ProfileForm.get('weight')!.value;
+    const bodyFat = this.ProfileForm.get('body_fat')!.value;
+
+    // Calculate body mass using the formula: body mass = weight * body fat
+    const mass = (weight * bodyFat) / 100;
+    this.calculatedBodyMass = parseFloat(mass.toFixed(1));
   }
   constructor(
     private fb: FormBuilder,
@@ -185,8 +195,9 @@ export class ProfileComponent implements OnInit {
           this.ProfileForm!.get('user_image')!.setValue(data.user.user_image);
           this.ProfileForm!.get('weight')!.setValue(data.weight);
           this.ProfileForm!.get('height')!.setValue(data.height);
+          this.calculatedBodyMass = data.body_mass;
           this.ProfileForm!.get('body_fat')!.setValue(data.body_fat);
-          this.ProfileForm!.get('body_mass')!.setValue(data.body_mass);
+          // this.ProfileForm!.get('body_mass')!.setValue(data.body_mass);
           this.ProfileForm!.get('waist')!.setValue(data.waist);
           this.ProfileForm!.get('hips')!.setValue(data.hips);
           this.ProfileForm!.get('activity_level')!.setValue(data.activity_level);
@@ -310,8 +321,9 @@ export class ProfileComponent implements OnInit {
           this.ProfileForm!.get('user_image')!.setValue(data.user.user_image);
           this.ProfileForm!.get('height')!.setValue(data.height);
           this.ProfileForm!.get('weight')!.setValue(data.weight);
+          this.calculatedBodyMass = data.body_mass;
           this.ProfileForm!.get('body_fat')!.setValue(data.body_fat);
-          this.ProfileForm!.get('body_mass')!.setValue(data.body_mass);
+          // this.ProfileForm!.get('body_mass')!.setValue(data.body_mass);
           this.ProfileForm!.get('waist')!.setValue(data.waist);
           this.ProfileForm!.get('hips')!.setValue(data.hips);
           this.ProfileForm!.get('activity_level')!.setValue(data.activity_level);
@@ -388,7 +400,7 @@ export class ProfileComponent implements OnInit {
       weight: this.ProfileForm.value.weight,
       height: this.ProfileForm.value.height,
       body_fat: this.ProfileForm.value.body_fat,
-      body_mass: this.ProfileForm.value.body_mass,
+      body_mass: this.calculatedBodyMass.toString(),
       waist: this.ProfileForm.value.waist,
       hips: this.ProfileForm.value.hips,
       activity_level: this.ProfileForm.value.activity_level,
