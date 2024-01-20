@@ -14,7 +14,10 @@
   <div class="meal-summary">
     <h2
       *ngIf="
-        homeData.user_name !== undefined && homeData.user_name !== null && homeData.user_name !== ''
+        homeData !== undefined &&
+        homeData.user_name !== undefined &&
+        homeData.user_name !== null &&
+        homeData.user_name !== ''
       "
     >
       {{ homeData.user_name }}

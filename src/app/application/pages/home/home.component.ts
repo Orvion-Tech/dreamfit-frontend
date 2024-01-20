@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit {
   formattedTime!: string;
   homeData: any;
   personalData: any;
+  apiDate = new Date();
   personalDataUpdate = false;
   personalDataFilled = false;
   weight = false;
@@ -113,9 +114,9 @@ export class HomeComponent implements OnInit {
 
     // Decrement the date by one day
     currentDate.setDate(currentDate.getDate() - 1);
-
     // Format the new date
     this.formattedDate = this.dateService.formatDate(currentDate, 'yyyy-MM-dd');
+    this.apiDate = currentDate;
 
     // Call homeDataApi with the updated date
     this.homeDataApi(this.formattedDate);
@@ -167,7 +168,8 @@ export class HomeComponent implements OnInit {
   }
   showMealFormClick(data: string) {
     this.mealType = data;
-    this.mealDataApi(this.formattedDate, 'GET', null);
+    const date = this.dateService.formatDate(this.apiDate, 'yyyy-MM-dd');
+    this.mealDataApi(date, 'GET', null);
     this.showMealForm = true;
   }
   hideMeal() {
@@ -323,13 +325,16 @@ export class HomeComponent implements OnInit {
     this.mealUploadedFiles.push({ selectedFile, side });
   }
   onMealSubmit() {
+    console.log(this.apiDate, 'apiDate');
     let method = 'POST';
     if (this.mealDataUpdate) {
       method = 'PATCH';
     }
     const mealTypeNo = this.getMealNumber();
     if (this.mealForm.valid) {
-      this.formattedDate = this.dateService.formatDate(new Date(), 'yyyy-MM-dd');
+      this.formattedDate = this.dateService.formatDate(this.apiDate, 'yyyy-MM-dd');
+      console.log(this.formattedDate, 'send date');
+
       this.formattedTime = this.mealForm.value.time;
       const supplementArray: {
         quantity: number;

@@ -6,8 +6,15 @@ import jsPDF from 'jspdf';
   providedIn: 'root',
 })
 export class ExportService {
+  corsProxyUrl = 'https://dc98nj6to71ef.cloudfront.net';
+
   exportToPdf(element: HTMLElement, fileName: string) {
-    html2canvas(element).then((canvas) => {
+    html2canvas(element, {
+      scale: 1,
+      logging: true,
+      useCORS: true,
+      proxy: this.corsProxyUrl,
+    }).then((canvas) => {
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF();
       const imgWidth = 190; // A4 page width in mm
@@ -25,7 +32,11 @@ export class ExportService {
   }
 
   exportToJpg(element: HTMLElement, fileName: string) {
-    html2canvas(element).then((canvas) => {
+    html2canvas(element, {
+      scale: 3, // Adjust the scale as needed
+      useCORS: true, // Corrected from userCORS to useCORS
+      proxy: this.corsProxyUrl,
+    }).then((canvas) => {
       //   const imgData = canvas.toDataURL('image/jpeg');
       const link = document.createElement('a');
       const margin = 10;
