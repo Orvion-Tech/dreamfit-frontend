@@ -126,7 +126,7 @@ export class HomeComponent implements OnInit {
     // this.abortControllerService.abortExistingRequest();
     // const abortController = this.abortControllerService.createAbortController();
     try {
-      const response = await fetch('http://18.163.194.77/en/api/home-summary/', {
+      const response = await fetch('https://dssv33z9c6vvp.cloudfront.net/en/api/home-summary/', {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${localStorage.getItem('id_token')}`,
@@ -191,14 +191,16 @@ export class HomeComponent implements OnInit {
     method: string,
     postData: BodyInit | null | undefined,
   ) {
-    let url = `http://18.163.194.77/en/api/daily-profile/`;
+    let url = `https://dssv33z9c6vvp.cloudfront.net/en/api/daily-profile/`;
     let data = postData;
     if (method === 'GET') {
-      url = `http://18.163.194.77/en/api/daily-profile/?date=${getDate}`;
+      url = `https://dssv33z9c6vvp.cloudfront.net/en/api/daily-profile/?date=${getDate}`;
       data = null;
     }
     if (method === 'PATCH') {
-      url = `http://18.163.194.77/en/api/daily-profile/${localStorage.getItem('dailyProfileId')}/`;
+      url = `https://dssv33z9c6vvp.cloudfront.net/en/api/daily-profile/${localStorage.getItem(
+        'dailyProfileId',
+      )}/`;
     }
     this.abortControllerService.abortExistingRequest();
     const abortController = this.abortControllerService.createAbortController();
@@ -386,14 +388,16 @@ export class HomeComponent implements OnInit {
       }
     }
     formData.append('user', localStorage.getItem('user_id') || '');
-    let url = `http://18.163.194.77/en/api/meal-info/`;
+    let url = `https://dssv33z9c6vvp.cloudfront.net/en/api/meal-info/`;
     let data: FormData | null = formData;
     if (method === 'GET') {
-      url = `http://18.163.194.77/en/api/meal-info/?date=${getDate}`;
+      url = `https://dssv33z9c6vvp.cloudfront.net/en/api/meal-info/?date=${getDate}`;
       data = null;
     }
     if (method === 'PATCH') {
-      url = `http://18.163.194.77/en/api/meal-info/${localStorage.getItem('dailyMealId')}/`;
+      url = `https://dssv33z9c6vvp.cloudfront.net/en/api/meal-info/${localStorage.getItem(
+        'dailyMealId',
+      )}/`;
     }
     // this.abortControllerService.abortExistingRequest();
     // const abortController = this.abortControllerService.createAbortController();
@@ -578,14 +582,16 @@ export class HomeComponent implements OnInit {
   //   return new File([blob], fileName, { lastModified: new Date().getTime() });
   // }
   async mealDataApi(getDate: string | null = null, method: string, postData: any) {
-    let url = `http://18.163.194.77/en/api/meal-info/`;
+    let url = `https://dssv33z9c6vvp.cloudfront.net/en/api/meal-info/`;
     let data = postData;
     if (method === 'GET') {
-      url = `http://18.163.194.77/en/api/meal-info/?date=${getDate}`;
+      url = `https://dssv33z9c6vvp.cloudfront.net/en/api/meal-info/?date=${getDate}`;
       data = null;
     }
     if (method === 'PATCH') {
-      url = `http://18.163.194.77/en/api/meal-info/${localStorage.getItem('dailyMealId')}/`;
+      url = `https://dssv33z9c6vvp.cloudfront.net/en/api/meal-info/${localStorage.getItem(
+        'dailyMealId',
+      )}/`;
     }
     // this.abortControllerService.abortExistingRequest();
     // const abortController = this.abortControllerService.createAbortController();

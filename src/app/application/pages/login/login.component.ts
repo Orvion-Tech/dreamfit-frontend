@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
         password: this.loginForm.value.password,
       };
       try {
-        const response = await fetch('http://18.163.194.77/en/api/login/', {
+        const response = await fetch('https://dssv33z9c6vvp.cloudfront.net/en/api/login/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

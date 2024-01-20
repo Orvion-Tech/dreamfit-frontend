@@ -150,13 +150,13 @@
               input___error: poopoo && personalProfileForm.get('poopoo')?.hasError('required')
             }"
           >
-            <label>Bowel Movement</label>
+            <label>Bowel Movement</label>
             <input type="number" formControlName="poopoo" (input)="resetError()" />
             <p
               class="input__errorMsg"
               *ngIf="personalProfileForm.get('poopoo')?.hasError('required')"
             >
-              Poopoo is required.
+              Bowel Movement is required.
             </p>
           </div>
         </div>
