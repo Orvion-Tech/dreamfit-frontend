@@ -34,6 +34,7 @@ export class CalenderComponent implements OnInit {
   calendar: any;
   comparisonDate: any = [];
   newDate: string = '';
+  fillDay = 0;
   compareData: any;
   constructor(
     private exportService: ExportService,
@@ -73,7 +74,9 @@ export class CalenderComponent implements OnInit {
       if (response.ok) {
         this.calenderData = await response.json();
         this.abortControllerService.resetAbortController();
-
+        if (this.calenderData.callender_data.length > 0) {
+          this.fillDay = this.calenderData.callender_data.length;
+        }
         this.generateCalendar();
         // console.log(this.calenderData);
       } else {

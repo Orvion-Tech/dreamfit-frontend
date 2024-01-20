@@ -8,7 +8,7 @@
         <img src="../../../../assets/images/time.svg" alt="time" width="20" height="20" />
         <p>{{ formattedDate }} (GMT+8)</p>
       </div>
-      <a class="today-mission__row__btn" (click)="prevDate()">Goto previous Date</a>
+      <a class="today-mission__row__btn" (click)="prevDate()">Go to previous Date</a>
     </div>
   </div>
   <div class="meal-summary">
@@ -95,7 +95,7 @@
     "
   >
     <div [ngClass]="{ 'tutor-message__row': true }">
-      <h3>Message form the Tutor:</h3>
+      <h3>Message from the Tutor:</h3>
       <svg
         width="16"
         height="17"
@@ -120,7 +120,7 @@
     <div class="personal-profile__header" (click)="personalClick()">Personal Profile</div>
     <div class="personal-profile__body" *ngIf="showPersonal">
       <form action="" [formGroup]="personalProfileForm">
-        <div class="personal-profile__body__period">
+        <div class="personal-profile__body__period" *ngIf="homeData.gender === '2'">
           <p>Period</p>
           <label class="switch">
             <input type="checkbox" formControlName="meanstation_cycle" />
