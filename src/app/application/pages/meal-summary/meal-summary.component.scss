@@ -76,9 +76,11 @@
           display: grid;
           gap: 12px;
           img {
-            width: 100%;
-            height: initial;
+            max-width: 250px;
+            max-height: 140px;
             border-radius: 8px;
+            width: initial;
+            height: 100%;
           }
         }
         &__detail {

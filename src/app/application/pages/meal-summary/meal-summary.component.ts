@@ -79,6 +79,8 @@ export class MealSummaryComponent implements OnInit {
     this.showExportPopup = false;
   }
   exportToPdf() {
+    this.hideExport();
+
     const element = document.getElementById('contentToExport');
     if (element) {
       html2canvas(element).then((canvas) => {
@@ -91,19 +93,22 @@ export class MealSummaryComponent implements OnInit {
 
         const maxWidth = pdf.internal.pageSize.getWidth() - 20;
         const maxHeight = pdf.internal.pageSize.getHeight() - 20;
-
         let imgWidth, imgHeight;
-        if (aspectRatio > 1) {
+        if (aspectRatio > 0.5) {
           imgWidth = maxWidth;
           imgHeight = maxWidth / aspectRatio;
         } else {
           imgHeight = maxHeight;
           imgWidth = maxHeight * aspectRatio;
+          // imgHeight = maxWidth / aspectRatio;
+          // imgWidth = maxWidth;
         }
 
         const x = (pdf.internal.pageSize.getWidth() - imgWidth) / 2;
         let y = (maxHeight - imgHeight) / 2;
         y = 10;
+        console.log(aspectRatio, maxWidth, maxHeight, x, y);
+
         pdf.addImage(imgData, 'PNG', x, y, imgWidth, imgHeight);
         pdf.setFontSize(32);
         pdf.setTextColor(200);
@@ -151,6 +156,8 @@ export class MealSummaryComponent implements OnInit {
   }
 
   exportToJpg() {
+    this.hideExport();
+
     const element = document.getElementById('contentToExport');
     if (element) {
       // this.exportService.exportToJpg(element, 'exportedFile');
