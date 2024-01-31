@@ -10,7 +10,7 @@ export class ExportService {
 
   exportToPdf(element: HTMLElement, fileName: string) {
     html2canvas(element, {
-      scale: 1,
+      scale: 3,
       logging: true,
       useCORS: true,
       proxy: this.corsProxyUrl,
@@ -58,7 +58,7 @@ export class ExportService {
       // marginContext.fillText('DreamFit', 120, 260);
 
       // Set the href attribute to the data URL of the new canvas
-      link.href = marginCanvas.toDataURL('image/jpeg');
+      link.href = marginCanvas.toDataURL('image/jpeg', 1);
       link.download = `${fileName}.jpg`;
       link.click();
     });

@@ -18,6 +18,7 @@ export class MealSummaryComponent implements OnInit {
   formattedTime!: string;
   selectedDate: string = new Date().toISOString(); // Initialize as YYYY-MM
   consumed_suppliment: any;
+  corsProxyUrl = 'https://dc98nj6to71ef.cloudfront.net';
 
   constructor(
     private router: Router,
@@ -86,7 +87,12 @@ export class MealSummaryComponent implements OnInit {
 
     const element = document.getElementById('contentToExport');
     if (element) {
-      html2canvas(element).then((canvas) => {
+      html2canvas(element, {
+        scale: 3,
+        logging: true,
+        useCORS: true,
+        proxy: this.corsProxyUrl,
+      }).then((canvas) => {
         const imgData = canvas.toDataURL('image/png');
         const pdf = new jsPDF();
         // const imgWidth = 190; // A4 page width in mm
@@ -175,7 +181,11 @@ export class MealSummaryComponent implements OnInit {
     const element = document.getElementById('contentToExport');
     if (element) {
       // this.exportService.exportToJpg(element, 'exportedFile');
-      html2canvas(element).then((canvas) => {
+      html2canvas(element, {
+        scale: 3, // Adjust the scale as needed
+        useCORS: true, // Corrected from userCORS to useCORS
+        proxy: this.corsProxyUrl,
+      }).then((canvas) => {
         //   const imgData = canvas.toDataURL('image/jpeg');
         const link = document.createElement('a');
         const margin = 10;
