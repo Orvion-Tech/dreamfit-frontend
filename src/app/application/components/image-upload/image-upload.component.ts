@@ -27,6 +27,7 @@ export class ImageUploadComponent implements OnChanges {
   @Input() uploadedFiles: any;
   @Input() index: number = 0;
   @Input() childLabel: string = '';
+  @Input() type: string = '';
   imageChangedEvent: Event | null = null;
   croppedImage: Blob | null = null;
   selectedFile: File | null = null;

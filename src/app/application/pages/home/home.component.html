@@ -78,11 +78,9 @@
           height="17"
           alt="{{ data.suppliment.name }}"
         />
-        <input
-          type="text"
-          disabled
-          value="{{ getConsumedQuantity(data.suppliment) }} / {{ data.quantity }}"
-        />
+        <p class="supplement__cont__box__input">
+          {{ getConsumedQuantity(data.suppliment) }} / {{ data.quantity }}
+        </p>
       </div>
     </div>
   </div>
@@ -212,6 +210,7 @@
           (fileSelected)="fileChangeEvent($event)"
           [index]="0"
           [childLabel]="'Upload Front Profile Photo'"
+          [type]="'profile'"
         />
         <app-image-upload
           [uploadedFiles]="uploadedFiles"
@@ -219,6 +218,7 @@
           (fileSelected)="fileChangeEvent($event)"
           [index]="1"
           [childLabel]="'Upload Side Profile Photo'"
+          [type]="'profile'"
         />
         <app-image-upload
           [uploadedFiles]="uploadedFiles"
@@ -226,6 +226,7 @@
           (fileSelected)="fileChangeEvent($event)"
           [childLabel]="'Upload Back Profile Photo'"
           [index]="2"
+          [type]="'profile'"
         />
         <input
           type="button"
@@ -292,6 +293,7 @@
             (fileSelected)="mealFileChangeEvent($event)"
             [index]="0"
             [childLabel]="'Upload Meal Photo 1'"
+            [type]="'meal'"
           />
           <app-image-upload
             [uploadedFiles]="mealUploadedFiles"
@@ -299,6 +301,7 @@
             (fileSelected)="mealFileChangeEvent($event)"
             [index]="1"
             [childLabel]="'Upload Meal Photo 2'"
+            [type]="'meal'"
           />
           <app-image-upload
             [uploadedFiles]="mealUploadedFiles"
@@ -306,28 +309,29 @@
             (fileSelected)="mealFileChangeEvent($event)"
             [index]="2"
             [childLabel]="'Upload Meal Photo 3'"
+            [type]="'meal'"
           />
         </div>
         <div class="meal-popup__form__row__right">
           <div class="meal-popup__form__row__right__input">
             <label>主</label>
-            <input type="number" formControlName="rice" (input)="resetError()" />
+            <input type="number" formControlName="rice" (input)="resetError()" [ngModel]="rice" />
           </div>
           <div class="meal-popup__form__row__right__input">
             <label>肉</label>
-            <input type="number" formControlName="meat" (input)="resetError()" />
+            <input type="number" formControlName="meat" (input)="resetError()" [ngModel]="meat" />
           </div>
           <div class="meal-popup__form__row__right__input">
             <label>菜</label>
-            <input type="number" formControlName="veg" (input)="resetError()" />
+            <input type="number" formControlName="veg" (input)="resetError()" [ngModel]="veg" />
           </div>
           <div class="meal-popup__form__row__right__input">
             <label>果</label>
-            <input type="number" formControlName="fruit" (input)="resetError()" />
+            <input type="number" formControlName="fruit" (input)="resetError()" [ngModel]="fruit" />
           </div>
           <div class="meal-popup__form__row__right__input">
             <label>水</label>
-            <input type="number" formControlName="water" (input)="resetError()" />
+            <input type="number" formControlName="water" (input)="resetError()" [ngModel]="water" />
           </div>
         </div>
       </div>
@@ -352,7 +356,7 @@
               type="text"
               class="supplement__cont__box__input"
               id="{{ data.suppliment.id }}"
-              value="{{ getConsumedQuantity(data.suppliment) }}"
+              placeholder="qty"
             />
           </div>
         </div>

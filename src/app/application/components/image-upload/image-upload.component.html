@@ -27,8 +27,20 @@
 </div>
 <div class="crop_popup" *ngIf="showCropPopup">
   <image-cropper
+    *ngIf="type !== 'meal'"
     [imageChangedEvent]="imageChangedEvent"
     [maintainAspectRatio]="false"
+    format="png"
+    (imageCropped)="imageCropped($event)"
+    (imageLoaded)="imageLoaded($event)"
+    (cropperReady)="cropperReady()"
+    (loadImageFailed)="loadImageFailed()"
+  ></image-cropper>
+  <image-cropper
+    *ngIf="type === 'meal'"
+    [imageChangedEvent]="imageChangedEvent"
+    [maintainAspectRatio]="true"
+    [aspectRatio]="16 / 8"
     format="png"
     (imageCropped)="imageCropped($event)"
     (imageLoaded)="imageLoaded($event)"

@@ -14,7 +14,16 @@
     </div>
     <div class="export" id="contentToExport">
       <div class="meal-summary">
-        <h2>Ravi Patel</h2>
+        <h2
+          *ngIf="
+            homeData !== undefined &&
+            homeData.user_name !== undefined &&
+            homeData.user_name !== null &&
+            homeData.user_name !== ''
+          "
+        >
+          {{ homeData.user_name }}
+        </h2>
         <div class="meal-summary__table" *ngIf="homeData !== undefined">
           <div class="meal-summary__table__col">
             <p>&nbsp;</p>
@@ -54,7 +63,8 @@
           </div>
         </div>
       </div>
-      <div
+
+      <!-- <div
         class="supplement"
         *ngIf="
           homeData !== undefined &&
@@ -71,10 +81,14 @@
               height="17"
               alt="{{ data.suppliment.name }}"
             />
-            <p class="supplement__cont__box__input">{{ data.quantity }} / {{ data.quantity }}</p>
+            <input
+              type="text"
+              disabled
+              value="{{ getConsumedQuantity(data.suppliment) }} / {{ data.quantity }}"
+            />
           </div>
         </div>
-      </div>
+      </div> -->
       <div
         class="summary-screen__body__boxCont"
         *ngIf="homeData !== undefined && homeData.meal_information.length > 0"
@@ -83,7 +97,7 @@
           class="summary-screen__body__box"
           *ngFor="let meal of homeData.meal_information; let i = index"
         >
-          <p class="summary-screen__body__box__title">
+          <!-- <p class="summary-screen__body__box__title">
             <span>{{
               meal.meal_type === '1'
                 ? 'Breakfast'
@@ -97,7 +111,7 @@
             }}</span>
 
             {{ meal.meal_time.split('T')[1].split(':').slice(0, 2).join(':') }} (GMT+8)
-          </p>
+          </p> -->
           <div class="summary-screen__body__box__mealDetail">
             <div class="summary-screen__body__box__mealDetail__imgs">
               <img
@@ -124,6 +138,21 @@
             </div>
             <div class="summary-screen__body__box__mealDetail__detail">
               <p>
+                <span>{{
+                  meal.meal_type === '1'
+                    ? 'Breakfast'
+                    : meal.meal_type === '2'
+                    ? 'Lunch'
+                    : meal.meal_type === '3'
+                    ? 'Dinner'
+                    : meal.meal_type === '4'
+                    ? 'Snacks'
+                    : ''
+                }}</span>
+
+                {{ meal.meal_time.split('T')[1].split(':').slice(0, 2).join(':') }} (GMT+8)
+              </p>
+              <p>
                 <span>主</span
                 >{{ meal.amount_of_rice_or_noodels !== null ? meal.amount_of_rice_or_noodels : 0 }}
               </p>
@@ -134,18 +163,41 @@
               </p>
               <p><span>果</span>{{ meal.amount_of_fruits !== null ? meal.amount_of_fruits : 0 }}</p>
               <p><span>水</span>{{ meal.amount_of_water !== null ? meal.amount_of_water : 0 }}</p>
-              <div class="summary-screen__body__box__mealDetail__detail__divider"></div>
-              <div *ngIf="meal.suppliment !== null && meal.suppliment.length > 0">
+              <!-- <div class="summary-screen__body__box__mealDetail__detail__divider"></div> -->
+              <!-- <div *ngIf="meal.suppliment !== null && meal.suppliment.length > 0">
                 <p *ngFor="let single_suppliment of meal.suppliment">
                   <span>{{ single_suppliment.suppliment.name }}</span
                   >{{ single_suppliment.quantity }}
                 </p>
-              </div>
+              </div> -->
             </div>
           </div>
           <div class="summary-screen__body__box__remarks" *ngIf="meal.remarks !== null">
             <p class="summary-screen__body__box__remarks__title">Remarks:</p>
             <p>{{ meal.remarks }}</p>
+          </div>
+        </div>
+      </div>
+      <div
+        class="supplement"
+        *ngIf="
+          homeData !== undefined &&
+          homeData.assigned_suppliment !== undefined &&
+          homeData.assigned_suppliment.length > 0
+        "
+      >
+        <h2>Supplements</h2>
+        <div class="supplement__cont">
+          <div class="supplement__cont__box" *ngFor="let data of homeData.assigned_suppliment">
+            <img
+              src="{{ data.suppliment.image }}"
+              width="54"
+              height="17"
+              alt="{{ data.suppliment.name }}"
+            />
+            <p class="supplement__cont__box__input">
+              {{ getConsumedQuantity(data.suppliment) }} / {{ data.quantity }}
+            </p>
           </div>
         </div>
       </div>

@@ -50,7 +50,7 @@
     &__box {
       border-radius: 8px;
       background: #9ddee5;
-      padding: 12px;
+      // padding: 12px;
       display: grid;
       gap: 12px;
       margin-inline: 16px;
@@ -68,36 +68,42 @@
       }
       &__mealDetail {
         display: grid;
-        grid-template-columns: auto 1fr;
-        gap: 12px;
+        grid-template-columns: auto 150px;
+        // gap: 12px;
         align-items: flex-start;
         &__imgs {
-          max-width: 250px;
+          // max-width: 250px;
           display: grid;
-          gap: 12px;
+          gap: 4px;
+          padding: 8px;
           img {
-            max-width: 250px;
-            max-height: 140px;
-            border-radius: 8px;
-            width: initial;
-            height: 100%;
+            // max-width: 250px;
+            // max-height: 140px;
+            // border-radius: 8px;
+            width: 100%;
+            height: initial;
           }
         }
         &__detail {
           display: grid;
-          gap: 4px;
+          border-left: 1px solid #000;
+          // gap: 4px;
           p {
             color: #6b6f80;
-            font-size: 16px;
-            line-height: 24px;
+            font-size: 12px;
+            line-height: 1.5;
             letter-spacing: -0.25px;
+            border-top: 1px solid #000;
             span {
               color: #141519;
               margin-right: 4px;
-              font-size: 16px;
+              font-size: 12px;
               font-weight: 600;
-              line-height: 24px;
+              line-height: 1.5;
               letter-spacing: -0.25px;
+            }
+            &:first-child {
+              border: none;
             }
           }
           &__divider {

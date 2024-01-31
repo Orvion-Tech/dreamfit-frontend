@@ -13,6 +13,11 @@ import { AbortControllerService } from '../../../abort-controller.service';
   encapsulation: ViewEncapsulation.None,
 })
 export class HomeComponent implements OnInit {
+  rice: any = 0;
+  meat: any = 0;
+  veg: any = 0;
+  fruit: any = 0;
+  water: any = 0;
   personalProfileForm: FormGroup;
   showPersonal = false;
   showMeal = false;
@@ -43,6 +48,7 @@ export class HomeComponent implements OnInit {
   mealData: any;
   mealDataUpdate = false;
   consumed_suppliment: any;
+  mealSuppData: any;
   /**
    *
    * Meal Form End
@@ -97,13 +103,26 @@ export class HomeComponent implements OnInit {
     const mass = (weight * bodyFat) / 100;
     this.calculatedBodyMass = parseFloat(mass.toFixed(1));
   }
+  // getConsumedQuantity(supplement: any): number {
+  //   const consumedItem = this.consumed_suppliment.find(
+  //     (item: any) => item.suppliment.id === supplement.id,
+  //   );
+  //   return consumedItem ? consumedItem.quantity : 0;
+  // }
   getConsumedQuantity(supplement: any): number {
-    const consumedItem = this.consumed_suppliment.find(
-      (item: any) => item.suppliment.id === supplement.id,
-    );
-    return consumedItem ? consumedItem.quantity : 0;
-  }
+    const consumedItem = this.consumed_suppliment
+      .filter((item: any) => item.suppliment.id === supplement.id)
+      .reduce((acc: any, item: { quantity: any }) => acc + item.quantity, 0);
 
+    return consumedItem ? consumedItem : 0;
+  }
+  getConsumedMealQuantity(supplement: any): number {
+    console.log(this.mealSuppData);
+    const consumedItem = this.mealSuppData.suppliment
+      .filter((item: any) => item.suppliment.id === supplement.id)
+      .reduce((acc: any, item: { quantity: any }) => acc + item.quantity, 0);
+    return consumedItem ? consumedItem : 0;
+  }
   showMsg() {
     this.showFullMsg = !this.showFullMsg;
   }
@@ -174,11 +193,11 @@ export class HomeComponent implements OnInit {
   }
   hideMeal() {
     this.mealForm!.get('time')!.setValue(this.dateService.formatTime(new Date()));
-    this.mealForm!.get('rice')!.setValue('');
-    this.mealForm!.get('meat')!.setValue('');
-    this.mealForm!.get('veg')!.setValue('');
-    this.mealForm!.get('fruit')!.setValue('');
-    this.mealForm!.get('water')!.setValue('');
+    this.mealForm!.get('rice')!.setValue('0');
+    this.mealForm!.get('meat')!.setValue('0');
+    this.mealForm!.get('veg')!.setValue('0');
+    this.mealForm!.get('fruit')!.setValue('0');
+    this.mealForm!.get('water')!.setValue('0');
     this.mealUploadedFiles = [];
     this.showMealForm = false;
     window.location.reload();
@@ -466,11 +485,11 @@ export class HomeComponent implements OnInit {
           console.log(this.mealUploadedFiles);
         } else {
           this.mealForm!.get('time')!.setValue(this.dateService.formatTime(new Date()));
-          this.mealForm!.get('rice')!.setValue('');
-          this.mealForm!.get('meat')!.setValue('');
-          this.mealForm!.get('veg')!.setValue('');
-          this.mealForm!.get('fruit')!.setValue('');
-          this.mealForm!.get('water')!.setValue('');
+          this.mealForm!.get('rice')!.setValue('0');
+          this.mealForm!.get('meat')!.setValue('0');
+          this.mealForm!.get('veg')!.setValue('0');
+          this.mealForm!.get('fruit')!.setValue('0');
+          this.mealForm!.get('water')!.setValue('0');
           this.mealUploadedFiles = [];
         }
         // if (method !== 'GET') {
@@ -614,15 +633,16 @@ export class HomeComponent implements OnInit {
       if (response.ok) {
         this.mealData = await response.json();
         let fillData;
-        console.log(this.getMealNumber(), this.mealData, 'fetch call');
         if (this.mealData.length > 0) {
           fillData = this.mealData.filter(
             (mealType: { meal_type: string }) => mealType.meal_type === this.getMealNumber(),
           )[0];
-          console.log(fillData, 'filter meal data');
         } else {
           fillData = this.mealData;
         }
+        this.mealSuppData = fillData;
+        console.log(this.mealSuppData, 'filter meal data');
+
         if (fillData !== undefined && fillData.meal_type === this.getMealNumber()) {
           this.mealDataUpdate = true;
         } else {
@@ -665,11 +685,11 @@ export class HomeComponent implements OnInit {
           console.log(this.mealUploadedFiles);
         } else {
           this.mealForm!.get('time')!.setValue(this.dateService.formatTime(new Date()));
-          this.mealForm!.get('rice')!.setValue('');
-          this.mealForm!.get('meat')!.setValue('');
-          this.mealForm!.get('veg')!.setValue('');
-          this.mealForm!.get('fruit')!.setValue('');
-          this.mealForm!.get('water')!.setValue('');
+          this.mealForm!.get('rice')!.setValue('0');
+          this.mealForm!.get('meat')!.setValue('0');
+          this.mealForm!.get('veg')!.setValue('0');
+          this.mealForm!.get('fruit')!.setValue('0');
+          this.mealForm!.get('water')!.setValue('0');
           this.mealUploadedFiles = [];
         }
         if (method !== 'GET') {

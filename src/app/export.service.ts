@@ -23,10 +23,10 @@ export class ExportService {
       pdf.addImage(imgData, 'PNG', 10, 10, imgWidth, imgHeight);
       pdf.setFontSize(32);
       pdf.setTextColor(200);
-      pdf.text('DreamFit', 40, 20);
-      pdf.text('DreamFit', 120, 100);
-      pdf.text('DreamFit', 40, 180);
-      pdf.text('DreamFit', 120, 260);
+      // pdf.text('DreamFit', 40, 20);
+      // pdf.text('DreamFit', 120, 100);
+      // pdf.text('DreamFit', 40, 180);
+      // pdf.text('DreamFit', 120, 260);
       pdf.save(`${fileName}.pdf`);
     });
   }
@@ -52,10 +52,10 @@ export class ExportService {
       marginContext.drawImage(canvas, margin, margin);
       marginContext.font = '32px Arial';
       marginContext.fillStyle = 'black'; // Set the text color, change as needed
-      marginContext.fillText('DreamFit', 40, 20);
-      marginContext.fillText('DreamFit', 120, 100);
-      marginContext.fillText('DreamFit', 40, 180);
-      marginContext.fillText('DreamFit', 120, 260);
+      // marginContext.fillText('DreamFit', 40, 20);
+      // marginContext.fillText('DreamFit', 120, 100);
+      // marginContext.fillText('DreamFit', 40, 180);
+      // marginContext.fillText('DreamFit', 120, 260);
 
       // Set the href attribute to the data URL of the new canvas
       link.href = marginCanvas.toDataURL('image/jpeg');

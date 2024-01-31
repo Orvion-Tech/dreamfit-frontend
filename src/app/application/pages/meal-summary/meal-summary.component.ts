@@ -17,6 +17,7 @@ export class MealSummaryComponent implements OnInit {
   formattedDate!: string;
   formattedTime!: string;
   selectedDate: string = new Date().toISOString(); // Initialize as YYYY-MM
+  consumed_suppliment: any;
 
   constructor(
     private router: Router,
@@ -46,8 +47,8 @@ export class MealSummaryComponent implements OnInit {
   }
   async homeDataApi(getDate: string) {
     const data = { date: getDate };
-    this.abortControllerService.abortExistingRequest();
-    const abortController = this.abortControllerService.createAbortController();
+    // this.abortControllerService.abortExistingRequest();
+    // const abortController = this.abortControllerService.createAbortController();
     try {
       const response = await fetch('https://dssv33z9c6vvp.cloudfront.net/en/api/summary/', {
         method: 'POST',
@@ -56,16 +57,18 @@ export class MealSummaryComponent implements OnInit {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
-        signal: abortController.signal,
+        // signal: abortController.signal,
       });
 
       if (response.ok) {
         this.homeData = await response.json();
-        this.abortControllerService.resetAbortController();
+        this.consumed_suppliment = this.homeData.consumed_suppliment;
+
+        // this.abortControllerService.resetAbortController();
         console.log(this.homeData);
       } else {
         const data = await response.json();
-        this.abortControllerService.resetAbortController();
+        // this.abortControllerService.resetAbortController();
         alert(data.message);
       }
     } catch (error) {
@@ -144,17 +147,28 @@ export class MealSummaryComponent implements OnInit {
 
         // Adjust the PDF height if needed
         // pdf.internal.pageSize.height = totalHeight + 30;
-        pdf.text('DreamFit', 40, 20);
-        pdf.text('DreamFit', 120, 100);
-        pdf.text('DreamFit', 40, 180);
-        pdf.text('DreamFit', 120, 260);
+        // pdf.text('DreamFit', 40, 20);
+        // pdf.text('DreamFit', 120, 100);
+        // pdf.text('DreamFit', 40, 180);
+        // pdf.text('DreamFit', 120, 260);
         pdf.save(`meal-summary.pdf`);
       });
     } else {
       console.error('Element with ID "contentToExport" not found.');
     }
   }
-
+  // getConsumedQuantity(supplement: any): number {
+  //   const consumedItem = this.consumed_suppliment.find(
+  //     (item: any) => item.suppliment.id === supplement.id,
+  //   );
+  //   return consumedItem ? consumedItem.quantity : 0;
+  // }
+  getConsumedQuantity(supplement: any): number {
+    const consumedItem = this.consumed_suppliment
+      .filter((item: any) => item.suppliment.id === supplement.id)
+      .reduce((acc: any, item: { quantity: any }) => acc + item.quantity, 0);
+    return consumedItem ? consumedItem : 0;
+  }
   exportToJpg() {
     this.hideExport();
 
@@ -177,10 +191,10 @@ export class MealSummaryComponent implements OnInit {
         marginContext.drawImage(canvas, margin, margin);
         marginContext.font = '32px Arial';
         marginContext.fillStyle = 'black'; // Set the text color, change as needed
-        marginContext.fillText('DreamFit', 40, 20);
-        marginContext.fillText('DreamFit', 120, 100);
-        marginContext.fillText('DreamFit', 40, 180);
-        marginContext.fillText('DreamFit', 120, 260);
+        // marginContext.fillText('DreamFit', 40, 20);
+        // marginContext.fillText('DreamFit', 120, 100);
+        // marginContext.fillText('DreamFit', 40, 180);
+        // marginContext.fillText('DreamFit', 120, 260);
 
         // Set the href attribute to the data URL of the new canvas
         link.href = marginCanvas.toDataURL('image/jpeg');
