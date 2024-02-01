@@ -225,6 +225,9 @@ export class ProfileComponent implements OnInit {
             });
           }
         }
+        if (method !== 'GET') {
+          alert('Your Profile Picture has been updated successfully.');
+        }
         window.location.reload();
         this.abortControllerService.resetAbortController();
       } else {
@@ -351,6 +354,9 @@ export class ProfileComponent implements OnInit {
             });
           }
         }
+        if (method !== 'GET') {
+          alert('Your information has been submitted successfully.');
+        }
         this.abortControllerService.resetAbortController();
       } else {
         const data = await response.json();
@@ -404,7 +410,7 @@ export class ProfileComponent implements OnInit {
       weight: this.ProfileForm.value.weight,
       height: this.ProfileForm.value.height,
       body_fat: this.ProfileForm.value.body_fat,
-      body_mass: this.calculatedBodyMass.toString(),
+      body_mass: this.calculatedBodyMass !== undefined ? this.calculatedBodyMass.toString() : null,
       waist: this.ProfileForm.value.waist,
       hips: this.ProfileForm.value.hips,
       activity_level: this.ProfileForm.value.activity_level,
