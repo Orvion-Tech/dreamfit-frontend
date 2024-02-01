@@ -37,7 +37,7 @@
         <div class="profile-screen__body__form__body__row">
           <div class="profile-screen__body__form__body__input">
             <label for="dob">Birthday:</label>
-            <input type="date" formControlName="birth_date" value="16-11-1992" />
+            <input type="date" formControlName="birth_date" value="16-11-1992" min="1964-01-01" />
           </div>
           <div class="profile-screen__body__form__body__input">
             <label for="gender">Gender:</label>
@@ -50,11 +50,16 @@
         <div class="profile-screen__body__form__body__row">
           <div class="profile-screen__body__form__body__input">
             <label for="fat_mass">Weight (kg):</label>
-            <input type="number" formControlName="weight" (input)="calculateBodyMass()" />
+            <input
+              type="number"
+              formControlName="weight"
+              (input)="calculateBodyMass()"
+              maxlength="3"
+            />
           </div>
           <div class="profile-screen__body__form__body__input">
-            <label for="fat_mass">height (cm):</label>
-            <input type="number" formControlName="height" />
+            <label for="fat_mass">Height (cm):</label>
+            <input type="number" formControlName="height" maxlength="3" />
           </div>
         </div>
         <div class="profile-screen__body__form__body__row">
@@ -144,7 +149,7 @@
           </select>
         </div>
         <div class="profile-screen__body__form__body__input">
-          <label for="illnesses">List all long-term illnesses Here:</label>
+          <label for="illnesses">List all long-term illnesses here :</label>
           <textarea rows="3" formControlName="family_history">Sugar</textarea>
         </div>
         <div class="profile-screen__body__form__body__input">
@@ -171,7 +176,7 @@
           </div>
         </div>
         <div class="profile-screen__body__form__body__input">
-          <label for="bowel_movement">How often you have bowel movement?:</label>
+          <label for="bowel_movement">How often you have bowel movement?</label>
           <select formControlName="bowl_movememnt_trend">
             <option value="1">Several times a day</option>
             <option value="2">Once a day</option>

@@ -68,7 +68,7 @@
       }
       &__mealDetail {
         display: grid;
-        grid-template-columns: auto 150px;
+        grid-template-columns: auto 100px;
         // gap: 12px;
         align-items: flex-start;
         &__imgs {
@@ -76,6 +76,7 @@
           display: grid;
           gap: 4px;
           padding: 8px;
+          border-right: 1px solid #000;
           img {
             // max-width: 250px;
             // max-height: 140px;
@@ -86,7 +87,6 @@
         }
         &__detail {
           display: grid;
-          border-left: 1px solid #000;
           // gap: 4px;
           p {
             color: #6b6f80;
@@ -95,6 +95,7 @@
             letter-spacing: -0.25px;
             border-top: 1px solid #000;
             padding: 2px;
+            text-align: center;
             span {
               color: #141519;
               margin-right: 4px;
