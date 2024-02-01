@@ -39,6 +39,7 @@ export class HomeComponent implements OnInit {
   poopoo = false;
   showFullMsg = false;
   calculatedBodyMass!: number;
+  loading = false;
   /**
    *
    * Meal Form Start
@@ -344,6 +345,7 @@ export class HomeComponent implements OnInit {
     this.mealUploadedFiles.push({ selectedFile, side });
   }
   onMealSubmit() {
+    this.loading = true;
     console.log(this.apiDate, 'apiDate');
     let method = 'POST';
     if (this.mealDataUpdate) {
@@ -496,6 +498,7 @@ export class HomeComponent implements OnInit {
         //   alert('Your information has been submitted successfully.');
         // }
         // this.abortControllerService.resetAbortController();
+        this.loading = false;
       } else {
         const data = await response.json();
         // this.abortControllerService.resetAbortController();
