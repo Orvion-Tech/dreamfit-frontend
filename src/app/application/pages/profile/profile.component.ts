@@ -124,6 +124,7 @@ export class ProfileComponent implements OnInit {
     }
   }
   async uploadFile(method: string, postData: any | null | undefined) {
+    console.log(method, postData);
     let url = `https://dssv33z9c6vvp.cloudfront.net/en/api/profile/`;
     const data = postData;
     if (method === 'PATCH') {
