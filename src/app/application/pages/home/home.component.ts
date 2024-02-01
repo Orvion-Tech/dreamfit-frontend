@@ -298,6 +298,7 @@ export class HomeComponent implements OnInit {
     this.poopoo = true;
     if (this.personalProfileForm.valid) {
       this.formattedDate = this.dateService.formatDate(new Date(), 'yyyy-MM-dd');
+      this.formattedTime = this.dateService.formatTime(new Date());
       console.log(this.calculatedBodyMass, 'mass');
       const formData = new FormData();
       formData.append('weight', this.personalProfileForm.value.weight);
@@ -308,7 +309,7 @@ export class HomeComponent implements OnInit {
         formData.append('meanstation_cycle', this.personalProfileForm.value.meanstation_cycle);
       }
       formData.append('user', localStorage.getItem('user_id') || '');
-      formData.append('date_time', this.formattedDate);
+      formData.append('date_time', `${this.formattedDate} ${this.formattedTime}`);
       if (this.uploadedFiles !== undefined && this.uploadedFiles.length > 0) {
         const frontSide = this.uploadedFiles.find(
           (side: { side: string }) => side.side === 'front',
@@ -346,7 +347,6 @@ export class HomeComponent implements OnInit {
   }
   onMealSubmit() {
     this.loading = true;
-    console.log(this.apiDate, 'apiDate');
     let method = 'POST';
     if (this.mealDataUpdate) {
       method = 'PATCH';
@@ -659,6 +659,8 @@ export class HomeComponent implements OnInit {
           localStorage.setItem('dailyMealId', fillData.id);
           if (this.mealUploadedFiles !== undefined && this.mealUploadedFiles.length > 0) {
             this.mealPhotoApi(null, 'PATCH');
+          } else {
+            this.loading = false;
           }
           const date = new Date(fillData.meal_time).toLocaleTimeString([], {
             hour: '2-digit',
