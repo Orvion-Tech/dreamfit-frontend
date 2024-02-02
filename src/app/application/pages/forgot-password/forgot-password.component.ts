@@ -56,17 +56,14 @@ export class ForgotPasswordComponent {
       this.abortControllerService.abortExistingRequest();
       const abortController = this.abortControllerService.createAbortController();
       try {
-        const response = await fetch(
-          'https://dssv33z9c6vvp.cloudfront.net/en/api/user-registration/',
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(credentials),
-            signal: abortController.signal,
+        const response = await fetch('https://admin.dreamfithk.com/en/api/user-registration/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
           },
-        );
+          body: JSON.stringify(credentials),
+          signal: abortController.signal,
+        });
         if (response.ok) {
           const data = await response.json();
           const user_id = data.user_id;
@@ -107,22 +104,19 @@ export class ForgotPasswordComponent {
       this.forgotpasswordForm.get('otp')!.valid
     ) {
       try {
-        const response = await fetch(
-          'https://dssv33z9c6vvp.cloudfront.net/en/api/verify-forgotpass-otp/',
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              phone_number:
-                this.forgotpasswordForm.get('country_code')!.value +
-                this.forgotpasswordForm.get('phone_number')!.value,
-              otp: this.forgotpasswordForm.get('otp')!.value,
-            }),
-            signal: abortController.signal,
+        const response = await fetch('https://admin.dreamfithk.com/en/api/verify-forgotpass-otp/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
           },
-        );
+          body: JSON.stringify({
+            phone_number:
+              this.forgotpasswordForm.get('country_code')!.value +
+              this.forgotpasswordForm.get('phone_number')!.value,
+            otp: this.forgotpasswordForm.get('otp')!.value,
+          }),
+          signal: abortController.signal,
+        });
 
         if (response.ok) {
           // const data = await response.json();
@@ -156,21 +150,18 @@ export class ForgotPasswordComponent {
       this.forgotpasswordForm.get('phone_number')!.valid
     ) {
       try {
-        const response = await fetch(
-          'https://dssv33z9c6vvp.cloudfront.net/en/api/send-forgotpass-otp/',
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              phone_number:
-                this.forgotpasswordForm.get('country_code')!.value +
-                this.forgotpasswordForm.get('phone_number')!.value,
-            }),
-            signal: abortController.signal,
+        const response = await fetch('https://admin.dreamfithk.com/en/api/send-forgotpass-otp/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
           },
-        );
+          body: JSON.stringify({
+            phone_number:
+              this.forgotpasswordForm.get('country_code')!.value +
+              this.forgotpasswordForm.get('phone_number')!.value,
+          }),
+          signal: abortController.signal,
+        });
 
         if (response.ok) {
           // const data = await response.json();

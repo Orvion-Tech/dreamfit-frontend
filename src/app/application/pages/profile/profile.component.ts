@@ -125,10 +125,10 @@ export class ProfileComponent implements OnInit {
   }
   async uploadFile(method: string, postData: any | null | undefined) {
     console.log(method, postData);
-    let url = `https://dssv33z9c6vvp.cloudfront.net/en/api/profile/`;
+    let url = `https://admin.dreamfithk.com/en/api/profile/`;
     const data = postData;
     if (method === 'PATCH') {
-      url = `https://dssv33z9c6vvp.cloudfront.net/en/api/profile/${this.profileId}/`;
+      url = `https://admin.dreamfithk.com/en/api/profile/${this.profileId}/`;
     }
     this.abortControllerService.abortExistingRequest();
     const abortController = this.abortControllerService.createAbortController();
@@ -240,13 +240,13 @@ export class ProfileComponent implements OnInit {
     }
   }
   async getProfileData(method: string, postData: any | null | undefined) {
-    let url = `https://dssv33z9c6vvp.cloudfront.net/en/api/profile/`;
+    let url = `https://admin.dreamfithk.com/en/api/profile/`;
     let data = postData;
     if (method === 'GET') {
       data = null;
     }
     if (method === 'PATCH') {
-      url = `https://dssv33z9c6vvp.cloudfront.net/en/api/profile/${this.profileId}/`;
+      url = `https://admin.dreamfithk.com/en/api/profile/${this.profileId}/`;
     }
     this.abortControllerService.abortExistingRequest();
     const abortController = this.abortControllerService.createAbortController();

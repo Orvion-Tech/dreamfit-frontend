@@ -61,7 +61,7 @@ export class CalenderComponent implements OnInit {
     this.abortControllerService.abortExistingRequest();
     const abortController = this.abortControllerService.createAbortController();
     try {
-      const response = await fetch('https://dssv33z9c6vvp.cloudfront.net/en/api/callender/', {
+      const response = await fetch('https://admin.dreamfithk.com/en/api/callender/', {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${localStorage.getItem('id_token')}`,
@@ -120,7 +120,7 @@ export class CalenderComponent implements OnInit {
       this.abortControllerService.abortExistingRequest();
       const abortController = this.abortControllerService.createAbortController();
       try {
-        const response = await fetch('https://dssv33z9c6vvp.cloudfront.net/en/api/comparison/', {
+        const response = await fetch('https://admin.dreamfithk.com/en/api/comparison/', {
           method: 'POST',
           headers: {
             Authorization: `Bearer ${localStorage.getItem('id_token')}`,

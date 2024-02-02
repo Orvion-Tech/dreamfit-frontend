@@ -58,17 +58,14 @@ export class RegistrationComponent {
       this.abortControllerService.abortExistingRequest();
       const abortController = this.abortControllerService.createAbortController();
       try {
-        const response = await fetch(
-          'https://dssv33z9c6vvp.cloudfront.net/en/api/user-registration/',
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(credentials),
-            signal: abortController.signal,
+        const response = await fetch('https://admin.dreamfithk.com/en/api/user-registration/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
           },
-        );
+          body: JSON.stringify(credentials),
+          signal: abortController.signal,
+        });
         if (response.ok) {
           const data = await response.json();
           const user_id = data.user_id;
@@ -110,7 +107,7 @@ export class RegistrationComponent {
       this.registrationForm.get('invitation_code')!.valid
     ) {
       try {
-        const response = await fetch('https://dssv33z9c6vvp.cloudfront.net/en/api/verify-otp/', {
+        const response = await fetch('https://admin.dreamfithk.com/en/api/verify-otp/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -159,7 +156,7 @@ export class RegistrationComponent {
       this.registrationForm.get('phone_number')!.valid
     ) {
       try {
-        const response = await fetch('https://dssv33z9c6vvp.cloudfront.net/en/api/send-otp/', {
+        const response = await fetch('https://admin.dreamfithk.com/en/api/send-otp/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
