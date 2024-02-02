@@ -18,7 +18,7 @@ export class MealSummaryComponent implements OnInit {
   formattedTime!: string;
   selectedDate: string = new Date().toISOString(); // Initialize as YYYY-MM
   consumed_suppliment: any;
-  corsProxyUrl = 'https://dc98nj6to71ef.cloudfront.net';
+  corsProxyUrl = 'https://d1op43dibfsfwl.cloudfront.net';
 
   constructor(
     private router: Router,

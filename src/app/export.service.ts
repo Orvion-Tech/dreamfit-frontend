@@ -6,7 +6,7 @@ import jsPDF from 'jspdf';
   providedIn: 'root',
 })
 export class ExportService {
-  corsProxyUrl = 'https://dc98nj6to71ef.cloudfront.net';
+  corsProxyUrl = 'https://d1op43dibfsfwl.cloudfront.net';
 
   exportToPdf(element: HTMLElement, fileName: string) {
     html2canvas(element, {
