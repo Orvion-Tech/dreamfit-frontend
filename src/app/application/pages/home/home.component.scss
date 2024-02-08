@@ -118,14 +118,14 @@
   padding: 12px;
   display: grid;
   gap: 4px;
-  p {
+  pre {
     color: #000;
     font-size: 12px;
     line-height: 150%;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    text-overflow: ellipsis;
-    display: -webkit-box;
+    // -webkit-line-clamp: 3;
+    // -webkit-box-orient: vertical;
+    // text-overflow: ellipsis;
+    // display: -webkit-box;
     overflow: hidden;
     word-break: break-all;
   }

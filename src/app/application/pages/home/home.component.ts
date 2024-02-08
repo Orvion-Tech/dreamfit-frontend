@@ -5,6 +5,7 @@ import { TokenService } from '../../../token.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DateService } from '../../../date.service';
 import { AbortControllerService } from '../../../abort-controller.service';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
@@ -14,6 +15,7 @@ import { AbortControllerService } from '../../../abort-controller.service';
 })
 export class HomeComponent implements OnInit {
   rice: any = 0;
+  sanitizedMessage: SafeHtml = '';
   meat: any = 0;
   veg: any = 0;
   fruit: any = 0;
@@ -58,6 +60,7 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private tokenService: TokenService,
     private dateService: DateService,
+    private sanitizer: DomSanitizer,
     private fb: FormBuilder,
     private abortControllerService: AbortControllerService,
   ) {
@@ -95,6 +98,11 @@ export class HomeComponent implements OnInit {
       this.homeDataApi(this.formattedDate);
       this.personalDataApi(this.formattedDate, 'GET', null);
     }
+  }
+  formatMessage(text: string): string {
+    console.log(text);
+    // Replace escaped characters with line breaks
+    return text.replace(/\\r\\n/g, '<br>');
   }
   calculateBodyMass() {
     const weight = this.personalProfileForm.get('weight')!.value;
@@ -161,7 +169,9 @@ export class HomeComponent implements OnInit {
         this.homeData = await response.json();
         // this.abortControllerService.resetAbortController();
         this.consumed_suppliment = this.homeData.consumed_suppliment;
-        console.log(this.homeData);
+        this.sanitizedMessage = this.sanitizer.bypassSecurityTrustHtml(
+          this.homeData.message_from_tutor.message,
+        );
       } else {
         const data = await response.json();
         // this.abortControllerService.resetAbortController();

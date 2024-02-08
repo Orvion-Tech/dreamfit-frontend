@@ -107,12 +107,10 @@
         />
       </svg>
     </div>
-    <p>
-      {{ homeData.message_from_tutor.message }}
-    </p>
-    <a class="tutor-message__row" (click)="showMsg()">{{
+    <pre [innerHTML]="formatMessage(homeData.message_from_tutor.message)"></pre>
+    <!-- <a class="tutor-message__row" (click)="showMsg()">{{
       !showFullMsg ? 'show more' : 'show less'
-    }}</a>
+    }}</a> -->
   </div>
   <div [ngClass]="{ 'personal-profile': true, 'personal-profile___show': showPersonal }">
     <div class="personal-profile__header" (click)="personalClick()">Personal Profile</div>

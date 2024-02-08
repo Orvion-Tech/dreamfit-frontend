@@ -201,6 +201,17 @@
           </div>
         </div>
       </div>
+      <div
+        class="comment"
+        *ngIf="
+          homeData !== undefined &&
+          homeData.meal_comment !== undefined &&
+          homeData.meal_comment.length > 0
+        "
+      >
+        <h2>Comments</h2>
+        <p>{{ homeData.meal_comment[0].comment }}</p>
+      </div>
     </div>
   </div>
   <app-app-footer />

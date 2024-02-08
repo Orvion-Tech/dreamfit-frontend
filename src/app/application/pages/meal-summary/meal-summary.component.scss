@@ -268,3 +268,16 @@
   display: grid;
   gap: 16px;
 }
+.comment {
+  padding-inline: 16px;
+  display: grid;
+  gap: 8px;
+  h2 {
+    color: #616161;
+    font-size: 18px;
+    font-weight: 500;
+  }
+  p {
+    font-size: 14px;
+  }
+}
