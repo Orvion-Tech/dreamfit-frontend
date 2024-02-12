@@ -13,7 +13,7 @@ export class TokenService {
       const hoursDifference = (currentTime - storedTimestamp) / (1000 * 60 * 60); // Convert milliseconds to hours
 
       // Check if 48 hours (2 days) have passed
-      if (hoursDifference >= 1) {
+      if (hoursDifference >= 8640) {
         // Token has expired, clear the localStorage
         localStorage.removeItem('id_token');
         localStorage.removeItem('user_id');
