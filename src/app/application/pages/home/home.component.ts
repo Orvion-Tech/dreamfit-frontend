@@ -43,6 +43,7 @@ export class HomeComponent implements OnInit {
   calculatedBodyMass!: number;
   loading = false;
   showProfileAlert = false;
+  noSecretMsg = false;
   /**
    *
    * Meal Form Start
@@ -178,7 +179,11 @@ export class HomeComponent implements OnInit {
       } else {
         const data = await response.json();
         // this.abortControllerService.resetAbortController();
-
+        if (data.message === 'No secret code found for this date') {
+          this.noSecretMsg = true;
+        } else {
+          this.noSecretMsg = false;
+        }
         alert(data.message);
       }
     } catch (error) {

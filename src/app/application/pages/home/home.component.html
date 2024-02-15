@@ -1,262 +1,267 @@
 <div class="app-container home-screen">
   <app-app-header />
   <!-- <app-image-upload /> -->
-  <div class="today-mission">
-    <h3>Today's Mission</h3>
-    <div class="today-mission__row">
-      <div class="today-mission__row__date">
-        <img src="../../../../assets/images/time.svg" alt="time" width="20" height="20" />
-        <p>{{ formattedDate }}</p>
+  <ng-container *ngIf="!noSecretMsg">
+    <div class="today-mission">
+      <h3>Today's Mission</h3>
+      <div class="today-mission__row">
+        <div class="today-mission__row__date">
+          <img src="../../../../assets/images/time.svg" alt="time" width="20" height="20" />
+          <p>{{ formattedDate }}</p>
+        </div>
+        <a class="today-mission__row__btn" (click)="prevDate()">Go to previous Date</a>
       </div>
-      <a class="today-mission__row__btn" (click)="prevDate()">Go to previous Date</a>
     </div>
-  </div>
-  <div class="daily-profile-alert" *ngIf="showProfileAlert">
-    <div class="daily-profile-alert__cont">
-      <p>Hey {{ homeData.user_name }}, Don't forget to upload Daily Body Data</p>
-      <a (click)="personalClick()">Let's Upload</a>
+    <div class="daily-profile-alert" *ngIf="showProfileAlert">
+      <div class="daily-profile-alert__cont">
+        <p>Hey {{ homeData.user_name }}, Don't forget to upload Daily Body Data</p>
+        <a (click)="personalClick()">Let's Upload</a>
+      </div>
     </div>
-  </div>
-  <div class="meal-summary">
-    <h2
+    <div class="meal-summary">
+      <h2
+        *ngIf="
+          homeData !== undefined &&
+          homeData.user_name !== undefined &&
+          homeData.user_name !== null &&
+          homeData.user_name !== ''
+        "
+      >
+        {{ homeData.user_name }}
+      </h2>
+      <div class="meal-summary__table" *ngIf="homeData !== undefined">
+        <div class="meal-summary__table__col">
+          <p>&nbsp;</p>
+          <p>Goal:</p>
+          <p>Current:</p>
+          <p>Remaining:</p>
+        </div>
+        <div class="meal-summary__table__col">
+          <p>Main 🍚</p>
+          <p>{{ homeData.goal.rice_noodels }}</p>
+          <p>{{ homeData.current_code.rice_noodels }}</p>
+          <p>{{ homeData.remaning_code.rice_noodels }}</p>
+        </div>
+        <div class="meal-summary__table__col">
+          <p>Meat 🥩</p>
+          <p>{{ homeData.goal.meat }}</p>
+          <p>{{ homeData.current_code.meat }}</p>
+          <p>{{ homeData.remaning_code.meat }}</p>
+        </div>
+        <div class="meal-summary__table__col">
+          <p>Veggie 🥦</p>
+          <p>{{ homeData.goal.vegitables }}</p>
+          <p>{{ homeData.current_code.vegitables }}</p>
+          <p>{{ homeData.remaning_code.vegitables }}</p>
+        </div>
+        <div class="meal-summary__table__col">
+          <p>Fruit🍓</p>
+          <p>{{ homeData.goal.fruits }}</p>
+          <p>{{ homeData.current_code.fruits }}</p>
+          <p>{{ homeData.remaning_code.fruits }}</p>
+        </div>
+        <div class="meal-summary__table__col">
+          <p>Water 💧</p>
+          <p>{{ homeData.goal.water }}</p>
+          <p>{{ homeData.current_code.water }}</p>
+          <p>{{ homeData.remaning_code.water }}</p>
+        </div>
+      </div>
+    </div>
+    <div
+      class="supplement"
       *ngIf="
         homeData !== undefined &&
-        homeData.user_name !== undefined &&
-        homeData.user_name !== null &&
-        homeData.user_name !== ''
+        homeData.assigned_suppliment !== undefined &&
+        homeData.assigned_suppliment.length > 0
       "
     >
-      {{ homeData.user_name }}
-    </h2>
-    <div class="meal-summary__table" *ngIf="homeData !== undefined">
-      <div class="meal-summary__table__col">
-        <p>&nbsp;</p>
-        <p>Goal:</p>
-        <p>Current:</p>
-        <p>Remaining:</p>
-      </div>
-      <div class="meal-summary__table__col">
-        <p>Main 🍚</p>
-        <p>{{ homeData.goal.rice_noodels }}</p>
-        <p>{{ homeData.current_code.rice_noodels }}</p>
-        <p>{{ homeData.remaning_code.rice_noodels }}</p>
-      </div>
-      <div class="meal-summary__table__col">
-        <p>Meat 🥩</p>
-        <p>{{ homeData.goal.meat }}</p>
-        <p>{{ homeData.current_code.meat }}</p>
-        <p>{{ homeData.remaning_code.meat }}</p>
-      </div>
-      <div class="meal-summary__table__col">
-        <p>Veggie 🥦</p>
-        <p>{{ homeData.goal.vegitables }}</p>
-        <p>{{ homeData.current_code.vegitables }}</p>
-        <p>{{ homeData.remaning_code.vegitables }}</p>
-      </div>
-      <div class="meal-summary__table__col">
-        <p>Fruit🍓</p>
-        <p>{{ homeData.goal.fruits }}</p>
-        <p>{{ homeData.current_code.fruits }}</p>
-        <p>{{ homeData.remaning_code.fruits }}</p>
-      </div>
-      <div class="meal-summary__table__col">
-        <p>Water 💧</p>
-        <p>{{ homeData.goal.water }}</p>
-        <p>{{ homeData.current_code.water }}</p>
-        <p>{{ homeData.remaning_code.water }}</p>
+      <h2>Supplements</h2>
+      <div class="supplement__cont">
+        <div class="supplement__cont__box" *ngFor="let data of homeData.assigned_suppliment">
+          <img
+            src="{{ data.suppliment.image }}"
+            width="54"
+            height="17"
+            alt="{{ data.suppliment.name }}"
+          />
+          <p class="supplement__cont__box__input">
+            {{ getConsumedQuantity(data.suppliment) }} / {{ data.quantity }}
+          </p>
+        </div>
       </div>
     </div>
-  </div>
-  <div
-    class="supplement"
-    *ngIf="
-      homeData !== undefined &&
-      homeData.assigned_suppliment !== undefined &&
-      homeData.assigned_suppliment.length > 0
-    "
-  >
-    <h2>Supplements</h2>
-    <div class="supplement__cont">
-      <div class="supplement__cont__box" *ngFor="let data of homeData.assigned_suppliment">
-        <img
-          src="{{ data.suppliment.image }}"
-          width="54"
+    <div
+      [ngClass]="{ 'tutor-message': true, 'tutor-message___full': showFullMsg }"
+      *ngIf="
+        homeData !== undefined &&
+        homeData.message_from_tutor !== undefined &&
+        homeData.message_from_tutor !== null
+      "
+    >
+      <div [ngClass]="{ 'tutor-message__row': true }">
+        <h3>Message from the Tutor:</h3>
+        <svg
+          width="16"
           height="17"
-          alt="{{ data.suppliment.name }}"
-        />
-        <p class="supplement__cont__box__input">
-          {{ getConsumedQuantity(data.suppliment) }} / {{ data.quantity }}
-        </p>
+          viewBox="0 0 16 17"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M7.99967 2.00757C4.33301 2.00757 1.33301 5.00757 1.33301 8.67423C1.33301 12.3409 4.33301 15.3409 7.99967 15.3409C11.6663 15.3409 14.6663 12.3409 14.6663 8.67423C14.6663 5.00757 11.6663 2.00757 7.99967 2.00757ZM6.66634 12.0076L3.33301 8.67423L4.27301 7.73423L6.66634 10.1209L11.7263 5.0609L12.6663 6.00757L6.66634 12.0076Z"
+            fill="#00B112"
+          />
+        </svg>
       </div>
+      <pre [innerHTML]="formatMessage(homeData.message_from_tutor.message)"></pre>
+      <!-- <a class="tutor-message__row" (click)="showMsg()">{{
+        !showFullMsg ? 'show more' : 'show less'
+      }}</a> -->
     </div>
-  </div>
-  <div
-    [ngClass]="{ 'tutor-message': true, 'tutor-message___full': showFullMsg }"
-    *ngIf="
-      homeData !== undefined &&
-      homeData.message_from_tutor !== undefined &&
-      homeData.message_from_tutor !== null
-    "
-  >
-    <div [ngClass]="{ 'tutor-message__row': true }">
-      <h3>Message from the Tutor:</h3>
-      <svg
-        width="16"
-        height="17"
-        viewBox="0 0 16 17"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M7.99967 2.00757C4.33301 2.00757 1.33301 5.00757 1.33301 8.67423C1.33301 12.3409 4.33301 15.3409 7.99967 15.3409C11.6663 15.3409 14.6663 12.3409 14.6663 8.67423C14.6663 5.00757 11.6663 2.00757 7.99967 2.00757ZM6.66634 12.0076L3.33301 8.67423L4.27301 7.73423L6.66634 10.1209L11.7263 5.0609L12.6663 6.00757L6.66634 12.0076Z"
-          fill="#00B112"
-        />
-      </svg>
-    </div>
-    <pre [innerHTML]="formatMessage(homeData.message_from_tutor.message)"></pre>
-    <!-- <a class="tutor-message__row" (click)="showMsg()">{{
-      !showFullMsg ? 'show more' : 'show less'
-    }}</a> -->
-  </div>
-  <div [ngClass]="{ 'personal-profile': true, 'personal-profile___show': showPersonal }">
-    <div class="personal-profile__header" (click)="personalClick()">Daily Body Data</div>
-    <div class="personal-profile__body" *ngIf="showPersonal">
-      <form action="" [formGroup]="personalProfileForm">
-        <div class="personal-profile__body__period" *ngIf="homeData.gender === '2'">
-          <p>Period</p>
-          <label class="switch">
-            <input type="checkbox" formControlName="meanstation_cycle" />
-            <span class="slider round"></span>
-          </label>
-        </div>
-        <div class="grid grid___same gap___df">
-          <div
-            [ngClass]="{
-              input: true,
-              input___error: weight && personalProfileForm.get('weight')?.hasError('required')
-            }"
-          >
-            <label>Weight (kg)</label>
-            <input
-              type="number"
-              formControlName="weight"
-              (input)="resetError(); calculateBodyMass()"
-            />
-            <p
-              class="input__errorMsg"
-              *ngIf="personalProfileForm.get('weight')?.hasError('required')"
-            >
-              Weight is required.
-            </p>
+    <div [ngClass]="{ 'personal-profile': true, 'personal-profile___show': showPersonal }">
+      <div class="personal-profile__header" (click)="personalClick()">Daily Body Data</div>
+      <div class="personal-profile__body" *ngIf="showPersonal">
+        <form action="" [formGroup]="personalProfileForm">
+          <div class="personal-profile__body__period" *ngIf="homeData.gender === '2'">
+            <p>Period</p>
+            <label class="switch">
+              <input type="checkbox" formControlName="meanstation_cycle" />
+              <span class="slider round"></span>
+            </label>
           </div>
-          <div
-            [ngClass]="{
-              input: true,
-              input___error: poopoo && personalProfileForm.get('poopoo')?.hasError('required')
-            }"
-          >
-            <label>Bowel Movement</label>
-            <input type="number" formControlName="poopoo" (input)="resetError()" />
-            <p
-              class="input__errorMsg"
-              *ngIf="personalProfileForm.get('poopoo')?.hasError('required')"
+          <div class="grid grid___same gap___df">
+            <div
+              [ngClass]="{
+                input: true,
+                input___error: weight && personalProfileForm.get('weight')?.hasError('required')
+              }"
             >
-              Bowel Movement is required.
-            </p>
+              <label>Weight (kg)</label>
+              <input
+                type="number"
+                formControlName="weight"
+                (input)="resetError(); calculateBodyMass()"
+              />
+              <p
+                class="input__errorMsg"
+                *ngIf="personalProfileForm.get('weight')?.hasError('required')"
+              >
+                Weight is required.
+              </p>
+            </div>
+            <div
+              [ngClass]="{
+                input: true,
+                input___error: poopoo && personalProfileForm.get('poopoo')?.hasError('required')
+              }"
+            >
+              <label>Bowel Movement</label>
+              <input type="number" formControlName="poopoo" (input)="resetError()" />
+              <p
+                class="input__errorMsg"
+                *ngIf="personalProfileForm.get('poopoo')?.hasError('required')"
+              >
+                Bowel Movement is required.
+              </p>
+            </div>
           </div>
-        </div>
 
-        <div class="grid grid___same gap___df">
-          <div
-            [ngClass]="{
-              input: true,
-              input___error: body_fat && personalProfileForm.get('body_fat')?.hasError('required')
-            }"
-          >
-            <label>Body Fat (%) </label>
-            <input
-              type="number"
-              formControlName="body_fat"
-              (input)="resetError(); calculateBodyMass()"
-            />
-            <p
-              class="input__errorMsg"
-              *ngIf="personalProfileForm.get('body_fat')?.hasError('required')"
+          <div class="grid grid___same gap___df">
+            <div
+              [ngClass]="{
+                input: true,
+                input___error: body_fat && personalProfileForm.get('body_fat')?.hasError('required')
+              }"
             >
-              Body Fat is required.
-            </p>
-          </div>
-          <div
-            [ngClass]="{
-              input: true,
-              input___error: body_mass && personalProfileForm.get('body_mass')?.hasError('required')
-            }"
-          >
-            <label>Fat Mass (kg)</label>
-            <input
-              type="number"
-              formControlName="body_mass"
-              (input)="resetError()"
-              readonly
-              value="{{ calculatedBodyMass }}"
-            />
-            <p
-              class="input__errorMsg"
-              *ngIf="personalProfileForm.get('body_mass')?.hasError('required')"
+              <label>Body Fat (%) </label>
+              <input
+                type="number"
+                formControlName="body_fat"
+                (input)="resetError(); calculateBodyMass()"
+              />
+              <p
+                class="input__errorMsg"
+                *ngIf="personalProfileForm.get('body_fat')?.hasError('required')"
+              >
+                Body Fat is required.
+              </p>
+            </div>
+            <div
+              [ngClass]="{
+                input: true,
+                input___error:
+                  body_mass && personalProfileForm.get('body_mass')?.hasError('required')
+              }"
             >
-              Body Mass is required.
-            </p>
+              <label>Fat Mass (kg)</label>
+              <input
+                type="number"
+                formControlName="body_mass"
+                (input)="resetError()"
+                readonly
+                value="{{ calculatedBodyMass }}"
+              />
+              <p
+                class="input__errorMsg"
+                *ngIf="personalProfileForm.get('body_mass')?.hasError('required')"
+              >
+                Body Mass is required.
+              </p>
+            </div>
           </div>
+          <app-image-upload
+            [uploadedFiles]="uploadedFiles"
+            (deleteLastFile)="deleteLastFile($event)"
+            (fileSelected)="fileChangeEvent($event)"
+            [index]="0"
+            [childLabel]="'Upload Front Profile Photo'"
+            [type]="'profile'"
+          />
+          <app-image-upload
+            [uploadedFiles]="uploadedFiles"
+            (deleteLastFile)="deleteLastFile($event)"
+            (fileSelected)="fileChangeEvent($event)"
+            [index]="1"
+            [childLabel]="'Upload Side Profile Photo'"
+            [type]="'profile'"
+          />
+          <app-image-upload
+            [uploadedFiles]="uploadedFiles"
+            (deleteLastFile)="deleteLastFile($event)"
+            (fileSelected)="fileChangeEvent($event)"
+            [childLabel]="'Upload Back Profile Photo'"
+            [index]="2"
+            [type]="'profile'"
+          />
+          <input
+            type="button"
+            value="Submit Daily Profile"
+            class="primaryBtn primaryBtn__smallHeight"
+            *ngIf="notToday"
+            (click)="onProfileSubmit()"
+          />
+        </form>
+      </div>
+    </div>
+    <div [ngClass]="{ 'meal-management': true, 'meal-management___show': showMeal }">
+      <div class="meal-management__header" (click)="mealClick()">Meal Management</div>
+      <div class="meal-management__body" *ngIf="showMeal">
+        <div class="meal-management__body__btn" (click)="showMealFormClick('Breakfast')">
+          + Add Breakfast
         </div>
-        <app-image-upload
-          [uploadedFiles]="uploadedFiles"
-          (deleteLastFile)="deleteLastFile($event)"
-          (fileSelected)="fileChangeEvent($event)"
-          [index]="0"
-          [childLabel]="'Upload Front Profile Photo'"
-          [type]="'profile'"
-        />
-        <app-image-upload
-          [uploadedFiles]="uploadedFiles"
-          (deleteLastFile)="deleteLastFile($event)"
-          (fileSelected)="fileChangeEvent($event)"
-          [index]="1"
-          [childLabel]="'Upload Side Profile Photo'"
-          [type]="'profile'"
-        />
-        <app-image-upload
-          [uploadedFiles]="uploadedFiles"
-          (deleteLastFile)="deleteLastFile($event)"
-          (fileSelected)="fileChangeEvent($event)"
-          [childLabel]="'Upload Back Profile Photo'"
-          [index]="2"
-          [type]="'profile'"
-        />
-        <input
-          type="button"
-          value="Submit Daily Profile"
-          class="primaryBtn primaryBtn__smallHeight"
-          *ngIf="notToday"
-          (click)="onProfileSubmit()"
-        />
-      </form>
-    </div>
-  </div>
-  <div [ngClass]="{ 'meal-management': true, 'meal-management___show': showMeal }">
-    <div class="meal-management__header" (click)="mealClick()">Meal Management</div>
-    <div class="meal-management__body" *ngIf="showMeal">
-      <div class="meal-management__body__btn" (click)="showMealFormClick('Breakfast')">
-        + Add Breakfast
-      </div>
-      <div class="meal-management__body__btn" (click)="showMealFormClick('Lunch')">+ Add Lunch</div>
-      <div class="meal-management__body__btn" (click)="showMealFormClick('Dinner')">
-        + Add Dinner
-      </div>
-      <div class="meal-management__body__btn" (click)="showMealFormClick('Snacks')">
-        + Add Snacks
+        <div class="meal-management__body__btn" (click)="showMealFormClick('Lunch')">
+          + Add Lunch
+        </div>
+        <div class="meal-management__body__btn" (click)="showMealFormClick('Dinner')">
+          + Add Dinner
+        </div>
+        <div class="meal-management__body__btn" (click)="showMealFormClick('Snacks')">
+          + Add Snacks
+        </div>
       </div>
     </div>
-  </div>
+  </ng-container>
   <app-app-footer />
   <div class="app-container meal-popup" *ngIf="showMealForm">
     <div class="meal-popup__header">
@@ -378,5 +383,8 @@
   </div>
   <div class="loading" *ngIf="loading">
     <div class="loader"></div>
+  </div>
+  <div class="no-secret-code" *ngIf="noSecretMsg">
+    <h2>No secret code assign to you. Please contact your tutor to assign code</h2>
   </div>
 </div>
