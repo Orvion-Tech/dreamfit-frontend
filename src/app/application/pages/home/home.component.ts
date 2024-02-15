@@ -179,7 +179,7 @@ export class HomeComponent implements OnInit {
       } else {
         const data = await response.json();
         // this.abortControllerService.resetAbortController();
-        if (data.message === 'No secret code found for this date') {
+        if (data.message[0] === 'No secret code found for this date') {
           this.noSecretMsg = true;
         } else {
           this.noSecretMsg = false;
