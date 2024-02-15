@@ -113,7 +113,7 @@
     }}</a> -->
   </div>
   <div [ngClass]="{ 'personal-profile': true, 'personal-profile___show': showPersonal }">
-    <div class="personal-profile__header" (click)="personalClick()">Personal Profile</div>
+    <div class="personal-profile__header" (click)="personalClick()">Daily Body Data</div>
     <div class="personal-profile__body" *ngIf="showPersonal">
       <form action="" [formGroup]="personalProfileForm">
         <div class="personal-profile__body__period" *ngIf="homeData.gender === '2'">
@@ -356,6 +356,9 @@
               id="{{ data.suppliment.id }}"
               placeholder="qty"
             />
+            <small class="supplement__cont__box__text"
+              >consumed : {{ getConsumedQuantity(data.suppliment) }}</small
+            >
           </div>
         </div>
       </div>

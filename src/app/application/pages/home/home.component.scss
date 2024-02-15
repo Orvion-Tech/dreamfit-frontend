@@ -99,7 +99,10 @@
         place-items: center;
         text-align: center;
       }
-
+      &__text {
+        font-size: 10px;
+        text-align: center;
+      }
       img {
         width: 100%;
         height: auto;
