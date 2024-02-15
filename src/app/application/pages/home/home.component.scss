@@ -367,3 +367,34 @@
     }
   }
 }
+.daily-profile-alert {
+  padding-inline: 16px;
+  display: grid;
+  gap: 4px;
+  &__cont {
+    background-color: #f7f7f7;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+    display: grid;
+    place-content: center;
+    place-items: center;
+    gap: 16px;
+    p {
+      text-align: center;
+      font-size: 14px;
+      color: #ff4040;
+    }
+
+    a {
+      font-size: 14px;
+      background-color: #c31e1e;
+      color: #fff;
+      height: 32px;
+      width: 120px;
+      display: grid;
+      place-content: center;
+      place-items: center;
+    }
+  }
+}

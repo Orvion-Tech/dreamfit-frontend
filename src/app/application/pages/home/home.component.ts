@@ -42,6 +42,7 @@ export class HomeComponent implements OnInit {
   showFullMsg = false;
   calculatedBodyMass!: number;
   loading = false;
+  showProfileAlert = false;
   /**
    *
    * Meal Form Start
@@ -169,9 +170,11 @@ export class HomeComponent implements OnInit {
         this.homeData = await response.json();
         // this.abortControllerService.resetAbortController();
         this.consumed_suppliment = this.homeData.consumed_suppliment;
-        this.sanitizedMessage = this.sanitizer.bypassSecurityTrustHtml(
-          this.homeData.message_from_tutor.message,
-        );
+        if (this.homeData.message_from_tutor !== null) {
+          this.sanitizedMessage = this.sanitizer.bypassSecurityTrustHtml(
+            this.homeData.message_from_tutor.message,
+          );
+        }
       } else {
         const data = await response.json();
         // this.abortControllerService.resetAbortController();
@@ -251,6 +254,12 @@ export class HomeComponent implements OnInit {
         this.uploadedFiles = [];
 
         this.personalData = await response.json();
+        if (this.personalData.length === 0) {
+          this.showProfileAlert = true;
+        } else {
+          this.showProfileAlert = false;
+        }
+        console.log(this.personalData, 'data');
         let fillData;
         if (this.personalData.length > 0) {
           this.personalDataUpdate = true;

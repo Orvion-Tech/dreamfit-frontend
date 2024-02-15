@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   ) {
     this.loginForm = this.fb.group({
       country_code: ['', Validators.required],
-      phone_number: ['', [Validators.required]],
+      phone_number: ['', [Validators.required, Validators.pattern(/^\d{8,10}$/)]],
       password: ['', Validators.required],
     });
   }

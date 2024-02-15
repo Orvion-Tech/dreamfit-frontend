@@ -23,7 +23,7 @@ export class RegistrationComponent {
     private abortControllerService: AbortControllerService,
   ) {
     this.registrationForm = this.fb.group({
-      phone_number: ['', [Validators.required, Validators.pattern(/^\d{8}$/)]],
+      phone_number: ['', [Validators.required, Validators.pattern(/^\d{8,10}$/)]],
       otp: ['', [Validators.required, Validators.pattern(/^\d{4}$/)]],
       country_code: ['', Validators.required],
       invitation_code: ['', Validators.required],

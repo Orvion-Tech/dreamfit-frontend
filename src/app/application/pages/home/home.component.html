@@ -6,9 +6,15 @@
     <div class="today-mission__row">
       <div class="today-mission__row__date">
         <img src="../../../../assets/images/time.svg" alt="time" width="20" height="20" />
-        <p>{{ formattedDate }} (GMT+8)</p>
+        <p>{{ formattedDate }}</p>
       </div>
       <a class="today-mission__row__btn" (click)="prevDate()">Go to previous Date</a>
+    </div>
+  </div>
+  <div class="daily-profile-alert" *ngIf="showProfileAlert">
+    <div class="daily-profile-alert__cont">
+      <p>Hey {{ homeData.user_name }}, Don't forget to upload Daily Body Data</p>
+      <a (click)="personalClick()">Let's Upload</a>
     </div>
   </div>
   <div class="meal-summary">
