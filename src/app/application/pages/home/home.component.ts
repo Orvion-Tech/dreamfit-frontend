@@ -521,6 +521,10 @@ export class HomeComponent implements OnInit {
         // }
         // this.abortControllerService.resetAbortController();
         this.loading = false;
+        if (method !== 'GET') {
+          this.showMealForm = false;
+          window.location.reload();
+        }
       } else {
         const data = await response.json();
         // this.abortControllerService.resetAbortController();
@@ -681,6 +685,10 @@ export class HomeComponent implements OnInit {
             this.mealPhotoApi(null, 'PATCH');
           } else {
             this.loading = false;
+            if (method !== 'GET') {
+              this.showMealForm = false;
+              window.location.reload();
+            }
           }
           const date = new Date(fillData.meal_time).toLocaleTimeString([], {
             hour: '2-digit',
