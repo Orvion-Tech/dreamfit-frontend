@@ -373,16 +373,16 @@ export class ProfileComponent implements OnInit {
     }
   }
   submitProfile() {
-    console.log(this.ProfileForm.value.sleep_time, this.ProfileForm.value.wakeup_time, 'time');
     let method = 'POST';
     if (this.profilePatch) {
       method = 'PATCH';
     }
+    const date = this.formatDate(this.ProfileForm.value.birth_date);
 
     const data = {
       first_name: this.ProfileForm.value.first_name,
       last_name: this.ProfileForm.value.last_name,
-      birth_date: new Date(this.ProfileForm.value.birth_date).toISOString().slice(0, 10),
+      birth_date: date,
       gender: this.ProfileForm.value.gender,
       acr: this.dailyCalorie > 0 ? this.dailyCalorie : null,
       bcr: this.bseCalorie > 0 ? this.bseCalorie : null,
@@ -413,43 +413,11 @@ export class ProfileComponent implements OnInit {
 
     this.getProfileData(method, data);
   }
-  convertTo24Hour(timeString: string) {
-    // Check if the timeString is defined
-    if (!timeString) {
-      return 'Invalid time string';
-    }
-
-    // Parse the time string
-    const timeParts = timeString.split(':');
-    if (timeParts.length !== 2) {
-      return 'Invalid time string';
-    }
-
-    let hours = parseInt(timeParts[0]);
-    const minutes = parseInt(timeParts[1].split(' ')[0]);
-    const period = (timeParts[1].split(' ')[1] || '').toUpperCase();
-
-    // Validate the period
-    if (period !== 'AM' && period !== 'PM') {
-      return 'Invalid time string';
-    }
-
-    // Convert to 24-hour format
-    if (period === 'AM') {
-      if (hours === 12) {
-        hours = 0; // 12 AM is midnight (0 hours)
-      }
-    } else if (period === 'PM') {
-      if (hours !== 12) {
-        hours += 12; // Add 12 hours for PM times except 12 PM
-      }
-    }
-
-    // Format the time in 24-hour format
-    const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes
-      .toString()
-      .padStart(2, '0')}`;
-
-    return formattedTime;
+  formatDate(dateString: string | number | Date) {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    return `${year}-${month}-${day}`;
   }
 }
