@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AbortControllerService } from '../../../abort-controller.service';
 import { Router } from '@angular/router';
+import { MatDatepicker } from '@angular/material/datepicker';
 import { TokenService } from '../../../token.service';
 @Component({
   selector: 'app-profile',
@@ -10,6 +11,7 @@ import { TokenService } from '../../../token.service';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
+  @ViewChild('dobPicker') dobPicker!: MatDatepicker<Date>;
   options = [
     { value: 1, label: 'NA', selected: false },
     { value: 2, label: 'Sweets', selected: false },
@@ -40,6 +42,9 @@ export class ProfileComponent implements OnInit {
     } else {
       this.getProfileData('GET', null);
     }
+  }
+  openDatePicker(datepicker: MatDatepicker<Date>) {
+    datepicker.open();
   }
   calculateBodyMass() {
     const weight = this.ProfileForm.get('weight')!.value;

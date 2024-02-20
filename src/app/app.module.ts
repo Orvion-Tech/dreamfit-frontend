@@ -1,7 +1,8 @@
-import { NgModule } from '@angular/core';
+import { NgModule, importProvidersFrom } from '@angular/core';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { HttpClientModule, provideHttpClient } from '@angular/common/http';
 import { MatInputModule } from '@angular/material/input';
-import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
@@ -25,6 +26,17 @@ import { CalenderComponent } from './application/pages/calender/calender.compone
 import { MealSummaryComponent } from './application/pages/meal-summary/meal-summary.component';
 import { ImageUploadComponent } from './application/components/image-upload/image-upload.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import {
+  DateAdapter,
+  MAT_DATE_FORMATS,
+  MAT_DATE_LOCALE,
+  MatNativeDateModule,
+} from '@angular/material/core';
+import {
+  MomentDateAdapter,
+  MAT_MOMENT_DATE_ADAPTER_OPTIONS,
+  MAT_MOMENT_DATE_FORMATS,
+} from '@angular/material-moment-adapter';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,6 +59,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
     MatDatepickerModule,
@@ -56,7 +69,17 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     BrowserAnimationsModule,
     ImageCropperModule,
   ],
-  providers: [],
+  providers: [
+    provideAnimations(),
+    provideHttpClient(),
+    importProvidersFrom(MatNativeDateModule),
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS],
+    },
+    { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

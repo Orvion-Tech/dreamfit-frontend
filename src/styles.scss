@@ -771,3 +771,61 @@ input[type='time'] {
   // min-height: 1.2em;
   min-width: 90%;
 }
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+// angular date picker
+
+.mat-mdc-form-field-has-icon-suffix .mat-mdc-text-field-wrapper {
+  padding: 0;
+  background-color: transparent;
+  border: none;
+}
+.mat-mdc-form-field-has-icon-suffix .mat-mdc-text-field-wrapper,
+.mdc-text-field--filled {
+  background-color: transparent !important;
+}
+
+.mat-mdc-form-field-infix {
+  padding: 0 !important;
+  width: auto !important;
+  min-height: initial !important;
+}
+.mdc-text-field--filled .mdc-line-ripple::before,
+.mdc-text-field--filled .mdc-line-ripple::after,
+.mat-mdc-form-field-subscript-wrapper,
+.mat-mdc-form-field-focus-overlay {
+  display: none;
+}
+.mat-mdc-icon-button.mat-mdc-button-base {
+  padding: 0;
+  height: 24px;
+  width: 24px;
+  display: grid;
+  place-content: center;
+  place-items: center;
+}
+
+.mat-mdc-icon-button svg {
+  width: 16px;
+  height: 16px;
+  vertical-align: initial;
+}
+
+.mat-mdc-icon-button .mat-mdc-button-persistent-ripple,
+.mat-mdc-focus-indicator,
+.mat-mdc-button-touch-target,
+.mat-mdc-button-ripple {
+  display: none;
+}
+.mat-mdc-icon-button svg {
+  width: 16px !important;
+  height: 16px !important;
+}

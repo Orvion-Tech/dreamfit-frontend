@@ -37,13 +37,24 @@
         <div class="profile-screen__body__form__body__row">
           <div class="profile-screen__body__form__body__input">
             <label for="dob">Birthday:</label>
-            <input
+            <!-- <input
               type="date"
               formControlName="birth_date"
               value="16-11-1992"
               min="1964-01-01"
               placeholder="DD-MM-YYYY"
-            />
+            /> -->
+            <mat-form-field>
+              <input
+                matInput
+                [matDatepicker]="dobPicker"
+                formControlName="birth_date"
+                placeholder="DD-MM-YYYY"
+                (focus)="openDatePicker(dobPicker)"
+              />
+              <mat-datepicker-toggle matIconSuffix [for]="dobPicker"></mat-datepicker-toggle>
+              <mat-datepicker #dobPicker></mat-datepicker>
+            </mat-form-field>
           </div>
           <div class="profile-screen__body__form__body__input">
             <label for="gender">Gender:</label>
