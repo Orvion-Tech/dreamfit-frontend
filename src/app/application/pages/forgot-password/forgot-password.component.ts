@@ -52,6 +52,7 @@ export class ForgotPasswordComponent {
         phone_number:
           this.forgotpasswordForm.get('country_code')!.value +
           this.forgotpasswordForm.get('phone_number')!.value,
+        forget_password: true,
       };
       this.abortControllerService.abortExistingRequest();
       const abortController = this.abortControllerService.createAbortController();

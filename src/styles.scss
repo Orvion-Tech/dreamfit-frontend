@@ -762,3 +762,12 @@ body {
       calc(-9 * var(--w)) -10px #79e0e8;
   }
 }
+input[type='date'],
+input[type='time'] {
+  display: block;
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+  text-align: left;
+  // min-height: 1.2em;
+  min-width: 90%;
+}

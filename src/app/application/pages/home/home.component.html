@@ -157,7 +157,14 @@
               }"
             >
               <label>Bowel Movement</label>
-              <input type="number" formControlName="poopoo" (input)="resetError()" />
+              <!-- <input type="number" formControlName="poopoo" (input)="resetError()" /> -->
+              <select formControlName="poopoo">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+              </select>
               <p
                 class="input__errorMsg"
                 *ngIf="personalProfileForm.get('poopoo')?.hasError('required')"

@@ -37,7 +37,13 @@
         <div class="profile-screen__body__form__body__row">
           <div class="profile-screen__body__form__body__input">
             <label for="dob">Birthday:</label>
-            <input type="date" formControlName="birth_date" value="16-11-1992" min="1964-01-01" />
+            <input
+              type="date"
+              formControlName="birth_date"
+              value="16-11-1992"
+              min="1964-01-01"
+              placeholder="DD-MM-YYYY"
+            />
           </div>
           <div class="profile-screen__body__form__body__input">
             <label for="gender">Gender:</label>
@@ -119,11 +125,11 @@
         <div class="profile-screen__body__form__body__row">
           <div class="profile-screen__body__form__body__input">
             <label for="sleeping">Usual Sleeping time:</label>
-            <input type="time" formControlName="sleep_time" />
+            <input type="time" formControlName="sleep_time" placeholder="HH:MM" />
           </div>
           <div class="profile-screen__body__form__body__input">
             <label for="wakeup">Usual Wakeup time:</label>
-            <input type="time" formControlName="wakeup_time" />
+            <input type="time" formControlName="wakeup_time" placeholder="HH:MM" />
           </div>
         </div>
         <div class="profile-screen__body__form__body__input">
