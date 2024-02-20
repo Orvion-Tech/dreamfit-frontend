@@ -406,7 +406,7 @@ export class ProfileComponent implements OnInit {
     const data = {
       first_name: this.ProfileForm.value.first_name,
       last_name: this.ProfileForm.value.last_name,
-      birth_date: this.ProfileForm.value.birth_date,
+      birth_date: new Date(this.ProfileForm.value.birth_date).toISOString().slice(0, 10),
       gender: this.ProfileForm.value.gender,
       acr: this.dailyCalorie > 0 ? this.dailyCalorie : null,
       bcr: this.bseCalorie > 0 ? this.bseCalorie : null,
