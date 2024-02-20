@@ -373,36 +373,12 @@ export class ProfileComponent implements OnInit {
     }
   }
   submitProfile() {
-    console.log(this.selectedOptions, 'check');
+    console.log(this.ProfileForm.value.sleep_time, this.ProfileForm.value.wakeup_time, 'time');
     let method = 'POST';
     if (this.profilePatch) {
       method = 'PATCH';
     }
 
-    // const formData = new FormData();
-    // formData.append('first_name', this.ProfileForm.value.first_name);
-    // formData.append('last_name', this.ProfileForm.value.last_name);
-    // formData.append('birth_date', this.ProfileForm.value.birth_date);
-    // formData.append('gender', this.ProfileForm.value.gender);
-    // formData.append('id', localStorage.getItem('user_id') || '');
-    // formData.append('body_fat', this.ProfileForm.value.body_fat);
-    // formData.append('body_mass', this.ProfileForm.value.body_mass);
-    // formData.append('waist', this.ProfileForm.value.waist);
-    // formData.append('hips', this.ProfileForm.value.hips);
-    // formData.append('activity_level', this.ProfileForm.value.activity_level);
-    // formData.append('sleep_time', this.ProfileForm.value.sleep_time);
-    // formData.append('wakeup_time', this.ProfileForm.value.wakeup_time);
-    // formData.append('sleep_quality', this.ProfileForm.value.sleep_quality);
-    // formData.append('family_history', this.ProfileForm.value.family_history);
-    // formData.append('regular_medicine', this.ProfileForm.value.regular_medicine);
-    // formData.append('food_allergy', this.ProfileForm.value.food_allergy);
-    // formData.append('food_test_preference', JSON.stringify(this.selectedOptions));
-    // formData.append('bowl_movememnt_trend', this.ProfileForm.value.bowl_movememnt_trend);
-    // formData.append('normal_stool_form', this.ProfileForm.value.normal_stool_form);
-    // formData.append('work_stress_index', this.ProfileForm.value.work_stress_index);
-    // if (this.ProfileForm.value.meanstation_cycle == 'true') {
-    //   formData.append('meanstation_cycle', this.ProfileForm.value.meanstation_cycle);
-    // }
     const data = {
       first_name: this.ProfileForm.value.first_name,
       last_name: this.ProfileForm.value.last_name,
@@ -419,8 +395,10 @@ export class ProfileComponent implements OnInit {
       waist: this.ProfileForm.value.waist,
       hips: this.ProfileForm.value.hips,
       activity_level: this.ProfileForm.value.activity_level,
-      sleep_time: this.ProfileForm.value.sleep_time,
-      wakeup_time: this.ProfileForm.value.wakeup_time,
+      sleep_time:
+        this.ProfileForm.value.sleep_time !== null ? this.ProfileForm.value.sleep_time : null,
+      wakeup_time:
+        this.ProfileForm.value.wakeup_time !== null ? this.ProfileForm.value.wakeup_time : null,
       sleep_quality: this.ProfileForm.value.sleep_quality,
       family_history: this.ProfileForm.value.family_history,
       regular_medicine: this.ProfileForm.value.regular_medicine,
@@ -434,5 +412,44 @@ export class ProfileComponent implements OnInit {
     console.log(data, 'data');
 
     this.getProfileData(method, data);
+  }
+  convertTo24Hour(timeString: string) {
+    // Check if the timeString is defined
+    if (!timeString) {
+      return 'Invalid time string';
+    }
+
+    // Parse the time string
+    const timeParts = timeString.split(':');
+    if (timeParts.length !== 2) {
+      return 'Invalid time string';
+    }
+
+    let hours = parseInt(timeParts[0]);
+    const minutes = parseInt(timeParts[1].split(' ')[0]);
+    const period = (timeParts[1].split(' ')[1] || '').toUpperCase();
+
+    // Validate the period
+    if (period !== 'AM' && period !== 'PM') {
+      return 'Invalid time string';
+    }
+
+    // Convert to 24-hour format
+    if (period === 'AM') {
+      if (hours === 12) {
+        hours = 0; // 12 AM is midnight (0 hours)
+      }
+    } else if (period === 'PM') {
+      if (hours !== 12) {
+        hours += 12; // Add 12 hours for PM times except 12 PM
+      }
+    }
+
+    // Format the time in 24-hour format
+    const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes
+      .toString()
+      .padStart(2, '0')}`;
+
+    return formattedTime;
   }
 }
