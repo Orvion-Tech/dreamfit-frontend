@@ -31,6 +31,7 @@ export class ProfileComponent implements OnInit {
   bseCalorie = 0;
   dailyCalorie = 0;
   calculatedBodyMass!: number;
+  loading = false;
 
   ngOnInit(): void {
     if (this.tokenService.isTokenExpired()) {
@@ -130,6 +131,7 @@ export class ProfileComponent implements OnInit {
   }
   async uploadFile(method: string, postData: any | null | undefined) {
     console.log(method, postData);
+    this.loading = true;
     let url = `https://admin.dreamfithk.com/en/api/profile/`;
     const data = postData;
     if (method === 'PATCH') {
@@ -231,6 +233,7 @@ export class ProfileComponent implements OnInit {
           }
         }
         if (method !== 'GET') {
+          this.loading = false;
           alert('Your Profile Picture has been updated successfully.');
         }
         window.location.reload();
@@ -245,6 +248,9 @@ export class ProfileComponent implements OnInit {
     }
   }
   async getProfileData(method: string, postData: any | null | undefined) {
+    if (method !== 'GET') {
+      this.loading = true;
+    }
     let url = `https://admin.dreamfithk.com/en/api/profile/`;
     let data = postData;
     if (method === 'GET') {
@@ -362,7 +368,9 @@ export class ProfileComponent implements OnInit {
           }
         }
         if (method !== 'GET') {
+          this.loading = false;
           alert('Your information has been submitted successfully.');
+          window.location.reload();
         }
         this.abortControllerService.resetAbortController();
       } else {
@@ -411,7 +419,6 @@ export class ProfileComponent implements OnInit {
       work_stress_index: this.ProfileForm.value.work_stress_index,
       meanstation_cycle: this.ProfileForm.value.meanstation_cycle,
     };
-    console.log(data, 'data');
 
     this.getProfileData(method, data);
   }
