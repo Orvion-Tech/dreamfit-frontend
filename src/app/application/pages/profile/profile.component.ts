@@ -294,9 +294,11 @@ export class ProfileComponent implements OnInit {
             this.BMI = parseFloat(tmpBmi.toFixed(1));
           }
           if (data.user.gender === '1') {
-            bmr = 66.47 + 13.75 * data.weight + 5.003 * data.height - 6.755 * age;
+            bmr = 10 * data.weight + 6.25 * data.height - 5 * age + 5;
+            // bmr = 66.47 + 13.75 * data.weight + 5.003 * data.height - 6.755 * age;
           } else {
-            bmr = 655.1 + 9.563 * data.weight + 1.85 * data.height - 4.676 * age;
+            bmr = 10 * data.weight + 6.25 * data.height - 5 * age - 161;
+            // bmr = 655.1 + 9.563 * data.weight + 1.85 * data.height - 4.676 * age;
           }
           this.bseCalorie = Math.round(bmr);
           if (data.activity_level == '1') {
