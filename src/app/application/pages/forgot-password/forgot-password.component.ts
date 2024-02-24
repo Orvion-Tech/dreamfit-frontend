@@ -22,7 +22,7 @@ export class ForgotPasswordComponent {
     private abortControllerService: AbortControllerService,
   ) {
     this.forgotpasswordForm = this.fb.group({
-      phone_number: ['', [Validators.required, Validators.pattern(/^\d{8}$/)]],
+      phone_number: ['', [Validators.required, Validators.pattern(/^\d{8,10}$/)]],
       otp: ['', [Validators.required, Validators.pattern(/^\d{4}$/)]],
       country_code: ['', Validators.required],
       password: ['', Validators.required],
