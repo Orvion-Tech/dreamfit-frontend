@@ -524,7 +524,7 @@ export class HomeComponent implements OnInit {
       if (response.ok) {
         if (method !== 'GET') {
           if (this.mealUploadedFiles !== undefined && this.mealUploadedFiles.length > 0) {
-            this.mealPhotoApi(null, 'PATCH');
+            this.mealPhotoApi(data, 'PATCH');
           } else {
             alert('Your information has been submitted successfully.');
             this.loading = false;
