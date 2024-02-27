@@ -410,6 +410,8 @@ export class HomeComponent implements OnInit {
     }
   }
   async mealPhotoApi(getDate: string | null = null, method: string) {
+    const mealTypeNo = this.getMealNumber();
+
     const formData = new FormData();
     if (this.mealUploadedFiles !== undefined && this.mealUploadedFiles.length > 0) {
       const frontSide = this.mealUploadedFiles.find(
@@ -431,6 +433,8 @@ export class HomeComponent implements OnInit {
         formData.append('meal_photo_2', backSide.selectedFile);
       }
     }
+    formData.append('meal_type', mealTypeNo);
+    formData.append('meal_time', `${this.formattedDate} ${this.formattedTime}`);
     formData.append('user', localStorage.getItem('user_id') || '');
     let url = `https://admin.dreamfithk.com/en/api/meal-info/`;
     let data: FormData | null = formData;
@@ -522,87 +526,87 @@ export class HomeComponent implements OnInit {
       });
 
       if (response.ok) {
-        if (method !== 'GET') {
+        this.mealData = await response.json();
+        let fillData;
+        if (this.mealData.length > 0) {
+          fillData = this.mealData.filter(
+            (mealType: { meal_type: string }) => mealType.meal_type === this.getMealNumber(),
+          )[0];
+        } else {
+          fillData = this.mealData;
+        }
+        this.mealSuppData = fillData;
+
+        if (fillData !== undefined && fillData.meal_type === this.getMealNumber()) {
+          this.mealDataUpdate = true;
+        } else {
+          this.mealDataUpdate = false;
+        }
+        if (
+          fillData !== undefined &&
+          Object.keys(fillData).length > 0 &&
+          fillData.meal_type === this.getMealNumber()
+        ) {
+          localStorage.setItem('dailyMealId', fillData.id);
+
           if (this.mealUploadedFiles !== undefined && this.mealUploadedFiles.length > 0) {
-            this.mealPhotoApi(data, 'PATCH');
+            this.mealPhotoApi(null, 'PATCH');
           } else {
-            alert('Your information has been submitted successfully.');
-            this.loading = false;
-            this.showMealForm = false;
-            window.location.reload();
+            if (method !== 'GET') {
+              alert('Your information has been submitted successfully.');
+              this.loading = false;
+              this.showMealForm = false;
+              window.location.reload();
+            }
+          }
+
+          // const date = new Date(fillData.meal_time).toLocaleTimeString([], {
+          //   hour: '2-digit',
+          //   minute: '2-digit',
+          //   hour12: false,
+          // });
+          const date = new Date(fillData.meal_time);
+          let hours = date.getHours();
+          const minutes = date.getMinutes();
+
+          // Adjust hours if they exceed 24
+          hours = hours >= 24 ? hours % 24 : hours;
+
+          // Convert hours and minutes to string and pad with leading zeros if necessary
+          const formattedHours = hours < 10 ? '0' + hours : hours;
+          const formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
+
+          // Construct the formatted time string
+          const formattedTime = `${formattedHours}:${formattedMinutes}`;
+
+          this.mealForm!.get('time')!.setValue(formattedTime);
+          this.mealForm!.get('rice')!.setValue(fillData.amount_of_rice_or_noodels);
+          this.mealForm!.get('meat')!.setValue(fillData.amount_of_meat);
+          this.mealForm!.get('veg')!.setValue(fillData.amount_of_vegitables);
+          this.mealForm!.get('fruit')!.setValue(fillData.amount_of_fruits);
+          this.mealForm!.get('water')!.setValue(fillData.amount_of_water);
+          this.mealUploadedFiles = [];
+
+          if (fillData.meal_photo_1 !== null) {
+            this.mealUploadedFiles.push({
+              selectedFile: fillData.meal_photo_1,
+              side: 'front',
+            });
+          }
+          if (fillData.meal_photo_2 !== null) {
+            this.mealUploadedFiles.push({ selectedFile: fillData.meal_photo_2, side: 'back' });
+          }
+          if (fillData.meal_photo_3 !== null) {
+            this.mealUploadedFiles.push({ selectedFile: fillData.meal_photo_3, side: 'side' });
           }
         } else {
-          this.mealData = await response.json();
-          let fillData;
-          if (this.mealData.length > 0) {
-            fillData = this.mealData.filter(
-              (mealType: { meal_type: string }) => mealType.meal_type === this.getMealNumber(),
-            )[0];
-          } else {
-            fillData = this.mealData;
-          }
-          this.mealSuppData = fillData;
-
-          if (fillData !== undefined && fillData.meal_type === this.getMealNumber()) {
-            this.mealDataUpdate = true;
-          } else {
-            this.mealDataUpdate = false;
-          }
-          if (
-            fillData !== undefined &&
-            Object.keys(fillData).length > 0 &&
-            fillData.meal_type === this.getMealNumber()
-          ) {
-            localStorage.setItem('dailyMealId', fillData.id);
-
-            // const date = new Date(fillData.meal_time).toLocaleTimeString([], {
-            //   hour: '2-digit',
-            //   minute: '2-digit',
-            //   hour12: false,
-            // });
-            const date = new Date(fillData.meal_time);
-            let hours = date.getHours();
-            const minutes = date.getMinutes();
-
-            // Adjust hours if they exceed 24
-            hours = hours >= 24 ? hours % 24 : hours;
-
-            // Convert hours and minutes to string and pad with leading zeros if necessary
-            const formattedHours = hours < 10 ? '0' + hours : hours;
-            const formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
-
-            // Construct the formatted time string
-            const formattedTime = `${formattedHours}:${formattedMinutes}`;
-
-            this.mealForm!.get('time')!.setValue(formattedTime);
-            this.mealForm!.get('rice')!.setValue(fillData.amount_of_rice_or_noodels);
-            this.mealForm!.get('meat')!.setValue(fillData.amount_of_meat);
-            this.mealForm!.get('veg')!.setValue(fillData.amount_of_vegitables);
-            this.mealForm!.get('fruit')!.setValue(fillData.amount_of_fruits);
-            this.mealForm!.get('water')!.setValue(fillData.amount_of_water);
-            this.mealUploadedFiles = [];
-
-            if (fillData.meal_photo_1 !== null) {
-              this.mealUploadedFiles.push({
-                selectedFile: fillData.meal_photo_1,
-                side: 'front',
-              });
-            }
-            if (fillData.meal_photo_2 !== null) {
-              this.mealUploadedFiles.push({ selectedFile: fillData.meal_photo_2, side: 'back' });
-            }
-            if (fillData.meal_photo_3 !== null) {
-              this.mealUploadedFiles.push({ selectedFile: fillData.meal_photo_3, side: 'side' });
-            }
-          } else {
-            this.mealForm!.get('time')!.setValue(this.dateService.formatTime(new Date()));
-            this.mealForm!.get('rice')!.setValue('0');
-            this.mealForm!.get('meat')!.setValue('0');
-            this.mealForm!.get('veg')!.setValue('0');
-            this.mealForm!.get('fruit')!.setValue('0');
-            this.mealForm!.get('water')!.setValue('0');
-            this.mealUploadedFiles = [];
-          }
+          this.mealForm!.get('time')!.setValue(this.dateService.formatTime(new Date()));
+          this.mealForm!.get('rice')!.setValue('0');
+          this.mealForm!.get('meat')!.setValue('0');
+          this.mealForm!.get('veg')!.setValue('0');
+          this.mealForm!.get('fruit')!.setValue('0');
+          this.mealForm!.get('water')!.setValue('0');
+          this.mealUploadedFiles = [];
         }
       } else {
         const data = await response.json();
