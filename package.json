@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "npm run lint && ng serve",
+    "start": "npm run lint && ng serve --disable-host-check",
     "build": "npm run lint && ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
