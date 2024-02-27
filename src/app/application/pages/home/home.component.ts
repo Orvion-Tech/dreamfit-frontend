@@ -86,7 +86,6 @@ export class HomeComponent implements OnInit {
     });
   }
   ngOnInit() {
-    console.log(this.notToday, 'today');
     const currentDate = new Date(); // You can pass any date you want to format
     this.formattedDate = this.dateService.formatDate(currentDate, 'yyyy-MM-dd');
     this.formattedTime = this.dateService.formatTime(currentDate);
@@ -102,7 +101,6 @@ export class HomeComponent implements OnInit {
     }
   }
   formatMessage(text: string): string {
-    console.log(text);
     // Replace escaped characters with line breaks
     return text.replace(/\\r\\n/g, '<br>');
   }
@@ -128,7 +126,6 @@ export class HomeComponent implements OnInit {
     return consumedItem ? consumedItem : 0;
   }
   getConsumedMealQuantity(supplement: any): number {
-    console.log(this.mealSuppData);
     const consumedItem = this.mealSuppData.suppliment
       .filter((item: any) => item.suppliment.id === supplement.id)
       .reduce((acc: any, item: { quantity: any }) => acc + item.quantity, 0);
@@ -264,7 +261,6 @@ export class HomeComponent implements OnInit {
         } else {
           this.showProfileAlert = false;
         }
-        console.log(this.personalData, 'data');
         let fillData;
         if (this.personalData.length > 0) {
           this.personalDataUpdate = true;
@@ -323,7 +319,6 @@ export class HomeComponent implements OnInit {
     if (this.personalProfileForm.valid) {
       this.formattedDate = this.dateService.formatDate(new Date(), 'yyyy-MM-dd');
       this.formattedTime = this.dateService.formatTime(new Date());
-      console.log(this.calculatedBodyMass, 'mass');
       const formData = new FormData();
       formData.append('weight', this.personalProfileForm.value.weight);
       formData.append('poopoo_time', this.personalProfileForm.value.poopoo);
@@ -378,7 +373,6 @@ export class HomeComponent implements OnInit {
     const mealTypeNo = this.getMealNumber();
     if (this.mealForm.valid) {
       this.formattedDate = this.dateService.formatDate(this.apiDate, 'yyyy-MM-dd');
-      console.log(this.formattedDate, 'send date');
 
       this.formattedTime = this.mealForm.value.time;
       const supplementArray: {
@@ -447,193 +441,66 @@ export class HomeComponent implements OnInit {
     if (method === 'PATCH') {
       url = `https://admin.dreamfithk.com/en/api/meal-info/${localStorage.getItem('dailyMealId')}/`;
     }
-    // this.abortControllerService.abortExistingRequest();
-    // const abortController = this.abortControllerService.createAbortController();
     try {
       const response = await fetch(url, {
         method: method,
         headers: {
           Authorization: `Bearer ${localStorage.getItem('id_token')}`,
-          // 'Content-Type': 'application/json',
         },
         body: data !== null ? data : undefined,
-        // signal: abortController.signal,
       });
 
       if (response.ok) {
-        this.mealUploadedFiles = [];
-
-        this.mealData = await response.json();
-        let fillData;
-        console.log(this.getMealNumber(), this.mealData, 'fetch call');
-        if (this.mealData.length > 0) {
-          fillData = this.mealData.filter(
-            (mealType: { meal_type: string }) => mealType.meal_type === this.getMealNumber(),
-          )[0];
-          console.log(fillData, 'filter meal data');
-        } else {
-          fillData = this.mealData;
-        }
-        if (fillData !== undefined && fillData.meal_type === this.getMealNumber()) {
-          this.mealDataUpdate = true;
-        }
-        if (
-          fillData !== undefined &&
-          Object.keys(fillData).length > 0 &&
-          fillData.meal_type === this.getMealNumber()
-        ) {
-          localStorage.setItem('dailyMealId', fillData.id);
-          // const date = new Date(fillData.meal_time).toLocaleTimeString([], {
-          //   hour: '2-digit',
-          //   minute: '2-digit',
-          //   hour12: false,
-          // });
-          // this.mealForm!.get('time')!.setValue(date);
-          // this.mealForm!.get('rice')!.setValue(fillData.amount_of_rice_or_noodels);
-          // this.mealForm!.get('meat')!.setValue(fillData.amount_of_meat);
-          // this.mealForm!.get('veg')!.setValue(fillData.amount_of_vegitables);
-          // this.mealForm!.get('fruit')!.setValue(fillData.amount_of_fruits);
-          // this.mealForm!.get('water')!.setValue(fillData.amount_of_water);
-          if (fillData.meal_photo_1 !== null) {
-            this.mealUploadedFiles.push({
-              selectedFile: fillData.meal_photo_1,
-              side: 'front',
-            });
-          }
-          if (fillData.meal_photo_2 !== null) {
-            this.mealUploadedFiles.push({ selectedFile: fillData.meal_photo_2, side: 'back' });
-          }
-          if (fillData.meal_photo_3 !== null) {
-            this.mealUploadedFiles.push({ selectedFile: fillData.meal_photo_3, side: 'side' });
-          }
-          console.log(this.mealUploadedFiles);
-        } else {
-          this.mealForm!.get('time')!.setValue(this.dateService.formatTime(new Date()));
-          this.mealForm!.get('rice')!.setValue('0');
-          this.mealForm!.get('meat')!.setValue('0');
-          this.mealForm!.get('veg')!.setValue('0');
-          this.mealForm!.get('fruit')!.setValue('0');
-          this.mealForm!.get('water')!.setValue('0');
-          this.mealUploadedFiles = [];
-        }
-        // if (method !== 'GET') {
-        //   alert('Your information has been submitted successfully.');
-        // }
-        // this.abortControllerService.resetAbortController();
-        this.loading = false;
         if (method !== 'GET') {
-          this.showMealForm = false;
+          alert('Your information has been submitted successfully.');
           window.location.reload();
+          this.showMealForm = false;
+          this.loading = false;
+        } else {
+          this.mealUploadedFiles = [];
+          this.mealData = await response.json();
+          let fillData;
+          if (this.mealData.length > 0) {
+            fillData = this.mealData.filter(
+              (mealType: { meal_type: string }) => mealType.meal_type === this.getMealNumber(),
+            )[0];
+          } else {
+            fillData = this.mealData;
+          }
+          if (fillData !== undefined && fillData.meal_type === this.getMealNumber()) {
+            this.mealDataUpdate = true;
+          }
+          if (
+            fillData !== undefined &&
+            Object.keys(fillData).length > 0 &&
+            fillData.meal_type === this.getMealNumber()
+          ) {
+            localStorage.setItem('dailyMealId', fillData.id);
+            if (fillData.meal_photo_1 !== null) {
+              this.mealUploadedFiles.push({
+                selectedFile: fillData.meal_photo_1,
+                side: 'front',
+              });
+            }
+            if (fillData.meal_photo_2 !== null) {
+              this.mealUploadedFiles.push({ selectedFile: fillData.meal_photo_2, side: 'back' });
+            }
+            if (fillData.meal_photo_3 !== null) {
+              this.mealUploadedFiles.push({ selectedFile: fillData.meal_photo_3, side: 'side' });
+            }
+          } else {
+            this.mealForm!.get('time')!.setValue(this.dateService.formatTime(new Date()));
+            this.mealUploadedFiles = [];
+          }
         }
       } else {
         const data = await response.json();
-        // this.abortControllerService.resetAbortController();
         alert(data.message);
       }
     } catch (error) {
       console.error('Error:', error);
     }
   }
-  // onMealSubmit() {
-  //   let method = 'POST';
-  //   if (this.mealDataUpdate) {
-  //     method = 'PATCH';
-  //   }
-  //   const mealTypeNo = this.getMealNumber();
-  //   if (this.mealForm.valid) {
-  //     this.formattedDate = this.dateService.formatDate(new Date(), 'yyyy-MM-dd');
-  //     this.formattedTime = this.mealForm.value.time;
-  //     const data: {
-  //       meal_type: string;
-  //       user: string;
-  //       meal_time: string;
-  //       amount_of_rice_or_noodels?: string;
-  //       amount_of_meat?: string;
-  //       amount_of_vegitables?: string;
-  //       amount_of_fruits?: string;
-  //       amount_of_water?: string;
-  //       suppliment?: any[]; // Update the type as needed
-  //       meal_photo_1?: File; // Update the type as needed
-  //       meal_photo_2?: File; // Update the type as needed
-  //       meal_photo_3?: File; // Update the type as needed
-  //     } = {
-  //       meal_type: mealTypeNo,
-  //       user: localStorage.getItem('user_id') || '',
-  //       meal_time: `${this.formattedDate} ${this.formattedTime}`,
-  //     };
-  //     if (this.mealForm.value.rice !== '') {
-  //       data.amount_of_rice_or_noodels = this.mealForm.value.rice;
-  //     }
-  //     if (this.mealForm.value.meat !== '') {
-  //       data.amount_of_meat = this.mealForm.value.meat;
-  //     }
-  //     if (this.mealForm.value.veg !== '') {
-  //       data.amount_of_vegitables = this.mealForm.value.veg;
-  //     }
-  //     if (this.mealForm.value.fruit !== '') {
-  //       data.amount_of_fruits = this.mealForm.value.fruit;
-  //     }
-  //     if (this.mealForm.value.water !== '') {
-  //       data.amount_of_water = this.mealForm.value.water;
-  //     }
-  //     const supplementArray: {
-  //       quantity: number;
-  //       suppliment: number;
-  //       date: string;
-  //     }[] = [];
-  //     const inputElements = document.querySelectorAll(
-  //       '.supplement__cont__box__input',
-  //     ) as NodeListOf<HTMLInputElement>;
-
-  //     inputElements.forEach((inputElement) => {
-  //       if (inputElement.value > '0') {
-  //         const data = {
-  //           quantity: parseInt(inputElement.value),
-  //           suppliment: parseInt(inputElement.id),
-  //           // user: localStorage.getItem('user_id') || '',
-  //           date: `${this.formattedDate} ${this.formattedTime}`,
-  //         };
-  //         supplementArray.push(data);
-  //       }
-  //       // Do whatever you need to do with each input element
-  //     });
-  //     if (supplementArray.length > 0) {
-  //       data.suppliment = supplementArray;
-  //     }
-  //     if (this.mealUploadedFiles !== undefined && this.mealUploadedFiles.length > 0) {
-  //       const frontSide = this.mealUploadedFiles.find(
-  //         (side: { side: string }) => side.side === 'front',
-  //       );
-  //       const sideSide = this.mealUploadedFiles.find(
-  //         (side: { side: string }) => side.side === 'side',
-  //       );
-  //       const backSide = this.mealUploadedFiles.find(
-  //         (side: { side: string }) => side.side === 'back',
-  //       );
-  //       console.log('frontSide:', frontSide);
-  //       console.log('sideSide:', sideSide);
-  //       console.log('backSide:', backSide);
-
-  //       if (frontSide && typeof frontSide.selectedFile !== 'string') {
-  //         data.meal_photo_1 = this.createFile(frontSide.selectedFile, 'meal_photo_1.jpg');
-  //       }
-
-  //       if (sideSide && typeof sideSide.selectedFile !== 'string') {
-  //         data.meal_photo_2 = this.createFile(sideSide.selectedFile, 'meal_photo_2.jpg');
-  //       }
-
-  //       if (backSide && typeof backSide.selectedFile !== 'string') {
-  //         data.meal_photo_3 = this.createFile(backSide.selectedFile, 'meal_photo_3.jpg');
-  //       }
-  //     }
-
-  //     this.mealDataApi(null, method, data);
-  //   }
-  // }
-
-  // createFile(blob: Blob, fileName: string): File {
-  //   return new File([blob], fileName, { lastModified: new Date().getTime() });
-  // }
   async mealDataApi(getDate: string | null = null, method: string, postData: any) {
     let url = `https://admin.dreamfithk.com/en/api/meal-info/`;
     let data = postData;
@@ -644,8 +511,6 @@ export class HomeComponent implements OnInit {
     if (method === 'PATCH') {
       url = `https://admin.dreamfithk.com/en/api/meal-info/${localStorage.getItem('dailyMealId')}/`;
     }
-    // this.abortControllerService.abortExistingRequest();
-    // const abortController = this.abortControllerService.createAbortController();
     try {
       const response = await fetch(url, {
         method: method,
@@ -654,88 +519,79 @@ export class HomeComponent implements OnInit {
           'Content-Type': 'application/json',
         },
         body: data !== null ? JSON.stringify(data) : undefined,
-        // signal: abortController.signal,
       });
 
       if (response.ok) {
-        this.mealData = await response.json();
-        let fillData;
-        if (this.mealData.length > 0) {
-          fillData = this.mealData.filter(
-            (mealType: { meal_type: string }) => mealType.meal_type === this.getMealNumber(),
-          )[0];
-        } else {
-          fillData = this.mealData;
-        }
-        this.mealSuppData = fillData;
-        console.log(this.mealSuppData, 'filter meal data');
-
-        if (fillData !== undefined && fillData.meal_type === this.getMealNumber()) {
-          this.mealDataUpdate = true;
-        } else {
-          this.mealDataUpdate = false;
-        }
-        if (
-          fillData !== undefined &&
-          Object.keys(fillData).length > 0 &&
-          fillData.meal_type === this.getMealNumber()
-        ) {
-          localStorage.setItem('dailyMealId', fillData.id);
+        if (method !== 'GET') {
           if (this.mealUploadedFiles !== undefined && this.mealUploadedFiles.length > 0) {
             this.mealPhotoApi(null, 'PATCH');
           } else {
+            alert('Your information has been submitted successfully.');
             this.loading = false;
-            if (method !== 'GET') {
-              this.showMealForm = false;
-              window.location.reload();
-            }
+            this.showMealForm = false;
+            window.location.reload();
           }
-          const date = new Date(fillData.meal_time).toLocaleTimeString([], {
-            hour: '2-digit',
-            minute: '2-digit',
-            hour12: false,
-          });
-          this.mealForm!.get('time')!.setValue(date);
-          this.mealForm!.get('rice')!.setValue(fillData.amount_of_rice_or_noodels);
-          this.mealForm!.get('meat')!.setValue(fillData.amount_of_meat);
-          this.mealForm!.get('veg')!.setValue(fillData.amount_of_vegitables);
-          this.mealForm!.get('fruit')!.setValue(fillData.amount_of_fruits);
-          this.mealForm!.get('water')!.setValue(fillData.amount_of_water);
-          this.mealUploadedFiles = [];
-
-          if (fillData.meal_photo_1 !== null) {
-            this.mealUploadedFiles.push({
-              selectedFile: fillData.meal_photo_1,
-              side: 'front',
-            });
-          }
-          if (fillData.meal_photo_2 !== null) {
-            this.mealUploadedFiles.push({ selectedFile: fillData.meal_photo_2, side: 'back' });
-          }
-          if (fillData.meal_photo_3 !== null) {
-            this.mealUploadedFiles.push({ selectedFile: fillData.meal_photo_3, side: 'side' });
-          }
-          console.log(this.mealUploadedFiles);
         } else {
-          this.mealForm!.get('time')!.setValue(this.dateService.formatTime(new Date()));
-          this.mealForm!.get('rice')!.setValue('0');
-          this.mealForm!.get('meat')!.setValue('0');
-          this.mealForm!.get('veg')!.setValue('0');
-          this.mealForm!.get('fruit')!.setValue('0');
-          this.mealForm!.get('water')!.setValue('0');
-          this.mealUploadedFiles = [];
-        }
-        if (method !== 'GET') {
-          alert('Your information has been submitted successfully.');
-        }
+          this.mealData = await response.json();
+          let fillData;
+          if (this.mealData.length > 0) {
+            fillData = this.mealData.filter(
+              (mealType: { meal_type: string }) => mealType.meal_type === this.getMealNumber(),
+            )[0];
+          } else {
+            fillData = this.mealData;
+          }
+          this.mealSuppData = fillData;
 
-        // if (method !== 'GET') {
-        //   window.location.reload();
-        // }
-        // this.abortControllerService.resetAbortController();
+          if (fillData !== undefined && fillData.meal_type === this.getMealNumber()) {
+            this.mealDataUpdate = true;
+          } else {
+            this.mealDataUpdate = false;
+          }
+          if (
+            fillData !== undefined &&
+            Object.keys(fillData).length > 0 &&
+            fillData.meal_type === this.getMealNumber()
+          ) {
+            localStorage.setItem('dailyMealId', fillData.id);
+
+            const date = new Date(fillData.meal_time).toLocaleTimeString([], {
+              hour: '2-digit',
+              minute: '2-digit',
+              hour12: false,
+            });
+            this.mealForm!.get('time')!.setValue(date);
+            this.mealForm!.get('rice')!.setValue(fillData.amount_of_rice_or_noodels);
+            this.mealForm!.get('meat')!.setValue(fillData.amount_of_meat);
+            this.mealForm!.get('veg')!.setValue(fillData.amount_of_vegitables);
+            this.mealForm!.get('fruit')!.setValue(fillData.amount_of_fruits);
+            this.mealForm!.get('water')!.setValue(fillData.amount_of_water);
+            this.mealUploadedFiles = [];
+
+            if (fillData.meal_photo_1 !== null) {
+              this.mealUploadedFiles.push({
+                selectedFile: fillData.meal_photo_1,
+                side: 'front',
+              });
+            }
+            if (fillData.meal_photo_2 !== null) {
+              this.mealUploadedFiles.push({ selectedFile: fillData.meal_photo_2, side: 'back' });
+            }
+            if (fillData.meal_photo_3 !== null) {
+              this.mealUploadedFiles.push({ selectedFile: fillData.meal_photo_3, side: 'side' });
+            }
+          } else {
+            this.mealForm!.get('time')!.setValue(this.dateService.formatTime(new Date()));
+            this.mealForm!.get('rice')!.setValue('0');
+            this.mealForm!.get('meat')!.setValue('0');
+            this.mealForm!.get('veg')!.setValue('0');
+            this.mealForm!.get('fruit')!.setValue('0');
+            this.mealForm!.get('water')!.setValue('0');
+            this.mealUploadedFiles = [];
+          }
+        }
       } else {
         const data = await response.json();
-        // this.abortControllerService.resetAbortController();
         alert(data.message);
       }
     } catch (error) {
