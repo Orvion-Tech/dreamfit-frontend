@@ -555,12 +555,26 @@ export class HomeComponent implements OnInit {
           ) {
             localStorage.setItem('dailyMealId', fillData.id);
 
-            const date = new Date(fillData.meal_time).toLocaleTimeString([], {
-              hour: '2-digit',
-              minute: '2-digit',
-              hour12: false,
-            });
-            this.mealForm!.get('time')!.setValue(date);
+            // const date = new Date(fillData.meal_time).toLocaleTimeString([], {
+            //   hour: '2-digit',
+            //   minute: '2-digit',
+            //   hour12: false,
+            // });
+            const date = new Date(fillData.meal_time);
+            let hours = date.getHours();
+            const minutes = date.getMinutes();
+
+            // Adjust hours if they exceed 24
+            hours = hours >= 24 ? hours % 24 : hours;
+
+            // Convert hours and minutes to string and pad with leading zeros if necessary
+            const formattedHours = hours < 10 ? '0' + hours : hours;
+            const formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
+
+            // Construct the formatted time string
+            const formattedTime = `${formattedHours}:${formattedMinutes}`;
+
+            this.mealForm!.get('time')!.setValue(formattedTime);
             this.mealForm!.get('rice')!.setValue(fillData.amount_of_rice_or_noodels);
             this.mealForm!.get('meat')!.setValue(fillData.amount_of_meat);
             this.mealForm!.get('veg')!.setValue(fillData.amount_of_vegitables);
