@@ -57,6 +57,7 @@ export class CalenderComponent implements OnInit {
     }
   }
   async getCalenderData(getDate: string) {
+    console.log(getDate, 'date');
     const data = { month: getDate };
     this.abortControllerService.abortExistingRequest();
     const abortController = this.abortControllerService.createAbortController();
@@ -152,6 +153,7 @@ export class CalenderComponent implements OnInit {
     this.showComparison = false;
   }
   prevMonth() {
+    console.log('asd');
     const currentMonthIndex = this.months.indexOf(this.currentMonth);
     const newMonthIndex = (currentMonthIndex - 1 + 12) % 12; // Ensure the result is a non-negative number
 
@@ -187,6 +189,7 @@ export class CalenderComponent implements OnInit {
     this.currentYear = year;
     const month = (monthIndex + 1).toString().padStart(2, '0');
     this.selectedDate = new Date(`${year}-${month}`).toISOString().slice(0, 7);
+    this.getCalenderData(month);
     this.generateCalendar();
   }
   getDaysInMonth(month: number, year: number): number {
@@ -224,6 +227,7 @@ export class CalenderComponent implements OnInit {
   //   return calendar;
   // }
   generateCalendar() {
+    console.log('asdqwe');
     const selectedMonth = this.selectedDateObject.getMonth();
     const selectedYear = this.selectedDateObject.getFullYear();
     const daysInMonth = this.getDaysInMonth(selectedMonth, selectedYear);
