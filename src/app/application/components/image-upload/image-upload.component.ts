@@ -133,7 +133,7 @@ export class ImageUploadComponent implements OnChanges {
           resolve(file);
         })
         .catch(function (error) {
-          console.error('Error converting HEIC to JPG:', error);
+          alert('Error converting HEIC to JPG:');
           reject(error);
         });
     });
@@ -146,7 +146,17 @@ export class ImageUploadComponent implements OnChanges {
       const maxSizeInBytes = 5 * 1024 * 1024; // 5MB
       let selectedFile;
       let imageEvent;
-      if (inputElement.files[0].name.includes('.heic')) {
+      if (inputElement.files[0].size > maxSizeInBytes) {
+        this.fileSizeError = '上傳的文件不能超過5MB, 請重新上傳';
+        this.imageChangedEvent = null;
+        this.showCropPopup = false;
+        this.selectedFile = null;
+        return;
+      }
+      if (
+        inputElement.files[0].name.includes('.heic') ||
+        inputElement.files[0].name.includes('.HEIC')
+      ) {
         selectedFile = await this.convertHeicToJpg(inputElement.files[0]);
         imageEvent = {
           target: {
@@ -160,13 +170,6 @@ export class ImageUploadComponent implements OnChanges {
       if (selectedFile) {
         if (!selectedFile.type.startsWith('image/')) {
           this.fileSizeError = '只允許上傳圖片文件，請重新上傳';
-          this.imageChangedEvent = null;
-          this.showCropPopup = false;
-          this.selectedFile = null;
-          return;
-        }
-        if (selectedFile.size > maxSizeInBytes) {
-          this.fileSizeError = '上傳的文件不能超過5MB, 請重新上傳';
           this.imageChangedEvent = null;
           this.showCropPopup = false;
           this.selectedFile = null;
