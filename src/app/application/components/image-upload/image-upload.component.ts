@@ -84,7 +84,13 @@ export class ImageUploadComponent implements OnChanges {
     }
   }
   hideCropPopup() {
+    this.showCroppedImage = false;
+    this.croppedImage = null;
+    this.selectedFile = null;
+    this.croppedImageLink = '';
     this.showCropPopup = false;
+    this.imageChangedEvent = null;
+
     this.resetFileInput();
   }
   deleteFile() {
@@ -92,6 +98,8 @@ export class ImageUploadComponent implements OnChanges {
     this.croppedImage = null;
     this.selectedFile = null;
     this.croppedImageLink = '';
+    this.imageChangedEvent = null;
+
     if (this.uploadedFiles.length > 0) {
       // Notify the parent component to delete the last file
       let side = '';
@@ -108,9 +116,6 @@ export class ImageUploadComponent implements OnChanges {
     }
   }
   resetFileInput() {
-    this.imageChangedEvent = null;
-    this.showCropPopup = false;
-    this.selectedFile = null;
     if (this.fileInput) {
       // Reset the input value to an empty string
       this.fileInput.nativeElement.value = '';
