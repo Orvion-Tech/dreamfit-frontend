@@ -131,17 +131,17 @@ export class ImageUploadComponent implements OnChanges {
 
         return;
       }
-      if (!selectedFile.type.startsWith('image/')) {
-        // Set the error message for file type
-        this.fileSizeError = '只允許上傳圖片文件，請重新上傳';
+      // if (!selectedFile.type.startsWith('image/')) {
+      //   // Set the error message for file type
+      //   this.fileSizeError = '只允許上傳圖片文件，請重新上傳';
 
-        // Clear other properties to prevent further actions
-        this.imageChangedEvent = null;
-        this.showCropPopup = false;
-        this.selectedFile = null;
+      //   // Clear other properties to prevent further actions
+      //   this.imageChangedEvent = null;
+      //   this.showCropPopup = false;
+      //   this.selectedFile = null;
 
-        return;
-      }
+      //   return;
+      // }
       // Continue with the cropping process
       this.fileSizeError = ''; // Clear the error message
       this.imageChangedEvent = event;
