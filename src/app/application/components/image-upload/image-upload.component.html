@@ -32,29 +32,32 @@
   </div>
 </div>
 <div class="crop_popup" *ngIf="showCropPopup">
-  <image-cropper
-    *ngIf="type !== 'meal'"
-    [imageChangedEvent]="imageChangedEvent"
-    [maintainAspectRatio]="false"
-    format="png"
-    (imageCropped)="imageCropped($event)"
-    (imageLoaded)="imageLoaded($event)"
-    (cropperReady)="cropperReady()"
-    (loadImageFailed)="loadImageFailed()"
-  ></image-cropper>
-  <image-cropper
-    *ngIf="type === 'meal'"
-    [imageChangedEvent]="imageChangedEvent"
-    [maintainAspectRatio]="true"
-    [aspectRatio]="179 / 134"
-    format="png"
-    (imageCropped)="imageCropped($event)"
-    (imageLoaded)="imageLoaded($event)"
-    (cropperReady)="cropperReady()"
-    (loadImageFailed)="loadImageFailed()"
-  ></image-cropper>
-  <div class="crop_popup__row">
-    <a (click)="setCropImage()" class="primaryBlueBtn primaryBlueBtn__smallHeight">Set Image</a>
-    <a (click)="hideCropPopup()" class="secondaryBtn">Close</a>
-  </div>
+  <ng-container *ngIf="!showLoading">
+    <image-cropper
+      *ngIf="type !== 'meal'"
+      [imageChangedEvent]="imageChangedEvent"
+      [maintainAspectRatio]="false"
+      format="png"
+      (imageCropped)="imageCropped($event)"
+      (imageLoaded)="imageLoaded($event)"
+      (cropperReady)="cropperReady()"
+      (loadImageFailed)="loadImageFailed()"
+    ></image-cropper>
+    <image-cropper
+      *ngIf="type === 'meal'"
+      [imageChangedEvent]="imageChangedEvent"
+      [maintainAspectRatio]="true"
+      [aspectRatio]="179 / 134"
+      format="png"
+      (imageCropped)="imageCropped($event)"
+      (imageLoaded)="imageLoaded($event)"
+      (cropperReady)="cropperReady()"
+      (loadImageFailed)="loadImageFailed()"
+    ></image-cropper>
+    <div class="crop_popup__row">
+      <a (click)="setCropImage()" class="primaryBlueBtn primaryBlueBtn__smallHeight">Set Image</a>
+      <a (click)="hideCropPopup()" class="secondaryBtn">Close</a>
+    </div>
+  </ng-container>
+  <div *ngIf="showLoading">Please Wait we are uploading your image</div>
 </div>

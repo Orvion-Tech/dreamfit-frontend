@@ -39,7 +39,7 @@ export class ImageUploadComponent implements OnChanges {
   // setCroppedImage: unknown;
   showCropPopup = false;
   fileSizeError!: string;
-
+  showLoading = false;
   constructor(
     private sanitizer: DomSanitizer,
     private imageCompress: NgxImageCompressService,
@@ -153,10 +153,14 @@ export class ImageUploadComponent implements OnChanges {
         this.selectedFile = null;
         return;
       }
+      this.showCropPopup = true;
+
       if (
         inputElement.files[0].name.includes('.heic') ||
         inputElement.files[0].name.includes('.HEIC')
       ) {
+        this.showLoading = true;
+
         selectedFile = await this.convertHeicToJpg(inputElement.files[0]);
         imageEvent = {
           target: {
@@ -179,8 +183,8 @@ export class ImageUploadComponent implements OnChanges {
       this.fileSizeError = '';
       // this.imageChangedEvent = event;
       this.imageChangedEvent = imageEvent;
-      this.showCropPopup = true;
       this.selectedFile = selectedFile;
+      this.showLoading = false;
     }
   }
   // convertHeicToJpg(heicDataUrl: File) {
