@@ -113,10 +113,10 @@ export class ImageUploadComponent implements OnChanges {
   }
   fileChangeEvent(event: Event): void {
     const inputElement = event.target as HTMLInputElement;
-
     // Check if files are selected
     if (inputElement.files && inputElement.files.length > 0) {
       const selectedFile = inputElement.files[0];
+      console.log(selectedFile);
 
       // Check file size (1MB = 1024 * 1024 bytes)
       const maxSizeInBytes = 5 * 1024 * 1024; // 1MB
@@ -131,7 +131,17 @@ export class ImageUploadComponent implements OnChanges {
 
         return;
       }
+      if (!selectedFile.type.startsWith('image/')) {
+        // Set the error message for file type
+        this.fileSizeError = '只允許上傳圖片文件，請重新上傳';
 
+        // Clear other properties to prevent further actions
+        this.imageChangedEvent = null;
+        this.showCropPopup = false;
+        this.selectedFile = null;
+
+        return;
+      }
       // Continue with the cropping process
       this.fileSizeError = ''; // Clear the error message
       this.imageChangedEvent = event;

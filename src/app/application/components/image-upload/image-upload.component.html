@@ -15,7 +15,13 @@
       </svg>
       <p>{{ childLabel }}</p>
     </button>
-    <input type="file" name="myfile" #fileInput (change)="fileChangeEvent($event)" />
+    <input
+      type="file"
+      name="myfile"
+      #fileInput
+      (change)="fileChangeEvent($event)"
+      accept="image/*"
+    />
   </div>
   <div class="fileUpload__preview" *ngIf="showCroppedImage">
     <img [src]="croppedImageLink.toString()" alt="Cropped Image" />
