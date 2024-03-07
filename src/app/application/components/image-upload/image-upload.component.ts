@@ -169,10 +169,8 @@ export class ImageUploadComponent implements OnChanges {
         }
       }
       this.fileSizeError = '';
-      console.log(selectedFile);
       // this.imageChangedEvent = event;
       this.imageChangedEvent = imageEvent;
-      console.log(this.imageChangedEvent, 'asd');
       this.showCropPopup = true;
       this.selectedFile = selectedFile;
     }
@@ -229,7 +227,6 @@ export class ImageUploadComponent implements OnChanges {
   //   }
   // }
   imageCropped(event: ImageCroppedEvent): void {
-    console.log(event, 'called');
     if (event.blob) {
       this.croppedImage = event.blob;
     }
@@ -240,7 +237,6 @@ export class ImageUploadComponent implements OnChanges {
   }
   setCropImage() {
     this.showCroppedImage = true;
-    console.log(this.selectedFile, 'cropped');
 
     // Ensure both selectedFile and croppedImage are available
     if (this.selectedFile && this.croppedImage) {
