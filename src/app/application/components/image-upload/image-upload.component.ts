@@ -11,6 +11,7 @@ import {
 import { ImageCroppedEvent, LoadedImage } from 'ngx-image-cropper';
 import { NgxImageCompressService } from 'ngx-image-compress';
 import { DomSanitizer } from '@angular/platform-browser';
+import heic2any from 'heic2any';
 @Component({
   selector: 'app-image-upload',
   templateUrl: './image-upload.component.html',
@@ -29,7 +30,8 @@ export class ImageUploadComponent implements OnChanges {
   @Input() index: number = 0;
   @Input() childLabel: string = '';
   @Input() type: string = '';
-  imageChangedEvent: Event | null = null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  imageChangedEvent: any = null;
   croppedImage: Blob | null = null;
   selectedFile: File | null = null;
   croppedImageLink: string = '';
@@ -106,50 +108,128 @@ export class ImageUploadComponent implements OnChanges {
     }
   }
   resetFileInput() {
+    this.imageChangedEvent = null;
+    this.showCropPopup = false;
+    this.selectedFile = null;
     if (this.fileInput) {
       // Reset the input value to an empty string
       this.fileInput.nativeElement.value = '';
     }
   }
-  fileChangeEvent(event: Event): void {
+  convertHeicToJpg(heicDataUrl: File): Promise<File> {
+    return new Promise((resolve, reject) => {
+      heic2any({
+        blob: heicDataUrl,
+        toType: 'image/jpeg',
+      })
+        .then(function (resultBlob) {
+          const blob = Array.isArray(resultBlob) ? new Blob(resultBlob) : resultBlob;
+          const file = new File([blob], 'converted.jpg', { type: 'image/jpeg' });
+          resolve(file);
+        })
+        .catch(function (error) {
+          console.error('Error converting HEIC to JPG:', error);
+          reject(error);
+        });
+    });
+  }
+
+  async fileChangeEvent(event: Event) {
     const inputElement = event.target as HTMLInputElement;
     // Check if files are selected
     if (inputElement.files && inputElement.files.length > 0) {
-      const selectedFile = inputElement.files[0];
-      console.log(selectedFile);
-
-      // Check file size (1MB = 1024 * 1024 bytes)
-      const maxSizeInBytes = 5 * 1024 * 1024; // 1MB
-      if (selectedFile.size > maxSizeInBytes) {
-        // Set the error message
-        this.fileSizeError = '上傳的文件不能超過5MB, 請重新上傳';
-
-        // Clear other properties to prevent further actions
-        this.imageChangedEvent = null;
-        this.showCropPopup = false;
-        this.selectedFile = null;
-
-        return;
+      const maxSizeInBytes = 5 * 1024 * 1024; // 5MB
+      let selectedFile;
+      let imageEvent;
+      if (inputElement.files[0].name.includes('.heic')) {
+        selectedFile = await this.convertHeicToJpg(inputElement.files[0]);
+        imageEvent = {
+          target: {
+            files: [selectedFile],
+          },
+        };
+      } else {
+        selectedFile = inputElement.files[0];
+        imageEvent = event;
       }
-      // if (!selectedFile.type.startsWith('image/')) {
-      //   // Set the error message for file type
-      //   this.fileSizeError = '只允許上傳圖片文件，請重新上傳';
-
-      //   // Clear other properties to prevent further actions
-      //   this.imageChangedEvent = null;
-      //   this.showCropPopup = false;
-      //   this.selectedFile = null;
-
-      //   return;
-      // }
-      // Continue with the cropping process
-      this.fileSizeError = ''; // Clear the error message
-      this.imageChangedEvent = event;
+      if (selectedFile) {
+        if (!selectedFile.type.startsWith('image/')) {
+          this.fileSizeError = '只允許上傳圖片文件，請重新上傳';
+          this.imageChangedEvent = null;
+          this.showCropPopup = false;
+          this.selectedFile = null;
+          return;
+        }
+        if (selectedFile.size > maxSizeInBytes) {
+          this.fileSizeError = '上傳的文件不能超過5MB, 請重新上傳';
+          this.imageChangedEvent = null;
+          this.showCropPopup = false;
+          this.selectedFile = null;
+          return;
+        }
+      }
+      this.fileSizeError = '';
+      console.log(selectedFile);
+      // this.imageChangedEvent = event;
+      this.imageChangedEvent = imageEvent;
+      console.log(this.imageChangedEvent, 'asd');
       this.showCropPopup = true;
       this.selectedFile = selectedFile;
     }
   }
+  // convertHeicToJpg(heicDataUrl: File) {
+  //   heic2any({
+  //     blob: heicDataUrl,
+  //     toType: 'image/jpeg',
+  //   })
+  //     .then(function (resultBlob) {
+  //       const blob = Array.isArray(resultBlob) ? new Blob(resultBlob) : resultBlob;
+  //       const file = new File([blob], 'converted.jpg', { type: 'image/jpeg' });
+  //       console.log('Converted image file:', file);
+  //       return file;
+  //     })
+  //     .catch(function (error) {
+  //       console.error('Error converting HEIC to JPG:', error);
+  //     });
+  // }
+  // async fileChangeEvent(event: Event) {
+  //   const inputElement = event.target as HTMLInputElement;
+  //   // Check if files are selected
+  //   if (inputElement.files && inputElement.files.length > 0) {
+  //     let selectedFile = inputElement.files[0];
+  //     const maxSizeInBytes = 5 * 1024 * 1024; // 1MB
+  //     console.log(selectedFile);
+  //     if (selectedFile) {
+  //       try {
+  //         selectedFile = await this.convertHeicToJpg(selectedFile);
+  //       } catch (error) {
+  //         console.error('Error converting HEIC to JPG:', error);
+  //         // Handle conversion error
+  //         return;
+  //       }
+  //     }
+  //     if (!selectedFile.type.startsWith('image/')) {
+  //       this.fileSizeError = '只允許上傳圖片文件，請重新上傳';
+  //       this.imageChangedEvent = null;
+  //       this.showCropPopup = false;
+  //       this.selectedFile = null;
+  //       return;
+  //     }
+  //     if (selectedFile.size > maxSizeInBytes) {
+  //       this.fileSizeError = '上傳的文件不能超過5MB, 請重新上傳';
+  //       this.imageChangedEvent = null;
+  //       this.showCropPopup = false;
+  //       this.selectedFile = null;
+  //       return;
+  //     }
+  //     this.fileSizeError = '';
+  //     this.imageChangedEvent = event;
+  //     this.showCropPopup = true;
+  //     this.selectedFile = selectedFile;
+  //   }
+  // }
   imageCropped(event: ImageCroppedEvent): void {
+    console.log(event, 'called');
     if (event.blob) {
       this.croppedImage = event.blob;
     }
@@ -160,6 +240,7 @@ export class ImageUploadComponent implements OnChanges {
   }
   setCropImage() {
     this.showCroppedImage = true;
+    console.log(this.selectedFile, 'cropped');
 
     // Ensure both selectedFile and croppedImage are available
     if (this.selectedFile && this.croppedImage) {
