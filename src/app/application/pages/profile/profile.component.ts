@@ -387,8 +387,10 @@ export class ProfileComponent implements OnInit {
     if (this.profilePatch) {
       method = 'PATCH';
     }
-    const date = this.formatDate(this.ProfileForm.value.birth_date);
+    console.log(this.ProfileForm.value, 'data');
 
+    const date = this.formatDate(this.ProfileForm.value.birth_date);
+    console.log(this.calculatedBodyMass, 'date');
     const data = {
       first_name: this.ProfileForm.value.first_name,
       last_name: this.ProfileForm.value.last_name,
@@ -401,7 +403,10 @@ export class ProfileComponent implements OnInit {
       weight: this.ProfileForm.value.weight,
       height: this.ProfileForm.value.height,
       body_fat: this.ProfileForm.value.body_fat,
-      body_mass: this.calculatedBodyMass !== undefined ? this.calculatedBodyMass.toString() : null,
+      body_mass:
+        this.calculatedBodyMass !== undefined && this.calculatedBodyMass !== null
+          ? this.calculatedBodyMass.toString()
+          : null,
       waist: this.ProfileForm.value.waist,
       hips: this.ProfileForm.value.hips,
       activity_level: this.ProfileForm.value.activity_level,
