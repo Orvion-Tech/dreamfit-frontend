@@ -14,7 +14,7 @@
     </div>
     <div class="daily-profile-alert" *ngIf="showProfileAlert">
       <div class="daily-profile-alert__cont">
-        <p>Hey {{ homeData.user_name }}, Don't forget to upload Daily Body Data</p>
+        <p>Hey {{ homeData?.user_name }}, Don't forget to upload Daily Body Data</p>
         <a (click)="personalClick()">Let's Upload</a>
       </div>
     </div>

@@ -25,6 +25,15 @@ import { CalenderComponent } from './application/pages/calender/calender.compone
 import { MealSummaryComponent } from './application/pages/meal-summary/meal-summary.component';
 import { ImageUploadComponent } from './application/components/image-upload/image-upload.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { TranslationService } from './translation.service';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { LanguageSelectorComponent } from './application/components/language-selector/language-selector.component';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, '../assets/i18n/', '.json');
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,6 +52,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     CalenderComponent,
     MealSummaryComponent,
     ImageUploadComponent,
+    LanguageSelectorComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,8 +65,16 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     MatNativeDateModule,
     BrowserAnimationsModule,
     ImageCropperModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
   ],
-  providers: [],
+  providers: [TranslationService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
