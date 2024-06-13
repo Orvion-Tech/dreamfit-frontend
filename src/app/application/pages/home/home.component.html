@@ -37,9 +37,9 @@
       <div class="meal-summary__table" *ngIf="homeData !== undefined">
         <div class="meal-summary__table__col">
           <p>&nbsp;</p>
-          <p>{{ 'GOAL' | translate }}</p>
-          <p>{{ 'CURRENT' | translate }}</p>
-          <p>{{ 'REMAINING' | translate }}</p>
+          <p>{{ 'GOAL:' | translate }}</p>
+          <p>{{ 'CURRENT:' | translate }}</p>
+          <p>{{ 'REMAINING:' | translate }}</p>
         </div>
         <div class="meal-summary__table__col">
           <p>{{ 'MAIN 🍚' | translate }}</p>
@@ -176,7 +176,7 @@
                 class="input__errorMsg"
                 *ngIf="personalProfileForm.get('poopoo')?.hasError('required')"
               >
-                {{ 'BOWEL MOVEMENT IS REQUIRED.' | translate }}
+                {{ ' BOWEL MOVEMENT IS REQUIRED. ' | translate }}
               </p>
             </div>
           </div>
@@ -198,7 +198,7 @@
                 class="input__errorMsg"
                 *ngIf="personalProfileForm.get('body_fat')?.hasError('required')"
               >
-                {{ ' BODY FAT IS REQUIRED.' | translate }}
+                {{ ' BODY FAT IS REQUIRED. ' | translate }}
               </p>
             </div>
             <div
@@ -250,7 +250,7 @@
           />
           <input
             type="button"
-            value="Submit Daily Profile"
+            value="{{ 'SUBMIT DAILY PROFILE' | translate }}"
             class="primaryBtn primaryBtn__smallHeight"
             *ngIf="notToday"
             (click)="onProfileSubmit()"
@@ -264,16 +264,16 @@
       </div>
       <div class="meal-management__body" *ngIf="showMeal">
         <div class="meal-management__body__btn" (click)="showMealFormClick('Breakfast')">
-          {{ '+ ADD BREAKFAST' | translate }}
+          <p>{{ ' + ADD BREAKFAST ' | translate }}</p>
         </div>
         <div class="meal-management__body__btn" (click)="showMealFormClick('Lunch')">
-          {{ '+ ADD LUNCH' | translate }}
+          <p>{{ ' + ADD LUNCH ' | translate }}</p>
         </div>
         <div class="meal-management__body__btn" (click)="showMealFormClick('Dinner')">
-          {{ '+ ADD DINNER' | translate }}
+          <p>{{ ' + ADD DINNER ' | translate }}</p>
         </div>
         <div class="meal-management__body__btn" (click)="showMealFormClick('Snacks')">
-          {{ ' + ADD SNACKS' | translate }}
+          <p>{{ ' + ADD SNACKS ' | translate }}</p>
         </div>
       </div>
     </div>
@@ -297,7 +297,7 @@
           />
         </svg>
       </a>
-      <p class="meal-popup__header__title">{{ '+ ADD' | translate }} {{ mealType }}</p>
+      <p class="meal-popup__header__title">{{ '+ ADD ' | translate }} {{ mealType }}</p>
     </div>
     <form class="meal-popup__form" [formGroup]="mealForm">
       <div class="meal-popup__form__time grid grid___space-between">
@@ -391,7 +391,7 @@
       </div>
       <input
         type="button"
-        value="Submit Daily Profile"
+        value="{{ 'SUBMIT DAILY PROFILE' | translate }}"
         class="primaryBtn primaryBtn__smallHeight"
         (click)="onMealSubmit()"
       />

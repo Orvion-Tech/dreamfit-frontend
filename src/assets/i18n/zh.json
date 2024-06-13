@@ -71,7 +71,7 @@
   " + ADD LUNCH ": "+添加午餐",
   " + ADD DINNER ": "+添加晚餐",
   " + ADD SNACKS ": "+添加零食",
-  "+ ADD ": " ",
+  "+ ADD ": "添加",
   "SELECT TIME:": "選擇時間",
   "NO SECRET CODE ASSIGN TO YOU. PLEASE CONTACT YOUR TUTOR TO ASSIGN CODE": "您尚未獲得專屬的餐盤密碼",
   " PLEASE ENTER VALID PASSWORD ": "請輸入有效的密碼",
@@ -149,5 +149,7 @@
   "BODY MASS (KG)": "脂肪量(kg)",
   "TREND TABLE": "趨勢表",
   "LAST 30 DAYS": "過往30日",
-  "LAST 90 DAYS": "過往90日"
+  "LAST 90 DAYS": "過往90日",
+  "SUBMIT DAILY PROFILE": "提交每日個人資料",
+  "UPLOAD FRONT PROFILE PHOTO": "上傳正面頭像"
 }

@@ -36,7 +36,7 @@
         </div>
         <div class="profile-screen__body__form__body__row">
           <div class="profile-screen__body__form__body__input">
-            <label for="dob">{{ 'BIRTHDAY' | translate }}</label>
+            <label for="dob">{{ 'BIRTHDAY:' | translate }}</label>
             <input
               type="date"
               formControlName="birth_date"
@@ -46,7 +46,7 @@
             />
           </div>
           <div class="profile-screen__body__form__body__input">
-            <label for="gender">{{ 'GENDER' | translate }}</label>
+            <label for="gender">{{ 'GENDER:' | translate }}</label>
             <select formControlName="gender">
               <option value="1">{{ 'MALE' | translate }}</option>
               <option value="2">{{ 'FEMALE' | translate }}</option>
@@ -87,14 +87,14 @@
           <label for="waist">{{ 'WAIST (CM):' | translate }}</label>
           <input type="number" formControlName="waist" value="30" />
           <small class="profile-screen__body__form__body__input__info">{{
-            'DECIMAL DATA IS NOT ALLOWED"' | translate
+            'DECIMAL DATA IS NOT ALLOWED' | translate
           }}</small>
         </div>
         <div class="profile-screen__body__form__body__input">
           <label for="hips">{{ 'HIPS (CM):' | translate }}</label>
           <input type="number" formControlName="hips" value="Patel" />
           <small class="profile-screen__body__form__body__input__info">{{
-            'DECIMAL DATA IS NOT ALLOWED"' | translate
+            'DECIMAL DATA IS NOT ALLOWED' | translate
           }}</small>
         </div>
         <div class="profile-screen__body__form__body__input">
@@ -127,7 +127,7 @@
         </div> -->
         <div class="profile-screen__body__form__body__row">
           <div class="profile-screen__body__form__body__input">
-            <label for="sleeping">{{ 'USUAL SLEEPING TIME' | translate }}</label>
+            <label for="sleeping">{{ 'USUAL SLEEPING TIME:' | translate }}</label>
             <input type="time" formControlName="sleep_time" placeholder="HH:MM" />
           </div>
           <div class="profile-screen__body__form__body__input">
