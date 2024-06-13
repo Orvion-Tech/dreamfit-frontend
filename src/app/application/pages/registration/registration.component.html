@@ -2,7 +2,7 @@
   <div class="registration__cont appcontainer">
     <div class="registration__cont__top">
       <img src="../../../../assets/images/logo1.png" width="140" height="102" />
-      <p>Register</p>
+      <p>{{ 'REGISTER' | translate }}</p>
     </div>
     <form class="registration__cont__form" [formGroup]="registrationForm">
       <ng-container *ngIf="!otpVerified">
@@ -13,7 +13,7 @@
           }"
         >
           <select formControlName="country_code" placeholder="Select Country Code">
-            <option value="" disabled>Select Country Code</option>
+            <option value="" disabled>{{ 'SELECT COUNTRY CODE' | translate }}</option>
             <option value="+852">+852</option>
             <option value="+86">+86</option>
             <option value="+81">+81</option>
@@ -22,7 +22,7 @@
             class="input__errorMsg"
             *ngIf="registrationForm.get('country_code')?.hasError('required')"
           >
-            Country Code is required.
+            {{ 'COUNTRY CODE IS REQUIRED. ' | translate }}
           </p>
         </div>
         <div
@@ -46,13 +46,13 @@
             class="input__errorMsg"
             *ngIf="registrationForm.get('phone_number')?.hasError('required')"
           >
-            Mobile number is required.
+            {{ ' MOBILE NUMBER IS REQUIRED.' | translate }}
           </p>
           <p
             class="input__errorMsg"
             *ngIf="registrationForm.get('phone_number')?.hasError('pattern')"
           >
-            Please enter a valid 8-digit mobile number.
+            {{ 'PLEASE ENTER A VALID 8-DIGIT MOBILE NUMBER.' | translate }}
           </p>
         </div>
         <div
@@ -73,10 +73,10 @@
             [readOnly]="otpVerified"
           />
           <p class="input__errorMsg" *ngIf="registrationForm.get('otp')?.hasError('required')">
-            Otp is required.
+            {{ ' OTP IS REQUIRED. ' | translate }}
           </p>
           <p class="input__errorMsg" *ngIf="registrationForm.get('otp')?.hasError('pattern')">
-            Please enter a valid 4-digit otp.
+            {{ ' PLEASE ENTER A VALID 4-DIGIT OTP.' | translate }}
           </p>
         </div>
         <div
@@ -95,7 +95,7 @@
             formControlName="invitation_code"
           />
 
-          <p class="input__errorMsg">invitation is required.</p>
+          <p class="input__errorMsg">{{ 'INVITATION CODE IS REQUIRED.' | translate }}</p>
         </div>
       </ng-container>
       <ng-container *ngIf="otpVerified">
@@ -105,7 +105,7 @@
             input___error: password && registrationForm.get('password')?.hasError('required')
           }"
         >
-          <label><span>*</span>Password</label>
+          <label><span>*</span>{{ 'PASSWORD' | translate }}</label>
           <input
             type="password"
             placeholder="**************"
@@ -113,7 +113,7 @@
             (input)="resetError()"
           />
           <p class="input__errorMsg" *ngIf="registrationForm.get('password')?.hasError('required')">
-            Password is required.
+            {{ 'PASSWORD IS REQUIRED.' | translate }}
           </p>
         </div>
         <div
@@ -124,7 +124,7 @@
               (confirmPassword && registrationForm.get('confirmPassword')?.hasError('required'))
           }"
         >
-          <label><span>*</span>Confirm Password</label>
+          <label><span>*</span>{{ 'CONFIRM PASSWORD IS REQUIRED.' | translate }}</label>
           <input
             type="password"
             placeholder="**************"
@@ -135,7 +135,7 @@
             class="input__errorMsg"
             *ngIf="registrationForm.get('confirmPassword')?.hasError('required')"
           >
-            Confirm Password is required.
+            {{ 'CONFIRM PASSWORD IS REQUIRED.' | translate }}
           </p>
           <p class="input__errorMsg" *ngIf="passwordMismatch">Passwords do not match.</p>
         </div>
@@ -164,7 +164,7 @@
           *ngIf="otpVerified"
         />
       </div>
-      <a class="secondaryBtn" href="/login">Already have an account?</a>
+      <a class="secondaryBtn" href="/login">{{ 'ALREADY HAVE AN ACCOUNT?' | translate }}</a>
     </form>
   </div>
 </div>

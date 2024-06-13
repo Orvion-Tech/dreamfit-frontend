@@ -19,7 +19,7 @@
   </div>
   <div class="fileUpload__preview" *ngIf="showCroppedImage">
     <img [src]="croppedImageLink.toString()" alt="Cropped Image" />
-    <a class="fileUpload__delete" (click)="deleteFile()">Delete</a>
+    <a class="fileUpload__delete" (click)="deleteFile()">{{ 'DELETE' | translate }}</a>
   </div>
   <div *ngIf="fileSizeError" class="error">
     {{ fileSizeError }}
@@ -48,7 +48,9 @@
     (loadImageFailed)="loadImageFailed()"
   ></image-cropper>
   <div class="crop_popup__row">
-    <a (click)="setCropImage()" class="primaryBlueBtn primaryBlueBtn__smallHeight">Set Image</a>
-    <a (click)="hideCropPopup()" class="secondaryBtn">Close</a>
+    <a (click)="setCropImage()" class="primaryBlueBtn primaryBlueBtn__smallHeight">{{
+      'SET IMAGE' | translate
+    }}</a>
+    <a (click)="hideCropPopup()" class="secondaryBtn">{{ 'CLOSE' | translate }}</a>
   </div>
 </div>

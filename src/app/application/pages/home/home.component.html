@@ -3,19 +3,24 @@
   <!-- <app-image-upload /> -->
   <ng-container *ngIf="!noSecretMsg">
     <div class="today-mission">
-      <h3>Today's Mission</h3>
+      <h3>{{ "TODAY'S MISSION" | translate }}</h3>
       <div class="today-mission__row">
         <div class="today-mission__row__date">
           <img src="../../../../assets/images/time.svg" alt="time" width="20" height="20" />
           <p>{{ formattedDate }}</p>
         </div>
-        <a class="today-mission__row__btn" (click)="prevDate()">Go to previous Date</a>
+        <a class="today-mission__row__btn" (click)="prevDate()">{{
+          'GO TO PREVIOUS DATE' | translate
+        }}</a>
       </div>
     </div>
     <div class="daily-profile-alert" *ngIf="showProfileAlert">
       <div class="daily-profile-alert__cont">
-        <p>Hey {{ homeData?.user_name }}, Don't forget to upload Daily Body Data</p>
-        <a (click)="personalClick()">Let's Upload</a>
+        <p>
+          {{ 'HEY' | translate }} {{ homeData?.user_name }},
+          {{ "DON'T FORGET TO UPLOAD DAILY BODY DATA " | translate }}
+        </p>
+        <a (click)="personalClick()">{{ "LET'S UPLOAD" | translate }}</a>
       </div>
     </div>
     <div class="meal-summary">
@@ -32,36 +37,36 @@
       <div class="meal-summary__table" *ngIf="homeData !== undefined">
         <div class="meal-summary__table__col">
           <p>&nbsp;</p>
-          <p>Goal:</p>
-          <p>Current:</p>
-          <p>Remaining:</p>
+          <p>{{ 'GOAL' | translate }}</p>
+          <p>{{ 'CURRENT' | translate }}</p>
+          <p>{{ 'REMAINING' | translate }}</p>
         </div>
         <div class="meal-summary__table__col">
-          <p>Main 🍚</p>
+          <p>{{ 'MAIN 🍚' | translate }}</p>
           <p>{{ homeData.goal.rice_noodels }}</p>
           <p>{{ homeData.current_code.rice_noodels }}</p>
           <p>{{ homeData.remaning_code.rice_noodels }}</p>
         </div>
         <div class="meal-summary__table__col">
-          <p>Meat 🥩</p>
+          <p>{{ 'MEAT 🥩' | translate }}</p>
           <p>{{ homeData.goal.meat }}</p>
           <p>{{ homeData.current_code.meat }}</p>
           <p>{{ homeData.remaning_code.meat }}</p>
         </div>
         <div class="meal-summary__table__col">
-          <p>Veggie 🥦</p>
+          <p>{{ 'VEGGIE 🥦' | translate }}</p>
           <p>{{ homeData.goal.vegitables }}</p>
           <p>{{ homeData.current_code.vegitables }}</p>
           <p>{{ homeData.remaning_code.vegitables }}</p>
         </div>
         <div class="meal-summary__table__col">
-          <p>Fruit🍓</p>
+          <p>{{ 'FRUIT🍓' | translate }}</p>
           <p>{{ homeData.goal.fruits }}</p>
           <p>{{ homeData.current_code.fruits }}</p>
           <p>{{ homeData.remaning_code.fruits }}</p>
         </div>
         <div class="meal-summary__table__col">
-          <p>Water 💧</p>
+          <p>{{ 'WATER 💧' | translate }}</p>
           <p>{{ homeData.goal.water }}</p>
           <p>{{ homeData.current_code.water }}</p>
           <p>{{ homeData.remaning_code.water }}</p>
@@ -76,7 +81,7 @@
         homeData.assigned_suppliment.length > 0
       "
     >
-      <h2>Supplements</h2>
+      <h2>{{ 'SUPPLEMENTS' | translate }}</h2>
       <div class="supplement__cont">
         <div class="supplement__cont__box" *ngFor="let data of homeData.assigned_suppliment">
           <img
@@ -100,7 +105,7 @@
       "
     >
       <div [ngClass]="{ 'tutor-message__row': true }">
-        <h3>Message from the Tutor:</h3>
+        <h3>{{ 'MESSAGE FROM THE TUTOR:' | translate }}</h3>
         <svg
           width="16"
           height="17"
@@ -120,11 +125,13 @@
       }}</a> -->
     </div>
     <div [ngClass]="{ 'personal-profile': true, 'personal-profile___show': showPersonal }">
-      <div class="personal-profile__header" (click)="personalClick()">Daily Body Data</div>
+      <div class="personal-profile__header" (click)="personalClick()">
+        {{ 'DAILY BODY DATA' | translate }}
+      </div>
       <div class="personal-profile__body" *ngIf="showPersonal">
         <form action="" [formGroup]="personalProfileForm">
           <div class="personal-profile__body__period" *ngIf="homeData.gender === '2'">
-            <p>Period</p>
+            <p>{{ 'PERIOD' | translate }}</p>
             <label class="switch">
               <input type="checkbox" formControlName="meanstation_cycle" />
               <span class="slider round"></span>
@@ -137,7 +144,7 @@
                 input___error: weight && personalProfileForm.get('weight')?.hasError('required')
               }"
             >
-              <label>Weight (kg)</label>
+              <label>{{ 'WEIGHT (KG)' | translate }}</label>
               <input
                 type="number"
                 formControlName="weight"
@@ -147,7 +154,7 @@
                 class="input__errorMsg"
                 *ngIf="personalProfileForm.get('weight')?.hasError('required')"
               >
-                Weight is required.
+                {{ 'WEIGHT IS REQUIRED.' | translate }}
               </p>
             </div>
             <div
@@ -156,7 +163,7 @@
                 input___error: poopoo && personalProfileForm.get('poopoo')?.hasError('required')
               }"
             >
-              <label>Bowel Movement</label>
+              <label>{{ 'BOWEL MOVEMENT' | translate }}</label>
               <!-- <input type="number" formControlName="poopoo" (input)="resetError()" /> -->
               <select formControlName="poopoo">
                 <option value="0">0</option>
@@ -169,7 +176,7 @@
                 class="input__errorMsg"
                 *ngIf="personalProfileForm.get('poopoo')?.hasError('required')"
               >
-                Bowel Movement is required.
+                {{ 'BOWEL MOVEMENT IS REQUIRED.' | translate }}
               </p>
             </div>
           </div>
@@ -181,7 +188,7 @@
                 input___error: body_fat && personalProfileForm.get('body_fat')?.hasError('required')
               }"
             >
-              <label>Body Fat (%) </label>
+              <label>{{ 'BODY FAT (%) ' | translate }} </label>
               <input
                 type="number"
                 formControlName="body_fat"
@@ -191,7 +198,7 @@
                 class="input__errorMsg"
                 *ngIf="personalProfileForm.get('body_fat')?.hasError('required')"
               >
-                Body Fat is required.
+                {{ ' BODY FAT IS REQUIRED.' | translate }}
               </p>
             </div>
             <div
@@ -201,7 +208,7 @@
                   body_mass && personalProfileForm.get('body_mass')?.hasError('required')
               }"
             >
-              <label>Fat Mass (kg)</label>
+              <label>{{ 'FAT MASS (KG)' | translate }}</label>
               <input
                 type="number"
                 formControlName="body_mass"
@@ -213,7 +220,7 @@
                 class="input__errorMsg"
                 *ngIf="personalProfileForm.get('body_mass')?.hasError('required')"
               >
-                Body Mass is required.
+                {{ 'BODY MASS IS REQUIRED. ' | translate }}
               </p>
             </div>
           </div>
@@ -252,19 +259,21 @@
       </div>
     </div>
     <div [ngClass]="{ 'meal-management': true, 'meal-management___show': showMeal }">
-      <div class="meal-management__header" (click)="mealClick()">Meal Management</div>
+      <div class="meal-management__header" (click)="mealClick()">
+        {{ 'MEAL MANAGEMENT' | translate }}
+      </div>
       <div class="meal-management__body" *ngIf="showMeal">
         <div class="meal-management__body__btn" (click)="showMealFormClick('Breakfast')">
-          + Add Breakfast
+          {{ '+ ADD BREAKFAST' | translate }}
         </div>
         <div class="meal-management__body__btn" (click)="showMealFormClick('Lunch')">
-          + Add Lunch
+          {{ '+ ADD LUNCH' | translate }}
         </div>
         <div class="meal-management__body__btn" (click)="showMealFormClick('Dinner')">
-          + Add Dinner
+          {{ '+ ADD DINNER' | translate }}
         </div>
         <div class="meal-management__body__btn" (click)="showMealFormClick('Snacks')">
-          + Add Snacks
+          {{ ' + ADD SNACKS' | translate }}
         </div>
       </div>
     </div>
@@ -288,11 +297,11 @@
           />
         </svg>
       </a>
-      <p class="meal-popup__header__title">+ Add {{ mealType }}</p>
+      <p class="meal-popup__header__title">{{ '+ ADD' | translate }} {{ mealType }}</p>
     </div>
     <form class="meal-popup__form" [formGroup]="mealForm">
       <div class="meal-popup__form__time grid grid___space-between">
-        <p>Select Time:</p>
+        <p>{{ 'SELECT TIME:' | translate }}</p>
         <!-- <a class="meal-popup__form__time__btn"> {{ formattedTime }}</a> -->
         <input
           type="time"
@@ -392,6 +401,8 @@
     <div class="loader"></div>
   </div>
   <div class="no-secret-code" *ngIf="noSecretMsg">
-    <h2>No secret code assign to you. Please contact your tutor to assign code</h2>
+    <h2>
+      {{ 'NO SECRET CODE ASSIGN TO YOU. PLEASE CONTACT YOUR TUTOR TO ASSIGN CODE' | translate }}
+    </h2>
   </div>
 </div>

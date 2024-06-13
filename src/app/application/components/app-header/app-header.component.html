@@ -22,7 +22,7 @@
     </a>
   </div>
   <div class="header__menu" *ngIf="showMenu">
-    <a href="/meal-summary">Meal Summary</a>
-    <a (click)="logout()">Log Out</a>
+    <a href="/meal-summary">{{ 'MEAL SUMMARY' | translate }}</a>
+    <a (click)="logout()">{{ 'LOG OUT' | translate }}</a>
   </div>
 </div>

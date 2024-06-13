@@ -1,7 +1,7 @@
 <div class="app-container summary-screen">
   <app-app-header />
   <div class="summary-screen__body">
-    <h1 class="summary-screen__body__title">Meal Summary</h1>
+    <h1 class="summary-screen__body__title">{{ 'MEAL SUMMARY' | translate }}</h1>
     <div class="summary-screen__body__calender">
       <!-- <a class="summary-screen__body__calender__date">Dec 30, 2019 (GMT+8)</a> -->
       <input
@@ -10,7 +10,9 @@
         (change)="dateChange($event)"
         class="summary-screen__body__calender__date"
       />
-      <a class="summary-screen__body__calender__export" (click)="showExport()">Export</a>
+      <a class="summary-screen__body__calender__export" (click)="showExport()">{{
+        'EXPORT' | translate
+      }}</a>
     </div>
     <div class="export" id="contentToExport">
       <div class="meal-summary">
@@ -27,36 +29,36 @@
         <div class="meal-summary__table" *ngIf="homeData !== undefined">
           <div class="meal-summary__table__col">
             <p>&nbsp;</p>
-            <p>Goal:</p>
-            <p>Current:</p>
-            <p>Remaining:</p>
+            <p>{{ 'GOAL' | translate }}</p>
+            <p>{{ 'CURRENT' | translate }}</p>
+            <p>{{ 'REMAINING' | translate }}</p>
           </div>
           <div class="meal-summary__table__col">
-            <p>Main 🍚</p>
+            <p>{{ 'MAIN 🍚' | translate }}</p>
             <p>{{ homeData.goal.rice_noodels }}</p>
             <p>{{ homeData.current_code.rice_noodels }}</p>
             <p>{{ homeData.remaning_code.rice_noodels }}</p>
           </div>
           <div class="meal-summary__table__col">
-            <p>Meat 🥩</p>
+            <p>{{ 'MEAT 🥩' | translate }}</p>
             <p>{{ homeData.goal.meat }}</p>
             <p>{{ homeData.current_code.meat }}</p>
             <p>{{ homeData.remaning_code.meat }}</p>
           </div>
           <div class="meal-summary__table__col">
-            <p>Veggie 🥦</p>
+            <p>{{ 'VEGGIE 🥦' | translate }}</p>
             <p>{{ homeData.goal.vegitables }}</p>
             <p>{{ homeData.current_code.vegitables }}</p>
             <p>{{ homeData.remaning_code.vegitables }}</p>
           </div>
           <div class="meal-summary__table__col">
-            <p>Fruit🍓</p>
+            <p>{{ 'FRUIT🍓' | translate }}</p>
             <p>{{ homeData.goal.fruits }}</p>
             <p>{{ homeData.current_code.fruits }}</p>
             <p>{{ homeData.remaning_code.fruits }}</p>
           </div>
           <div class="meal-summary__table__col">
-            <p>Water 💧</p>
+            <p>{{ 'WATER 💧' | translate }}</p>
             <p>{{ homeData.goal.water }}</p>
             <p>{{ homeData.current_code.water }}</p>
             <p>{{ homeData.remaning_code.water }}</p>
@@ -173,7 +175,7 @@
             </div>
           </div>
           <div class="summary-screen__body__box__remarks" *ngIf="meal.remarks !== null">
-            <p class="summary-screen__body__box__remarks__title">Remarks:</p>
+            <p class="summary-screen__body__box__remarks__title">{{ 'REMARKS:' | translate }}</p>
             <p>{{ meal.remarks }}</p>
           </div>
         </div>
@@ -186,7 +188,7 @@
           homeData.assigned_suppliment.length > 0
         "
       >
-        <h2>Supplements</h2>
+        <h2>{{ 'SUPPLEMENTS' | translate }}</h2>
         <div class="supplement__cont">
           <div class="supplement__cont__box" *ngFor="let data of homeData.assigned_suppliment">
             <img
@@ -209,7 +211,7 @@
           homeData.meal_comment.length > 0
         "
       >
-        <h2>Comments</h2>
+        <h2>{{ 'COMMENTS' | translate }}</h2>
         <p>{{ homeData.meal_comment[0].comment }}</p>
       </div>
     </div>
@@ -232,10 +234,10 @@
           />
         </svg>
       </a>
-      <p class="export-popup__cont__title">Export Today's Summary</p>
+      <p class="export-popup__cont__title">{{ 'EXPORT TODAY'S SUMMARY' | translate }}</p>
       <div class="export-popup__cont__row">
-        <a (click)="exportToPdf()">Export as PDF</a>
-        <a (click)="exportToJpg()">Export as JPG</a>
+        <a (click)="exportToPdf()">{{ 'EXPORT AS PDF' | translate }}</a>
+        <a (click)="exportToJpg()">{{ 'EXPORT AS JPG' | translate }}</a>
       </div>
     </div>
   </div>
