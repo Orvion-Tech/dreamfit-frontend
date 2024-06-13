@@ -103,8 +103,8 @@
   "ACTIVE - EXERCISE 6-7 DAYS/WEEK": "active - exercise 6-7 days/week",
   "VERY ACTIVE - HARD EXERCISE 6-7 DAYS/WEEK": "very active - hard exercise 6-7 days/week",
   "YOUR BMI": "your BMI",
-  "YOUR BASE CALORIE REQURIEMENT: ": "your base calorie requirement: ",
-  "YOUR DAILY CALORIE REQUIREMENT: ": "your daily calorie requirement: ",
+  "YOUR BASE CALORIE REQURIEMENT:": "your base calorie requirement: ",
+  "YOUR DAILY CALORIE REQUIREMENT:": "your daily calorie requirement: ",
   "USUAL SLEEPING TIME:": "usual sleeping time:",
   "USUAL WAKEUP TIME:": "usual wakeup time:",
   "SLEEP QUALITY:": "sleep quality:",
@@ -151,5 +151,10 @@
   "LAST 30 DAYS": "last 30 days",
   "LAST 90 DAYS": "last 90 days",
   "SUBMIT DAILY PROFILE": "Submit Daily Profile",
-  "UPLOAD FRONT PROFILE PHOTO": "Upload Front Profile Photo"
+  "UPLOAD FRONT PROFILE PHOTO": "Upload Front Profile Photo",
+  "UPLOAD SIDE PROFILE PHOTO": "Upload Side Profile Photo",
+  "UPLOAD BACK PROFILE PHOTO": "Upload Back Profile Photo",
+  "UPLOAD MEAL PHOTO 1": "Upload Meal Photo 1",
+  "UPLOAD MEAL PHOTO 2": "Upload Meal Photo 2",
+  "UPLOAD MEAL PHOTO 3": "Upload Meal Photo 3"
 }

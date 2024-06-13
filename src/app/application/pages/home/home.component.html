@@ -229,7 +229,7 @@
             (deleteLastFile)="deleteLastFile($event)"
             (fileSelected)="fileChangeEvent($event)"
             [index]="0"
-            [childLabel]="'Upload Front Profile Photo'"
+            [childLabel]="'UPLOAD FRONT PROFILE PHOTO' | translate"
             [type]="'profile'"
           />
           <app-image-upload
@@ -237,14 +237,14 @@
             (deleteLastFile)="deleteLastFile($event)"
             (fileSelected)="fileChangeEvent($event)"
             [index]="1"
-            [childLabel]="'Upload Side Profile Photo'"
+            [childLabel]="'UPLOAD SIDE PROFILE PHOTO' | translate"
             [type]="'profile'"
           />
           <app-image-upload
             [uploadedFiles]="uploadedFiles"
             (deleteLastFile)="deleteLastFile($event)"
             (fileSelected)="fileChangeEvent($event)"
-            [childLabel]="'Upload Back Profile Photo'"
+            [childLabel]="'UPLOAD BACK PROFILE PHOTO' | translate"
             [index]="2"
             [type]="'profile'"
           />
@@ -317,7 +317,7 @@
             (deleteLastFile)="deleteMealLastFile($event)"
             (fileSelected)="mealFileChangeEvent($event)"
             [index]="0"
-            [childLabel]="'Upload Meal Photo 1'"
+            [childLabel]="'UPLOAD MEAL PHOTO 1' | translate"
             [type]="'meal'"
           />
           <app-image-upload
@@ -325,7 +325,7 @@
             (deleteLastFile)="deleteMealLastFile($event)"
             (fileSelected)="mealFileChangeEvent($event)"
             [index]="1"
-            [childLabel]="'Upload Meal Photo 2'"
+            [childLabel]="'UPLOAD MEAL PHOTO 2' | translate"
             [type]="'meal'"
           />
           <app-image-upload
@@ -333,7 +333,7 @@
             (deleteLastFile)="deleteMealLastFile($event)"
             (fileSelected)="mealFileChangeEvent($event)"
             [index]="2"
-            [childLabel]="'Upload Meal Photo 3'"
+            [childLabel]="'UPLOAD MEAL PHOTO 3' | translate"
             [type]="'meal'"
           />
         </div>

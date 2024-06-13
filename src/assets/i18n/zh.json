@@ -16,7 +16,7 @@
   "CLOSE": "關閉",
   "TODAY": "今日",
   "LET'S RECORD YOUR DATA EVERYDAY!": "開始記錄每天的數據吧！",
-  "PERIOD DAY": " ",
+  "PERIOD DAY": "經期日",
   "WEIGHT": "體重",
   "BODY FAT": "體脂率",
   "FAT MASS": "脂肪量",
@@ -103,8 +103,8 @@
   "ACTIVE - EXERCISE 6-7 DAYS/WEEK": "每週運動6-7次",
   "VERY ACTIVE - HARD EXERCISE 6-7 DAYS/WEEK": "每天重度運動或重勞力工作者",
   "YOUR BMI": "您的BMI",
-  "YOUR BASE CALORIE REQURIEMENT: ": "基礎代謝率(BMR)",
-  "YOUR DAILY CALORIE REQUIREMENT: ": "每日總熱量消耗 (TDEE)",
+  "YOUR BASE CALORIE REQURIEMENT:": "基礎代謝率(BMR)",
+  "YOUR DAILY CALORIE REQUIREMENT:": "每日總熱量消耗 (TDEE)",
   "USUAL SLEEPING TIME:": "睡眠時間",
   "USUAL WAKEUP TIME:": "起床時間",
   "SLEEP QUALITY:": "睡眠質量",
@@ -151,5 +151,10 @@
   "LAST 30 DAYS": "過往30日",
   "LAST 90 DAYS": "過往90日",
   "SUBMIT DAILY PROFILE": "提交每日個人資料",
-  "UPLOAD FRONT PROFILE PHOTO": "上傳正面頭像"
+  "UPLOAD FRONT PROFILE PHOTO": "上傳正面頭像",
+  "UPLOAD SIDE PROFILE PHOTO": "上傳側面照片",
+  "UPLOAD BACK PROFILE PHOTO": "上傳背面個人資料照片",
+  "UPLOAD MEAL PHOTO 1": "上傳餐點照片1",
+  "UPLOAD MEAL PHOTO 2": "上傳餐點照片2",
+  "UPLOAD MEAL PHOTO 3": "上傳餐點照片3"
 }
