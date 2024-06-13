@@ -53,13 +53,13 @@ export class LanguageSelectorComponent implements OnInit {
     });
   }
 
-  onChangeLanguage(event: Event) {
+  async onChangeLanguage(event: Event) {
     const target = event.target as HTMLSelectElement;
     if (target) {
       const lang = target.value;
       const urlTree = this.router.parseUrl(this.router.url);
       urlTree.root.children['primary'].segments[0].path = lang;
-      this.router.navigateByUrl(urlTree);
+      await this.router.navigateByUrl(urlTree);
       this.translationService.setLanguage(lang);
     }
   }
