@@ -4,6 +4,7 @@
   background-attachment: fixed;
   background-position: center;
   height: 100vh;
+
   @media screen and (min-width: 767px) {
     max-width: 462px;
     margin: 0 auto;
@@ -17,6 +18,11 @@
     gap: 24px;
     padding: 24px 32px;
     padding-top: 80px;
+    &__lang {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+    }
     &__top {
       display: grid;
       justify-content: center;

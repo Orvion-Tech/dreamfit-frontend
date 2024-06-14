@@ -1,5 +1,8 @@
 <div class="registration">
   <div class="registration__cont appcontainer">
+    <div class="registration__cont__lang">
+      <app-language-selector></app-language-selector>
+    </div>
     <div class="registration__cont__top">
       <img src="../../../../assets/images/logo1.png" width="140" height="102" />
       <p>{{ 'REGISTER' | translate }}</p>
@@ -144,7 +147,7 @@
         <!-- <a href="">Forgot your password?</a> -->
         <input
           type="button"
-          value="Send OTP"
+          [value]="'SEND OTP' | translate"
           class="primaryBtn"
           (click)="sendOTP()"
           *ngIf="!otpSent"
