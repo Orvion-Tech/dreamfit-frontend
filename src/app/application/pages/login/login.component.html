@@ -38,10 +38,10 @@
           (input)="resetError()"
         />
         <p class="input__errorMsg" *ngIf="loginForm.get('phone_number')?.hasError('required')">
-          {{ ' MOBILE NUMBER IS REQUIRED.' | translate }}
+          {{ 'MOBILE NUMBER IS REQUIRED.' | translate }}
         </p>
         <p class="input__errorMsg" *ngIf="loginForm.get('phone_number')?.hasError('pattern')">
-          {{ ' PLEASE ENTER A VALID 8-DIGIT MOBILE NUMBER.' | translate }}
+          {{ 'PLEASE ENTER A VALID 8-DIGIT MOBILE NUMBER.' | translate }}
         </p>
       </div>
       <div
@@ -66,7 +66,12 @@
         <a href="/{{ currentLang }}/forgot-password">{{ 'FORGOT YOUR PASSWORD?' | translate }}</a>
       </div>
 
-      <input type="button" value="Login" class="primaryBtn" (click)="onSubmit()" />
+      <input
+        type="button"
+        [value]="'LOGIN BTN' | translate"
+        class="primaryBtn"
+        (click)="onSubmit()"
+      />
 
       <a href="/{{ currentLang }}/registration" class="secondaryBtn">{{
         'REGISTER' | translate

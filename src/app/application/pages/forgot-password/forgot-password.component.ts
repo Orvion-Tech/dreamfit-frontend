@@ -1,13 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AbortControllerService } from '../../../abort-controller.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.scss'],
 })
-export class ForgotPasswordComponent {
+export class ForgotPasswordComponent implements OnInit {
   forgotpasswordForm: FormGroup;
   phoneNumber = false;
   otp = false;
@@ -17,8 +18,10 @@ export class ForgotPasswordComponent {
   otpVerified = false;
   countryCode = false;
   passwordMismatch = false;
+  currentLang: string = 'en';
   constructor(
     private fb: FormBuilder,
+    private route: ActivatedRoute,
     private abortControllerService: AbortControllerService,
   ) {
     this.forgotpasswordForm = this.fb.group({
@@ -27,6 +30,12 @@ export class ForgotPasswordComponent {
       country_code: ['', Validators.required],
       password: ['', Validators.required],
       confirmPassword: ['', [Validators.required]],
+    });
+  }
+  ngOnInit(): void {
+    this.route.params.subscribe((params) => {
+      console.log(params['lang']);
+      this.currentLang = params['lang'] || 'en';
     });
   }
   passwordMatchValidator() {
@@ -72,7 +81,7 @@ export class ForgotPasswordComponent {
           // localStorage.setItem('token_timestamp', now);
           localStorage.setItem('id_token', data.token.access);
           localStorage.setItem('user_id', user_id);
-          window.location.replace('/home');
+          window.location.replace(`${this.currentLang}/home`);
           this.abortControllerService.resetAbortController();
 
           // window.location.replace('/account');

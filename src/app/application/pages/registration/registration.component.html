@@ -22,7 +22,7 @@
             class="input__errorMsg"
             *ngIf="registrationForm.get('country_code')?.hasError('required')"
           >
-            {{ 'COUNTRY CODE IS REQUIRED. ' | translate }}
+            {{ 'COUNTRY CODE IS REQUIRED.' | translate }}
           </p>
         </div>
         <div
@@ -46,7 +46,7 @@
             class="input__errorMsg"
             *ngIf="registrationForm.get('phone_number')?.hasError('required')"
           >
-            {{ ' MOBILE NUMBER IS REQUIRED.' | translate }}
+            {{ 'MOBILE NUMBER IS REQUIRED.' | translate }}
           </p>
           <p
             class="input__errorMsg"
@@ -73,7 +73,7 @@
             [readOnly]="otpVerified"
           />
           <p class="input__errorMsg" *ngIf="registrationForm.get('otp')?.hasError('required')">
-            {{ ' OTP IS REQUIRED. ' | translate }}
+            {{ 'OTP IS REQUIRED.' | translate }}
           </p>
           <p class="input__errorMsg" *ngIf="registrationForm.get('otp')?.hasError('pattern')">
             {{ ' PLEASE ENTER A VALID 4-DIGIT OTP.' | translate }}
