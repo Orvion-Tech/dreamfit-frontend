@@ -164,7 +164,9 @@
           *ngIf="otpVerified"
         />
       </div>
-      <a class="secondaryBtn" href="/login">{{ 'ALREADY HAVE AN ACCOUNT?' | translate }}</a>
+      <a class="secondaryBtn" href="{{ currentLang }}/login">{{
+        'ALREADY HAVE AN ACCOUNT?' | translate
+      }}</a>
     </form>
   </div>
 </div>

@@ -63,12 +63,14 @@
         <!-- <p class="input__info">At least 8 digits</p> -->
       </div>
       <div class="login__cont__form__forgot">
-        <a href="/forgot-password">{{ 'FORGOT YOUR PASSWORD?' | translate }}</a>
+        <a href="/{{ currentLang }}/forgot-password">{{ 'FORGOT YOUR PASSWORD?' | translate }}</a>
       </div>
 
       <input type="button" value="Login" class="primaryBtn" (click)="onSubmit()" />
 
-      <a href="/registration" class="secondaryBtn">{{ 'REGISTER' | translate }}</a>
+      <a href="/{{ currentLang }}/registration" class="secondaryBtn">{{
+        'REGISTER' | translate
+      }}</a>
     </form>
     <!-- <div class="login__cont__mid">
       <div class="login__cont__mid__top">
