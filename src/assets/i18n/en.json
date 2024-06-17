@@ -46,7 +46,7 @@
   "TODAY'S MISSION": "today's mission",
   "GO TO PREVIOUS DATE": "go to previous date",
   "HEY ": "hey",
-  "DON'T FORGET TO UPLOAD DAILY BODY DATA ": "Don't forget to upload Daily Body Data",
+  "DON'T FORGET TO UPLOAD DAILY BODY DATA": "Don't forget to upload Daily Body Data🙂",
   "LET'S UPLOAD": "let's upload",
   "GOAL:": "goal",
   "CURRENT:": "current",
@@ -160,5 +160,6 @@
   "UPLOAD MEAL PHOTO 3": "Upload Meal Photo 3",
   "SEND OTP": "Send Otp",
   "VERIFY OTP": "verify OTP",
-  "RESET PASSWORD": "Reset Password"
+  "RESET PASSWORD": "Reset Password",
+  "SAVE": "Save"
 }

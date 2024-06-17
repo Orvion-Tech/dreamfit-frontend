@@ -17,8 +17,8 @@
     <div class="daily-profile-alert" *ngIf="showProfileAlert">
       <div class="daily-profile-alert__cont">
         <p>
-          {{ 'HEY' | translate }} {{ homeData?.user_name }},
-          {{ "DON'T FORGET TO UPLOAD DAILY BODY DATA " | translate }}
+          {{ homeData?.user_name }},
+          {{ "DON'T FORGET TO UPLOAD DAILY BODY DATA" | translate }}
         </p>
         <a (click)="personalClick()">{{ "LET'S UPLOAD" | translate }}</a>
       </div>
