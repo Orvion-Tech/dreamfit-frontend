@@ -170,6 +170,13 @@
           <textarea rows="3" formControlName="regular_medicine">Paracetamol</textarea>
         </div>
         <div class="profile-screen__body__form__body__input">
+          <label for="medicines">{{
+            'DO YOU HAVE FAMILY HISTORY OF DIABETES, HYPERTENSION, HIGH CHOLESTEROL, HEART ATTACK OR STROKE?'
+              | translate
+          }}</label>
+          <textarea rows="3" formControlName="cronical_information"></textarea>
+        </div>
+        <div class="profile-screen__body__form__body__input">
           <label for="allergies">{{ 'LIST FOOD ALLERGIES, IF ANY:' | translate }}</label>
           <textarea rows="3" formControlName="food_allergy">Lorem ipsum</textarea>
         </div>
