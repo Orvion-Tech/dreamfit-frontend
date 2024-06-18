@@ -74,6 +74,7 @@ export class ProfileComponent implements OnInit {
       meanstation_cycle: [false],
       family_history: [''],
       regular_medicine: [''],
+      cronical_information: [''],
       food_allergy: [''],
       food_test_preference: [''],
       bowl_movememnt_trend: [''],
@@ -207,6 +208,7 @@ export class ProfileComponent implements OnInit {
           this.ProfileForm!.get('sleep_quality')!.setValue(data.sleep_quality);
           this.ProfileForm!.get('family_history')!.setValue(data.family_history);
           this.ProfileForm!.get('regular_medicine')!.setValue(data.regular_medicine);
+          this.ProfileForm!.get('cronical_information')!.setValue(data.cronical_information);
           this.ProfileForm!.get('food_allergy')!.setValue(data.food_allergy);
           this.ProfileForm!.get('bowl_movememnt_trend')!.setValue(data.bowl_movememnt_trend);
           this.ProfileForm!.get('normal_stool_form')!.setValue(data.normal_stool_form);
@@ -336,6 +338,7 @@ export class ProfileComponent implements OnInit {
           this.ProfileForm!.get('sleep_quality')!.setValue(data.sleep_quality);
           this.ProfileForm!.get('family_history')!.setValue(data.family_history);
           this.ProfileForm!.get('regular_medicine')!.setValue(data.regular_medicine);
+          this.ProfileForm!.get('cronical_information')!.setValue(data.cronical_information);
           this.ProfileForm!.get('food_allergy')!.setValue(data.food_allergy);
           this.ProfileForm!.get('bowl_movememnt_trend')!.setValue(data.bowl_movememnt_trend);
           this.ProfileForm!.get('normal_stool_form')!.setValue(data.normal_stool_form);
@@ -419,6 +422,7 @@ export class ProfileComponent implements OnInit {
       sleep_quality: this.ProfileForm.value.sleep_quality,
       family_history: this.ProfileForm.value.family_history,
       regular_medicine: this.ProfileForm.value.regular_medicine,
+      cronical_information: this.ProfileForm.value.cronical_information,
       food_allergy: this.ProfileForm.value.food_allergy,
       food_test_preference: this.selectedOptions,
       bowl_movememnt_trend: this.ProfileForm.value.bowl_movememnt_trend,
