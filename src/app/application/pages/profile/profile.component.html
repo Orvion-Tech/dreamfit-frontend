@@ -1,7 +1,7 @@
 <div class="app-container profile-screen">
   <app-app-header />
   <div class="profile-screen__body">
-    <h1 class="profile-screen__body__title">User Profile</h1>
+    <h1 class="profile-screen__body__title">{{ 'USER PROFILE' | translate }}</h1>
     <form class="profile-screen__body__form" [formGroup]="ProfileForm">
       <div class="profile-screen__body__form__img">
         <img
@@ -20,30 +20,30 @@
             accept="image/png, image/jpeg"
             (change)="handleFileInput('user_image', $event)"
           />
-          <label for="upload">Upload Photo</label>
+          <label for="upload">{{ 'UPLOAD PHOTO' | translate }}</label>
         </div>
       </div>
       <div class="profile-screen__body__form__body">
         <div class="profile-screen__body__form__body__row">
           <div class="profile-screen__body__form__body__input">
-            <label for="first_name">First Name:</label>
+            <label for="first_name">{{ 'FIRST NAME:' | translate }}</label>
             <input type="text" formControlName="first_name" value="Ravi" />
           </div>
           <div class="profile-screen__body__form__body__input">
-            <label for="last_name">Last Name:</label>
+            <label for="last_name">{{ 'LAST NAME:' | translate }}</label>
             <input type="text" formControlName="last_name" value="Patel" />
           </div>
         </div>
         <div class="profile-screen__body__form__body__row">
           <div class="profile-screen__body__form__body__input">
-            <label for="dob">Birthday:</label>
-            <!-- <input
+            <label for="dob">{{ 'BIRTHDAY:' | translate }}</label>
+            <input
               type="date"
               formControlName="birth_date"
               value="16-11-1992"
               min="1964-01-01"
               placeholder="DD-MM-YYYY"
-            /> -->
+            />
             <mat-form-field>
               <input
                 matInput
@@ -57,16 +57,16 @@
             </mat-form-field>
           </div>
           <div class="profile-screen__body__form__body__input">
-            <label for="gender">Gender:</label>
+            <label for="gender">{{ 'GENDER:' | translate }}</label>
             <select formControlName="gender">
-              <option value="1">Male</option>
-              <option value="2">Female</option>
+              <option value="1">{{ 'MALE' | translate }}</option>
+              <option value="2">{{ 'FEMALE' | translate }}</option>
             </select>
           </div>
         </div>
         <div class="profile-screen__body__form__body__row">
           <div class="profile-screen__body__form__body__input">
-            <label for="fat_mass">Weight (kg):</label>
+            <label for="fat_mass">{{ 'WEIGHT (KG):' | translate }}</label>
             <input
               type="number"
               formControlName="weight"
@@ -75,17 +75,17 @@
             />
           </div>
           <div class="profile-screen__body__form__body__input">
-            <label for="fat_mass">Height (cm):</label>
+            <label for="fat_mass">{{ 'HEIGHT (CM):' | translate }}</label>
             <input type="number" formControlName="height" maxlength="3" />
           </div>
         </div>
         <div class="profile-screen__body__form__body__row">
           <div class="profile-screen__body__form__body__input">
-            <label for="body_fat">Body Fat(%):</label>
+            <label for="body_fat">{{ 'BODY FAT(%):' | translate }}</label>
             <input type="number" formControlName="body_fat" (input)="calculateBodyMass()" />
           </div>
           <div class="profile-screen__body__form__body__input">
-            <label for="fat_mass">Fat Mass(kg):</label>
+            <label for="fat_mass">{{ 'FAT MASS(KG):' | translate }}</label>
             <input
               type="number"
               formControlName="body_mass"
@@ -95,33 +95,36 @@
           </div>
         </div>
         <div class="profile-screen__body__form__body__input">
-          <label for="waist">Waist (cm):</label>
+          <label for="waist">{{ 'WAIST (CM):' | translate }}</label>
           <input type="number" formControlName="waist" value="30" />
-          <small class="profile-screen__body__form__body__input__info"
-            >Decimal data should not allowed</small
-          >
+          <small class="profile-screen__body__form__body__input__info">{{
+            'DECIMAL DATA IS NOT ALLOWED' | translate
+          }}</small>
         </div>
         <div class="profile-screen__body__form__body__input">
-          <label for="hips">Hips (cm):</label>
+          <label for="hips">{{ 'HIPS (CM):' | translate }}</label>
           <input type="number" formControlName="hips" value="Patel" />
-          <small class="profile-screen__body__form__body__input__info"
-            >Decimal data should not allowed</small
-          >
+          <small class="profile-screen__body__form__body__input__info">{{
+            'DECIMAL DATA IS NOT ALLOWED' | translate
+          }}</small>
         </div>
         <div class="profile-screen__body__form__body__input">
-          <label for="Activity_level">Activity Level:</label>
+          <label for="Activity_level">{{ 'ACTIVITY LEVEL:' | translate }}</label>
           <select formControlName="activity_level">
-            <option value="1">Sedentary - Little or no exercise</option>
-            <option value="2">Light Active - Exercise 1-2 Days/Week</option>
-            <option value="3">Moderately Active Exercise 3-5 Days/Week</option>
-            <option value="4">Active - Exercise 6-7 Days/Week</option>
-            <option value="5">Very Active - Hard Exercise 6-7 Days/Week</option>
+            <option value="1">{{ 'SEDENTARY - LITTLE OR NO EXERCISE' | translate }}</option>
+            <option value="2">{{ 'LIGHT ACTIVE - EXERCISE 1-2 DAYS/WEEK' | translate }}</option>
+            <option value="3">{{ 'MODERATELY ACTIVE EXERCISE 3-5 DAYS/WEEK' | translate }}</option>
+            <option value="4">{{ 'ACTIVE - EXERCISE 6-7 DAYS/WEEK' | translate }}</option>
+            <option value="5">{{ 'VERY ACTIVE - HARD EXERCISE 6-7 DAYS/WEEK' | translate }}</option>
           </select>
         </div>
         <div class="profile-screen__body__form__body__bmi" *ngIf="BMI > 0">
-          <p><span>Your BMI</span>: {{ BMI }}</p>
-          <p>Your base calorie requriement: {{ bseCalorie }} calories</p>
-          <p>Your daily calorie requirement: {{ dailyCalorie }} calories</p>
+          <p>
+            <span>{{ 'YOUR BMI' | translate }}</span
+            >: {{ BMI }}
+          </p>
+          <p>{{ 'YOUR BASE CALORIE REQURIEMENT:' | translate }} {{ bseCalorie }} calories</p>
+          <p>{{ 'YOUR DAILY CALORIE REQUIREMENT:' | translate }} {{ dailyCalorie }} calories</p>
         </div>
         <!-- <div class="profile-screen__body__form__body__input">
           <label for="timezone">Select timezone:</label>
@@ -135,7 +138,7 @@
         </div> -->
         <div class="profile-screen__body__form__body__row">
           <div class="profile-screen__body__form__body__input">
-            <label for="sleeping">Usual Sleeping time:</label>
+            <label for="sleeping">{{ 'USUAL SLEEPING TIME:' | translate }}</label>
             <select formControlName="sleep_time">
               <option value="00:00:00">12:00 AM</option>
               <option value="00:15:00">12:15 AM</option>
@@ -248,7 +251,7 @@
             <!-- <input type="time" formControlName="sleep_time" placeholder="HH:MM" /> -->
           </div>
           <div class="profile-screen__body__form__body__input">
-            <label for="wakeup">Usual Wakeup time:</label>
+            <label for="wakeup">{{ 'USUAL WAKEUP TIME:' | translate }}</label>
             <select formControlName="wakeup_time">
               <option value="00:00:00">12:00 AM</option>
               <option value="00:15:00">12:15 AM</option>
@@ -361,41 +364,52 @@
           </div>
         </div>
         <div class="profile-screen__body__form__body__input">
-          <label for="sleep_quality">Sleep Quality:</label>
+          <label for="sleep_quality">{{ 'SLEEP QUALITY:' | translate }}</label>
           <select formControlName="sleep_quality">
-            <option value="1">Easy to wakeup from light sleep</option>
-            <option value="2">Good sleep quality</option>
-            <option value="3">Sleep quality is good but difficult to fall sleep</option>
-            <option value="4">Light sleep</option>
+            <option value="1">{{ 'EASY TO WAKEUP FROM LIGHT SLEEP' | translate }}</option>
+            <option value="2">{{ 'GOOD SLEEP QUALITY' | translate }}</option>
+            <option value="3">
+              {{ 'SLEEP QUALITY IS GOOD BUT DIFFICULT TO FALL SLEEP' | translate }}
+            </option>
+            <option value="4">{{ 'LIGHT SLEEP' | translate }}</option>
           </select>
         </div>
         <div
           class="profile-screen__body__form__body__input"
           *ngIf="ProfileForm.value.gender === '2'"
         >
-          <label for="sleep_quality"
-            >Do you have your discoumfort before and after menstrual.Or the condition of the skin
-            has deteriorated significantly?</label
-          >
+          <label for="sleep_quality">{{
+            'DO YOU HAVE YOUR DISCOUMFORT BEFORE AND AFTER MENSTRUAL.OR THE CONDITION OF THE SKIN HAS DETERIORATED SIGNIFICANTLY?'
+              | translate
+          }}</label>
           <select formControlName="meanstation_cycle">
-            <option value="true">Yes</option>
-            <option value="false">No</option>
+            <option value="true">{{ 'YES' | translate }}</option>
+            <option value="false">{{ 'NO' | translate }}</option>
           </select>
         </div>
         <div class="profile-screen__body__form__body__input">
-          <label for="illnesses">List all long-term illnesses here :</label>
+          <label for="illnesses">{{ 'LIST ALL LONG-TERM ILLNESSES HERE :' | translate }}</label>
           <textarea rows="3" formControlName="family_history">Sugar</textarea>
         </div>
         <div class="profile-screen__body__form__body__input">
-          <label for="medicines">Taking regular medicines? If yes, list here :</label>
+          <label for="medicines">{{
+            'TAKING REGULAR MEDICINES? IF YES, LIST HERE :' | translate
+          }}</label>
           <textarea rows="3" formControlName="regular_medicine">Paracetamol</textarea>
         </div>
         <div class="profile-screen__body__form__body__input">
-          <label for="allergies">List food allergies, if any:</label>
+          <label for="medicines">{{
+            'DO YOU HAVE FAMILY HISTORY OF DIABETES, HYPERTENSION, HIGH CHOLESTEROL, HEART ATTACK OR STROKE?'
+              | translate
+          }}</label>
+          <textarea rows="3" formControlName="cronical_information"></textarea>
+        </div>
+        <div class="profile-screen__body__form__body__input">
+          <label for="allergies">{{ 'LIST FOOD ALLERGIES, IF ANY:' | translate }}</label>
           <textarea rows="3" formControlName="food_allergy">Lorem ipsum</textarea>
         </div>
         <div class="profile-screen__body__form__body__input">
-          <label for="food_preference">Food Preference:</label>
+          <label for="food_preference">{{ 'FOOD PREFERENCE:' | translate }}</label>
           <div class="profile-screen__body__form__body__input__checkbox">
             <label class="customCheckbox" *ngFor="let option of options">
               <input
@@ -410,36 +424,36 @@
           </div>
         </div>
         <div class="profile-screen__body__form__body__input">
-          <label for="bowel_movement">How often you have bowel movement?</label>
+          <label for="bowel_movement">{{ 'HOW OFTEN YOU HAVE BOWEL MOVEMENT?' | translate }}</label>
           <select formControlName="bowl_movememnt_trend">
-            <option value="1">Several times a day</option>
-            <option value="2">Once a day</option>
-            <option value="3">Every other day</option>
-            <option value="4">Less than 3 times a week</option>
+            <option value="1">{{ 'SEVERAL TIMES A DAY' | translate }}</option>
+            <option value="2">{{ 'ONCE A DAY' | translate }}</option>
+            <option value="3">{{ 'EVERY OTHER DAY' | translate }}</option>
+            <option value="4">{{ 'LESS THAN 3 TIMES A WEEK' | translate }}</option>
           </select>
         </div>
         <div class="profile-screen__body__form__body__input">
-          <label for="bowel_movement">Usual stool pattern:</label>
+          <label for="bowel_movement">{{ 'USUAL STOOL PATTERN:' | translate }}</label>
           <select formControlName="normal_stool_form">
-            <option value="1">Normal banana shape</option>
-            <option value="2">Hard and fine-grained</option>
-            <option value="3">Pulpy watery</option>
+            <option value="1">{{ 'NORMAL BANANA SHAPE' | translate }}</option>
+            <option value="2">{{ 'HARD AND FINE-GRAINED' | translate }}</option>
+            <option value="3">{{ 'PULPY WATERY' | translate }}</option>
           </select>
         </div>
         <div class="profile-screen__body__form__body__input">
-          <label for="bowel_movement">Work stress index:</label>
+          <label for="bowel_movement">{{ 'WORK STRESS INDEX:' | translate }}</label>
           <select formControlName="work_stress_index">
-            <option value="1">1 - Low</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5 - High</option>
+            <option value="1">{{ '1 - LOW' | translate }}</option>
+            <option value="2">{{ '2' | translate }}</option>
+            <option value="3">{{ '3' | translate }}</option>
+            <option value="4">{{ '4' | translate }}</option>
+            <option value="5">{{ '5 - HIGH' | translate }}</option>
           </select>
         </div>
         <div class="profile-screen__body__form__body__btn">
           <input
             type="button"
-            value="Save"
+            value="{{ 'SAVE' | translate }}"
             (click)="submitProfile()"
             class="profile-screen__body__form__body__btn__submit"
           />

@@ -1,18 +1,29 @@
-import { Component, Renderer2 } from '@angular/core';
+import { Component, Renderer2, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-app-header',
   templateUrl: './app-header.component.html',
   styleUrls: ['./app-header.component.scss'],
 })
-export class AppHeaderComponent {
+export class AppHeaderComponent implements OnInit {
   showMenu = false;
-  constructor(private renderer: Renderer2) {}
+  currentLang: string = 'en';
+
+  constructor(
+    private renderer: Renderer2,
+    private route: ActivatedRoute,
+  ) {}
+  ngOnInit(): void {
+    this.route.params.subscribe((params) => {
+      this.currentLang = params['lang'] || 'en';
+    });
+  }
   logout() {
     localStorage.removeItem('user_id');
     localStorage.removeItem('id_token');
     localStorage.removeItem('token_timestamp');
-    window.location.replace('/');
+    window.location.replace('/' + this.currentLang);
   }
   showMenuFn() {
     this.showMenu = !this.showMenu;

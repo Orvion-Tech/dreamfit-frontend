@@ -1,8 +1,11 @@
 <div class="login">
   <div class="login__cont appcontainer">
+    <div class="login__cont__lang">
+      <app-language-selector></app-language-selector>
+    </div>
     <div class="login__cont__top">
       <img src="../../../../assets/images/logo1.png" width="140" height="102" />
-      <p>Login</p>
+      <p>{{ 'LOGIN' | translate }}</p>
     </div>
     <form [formGroup]="loginForm" class="login__cont__form">
       <div
@@ -12,13 +15,13 @@
         }"
       >
         <select formControlName="country_code" placeholder="Select Country Code">
-          <option value="" disabled>Select Country Code</option>
+          <option value="" disabled>{{ 'SELECT COUNTRY CODE' | translate }}</option>
           <option value="+852">+852</option>
           <option value="+86">+86</option>
           <option value="+81">+81</option>
         </select>
         <p class="input__errorMsg" *ngIf="loginForm.get('country_code')?.hasError('required')">
-          Country Code is required.
+          {{ 'COUNTRY CODE IS REQUIRED.' | translate }}
         </p>
       </div>
       <div
@@ -38,10 +41,10 @@
           (input)="resetError()"
         />
         <p class="input__errorMsg" *ngIf="loginForm.get('phone_number')?.hasError('required')">
-          Mobile number is required.
+          {{ 'MOBILE NUMBER IS REQUIRED.' | translate }}
         </p>
         <p class="input__errorMsg" *ngIf="loginForm.get('phone_number')?.hasError('pattern')">
-          Please enter a valid 8-digit mobile number.
+          {{ 'PLEASE ENTER A VALID 8-DIGIT MOBILE NUMBER.' | translate }}
         </p>
       </div>
       <div
@@ -58,17 +61,24 @@
           (input)="resetError()"
         />
         <p class="input__errorMsg" *ngIf="loginForm.get('password')?.hasError('required')">
-          Please Enter Valid Password
+          {{ 'PLEASE ENTER VALID PASSWORD' | translate }}
         </p>
         <!-- <p class="input__info">At least 8 digits</p> -->
       </div>
       <div class="login__cont__form__forgot">
-        <a href="/forgot-password">Forgot your password?</a>
+        <a href="/{{ currentLang }}/forgot-password">{{ 'FORGOT YOUR PASSWORD?' | translate }}</a>
       </div>
 
-      <input type="button" value="Login" class="primaryBtn" (click)="onSubmit()" />
+      <input
+        type="button"
+        [value]="'LOGIN BTN' | translate"
+        class="primaryBtn"
+        (click)="onSubmit()"
+      />
 
-      <a href="/registration" class="secondaryBtn">Register</a>
+      <a href="/{{ currentLang }}/registration" class="secondaryBtn">{{
+        'REGISTER' | translate
+      }}</a>
     </form>
     <!-- <div class="login__cont__mid">
       <div class="login__cont__mid__top">

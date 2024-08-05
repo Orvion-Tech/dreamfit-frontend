@@ -1,7 +1,7 @@
 import { NgModule, importProvidersFrom } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { HttpClientModule, provideHttpClient } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient, HttpClient } from '@angular/common/http';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -37,6 +37,14 @@ import {
   MAT_MOMENT_DATE_ADAPTER_OPTIONS,
   MAT_MOMENT_DATE_FORMATS,
 } from '@angular/material-moment-adapter';
+import { TranslationService } from './translation.service';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { LanguageSelectorComponent } from './application/components/language-selector/language-selector.component';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, '../assets/i18n/', '.json');
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,6 +63,7 @@ import {
     CalenderComponent,
     MealSummaryComponent,
     ImageUploadComponent,
+    LanguageSelectorComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,6 +77,14 @@ import {
     MatNativeDateModule,
     BrowserAnimationsModule,
     ImageCropperModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
   ],
   providers: [
     provideAnimations(),
@@ -79,6 +96,7 @@ import {
       deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS],
     },
     { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
+    TranslationService,
   ],
   bootstrap: [AppComponent],
 })

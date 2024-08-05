@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbortControllerService } from '../../../abort-controller.service';
+import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-login',
@@ -11,9 +12,11 @@ export class LoginComponent implements OnInit {
   countryCode = false;
   phoneNumber = false;
   password = false;
+  currentLang: string = 'en';
 
   constructor(
     private fb: FormBuilder,
+    private route: ActivatedRoute,
     private abortControllerService: AbortControllerService,
   ) {
     this.loginForm = this.fb.group({
@@ -23,12 +26,15 @@ export class LoginComponent implements OnInit {
     });
   }
   ngOnInit(): void {
-    console.log('test');
+    this.route.params.subscribe((params) => {
+      console.log(params['lang']);
+      this.currentLang = params['lang'] || 'en';
+    });
     const idToken: string | null = localStorage.getItem('id_token');
     const userId: string | null = localStorage.getItem('user_id');
     console.log(idToken, userId);
     if (idToken && userId) {
-      window.location.href = '/home';
+      window.location.href = `${this.currentLang}/home`;
     }
   }
   async onSubmit() {
@@ -59,7 +65,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('user_id', user_id);
           const now: number = new Date().getTime();
           localStorage.setItem('token_timestamp', now.toString());
-          window.location.replace('/home');
+          window.location.replace(`${this.currentLang}/home`);
           this.abortControllerService.resetAbortController();
 
           // window.location.replace('/account');

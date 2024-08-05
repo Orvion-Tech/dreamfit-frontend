@@ -1,25 +1,28 @@
 <div class="header">
-  <a href="/home">
+  <a href="/{{ currentLang }}/home">
     <img src="../../../../assets/images/dreamfit.png" alt="logo" width="120" height="30" />
   </a>
-  <a class="header__mobIcon" (click)="showMenuFn()">
-    <img
-      *ngIf="!showMenu"
-      src="../../../assets/images/menu-icon-open.svg"
-      width="24px"
-      height="24px"
-      alt="menu open"
-    />
-    <img
-      *ngIf="showMenu"
-      src="../../../assets/images/menu-icon-close.svg"
-      width="24px"
-      height="24px"
-      alt="menu open"
-    />
-  </a>
+  <div class="header__right">
+    <app-language-selector></app-language-selector>
+    <a class="header__mobIcon" (click)="showMenuFn()">
+      <img
+        *ngIf="!showMenu"
+        src="../../../assets/images/menu-icon-open.svg"
+        width="24px"
+        height="24px"
+        alt="menu open"
+      />
+      <img
+        *ngIf="showMenu"
+        src="../../../assets/images/menu-icon-close.svg"
+        width="24px"
+        height="24px"
+        alt="menu open"
+      />
+    </a>
+  </div>
   <div class="header__menu" *ngIf="showMenu">
-    <a href="/meal-summary">Meal Summary</a>
-    <a (click)="logout()">Log Out</a>
+    <a href="/{{ currentLang }}/meal-summary">{{ 'MEAL SUMMARY' | translate }}</a>
+    <a (click)="logout()">{{ 'LOG OUT' | translate }}</a>
   </div>
 </div>

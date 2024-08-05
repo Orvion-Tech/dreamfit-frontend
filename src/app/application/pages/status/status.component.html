@@ -3,19 +3,19 @@
     <div class="status__cont__icon">
       <div class="status__cont__icon__home">
         <img src="../../../../assets/images/home.svg" alt="home" />
-        <p>Home</p>
+        <p>{{ 'HOME' | translate }}</p>
       </div>
       <div class="status__cont__icon__calendar">
         <img src="../../../../assets/images/calendar.svg" alt="calendar" />
-        <p>Calendar</p>
+        <p>{{ 'CALENDAR' | translate }}</p>
       </div>
       <div class="status__cont__icon__calendar">
         <img src="../../../../assets/images/trend.svg" alt="trend" />
-        <p>Trend</p>
+        <p>{{ 'TREND' | translate }}</p>
       </div>
       <div class="status__cont__icon__calendar">
         <img src="../../../../assets/images/profile.svg" alt="profile" />
-        <p>Profile</p>
+        <p>{{ 'PROFILE' | translate }}</p>
       </div>
     </div>
     <div class="status__cont__content">
@@ -24,7 +24,7 @@
       </div>
       <div class="status__cont__content__mission">
         <div class="status__cont__content__mission__cal">
-          <p>Today's Mission</p>
+          <p>{{ 'TODAY'S MISSION' | translate }}</p>
           <div class="status__cont__content__mission__cal__time">
             <img src="../../../../assets/images/time.svg" alt="time" width="20" height="20" />
             <p>2023-09-28 (GMT+8)</p>
@@ -39,70 +39,74 @@
         </div>
       </div>
       <div class="status__cont__content__name">
-        <h5>John Doe</h5>
+        <h5>{{ 'JOHN DOE' | translate }}</h5>
         <div class="status__cont__content__name__goal">
           <p style="border-right: 1px solid; font-size: 10px; font-weight: 400">
-            <br /><br />Goal:<br />Current: <br />Remaining:
+            <br /><br />{{ 'GOAL:' | translate }}<br />{{ 'CURRENT:' | translate }} <br />{{
+              'REMAINING:' | translate
+            }}
           </p>
           <p style="border-right: 1px solid; font-size: 12px; font-weight: 400">
-            Main 🍚 <br />5 <br />6 <br />
+            {{ 'MAIN 🍚' | translate }} <br />5 <br />6 <br />
             2
           </p>
           <p style="border-right: 1px solid; font-size: 12px; font-weight: 400">
-            Meat 🥩 <br />2 <br />1 <br />
+            {{ 'MEAT 🥩' | translate }} <br />2 <br />1 <br />
             3
           </p>
           <p style="border-right: 1px solid; font-size: 12px; font-weight: 400">
-            Veggie 🥦 <br />2 <br />1 <br />
+            {{ 'VEGGIE 🥦' | translate }} <br />2 <br />1 <br />
             3
           </p>
           <p style="border-right: 1px solid; font-size: 12px; font-weight: 400">
-            Fruit🍓 <br />2 <br />1 <br />
+            {{ 'FRUIT🍓' | translate }} <br />2 <br />1 <br />
             3
           </p>
           <p style="font-size: 12px; font-weight: 400">
-            Water 💧 <br />2400 <br />2400 <br />
+            {{ 'WATER 💧' | translate }} <br />2400 <br />2400 <br />
             2400
           </p>
         </div>
       </div>
       <div class="status__cont__content__supp">
         <h5>
-          Supplement <br />
-          <span>Consumed: 2 Br, 3 Wh</span>
+          {{ 'SUPPLEMENTS' | translate }} <br />
+          <span>{{ 'CONSUMED: 2 BR, 3 WH' | translate }}</span>
         </h5>
         <div class="status__cont__content__supp__goal">
           <p
             style="border-right: 1px solid; font-size: 10px; font-weight: 400; font-family: Poppins"
           >
-            <br />Goal:<br />Current: <br />Remaining:
+            <br />{{ 'GOAL:' | translate }}<br />{{ 'CURRENT:' | translate }} <br />{{
+              'REMAINING:' | translate
+            }}
           </p>
           <p
             style="border-right: 1px solid; font-size: 12px; font-weight: 400; font-family: Poppins"
           >
-            Main 🍚 <br />5 <br />6 <br />
+            {{ 'MAIN 🍚' | translate }} <br />5 <br />6 <br />
             2
           </p>
           <p
             style="border-right: 1px solid; font-size: 12px; font-weight: 400; font-family: Poppins"
           >
-            Meat 🥩 <br />2 <br />1 <br />
+            {{ 'MEAT 🥩' | translate }} <br />2 <br />1 <br />
             3
           </p>
           <p
             style="border-right: 1px solid; font-size: 12px; font-weight: 400; font-family: Poppins"
           >
-            Veggie 🥦 <br />2 <br />1 <br />
+            {{ 'VEGGIE 🥦' | translate }} <br />2 <br />1 <br />
             3
           </p>
           <p
             style="border-right: 1px solid; font-size: 12px; font-weight: 400; font-family: Poppins"
           >
-            Fruit🍓 <br />2 <br />1 <br />
+            {{ 'FRUIT🍓' | translate }}<br />2 <br />1 <br />
             3
           </p>
           <p style="font-size: 12px; font-weight: 400; font-family: Poppins">
-            Water 💧 <br />2400 <br />2400 <br />
+            {{ 'WATER 💧' | translate }} <br />2400 <br />2400 <br />
             2400
           </p>
         </div>
@@ -113,18 +117,21 @@
           <img src="../../../../assets/images/tick.svg" alt="tick" />
         </div>
         <p>
-          Keep exercise at least 2 hour a day. Keep exercise at least 2 hour <br />
-          a day. Keep exercise at least 2 hour a day. <span>See more...</span>
+          {{ 'KEEP EXERCISE AT LEAST 2 HOUR A DAY. KEEP EXERCISE AT LEAST 2 HOUR ' | translate }}
+          <br />
+          a day.
+          {{ 'KEEP EXERCISE AT LEAST 2 HOUR A DAY. KEEP EXERCISE AT LEAST 2 HOUR ' | translate }}
+          <span>See more...</span>
         </p>
       </div>
     </div>
     <div class="status__cont__profile">
       <div class="status__cont__profile__link">
-        <a>Personal profile</a>
+        <a>{{ 'PERSONAL PROFILE' | translate }}</a>
       </div>
       <div style="display: grid; gap: 10px">
         <div class="status__cont__profile__period">
-          <label>Period</label>
+          <label>{{ 'PERIOD' | translate }}</label>
           <label class="toggle-switch">
             <input type="checkbox" [(ngModel)]="isChecked" (change)="toggleChanged()" />
             <span class="slider round"></span>
@@ -136,10 +143,10 @@
               input: true
             }"
           >
-            <label>Weight (kg)</label>
+            <label>{{ 'WEIGHT (KG)' | translate }}</label>
             <input type="text" placeholder="" formControlName="" />
 
-            <p class="input__errorMsg">weight is required.</p>
+            <p class="input__errorMsg">{{ 'WEIGHT IS REQUIRED.' | translate }}</p>
           </div>
         </div>
         <div class="status__cont__profile__fat">
@@ -148,10 +155,10 @@
               input: true
             }"
           >
-            <label>Body Fat (%)</label>
+            <label>{{ 'BODY FAT (%) ' | translate }}</label>
             <input type="text" placeholder="" formControlName="" />
 
-            <p class="input__errorMsg">body fat is required.</p>
+            <p class="input__errorMsg">{{ 'BODY FAT IS REQUIRED. ' | translate }}</p>
           </div>
 
           <div
@@ -159,10 +166,10 @@
               input: true
             }"
           >
-            <label>Body Mass (kg)</label>
+            <label>{{ 'BODY MASS (KG)' | translate }}</label>
             <input type="text" placeholder="80" formControlName="80" />
 
-            <p class="input__errorMsg">body fat is required.</p>
+            <p class="input__errorMsg">{{ 'BODY FAT IS REQUIRED. ' | translate }}</p>
           </div>
         </div>
         <div class="status__cont__profile__upload">
@@ -179,14 +186,14 @@
               <label for="upload">Upload Back Profile Photo</label>
               <input type="file" id="upload" hidden />
 
-              <p class="input__errorMsg">weight is required.</p>
+              <p class="input__errorMsg">{{ 'WEIGHT IS REQUIRED.' | translate }}</p>
             </div>
           </div>
         </div>
         <div class="status__cont__profile__btn">
           <input
             type="button"
-            value="Submit Daily Profile"
+            value="{{ 'SUBMIT DAILY PROFILE' | translate }}"
             class="status__cont__profile__btn__daily"
           />
         </div>
@@ -194,7 +201,7 @@
     </div>
     <div class="status__cont__meal">
       <div class="status__cont__meal__link">
-        <a>Meal Management</a>
+        <a>{{ 'MEAL MANAGEMENT' | translate }}</a>
       </div>
       <div
         [ngClass]="{

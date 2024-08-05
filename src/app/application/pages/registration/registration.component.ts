@@ -1,13 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AbortControllerService } from '../../../abort-controller.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.scss'],
 })
-export class RegistrationComponent {
+export class RegistrationComponent implements OnInit {
   registrationForm: FormGroup;
   phoneNumber = false;
   otp = false;
@@ -18,8 +19,10 @@ export class RegistrationComponent {
   otpVerified = false;
   countryCode = false;
   passwordMismatch = false;
+  currentLang: string = 'en';
   constructor(
     private fb: FormBuilder,
+    private route: ActivatedRoute,
     private abortControllerService: AbortControllerService,
   ) {
     this.registrationForm = this.fb.group({
@@ -29,6 +32,11 @@ export class RegistrationComponent {
       invitation_code: ['', Validators.required],
       password: ['', Validators.required],
       confirmPassword: ['', [Validators.required]],
+    });
+  }
+  ngOnInit() {
+    this.route.params.subscribe((params) => {
+      this.currentLang = params['lang'] || 'en';
     });
   }
   passwordMatchValidator() {
@@ -73,7 +81,7 @@ export class RegistrationComponent {
           // localStorage.setItem('token_timestamp', now);
           localStorage.setItem('id_token', data.token.access);
           localStorage.setItem('user_id', user_id);
-          window.location.replace('/home');
+          window.location.replace(`${this.currentLang}/home`);
           this.abortControllerService.resetAbortController();
 
           // window.location.replace('/account');

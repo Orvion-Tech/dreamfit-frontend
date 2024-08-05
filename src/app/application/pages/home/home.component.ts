@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DateService } from '../../../date.service';
 import { AbortControllerService } from '../../../abort-controller.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -44,6 +45,8 @@ export class HomeComponent implements OnInit {
   loading = false;
   showProfileAlert = false;
   noSecretMsg = false;
+  currentLang: string = 'en';
+
   /**
    *
    * Meal Form Start
@@ -61,6 +64,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private router: Router,
     private tokenService: TokenService,
+    private route: ActivatedRoute,
     private dateService: DateService,
     private sanitizer: DomSanitizer,
     private fb: FormBuilder,
@@ -86,6 +90,10 @@ export class HomeComponent implements OnInit {
     });
   }
   ngOnInit() {
+    this.route.params.subscribe((params) => {
+      this.currentLang = params['lang'] || 'en';
+    });
+    console.log(this.notToday, 'today');
     const currentDate = new Date(); // You can pass any date you want to format
     this.formattedDate = this.dateService.formatDate(currentDate, 'yyyy-MM-dd');
     this.formattedTime = this.dateService.formatTime(currentDate);
@@ -94,7 +102,7 @@ export class HomeComponent implements OnInit {
       localStorage.removeItem('user_id');
       localStorage.removeItem('id_token');
       localStorage.removeItem('token_timestamp');
-      this.router.navigate(['/login']);
+      this.router.navigate([`${this.currentLang}/login`]);
     } else {
       this.homeDataApi(this.formattedDate);
       this.personalDataApi(this.formattedDate, 'GET', null);

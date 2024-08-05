@@ -5,6 +5,11 @@
   align-items: center;
   justify-content: space-between;
   position: relative;
+  &__right {
+    display: grid;
+    grid-auto-flow: column;
+    gap: 8px;
+  }
   &__menu {
     position: absolute;
     background: #fff;

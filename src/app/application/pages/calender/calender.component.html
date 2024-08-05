@@ -46,10 +46,14 @@
         [value]="selectedDate"
         (ngModelChange)="onChange()"
       />
-      <a class="calender-screen__body__row__today" (click)="goToToday()">Today</a>
+      <a class="calender-screen__body__row__today" (click)="goToToday()">{{
+        'TODAY' | translate
+      }}</a>
     </div>
     <div class="calender-screen__body__calender">
-      <p class="calender-screen__body__calender__title">Let's record your data everyday!</p>
+      <p class="calender-screen__body__calender__title">
+        {{ "LET'S RECORD YOUR DATA EVERYDAY!" | translate }}
+      </p>
       <div class="calender-screen__body__calender__body">
         <div class="days">
           <div
@@ -239,7 +243,7 @@
             />
           </svg>
 
-          <p>Period Day</p>
+          <p>{{ 'PERIOD DAY' | translate }}</p>
         </div>
         <div class="calender-screen__body__calender__footer__block">
           <svg
@@ -255,7 +259,7 @@
             />
           </svg>
 
-          <p>Weight</p>
+          <p>{{ 'WEIGHT' | translate }}</p>
         </div>
         <div class="calender-screen__body__calender__footer__block">
           <svg
@@ -271,7 +275,7 @@
             />
           </svg>
 
-          <p>Body Fat</p>
+          <p>{{ 'BODY FAT' | translate }}</p>
         </div>
         <div class="calender-screen__body__calender__footer__block">
           <svg
@@ -287,7 +291,7 @@
             />
           </svg>
 
-          <p>Fat Mass</p>
+          <p>{{ 'FAT MASS' | translate }}</p>
         </div>
         <div class="calender-screen__body__calender__footer__block">
           <svg
@@ -352,7 +356,7 @@
             />
           </svg>
 
-          <p>Photo</p>
+          <p>{{ 'PHOTO' | translate }}</p>
         </div>
         <div class="calender-screen__body__calender__footer__block">
           <svg
@@ -368,13 +372,13 @@
             />
           </svg>
 
-          <p>Bowel Movement</p>
+          <p>{{ 'BOWEL MOVEMENT' | translate }}</p>
         </div>
       </div>
     </div>
-    <a class="primaryBlueBtn" *ngIf="comparisonDate.length >= 2" (click)="showComparisonFn()"
-      >View Comparison</a
-    >
+    <a class="primaryBlueBtn" *ngIf="comparisonDate.length >= 2" (click)="showComparisonFn()">{{
+      'VIEW COMPARISON' | translate
+    }}</a>
   </div>
   <div class="comparison-screen" *ngIf="showComparison">
     <div class="comparison-screen__header">
@@ -395,7 +399,7 @@
           />
         </svg>
       </a>
-      <div class="comparison-screen__title">Comparison</div>
+      <div class="comparison-screen__title">{{ 'COMPARISON' | translate }}</div>
     </div>
     <div class="comparison-screen__selection">
       <a
@@ -403,21 +407,21 @@
         [ngClass]="{
           'comparison-screen__selection__active': comparisonType === 'front'
         }"
-        >Front</a
+        >{{ 'FRONT' | translate }}</a
       >
       <a
         (click)="selectComparision('side')"
         [ngClass]="{
           'comparison-screen__selection__active': comparisonType === 'side'
         }"
-        >Side</a
+        >{{ 'SIDE' | translate }}</a
       >
       <a
         (click)="selectComparision('back')"
         [ngClass]="{
           'comparison-screen__selection__active': comparisonType === 'back'
         }"
-        >Back</a
+        >{{ 'BACK' | translate }}</a
       >
     </div>
     <div id="contentToExport">
@@ -449,8 +453,8 @@
       </div>
     </div>
     <div class="comparison-screen__export">
-      <a (click)="exportToPdf()">Export as PDF</a>
-      <a (click)="exportToJpg()">Export as JPG</a>
+      <a (click)="exportToPdf()">{{ 'EXPORT AS PDF' | translate }}</a>
+      <a (click)="exportToJpg()">{{ 'EXPORT AS JPG' | translate }}</a>
     </div>
   </div>
   <app-app-footer />
