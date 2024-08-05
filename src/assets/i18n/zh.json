@@ -63,7 +63,7 @@
   "WEIGHT (KG)": "體重(kg)",
   " WEIGHT IS REQUIRED. ": "必須輸入體重",
   " BOWEL MOVEMENT IS REQUIRED. ": "必須輸入排便情況",
-  "BODY FAT (%) ": "體重率(%)",
+  "BODY FAT (%) ": "體脂率(%)",
   " BODY FAT IS REQUIRED. ": "必須輸入體重率",
   "FAT MASS (KG)": "脂肪量(kg)",
   " BODY MASS IS REQUIRED. ": "必須輸入脂肪量",
@@ -162,5 +162,10 @@
   "SEND OTP": "发送验证码",
   "VERIFY OTP": "验证一次性密码",
   "RESET PASSWORD": "重设密码",
-  "SAVE": "节省"
+  "SAVE": "儲存",
+  "SWEET": "甜食",
+  "SPICY FOOD": "辛辣",
+  "STRONG FOOD": "濃味",
+  "DIARY PRODUCT": "乳製品",
+  "SNACKS": " 零食"
 }

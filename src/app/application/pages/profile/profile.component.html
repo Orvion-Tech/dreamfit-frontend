@@ -411,7 +411,7 @@
         <div class="profile-screen__body__form__body__input">
           <label for="food_preference">{{ 'FOOD PREFERENCE:' | translate }}</label>
           <div class="profile-screen__body__form__body__input__checkbox">
-            <label class="customCheckbox" *ngFor="let option of options">
+            <!-- <label class="customCheckbox" *ngFor="let option of options">
               <input
                 type="checkbox"
                 [value]="option.value"
@@ -420,6 +420,66 @@
               />
               <span class="checkmark"></span>
               {{ option.label }}
+            </label> -->
+            <label class="customCheckbox">
+              <input
+                type="checkbox"
+                [value]="1"
+                [checked]="isSelected(1)"
+                (change)="toggleOption(1)"
+              />
+              <span class="checkmark"></span>
+              NA
+            </label>
+            <label class="customCheckbox">
+              <input
+                type="checkbox"
+                [value]="2"
+                [checked]="isSelected(2)"
+                (change)="toggleOption(2)"
+              />
+              <span class="checkmark"></span>
+              {{ 'SWEET' | translate }}
+            </label>
+            <label class="customCheckbox">
+              <input
+                type="checkbox"
+                [value]="3"
+                [checked]="isSelected(3)"
+                (change)="toggleOption(3)"
+              />
+              <span class="checkmark"></span>
+              {{ 'SPICY FOOD' | translate }}
+            </label>
+            <label class="customCheckbox">
+              <input
+                type="checkbox"
+                [value]="4"
+                [checked]="isSelected(4)"
+                (change)="toggleOption(4)"
+              />
+              <span class="checkmark"></span>
+              {{ 'STRONG FOOD' | translate }}
+            </label>
+            <label class="customCheckbox">
+              <input
+                type="checkbox"
+                [value]="5"
+                [checked]="isSelected(5)"
+                (change)="toggleOption(5)"
+              />
+              <span class="checkmark"></span>
+              {{ 'DIARY PRODUCT' | translate }}
+            </label>
+            <label class="customCheckbox">
+              <input
+                type="checkbox"
+                [value]="6"
+                [checked]="isSelected(6)"
+                (change)="toggleOption(6)"
+              />
+              <span class="checkmark"></span>
+              {{ 'SNACKS' | translate }}
             </label>
           </div>
         </div>
