@@ -20,24 +20,53 @@ export class RegistrationComponent implements OnInit {
   countryCode = false;
   passwordMismatch = false;
   currentLang: string = 'en';
+  userClassOptions: { key: string | number; value: string }[] = [];
+  userClassLoading = false;
+  userClassError = '';
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private abortControllerService: AbortControllerService,
   ) {
     this.registrationForm = this.fb.group({
-      phone_number: ['', [Validators.required, Validators.pattern(/^\d{8,10}$/)]],
-      otp: ['', [Validators.required, Validators.pattern(/^\d{4}$/)]],
+      phone_number: ['', [Validators.required, Validators.pattern(/^[\d]{8,10}$/)]],
+      otp: ['', [Validators.required, Validators.pattern(/^[\d]{4}$/)]],
       country_code: ['', Validators.required],
       invitation_code: ['', Validators.required],
       password: ['', Validators.required],
       confirmPassword: ['', [Validators.required]],
+      user_class: ['', Validators.required],
     });
   }
   ngOnInit() {
     this.route.params.subscribe((params) => {
       this.currentLang = params['lang'] || 'en';
     });
+    this.fetchUserClassOptions();
+  }
+
+  async fetchUserClassOptions() {
+    this.userClassLoading = true;
+    this.userClassError = '';
+    try {
+      const response = await fetch('https://admin.dreamfithk.com/en/api/user-class-options/');
+      if (response.ok) {
+        const data = await response.json();
+        if (Array.isArray(data)) {
+          this.userClassOptions = data;
+        } else if (Array.isArray(data?.options)) {
+          this.userClassOptions = data.options;
+        } else {
+          this.userClassOptions = [];
+        }
+      } else {
+        this.userClassError = 'Failed to load class options.';
+      }
+    } catch (error) {
+      this.userClassError = 'Error loading class options.';
+    } finally {
+      this.userClassLoading = false;
+    }
   }
   passwordMatchValidator() {
     const passwordCont = this.registrationForm.get('password');
@@ -112,7 +141,8 @@ export class RegistrationComponent implements OnInit {
     if (
       this.registrationForm.get('phone_number')!.valid &&
       this.registrationForm.get('otp')!.valid &&
-      this.registrationForm.get('invitation_code')!.valid
+      this.registrationForm.get('invitation_code')!.valid &&
+      this.registrationForm.get('user_class')!.valid
     ) {
       try {
         const response = await fetch('https://admin.dreamfithk.com/en/api/verify-otp/', {
@@ -126,6 +156,7 @@ export class RegistrationComponent implements OnInit {
               this.registrationForm.get('phone_number')!.value,
             otp: this.registrationForm.get('otp')!.value,
             invitation_code: this.registrationForm.get('invitation_code')!.value,
+            user_class: String(this.registrationForm.get('user_class')!.value),
           }),
           signal: abortController.signal,
         });
@@ -146,11 +177,15 @@ export class RegistrationComponent implements OnInit {
     } else {
       const invitationCodeCont = this.registrationForm.get('invitation_code');
       const otpCont = this.registrationForm.get('otp');
+      const userClassCont = this.registrationForm.get('user_class');
       if (otpCont) {
         this.otp = otpCont.invalid;
       }
       if (invitationCodeCont) {
         this.invitationCode = invitationCodeCont.invalid;
+      }
+      if (userClassCont) {
+        userClassCont.markAsTouched();
       }
     }
   }
@@ -209,5 +244,6 @@ export class RegistrationComponent implements OnInit {
     this.confirmPassword = false;
     this.otp = false;
     this.passwordMismatch = false;
+    this.userClassError = '';
   }
 }

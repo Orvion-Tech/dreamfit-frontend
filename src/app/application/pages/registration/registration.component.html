@@ -31,7 +31,6 @@
         <div
           [ngClass]="{
             input: true,
-            relative: true,
             input___error:
               phoneNumber &&
               (registrationForm.get('phone_number')?.hasError('required') ||
@@ -99,6 +98,34 @@
           />
 
           <p class="input__errorMsg">{{ 'INVITATION CODE IS REQUIRED.' | translate }}</p>
+        </div>
+        <!-- User Class Select -->
+        <div
+          [ngClass]="{
+            input: true,
+            input___error:
+              registrationForm.get('user_class')?.invalid &&
+              registrationForm.get('user_class')?.touched
+          }"
+          *ngIf="otpSent && registrationForm.get('phone_number')!.valid"
+        >
+          <select formControlName="user_class">
+            <option value="" disabled>{{ 'SELECT CLASS' | translate }}</option>
+            <option *ngFor="let option of userClassOptions" [value]="option.key">
+              {{ option.value }}
+            </option>
+          </select>
+          <div *ngIf="userClassLoading">{{ 'Loading classes...' }}</div>
+          <div *ngIf="userClassError">{{ userClassError }}</div>
+          <p
+            class="input__errorMsg"
+            *ngIf="
+              registrationForm.get('user_class')?.invalid &&
+              registrationForm.get('user_class')?.touched
+            "
+          >
+            {{ 'CLASS IS REQUIRED.' | translate }}
+          </p>
         </div>
       </ng-container>
       <ng-container *ngIf="otpVerified">

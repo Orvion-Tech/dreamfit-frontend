@@ -143,11 +143,11 @@ export class ImageUploadComponent implements OnChanges {
     const inputElement = event.target as HTMLInputElement;
     // Check if files are selected
     if (inputElement.files && inputElement.files.length > 0) {
-      const maxSizeInBytes = 5 * 1024 * 1024; // 5MB
+      const maxSizeInBytes = 8 * 1024 * 1024; // 8MB
       let selectedFile;
       let imageEvent;
       if (inputElement.files[0].size > maxSizeInBytes) {
-        this.fileSizeError = '上傳的文件不能超過5MB, 請重新上傳';
+        this.fileSizeError = '上傳的文件不能超過8MB, 請重新上傳';
         this.imageChangedEvent = null;
         this.showCropPopup = false;
         this.selectedFile = null;
@@ -207,7 +207,7 @@ export class ImageUploadComponent implements OnChanges {
   //   // Check if files are selected
   //   if (inputElement.files && inputElement.files.length > 0) {
   //     let selectedFile = inputElement.files[0];
-  //     const maxSizeInBytes = 5 * 1024 * 1024; // 1MB
+  //     const maxSizeInBytes = 8 * 1024 * 1024; // 8MB
   //     console.log(selectedFile);
   //     if (selectedFile) {
   //       try {
@@ -226,7 +226,7 @@ export class ImageUploadComponent implements OnChanges {
   //       return;
   //     }
   //     if (selectedFile.size > maxSizeInBytes) {
-  //       this.fileSizeError = '上傳的文件不能超過5MB, 請重新上傳';
+  //       this.fileSizeError = '上傳的文件不能超過8MB, 請重新上傳';
   //       this.imageChangedEvent = null;
   //       this.showCropPopup = false;
   //       this.selectedFile = null;

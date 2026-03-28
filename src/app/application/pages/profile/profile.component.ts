@@ -110,11 +110,11 @@ export class ProfileComponent implements OnInit {
 
     if (inputElement.files) {
       const file = inputElement.files[0];
-      const maxFileSizeInBytes = 5 * 1024 * 1024;
+      const maxFileSizeInBytes = 8 * 1024 * 1024;
       if (file && file.size > maxFileSizeInBytes) {
         this.ProfileForm.get(controlName)?.setErrors({ fileSizeExceeded: true });
 
-        // alert('File size exceeds the limit (1MB). Please select a smaller file.');
+        // alert('File size exceeds the limit (8MB). Please select a smaller file.');
         // You can reset the input if needed
         inputElement.value = '';
       } else {
