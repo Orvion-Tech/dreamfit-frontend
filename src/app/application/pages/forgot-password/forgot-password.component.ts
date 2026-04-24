@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 export class ForgotPasswordComponent implements OnInit {
   forgotpasswordForm: FormGroup;
   phoneNumber = false;
+  email = false;
   otp = false;
   password = false;
   confirmPassword = false;
@@ -26,6 +27,7 @@ export class ForgotPasswordComponent implements OnInit {
   ) {
     this.forgotpasswordForm = this.fb.group({
       phone_number: ['', [Validators.required, Validators.pattern(/^\d{8,10}$/)]],
+      email: ['', [Validators.required, Validators.email]],
       otp: ['', [Validators.required, Validators.pattern(/^\d{4}$/)]],
       country_code: ['', Validators.required],
       password: ['', Validators.required],
@@ -153,11 +155,13 @@ export class ForgotPasswordComponent implements OnInit {
   async sendOTP() {
     this.countryCode = true;
     this.phoneNumber = true;
+    this.email = true;
     this.abortControllerService.abortExistingRequest();
     const abortController = this.abortControllerService.createAbortController();
     if (
       this.forgotpasswordForm.get('country_code')!.valid &&
-      this.forgotpasswordForm.get('phone_number')!.valid
+      this.forgotpasswordForm.get('phone_number')!.valid &&
+      this.forgotpasswordForm.get('email')!.valid
     ) {
       try {
         const response = await fetch('https://admin.dreamfithk.com/en/api/send-forgotpass-otp/', {
@@ -169,6 +173,7 @@ export class ForgotPasswordComponent implements OnInit {
             phone_number:
               this.forgotpasswordForm.get('country_code')!.value +
               this.forgotpasswordForm.get('phone_number')!.value,
+            email: this.forgotpasswordForm.get('email')!.value,
           }),
           signal: abortController.signal,
         });
@@ -189,18 +194,23 @@ export class ForgotPasswordComponent implements OnInit {
       }
     } else {
       const countryCode = this.forgotpasswordForm.get('country_code');
-      const usernameCont = this.forgotpasswordForm.get('phone_number');
+      const phoneNumberCont = this.forgotpasswordForm.get('phone_number');
+      const emailCont = this.forgotpasswordForm.get('email');
       if (countryCode) {
         this.countryCode = countryCode.invalid;
       }
-      if (usernameCont) {
-        this.phoneNumber = usernameCont.invalid;
+      if (phoneNumberCont) {
+        this.phoneNumber = phoneNumberCont.invalid;
+      }
+      if (emailCont) {
+        this.email = emailCont.invalid;
       }
     }
   }
   resetError() {
     this.countryCode = false;
     this.phoneNumber = false;
+    this.email = false;
     this.password = false;
     this.confirmPassword = false;
     this.otp = false;

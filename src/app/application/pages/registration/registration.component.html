@@ -63,6 +63,29 @@
           [ngClass]="{
             input: true,
             input___error:
+              email &&
+              (registrationForm.get('email')?.hasError('required') ||
+                registrationForm.get('email')?.hasError('email'))
+          }"
+        >
+          <input
+            type="email"
+            placeholder="Please Enter Email"
+            id="email"
+            formControlName="email"
+            (input)="resetError()"
+          />
+          <p class="input__errorMsg" *ngIf="registrationForm.get('email')?.hasError('required')">
+            {{ 'EMAIL IS REQUIRED.' | translate }}
+          </p>
+          <p class="input__errorMsg" *ngIf="registrationForm.get('email')?.hasError('email')">
+            {{ 'PLEASE ENTER A VALID EMAIL.' | translate }}
+          </p>
+        </div>
+        <div
+          [ngClass]="{
+            input: true,
+            input___error:
               otp &&
               (registrationForm.get('otp')?.hasError('required') ||
                 registrationForm.get('otp')?.hasError('pattern'))

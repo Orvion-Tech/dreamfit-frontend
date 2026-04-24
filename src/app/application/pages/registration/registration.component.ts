@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 export class RegistrationComponent implements OnInit {
   registrationForm: FormGroup;
   phoneNumber = false;
+  email = false;
   otp = false;
   invitationCode = false;
   password = false;
@@ -30,6 +31,7 @@ export class RegistrationComponent implements OnInit {
   ) {
     this.registrationForm = this.fb.group({
       phone_number: ['', [Validators.required, Validators.pattern(/^[\d]{8,10}$/)]],
+      email: ['', [Validators.required, Validators.email]],
       otp: ['', [Validators.required, Validators.pattern(/^[\d]{4}$/)]],
       country_code: ['', Validators.required],
       invitation_code: ['', Validators.required],
@@ -192,11 +194,13 @@ export class RegistrationComponent implements OnInit {
   async sendOTP() {
     this.countryCode = true;
     this.phoneNumber = true;
+    this.email = true;
     this.abortControllerService.abortExistingRequest();
     const abortController = this.abortControllerService.createAbortController();
     if (
       this.registrationForm.get('country_code')!.valid &&
-      this.registrationForm.get('phone_number')!.valid
+      this.registrationForm.get('phone_number')!.valid &&
+      this.registrationForm.get('email')!.valid
     ) {
       try {
         const response = await fetch('https://admin.dreamfithk.com/en/api/send-otp/', {
@@ -208,6 +212,7 @@ export class RegistrationComponent implements OnInit {
             phone_number:
               this.registrationForm.get('country_code')!.value +
               this.registrationForm.get('phone_number')!.value,
+            email: this.registrationForm.get('email')!.value,
           }),
           signal: abortController.signal,
         });
@@ -227,12 +232,16 @@ export class RegistrationComponent implements OnInit {
       }
     } else {
       const countryCode = this.registrationForm.get('country_code');
-      const usernameCont = this.registrationForm.get('phone_number');
+      const phoneNumberCont = this.registrationForm.get('phone_number');
+      const emailCont = this.registrationForm.get('email');
       if (countryCode) {
         this.countryCode = countryCode.invalid;
       }
-      if (usernameCont) {
-        this.phoneNumber = usernameCont.invalid;
+      if (phoneNumberCont) {
+        this.phoneNumber = phoneNumberCont.invalid;
+      }
+      if (emailCont) {
+        this.email = emailCont.invalid;
       }
     }
   }
@@ -240,6 +249,7 @@ export class RegistrationComponent implements OnInit {
     this.countryCode = false;
     this.invitationCode = false;
     this.phoneNumber = false;
+    this.email = false;
     this.password = false;
     this.confirmPassword = false;
     this.otp = false;
